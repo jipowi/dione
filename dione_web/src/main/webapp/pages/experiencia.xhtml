@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/menuPrincipalTemplate.xhtml">
+	<ui:define name="content">
+		<p:outputPanel id="messagesHoja">
+			<p:messages></p:messages>
+		</p:outputPanel>
+		<p:panel>
+			<h:form id="formPrincipal">
+				<div align="center">
+					<h:panelGrid columns="1">
+						<!-- CABECERA EXPERIENCIA-->
+						<h:panelGrid columns="2">
+							<p:outputLabel value="#{message['lbl.titulo.experiencia']}" styleClass="negrita" />
+							<h:graphicImage name="experiencia.png" library="img" />
+						</h:panelGrid>
+
+						<p:spacer height="15px;" />
+
+						<h:panelGrid columns="2">
+							<p:outputLabel value="#{message['lbl.institucion']}:" styleClass="negrita" />
+							<p:inputText value="#{experienciaBean.institucion}" />
+
+							<p:outputLabel value="#{message['lbl.fechaInicio']}:" styleClass="negrita" />
+							<p:calendar navigator="true" effect="fold" value="#{experienciaBean.fechaInicio}" pattern="dd/MM/yyyy" />
+
+							<p:outputLabel value="#{message['lbl.fechaFin']}:" styleClass="negrita" />
+							<p:calendar navigator="true" effect="fold" value="#{experienciaBean.fechaFin}" pattern="dd/MM/yyyy" />
+
+							<p:outputLabel value="#{message['lbl.funciones']}:" styleClass="negrita" />
+							<p:inputTextarea value="#{experienciaBean.funciones}" />
+						</h:panelGrid>
+						<div align="center">
+							<p:commandButton id="agregarExperiencia" update="formPrincipal" icon="icon-add" value="#{message['boton.agregar']}"
+								actionListener="#{experienciaBean.addExperiencia}" title="Agregar" />
+						</div>
+						<p:spacer height="30px;" />
+						<p:dataTable id="tablaExperiencia" value="#{experienciaBean.experienciaList}" var="obj" widgetVar="50" style="width: 60%;" editable="true">
+							<p:ajax event="rowEdit" listener="#{experienciaBean.onEditExperiencia}" />
+							<p:ajax event="rowEditCancel" listener="#{experienciaBean.onCancelExperiencia}" />
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.institucion']}" />
+								</f:facet>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{obj.institucion}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{obj.institucion}" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.fechaInicio']}" />
+								</f:facet>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{obj.fechaInicio}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:calendar navigator="true" effect="fold" value="#{obj.fechaInicio}" pattern="dd/MM/yyyy" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.fechaFin']}" />
+								</f:facet>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{obj.fechaFin}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:calendar navigator="true" effect="fold" value="#{obj.fechaFin}" pattern="dd/MM/yyyy" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.funciones']}" />
+								</f:facet>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{obj.funciones}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{obj.funciones}" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column headerText="Options" style="width:50px">
+								<p:rowEditor />
+							</p:column>
+						</p:dataTable>
+
+						<p:spacer height="15px;" />
+
+					</h:panelGrid>
+					<p:spacer height="30px;" />
+					<p:commandButton id="guardarBtnId" actionListener="#{agropecuarioBacking.guardarRamo()}" icon="icon-save" value="#{message['boton.guardar']}"
+						update="formPrincipal" title="Guardar" />
+					<p:commandButton id="cancelarBtnId" icon="icon-cancel" value="#{message['boton.cancelar']}" title="Cancelar" />
+				</div>
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

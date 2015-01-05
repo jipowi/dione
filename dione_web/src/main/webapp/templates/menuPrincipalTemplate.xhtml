@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>#{dione['dione.titulo.pages.menuPrincipal']}</title>
+	<h:outputStylesheet name="layout.css" library="css" />
+	<h:outputStylesheet name="default.css" library="css" />
+</h:head>
+<h:body>
+	<!-- Todo el Temmplate -->
+	<div id="container">
+		<!-- Cabecera del Template -->
+		<div id="top" class="ui-widget-header ui-corner-all">
+			<ui:insert name="top">PORTAFOLIO DOCENTE</ui:insert>
+		</div>
+
+		<!-- Cuerpo del Template -->
+		<div>
+			<!-- Menu del Template ubicado en la parte derecha -->
+			<div id="left">
+				<h:form>
+					<p:panelMenu>
+						<p:submenu label="#{message['titulo.docente']}">
+							<p:menuitem value="#{message['subtitulo.datosGenerales']}" action="/pages/docente.xhtml" />
+							<p:menuitem value="#{message['subtitulo.hojaVida']}" action="/pages/hojaVida.xhtml" />
+							<p:menuitem value="#{message['subtitulo.experiencia']}" action="/pages/experiencia.xhtml" />
+						</p:submenu>
+						<p:submenu label="#{message['titulo.sillybus']}">
+							<p:menuitem value="#{message['subtitulo.ingresarSyllabus']}" action="/pages/syllabus.xhtml" />
+						</p:submenu>
+						<p:submenu label="#{message['titulo.planificacion']}">
+							<p:menuitem value="#{message['subtitulo.datosGenerales']}" action="/pages/docente.xhtml" />
+						</p:submenu>
+					</p:panelMenu>
+				</h:form>
+			</div>
+			<!-- Contenido del Template unicado en la parte izquierda -->
+			<div id="content" class="left_content">
+				<ui:insert name="content">Content</ui:insert>
+			</div>
+		</div>
+		<!-- Pie de Pagina del Template -->
+		<div id="bottom">
+			<ui:insert name="bottom">Bottom</ui:insert>
+		</div>
+	</div>
+</h:body>
+</html>

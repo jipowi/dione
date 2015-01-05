@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/menuPrincipalTemplate.xhtml">
+	<ui:define name="content">
+		<p:outputPanel id="messagesHoja">
+			<p:messages></p:messages>
+		</p:outputPanel>
+		<p:panel>
+			<h:form id="formPrincipal">
+				<div align="center">
+					<h:panelGrid columns="1">
+						<!-- CABECERA DE HOJA DE VIDA -->
+						<h:panelGrid columns="2">
+							<p:outputLabel value="#{message['lbl.titulo.hojaVida']}" styleClass="negrita" />
+							<h:graphicImage name="curriculum.png" library="img" />
+						</h:panelGrid>
+
+						<p:spacer height="15px;" />
+						<!-- FORMACION ACADEMICA -->
+						<h:panelGrid columns="2">
+							<h:graphicImage name="help.png" library="img" />
+							<p:outputLabel value="#{message['lbl.infoFa']}" styleClass="negrita" />
+						</h:panelGrid>
+
+						<h:panelGrid columns="2">
+							<p:outputLabel value="#{message['lbl.institucion']}:" styleClass="negrita" />
+							<p:inputText value="#{hojaVidaBean.institucionFa}" />
+
+							<p:outputLabel value="#{message['lbl.titulo']}:" styleClass="negrita" />
+							<p:inputText value="#{hojaVidaBean.titulo}" />
+						</h:panelGrid>
+						<div align="center">
+							<p:commandButton id="agregarFormacion" update="tablaFa" icon="icon-add" value="#{message['boton.agregar']}"
+								actionListener="#{hojaVidaBean.addActionFa}" title="Agregar" />
+						</div>
+						<p:spacer height="30px;" />
+						<p:dataTable id="tablaFa" value="#{hojaVidaBean.formacionAcademicaList}" var="obj" widgetVar="50" style="width: 60%;" editable="true">
+							<p:ajax event="rowEdit" listener="#{hojaVidaBean.onEditFa}" update="tablaFa"/>
+							<p:ajax event="rowEditCancel" listener="#{hojaVidaBean.onCancelFa}" update="tablaFa"/>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.institucion']}" />
+								</f:facet>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{obj.institucion}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{obj.institucion}" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.titulo']}" />
+								</f:facet>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{obj.titulo}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{obj.titulo}" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column headerText="Options" style="width:50px">
+								<p:rowEditor />
+							</p:column>
+						</p:dataTable>
+
+						<p:spacer height="15px;" />
+						<!-- FORMACION CONTINUA -->
+						<h:panelGrid columns="2">
+							<h:graphicImage name="help.png" library="img" />
+							<p:outputLabel value="#{message['lbl.infoFc']}" styleClass="negrita" />
+						</h:panelGrid>
+
+						<h:panelGrid columns="2">
+							<p:outputLabel value="#{message['lbl.institucion']}:" styleClass="negrita" />
+							<p:inputText value="#{hojaVidaBean.institucionFc}" />
+
+							<p:outputLabel value="#{message['lbl.curso']}:" styleClass="negrita" />
+							<p:inputText value="#{hojaVidaBean.curso}" />
+
+							<h:outputLabel value="#{message['lbl.tipoDuracion']}: " styleClass="negrita" />
+							<p:selectOneMenu value="#{hojaVidaBean.tipoDuracion}">
+								<f:selectItem itemLabel="Seleccione" noSelectionOption="true" />
+								<f:selectItems value="#{hojaVidaBacking.tipoDuracionList}" />
+							</p:selectOneMenu>
+
+							<h:outputLabel value="#{message['lbl.duracion']}: " styleClass="negrita" />
+							<p:inputText value="#{hojaVidaBean.duracion}" />
+						</h:panelGrid>
+						<div align="center">
+							<p:commandButton id="agregarFc" update="tablaFc" icon="icon-add" value="#{message['boton.agregar']}"
+								actionListener="#{hojaVidaBean.addActionFc()}" title="Agregar" />
+						</div>
+						<p:spacer height="30px;" />
+						<p:dataTable id="tablaFc" value="#{hojaVidaBean.formacionContinuaList}" var="obj" widgetVar="50" style="width: 60%;" editable="true">
+							<p:ajax event="rowEdit" listener="#{hojaVidaBean.onEditFc}" update="tablaFc"/>
+							<p:ajax event="rowEditCancel" listener="#{hojaVidaBean.onCancelFc}" update="tablaFc"/>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.institucion']}" />
+								</f:facet>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{obj.institucion}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{obj.institucion}" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.curso']}" />
+								</f:facet>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{obj.curso}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{obj.curso}" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.tipoDuracion']}" />
+								</f:facet>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{obj.tipoDuracion}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{obj.tipoDuracion}" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.duracion']}" />
+								</f:facet>
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{obj.duracion}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{obj.duracion}" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column headerText="Options" style="width:50px">
+								<p:rowEditor />
+							</p:column>
+						</p:dataTable>
+					</h:panelGrid>
+					<p:spacer height="30px;" />
+					<p:commandButton id="guardarBtnId" actionListener="#{agropecuarioBacking.guardarRamo()}" icon="icon-save" value="#{message['boton.guardar']}"
+						update="formPrincipal" title="Guardar" />
+					<p:commandButton id="cancelarBtnId" icon="icon-cancel" value="#{message['boton.cancelar']}" title="Cancelar" />
+				</div>
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

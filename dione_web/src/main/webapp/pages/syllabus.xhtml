@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/menuPrincipalTemplate.xhtml">
+	<ui:define name="content">
+		<p:panel>
+			<p:messages id="messagesSyllabus" showDetail="true" autoUpdate="true" closable="true" />
+			<h:form id="formPrincipal">
+				<h:panelGrid columns="1">
+					<p:outputLabel value="#{message['lbl.titulo.syllabus']}" styleClass="negrita" />
+					<h:graphicImage name="school.png" library="img" />
+				</h:panelGrid>
+				<p:spacer height="15px;" />
+				<h:panelGrid columns="1">
+					<p:panel>
+						<f:facet name="header">
+							<h:outputText value="#{message['lbl.buscarSyllabus']}" />
+						</f:facet>
+						<h:panelGrid columns="2">
+							<h:panelGrid columns="2">
+								<p:outputLabel value="#{message['lbl.cedula']}" styleClass="negrita" />
+								<p:inputText value="#{syllabusBean.cedula}" />
+							</h:panelGrid>
+							<p:commandLink title="Buscar aseguradoras" action="#{syllabusBacking.buscarDocente()}" update="@form">
+								<h:graphicImage name="search.png" library="img" />
+							</p:commandLink>
+						</h:panelGrid>
+					</p:panel>
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:outputLabel value="#{message['lbl.asignatura']}:" styleClass="negrita" />
+					<p:inputText value="#{syllabusBean.materia}" />
+
+					<p:outputLabel value="#{message['lbl.numHorasClase']}:" styleClass="negrita" />
+					<p:inputText value="#{syllabusBean.numHorasClase}" />
+
+					<p:outputLabel value="#{message['lbl.prerequisito']}:" styleClass="negrita" />
+					<p:inputText value="#{syllabusBean.prerequisito}" />
+
+					<p:outputLabel value="#{message['lbl.corequisito']}:" styleClass="negrita" />
+					<p:inputText value="#{syllabusBean.corequisito}" />
+				</h:panelGrid>
+
+
+				<p:spacer height="30px;" />
+				<p:commandButton id="guardarBtnId" actionListener="#{agropecuarioBacking.guardarRamo()}" icon="icon-save" value="#{message['boton.guardar']}"
+					update="formPrincipal" title="Guardar" />
+				<p:commandButton id="cancelarBtnId" icon="icon-cancel" value="#{message['boton.cancelar']}" title="Cancelar" />
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

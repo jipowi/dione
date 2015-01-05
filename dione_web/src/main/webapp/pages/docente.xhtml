@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/menuPrincipalTemplate.xhtml">
+	<ui:define name="content">
+		<p:panel>
+			<!-- DATOS GENERALES -->
+			<p:messages id="messagesDocente" showDetail="true" autoUpdate="true" closable="true" />
+			<h:form id="formPrincipal">
+				<div align="center">
+					<h:panelGrid columns="1">
+						<p:outputLabel value="#{message['lbl.titulo.docente']}" styleClass="negrita" />
+						<h:graphicImage name="school.png" library="img" />
+					</h:panelGrid>
+					<p:spacer height="15px;" />
+					<h:panelGrid columns="2">
+						<p:outputLabel for="nombre" value="#{message['lbl.nombres']}:" styleClass="negrita" />
+						<p:inputText id="nombre" value="#{docenteBean.nombresDocente}" required="true" requiredMessage="#{message['msn.obligatorio']}" />
+
+						<p:outputLabel for="apellidos" value="#{message['lbl.apellidos']}:" styleClass="negrita" />
+						<p:inputText id="apellidos" value="#{docenteBean.apellidosDocente}" required="true" requiredMessage="#{message['msn.obligatorio']}"/>
+
+						<p:outputLabel for="cedula" value="#{message['lbl.cedula']}:" styleClass="negrita" />
+						<p:inputText id="cedula" value="#{docenteBean.cedulaDocente}" required="true" requiredMessage="#{message['msn.obligatorio']}"/>
+
+						<p:outputLabel for="cedula" value="#{message['lbl.direccion']}:" styleClass="negrita" />
+						<p:inputText id="direccion" value="#{docenteBean.direccionDocente}" required="true" requiredMessage="#{message['msn.obligatorio']}"/>
+
+					</h:panelGrid>
+					<h:panelGrid columns="3">
+						<h:graphicImage name="help.png" library="img" />
+
+						<p:outputLabel value="#{message['lbl.infoAsignaturas']}" styleClass="negrita" />
+
+						<p:commandLink title="Agregar escuela" oncomplete="escuelas.show();" update=":idEscuela">
+							<h:graphicImage name="escuela.png" library="img" />
+						</p:commandLink>
+					</h:panelGrid>
+
+					<p:spacer height="30px;" />
+					<p:commandButton id="guardarBtnId" actionListener="#{docenteBacking.guardarDatosGenerales()}" icon="icon-save" value="#{message['boton.guardar']}"
+						update="formPrincipal" title="Guardar" />
+					<p:commandButton id="cancelarBtnId" icon="icon-cancel" value="#{message['boton.cancelar']}" title="Cancelar" />
+				</div>
+			</h:form>
+		</p:panel>
+		<!-- ESCUELA Y ASIGNATURA -->
+		<p:dialog id="idEscuela" header="Escuelas" widgetVar="escuelas" modal="true" width="500" position="center" showEffect="fade" hideEffect="explode"
+			resizable="false" closable="true">
+			<h:form id="formEscuelas">
+				<div align="center">
+					<p:growl id="messages" showDetail="true" />
+					<h:panelGrid columns="1">
+						<h:panelGrid columns="4">
+							<h:outputLabel value="#{message['lbl.escuela']}:" styleClass="negrita" />
+							<p:selectOneMenu id="selecMateria" value="#{docenteBean.escuela}" effect="drop">
+								<f:selectItem itemLabel="Seleccione" noSelectionOption="true" />
+								<f:selectItems value="#{docenteBacking.escuelas}" />
+							</p:selectOneMenu>
+
+							<h:outputLabel value="#{message['lbl.asignaturas']}:" styleClass="negrita" />
+							<p:commandLink title="Agregar asignatura" action="#{docenteBacking.obtenerMaterias()}" oncomplete="materias.show();" update=":idMateria">
+								<h:graphicImage name="materia.png" library="img" />
+							</p:commandLink>
+						</h:panelGrid>
+					</h:panelGrid>
+					<div align="center">
+						<p:commandButton id="agregarAsignaturas" update="tablaAsignatura" icon="icon-add" value="#{message['boton.agregar']}"
+							actionListener="#{docenteBean.addAsignatura}" title="Agregar" />
+					</div>
+					<p:spacer height="30px;" />
+					<p:dataTable id="tablaAsignatura" value="#{docenteBean.asignaturasList}" var="obj" widgetVar="50" style="width: 70%;" editable="true">
+						<p:ajax event="rowEdit" listener="#{docenteBean.onEditAsignatura}" update="tablaAsignatura" />
+						<p:ajax event="rowEditCancel" listener="#{docenteBean.onCancelAsignatura}" update="tablaAsignatura" />
+						<p:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{message['lbl.escuela']}" />
+							</f:facet>
+							<p:cellEditor>
+								<f:facet name="output">
+									<p:selectOneMenu value="#{obj.escuela}" effect="drop">
+										<f:selectItem itemLabel="Seleccione" noSelectionOption="true" />
+										<f:selectItems value="#{docenteBacking.escuelas}" />
+									</p:selectOneMenu>
+								</f:facet>
+								<f:facet name="input">
+									<p:selectOneMenu value="#{obj.escuela}" effect="drop">
+										<f:selectItem itemLabel="Seleccione" noSelectionOption="true" />
+										<f:selectItems value="#{docenteBacking.escuelas}" />
+									</p:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column>
+						<f:facet name="header">
+								<h:outputLabel value="#{message['lbl.asignaturas']}" />
+							</f:facet>
+							<p:dataList value="#{obj.materias}" var="escuela" type="ordered">
+								<h:outputText value="#{escuela.desMateria}" />
+							</p:dataList>
+						</p:column>
+
+						<p:column headerText="Options" style="width:50px">
+							<p:rowEditor />
+						</p:column>
+					</p:dataTable>
+					<p:spacer height="30px;" />
+					<p:commandButton onclick="escuelas.hide()" icon="icon-save" value="#{message['boton.aceptar']}" update="formEscuelas" title="Guardar" />
+				</div>
+			</h:form>
+		</p:dialog>
+		<!-- MATERIAS -->
+		<p:dialog id="idMateria" header="Materias" widgetVar="materias" modal="true" position="center" showEffect="fade" hideEffect="explode"
+			resizable="false" closable="true">
+			<h:form id="formMaterias">
+				<p:dataTable id="tablaAsignatura" value="#{docenteBacking.materias}" var="materia">
+					<p:column>
+						<f:facet name="header">
+							<h:outputLabel value="#{message['lbl.asignaturas']}" />
+						</f:facet>
+						<h:outputText value="#{materia.desMateria}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputLabel value="#{message['lbl.seleccion']}" />
+						</f:facet>
+						<p:selectBooleanCheckbox value="#{materia.seleccion}" />
+					</p:column>
+				</p:dataTable>
+				<p:spacer height="30px;" />
+				<p:commandButton id="aceptarBtnId" actionListener="#{docenteBacking.agregarMaterias()}" oncomplete="materias.hide()" icon="icon-save"
+					value="#{message['boton.aceptar']}" update="formMaterias" title="Guardar" />
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>
+</html>
