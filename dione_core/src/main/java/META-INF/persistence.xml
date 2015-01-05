@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="dione_core" transaction-type="JTA">
+		<jta-data-source>java:/dioneDS</jta-data-source>
+		<class>ec.com.uce.dione.entities.Usuario</class>
+		<class>ec.com.uce.dione.entities.Catalogo</class>
+		<class>ec.com.uce.dione.entities.DetalleCatalogo</class>
+		<class>ec.com.uce.dione.comun.Consultas</class>
+		<class>ec.com.uce.dione.entities.Auditoria</class>
+		<class>ec.com.uce.dione.entities.Bibliografia</class>
+		<class>ec.com.uce.dione.entities.Competencia</class>
+		<class>ec.com.uce.dione.entities.Docente</class>
+		<class>ec.com.uce.dione.entities.ElementoCompetencia</class>
+		<class>ec.com.uce.dione.entities.Escuela</class>
+		<class>ec.com.uce.dione.entities.EscuelaUce</class>
+		<class>ec.com.uce.dione.entities.Materia</class>
+		<class>ec.com.uce.dione.entities.MateriaUce</class>
+		<class>ec.com.uce.dione.entities.Objetivo</class>
+		<class>ec.com.uce.dione.entities.RecursosDidactico</class>
+		<class>ec.com.uce.dione.entities.Syllabus</class>
+   	</persistence-unit>
+</persistence>
