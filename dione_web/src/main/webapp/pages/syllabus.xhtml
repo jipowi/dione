@@ -6,11 +6,13 @@
 		<p:panel>
 			<p:messages id="messagesSyllabus" showDetail="true" autoUpdate="true" closable="true" />
 			<h:form id="formPrincipal">
-				<h:panelGrid columns="1">
-					<p:outputLabel value="#{message['lbl.titulo.syllabus']}" styleClass="negrita" />
-					<h:graphicImage name="school.png" library="img" />
-				</h:panelGrid>
+				<div align="center">
+					<h:panelGrid columns="1">
+						<p:outputLabel value="#{message['lbl.titulo.syllabus']}" styleClass="negrita" />
+					</h:panelGrid>
+				</div>
 				<p:spacer height="15px;" />
+				<!-- BUSCADOR DOCENTE -->
 				<h:panelGrid columns="1">
 					<p:panel>
 						<f:facet name="header">
@@ -29,26 +31,104 @@
 				</h:panelGrid>
 				<p:spacer height="30px;" />
 				<div align="center">
+					<!-- SYLLABUS -->
 					<h:panelGrid columns="1" id="idSyllabus" rendered="#{syllabusBacking.docenteEncontrado}">
-						<h:panelGrid columns="2">
-							<p:outputLabel value="#{message['lbl.asignatura']}:" styleClass="negrita" />
-							<p:selectOneMenu id="selecMateria" value="#{syllabusBean.materia}" effect="drop">
-								<f:selectItem itemLabel="Seleccione" noSelectionOption="true" />
-								<f:selectItems value="#{syllabusBacking.materias}" />
-							</p:selectOneMenu>
+						<p:panel>
+							<h:panelGrid columns="2">
+								<p:outputLabel value="#{message['lbl.asignatura']}:" styleClass="negrita" />
+								<p:selectOneMenu id="selecMateria" value="#{syllabusBean.materia}" effect="drop">
+									<f:selectItem itemLabel="Seleccione" noSelectionOption="true" />
+									<f:selectItems value="#{syllabusBacking.materias}" />
+								</p:selectOneMenu>
 
-							<p:outputLabel value="#{message['lbl.numHorasClase']}:" styleClass="negrita" />
-							<p:inputText value="#{syllabusBean.numHorasClase}" />
+								<p:outputLabel value="#{message['lbl.numHorasClase']}:" styleClass="negrita" />
+								<p:inputText value="#{syllabusBean.numHorasClase}" />
 
-							<p:outputLabel value="#{message['lbl.prerequisito']}:" styleClass="negrita" />
-							<p:inputTextarea cols="50" value="#{syllabusBean.prerequisito}" />
+								<p:outputLabel value="#{message['lbl.prerequisito']}:" styleClass="negrita" />
+								<p:inputTextarea cols="50" value="#{syllabusBean.prerequisito}" />
 
-							<p:outputLabel value="#{message['lbl.corequisito']}:" styleClass="negrita" />
-							<p:inputTextarea cols="50" value="#{syllabusBean.corequisito}" />
-							
-							<p:outputLabel value="#{message['lbl.desAsignatura']}:" styleClass="negrita" />
-							<p:inputTextarea cols="50" value="#{syllabusBean.desAsigantura}" />
-						</h:panelGrid>
+								<p:outputLabel value="#{message['lbl.corequisito']}:" styleClass="negrita" />
+								<p:inputTextarea cols="50" value="#{syllabusBean.corequisito}" />
+
+								<p:outputLabel value="#{message['lbl.desAsignatura']}:" styleClass="negrita" />
+								<p:inputTextarea cols="50" value="#{syllabusBean.desAsigantura}" />
+							</h:panelGrid>
+
+							<p:spacer height="20px;" />
+							<!-- OBJETIVOS -->
+							<h:panelGrid columns="2">
+								<h:graphicImage name="help.png" library="img" />
+								<p:outputLabel value="#{message['lbl.infoObjetivo']}" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:panelGrid columns="2">
+									<p:outputLabel value="#{message['lbl.objetivo']}:" styleClass="negrita" />
+									<p:inputText value="#{syllabusBean.objetivo}" />
+								</h:panelGrid>
+								<div align="center">
+									<p:commandButton id="agregarObjetivo" update="tablaObjetivos" icon="icon-add" value="#{message['boton.agregar']}"
+										actionListener="#{syllabusBean.addObjetivo()}" title="Agregar" />
+								</div>
+								<p:spacer height="30px;" />
+								<p:dataTable id="tablaObjetivos" value="#{syllabusBean.objetivosDTOs}" var="obj" widgetVar="50" style="width: 40%;" editable="true">
+									<p:ajax event="rowEdit" listener="#{syllabusBean.onEditObjetivo}" update="tablaObjetivos" />
+									<p:ajax event="rowEditCancel" listener="#{syllabusBean.onCancelObjetivo}" update="tablaObjetivos" />
+									<p:column>
+										<f:facet name="header">
+											<h:outputText value="#{message['lbl.objetivo']}" />
+										</f:facet>
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{obj.objetivo}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText value="#{obj.objetivo}" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+									<p:column headerText="Options" style="width:50px">
+										<p:rowEditor />
+									</p:column>
+								</p:dataTable>
+							</h:panelGrid>
+							<p:spacer height="20px;" />
+							<!-- COMPETENCIAS -->
+							<h:panelGrid columns="2">
+								<h:graphicImage name="help.png" library="img" />
+								<p:outputLabel value="#{message['lbl.infoCompetencia']}" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:panelGrid columns="2">
+									<p:outputLabel value="#{message['lbl.competencia']}:" styleClass="negrita" />
+									<p:inputText value="#{syllabusBean.competencia}" />
+								</h:panelGrid>
+								<div align="center">
+									<p:commandButton id="agregarCompetencia" update="tablaCompetencias" icon="icon-add" value="#{message['boton.agregar']}"
+										actionListener="#{syllabusBean.addCompetencia()}" title="Agregar" />
+								</div>
+								<p:spacer height="30px;" />
+								<p:dataTable id="tablaCompetencias" value="#{syllabusBean.competenciasDTOs}" var="obj" widgetVar="50" style="width: 40%;" editable="true">
+									<p:ajax event="rowEdit" listener="#{syllabusBean.onEditCompetencia}" update="tablaCompetencias" />
+									<p:ajax event="rowEditCancel" listener="#{syllabusBean.onCancelCompetencia}" update="tablaCompetencias" />
+									<p:column>
+										<f:facet name="header">
+											<h:outputText value="#{message['lbl.competencia']}" />
+										</f:facet>
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{obj.competencia}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText value="#{obj.competencia}" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+									<p:column headerText="Options" style="width:50px">
+										<p:rowEditor />
+									</p:column>
+								</p:dataTable>
+							</h:panelGrid>
+						</p:panel>
 					</h:panelGrid>
 				</div>
 			</h:form>

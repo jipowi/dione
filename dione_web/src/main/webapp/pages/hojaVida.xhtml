@@ -20,7 +20,7 @@
 						<!-- FORMACION ACADEMICA -->
 						<h:panelGrid columns="2">
 							<h:graphicImage name="help.png" library="img" />
-							<p:outputLabel value="#{message['lbl.infoFa']}" styleClass="negrita" />
+							<p:outputLabel value="#{message['lbl.infoFa']}" />
 						</h:panelGrid>
 
 						<h:panelGrid columns="2">
@@ -36,8 +36,8 @@
 						</div>
 						<p:spacer height="30px;" />
 						<p:dataTable id="tablaFa" value="#{hojaVidaBean.formacionAcademicaList}" var="obj" widgetVar="50" style="width: 60%;" editable="true">
-							<p:ajax event="rowEdit" listener="#{hojaVidaBean.onEditFa}" update="tablaFa"/>
-							<p:ajax event="rowEditCancel" listener="#{hojaVidaBean.onCancelFa}" update="tablaFa"/>
+							<p:ajax event="rowEdit" listener="#{hojaVidaBean.onEditFa}" update="tablaFa" />
+							<p:ajax event="rowEditCancel" listener="#{hojaVidaBean.onCancelFa}" update="tablaFa" />
 							<p:column>
 								<f:facet name="header">
 									<h:outputText value="#{message['lbl.institucion']}" />
@@ -73,7 +73,7 @@
 						<!-- FORMACION CONTINUA -->
 						<h:panelGrid columns="2">
 							<h:graphicImage name="help.png" library="img" />
-							<p:outputLabel value="#{message['lbl.infoFc']}" styleClass="negrita" />
+							<p:outputLabel value="#{message['lbl.infoFc']}" />
 						</h:panelGrid>
 
 						<h:panelGrid columns="2">
@@ -98,8 +98,8 @@
 						</div>
 						<p:spacer height="30px;" />
 						<p:dataTable id="tablaFc" value="#{hojaVidaBean.formacionContinuaList}" var="obj" widgetVar="50" style="width: 60%;" editable="true">
-							<p:ajax event="rowEdit" listener="#{hojaVidaBean.onEditFc}" update="tablaFc"/>
-							<p:ajax event="rowEditCancel" listener="#{hojaVidaBean.onCancelFc}" update="tablaFc"/>
+							<p:ajax event="rowEdit" listener="#{hojaVidaBean.onEditFc}" update="tablaFc" />
+							<p:ajax event="rowEditCancel" listener="#{hojaVidaBean.onCancelFc}" update="tablaFc" />
 							<p:column>
 								<f:facet name="header">
 									<h:outputText value="#{message['lbl.institucion']}" />
