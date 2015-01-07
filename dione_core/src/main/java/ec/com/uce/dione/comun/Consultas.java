@@ -13,6 +13,7 @@ import javax.persistence.NamedQuery;
 		@NamedQuery(name = "Catalogo.findById", query = "SELECT c FROM Catalogo c WHERE c.idCatalogo =:idCatalogo"),
 		//MATERIAS
 		@NamedQuery(name = "Materia.findByEscuela", query = "SELECT m FROM Materia m WHERE m.escuela.idEscuela =:idEscuela"),
+		@NamedQuery(name = "MateriaUce.findByDocente", query = "SELECT m FROM MateriaUce m WHERE m.docente.idDocente =:idDocente"),
 		//DOCENTE
 		@NamedQuery(name = "Docente.findByCedula", query = "SELECT d FROM Docente d WHERE d.cedulaDocente =:cedula"),
 		// DETALLE_CATALOGO

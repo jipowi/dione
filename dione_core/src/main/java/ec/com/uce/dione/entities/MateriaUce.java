@@ -23,10 +23,10 @@ public class MateriaUce implements Serializable {
 	@Column(name="materia_uce")
 	private String materiaUce;
 
-	//bi-directional many-to-one association to EscuelaUce
+	//bi-directional many-to-one association to Docente
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_escuela_uce")
-	private EscuelaUce escuelaUce;
+	@JoinColumn(name="id_docente")
+	private Docente docente;
 
 	//bi-directional many-to-one association to Syllabus
 	@OneToMany(mappedBy="materiaUce")
@@ -51,12 +51,12 @@ public class MateriaUce implements Serializable {
 		this.materiaUce = materiaUce;
 	}
 
-	public EscuelaUce getEscuelaUce() {
-		return this.escuelaUce;
+	public Docente getDocente() {
+		return this.docente;
 	}
 
-	public void setEscuelaUce(EscuelaUce escuelaUce) {
-		this.escuelaUce = escuelaUce;
+	public void setDocente(Docente docente) {
+		this.docente = docente;
 	}
 
 	public List<Syllabus> getSyllabuses() {

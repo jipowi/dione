@@ -6,13 +6,13 @@
 		<class>ec.com.uce.dione.entities.DetalleCatalogo</class>
 		<class>ec.com.uce.dione.comun.Consultas</class>
 		<class>ec.com.uce.dione.entities.Auditoria</class>
+		<class>ec.com.uce.dione.entities.Escuela</class>
+		<class>ec.com.uce.dione.entities.Materia</class>
 		<class>ec.com.uce.dione.entities.Bibliografia</class>
 		<class>ec.com.uce.dione.entities.Competencia</class>
 		<class>ec.com.uce.dione.entities.Docente</class>
 		<class>ec.com.uce.dione.entities.ElementoCompetencia</class>
-		<class>ec.com.uce.dione.entities.Escuela</class>
 		<class>ec.com.uce.dione.entities.EscuelaUce</class>
-		<class>ec.com.uce.dione.entities.Materia</class>
 		<class>ec.com.uce.dione.entities.MateriaUce</class>
 		<class>ec.com.uce.dione.entities.Objetivo</class>
 		<class>ec.com.uce.dione.entities.RecursosDidactico</class>

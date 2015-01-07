@@ -11,35 +11,40 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+
 /**
  * The persistent class for the docente database table.
  * 
  */
 @Entity
-@NamedQuery(name = "Docente.findAll", query = "SELECT d FROM Docente d")
+@NamedQuery(name="Docente.findAll", query="SELECT d FROM Docente d")
 public class Docente extends Auditoria implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_docente")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_docente")
 	private Integer idDocente;
 
-	@Column(name = "apellidos_docente")
+	@Column(name="apellidos_docente")
 	private String apellidosDocente;
 
-	@Column(name = "cedula_docente")
+	@Column(name="cedula_docente")
 	private String cedulaDocente;
 
-	@Column(name = "direccion_docente")
+	@Column(name="direccion_docente")
 	private String direccionDocente;
 
-	@Column(name = "nombres_docente")
+	@Column(name="nombres_docente")
 	private String nombresDocente;
 
-	// bi-directional many-to-one association to EscuelaUce
-	@OneToMany(mappedBy = "docente")
+	//bi-directional many-to-one association to EscuelaUce
+	@OneToMany(mappedBy="docente")
 	private List<EscuelaUce> escuelaUces;
+
+	//bi-directional many-to-one association to MateriaUce
+	@OneToMany(mappedBy="docente")
+	private List<MateriaUce> materiaUces;
 
 	public Docente() {
 	}
@@ -76,6 +81,9 @@ public class Docente extends Auditoria implements Serializable {
 		this.direccionDocente = direccionDocente;
 	}
 
+	
+
+
 	public String getNombresDocente() {
 		return this.nombresDocente;
 	}
@@ -104,6 +112,28 @@ public class Docente extends Auditoria implements Serializable {
 		escuelaUce.setDocente(null);
 
 		return escuelaUce;
+	}
+
+	public List<MateriaUce> getMateriaUces() {
+		return this.materiaUces;
+	}
+
+	public void setMateriaUces(List<MateriaUce> materiaUces) {
+		this.materiaUces = materiaUces;
+	}
+
+	public MateriaUce addMateriaUce(MateriaUce materiaUce) {
+		getMateriaUces().add(materiaUce);
+		materiaUce.setDocente(this);
+
+		return materiaUce;
+	}
+
+	public MateriaUce removeMateriaUce(MateriaUce materiaUce) {
+		getMateriaUces().remove(materiaUce);
+		materiaUce.setDocente(null);
+
+		return materiaUce;
 	}
 
 }
