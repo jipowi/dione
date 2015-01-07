@@ -21,31 +21,36 @@
 								<p:outputLabel value="#{message['lbl.cedula']}" styleClass="negrita" />
 								<p:inputText value="#{syllabusBean.cedula}" />
 							</h:panelGrid>
-							<p:commandLink title="Buscar aseguradoras" action="#{syllabusBacking.buscarDocente()}" update="@form">
+							<p:commandLink title="Buscar aseguradoras" action="#{syllabusBacking.buscarDocente()}" update="@form, formPrincipal:idSyllabus">
 								<h:graphicImage name="search.png" library="img" />
 							</p:commandLink>
 						</h:panelGrid>
 					</p:panel>
 				</h:panelGrid>
-				<h:panelGrid columns="2">
-					<p:outputLabel value="#{message['lbl.asignatura']}:" styleClass="negrita" />
-					<p:inputText value="#{syllabusBean.materia}" />
-
-					<p:outputLabel value="#{message['lbl.numHorasClase']}:" styleClass="negrita" />
-					<p:inputText value="#{syllabusBean.numHorasClase}" />
-
-					<p:outputLabel value="#{message['lbl.prerequisito']}:" styleClass="negrita" />
-					<p:inputText value="#{syllabusBean.prerequisito}" />
-
-					<p:outputLabel value="#{message['lbl.corequisito']}:" styleClass="negrita" />
-					<p:inputText value="#{syllabusBean.corequisito}" />
-				</h:panelGrid>
-
-
 				<p:spacer height="30px;" />
-				<p:commandButton id="guardarBtnId" actionListener="#{agropecuarioBacking.guardarRamo()}" icon="icon-save" value="#{message['boton.guardar']}"
-					update="formPrincipal" title="Guardar" />
-				<p:commandButton id="cancelarBtnId" icon="icon-cancel" value="#{message['boton.cancelar']}" title="Cancelar" />
+				<div align="center">
+					<h:panelGrid columns="1" id="idSyllabus" rendered="#{syllabusBacking.docenteEncontrado}">
+						<h:panelGrid columns="2">
+							<p:outputLabel value="#{message['lbl.asignatura']}:" styleClass="negrita" />
+							<p:selectOneMenu id="selecMateria" value="#{syllabusBean.materia}" effect="drop">
+								<f:selectItem itemLabel="Seleccione" noSelectionOption="true" />
+								<f:selectItems value="#{syllabusBacking.materias}" />
+							</p:selectOneMenu>
+
+							<p:outputLabel value="#{message['lbl.numHorasClase']}:" styleClass="negrita" />
+							<p:inputText value="#{syllabusBean.numHorasClase}" />
+
+							<p:outputLabel value="#{message['lbl.prerequisito']}:" styleClass="negrita" />
+							<p:inputTextarea cols="50" value="#{syllabusBean.prerequisito}" />
+
+							<p:outputLabel value="#{message['lbl.corequisito']}:" styleClass="negrita" />
+							<p:inputTextarea cols="50" value="#{syllabusBean.corequisito}" />
+							
+							<p:outputLabel value="#{message['lbl.desAsignatura']}:" styleClass="negrita" />
+							<p:inputTextarea cols="50" value="#{syllabusBean.desAsigantura}" />
+						</h:panelGrid>
+					</h:panelGrid>
+				</div>
 			</h:form>
 		</p:panel>
 	</ui:define>
