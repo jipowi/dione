@@ -75,8 +75,6 @@ public class DocenteBacking implements Serializable {
 
 		} catch (DioneException e) {
 			log.error("Error al momento consultar las escuelas", e);
-			MessagesController.addError(null, HiperionMensajes.getInstancia().getString("hiperion.mensaje.error.save"));
-
 			throw new DioneException(e);
 		}
 
@@ -155,24 +153,25 @@ public class DocenteBacking implements Serializable {
 		docente.setIdUsuarioCreacion(1);
 
 		List<EscuelaUce> escuelasUce = new ArrayList<EscuelaUce>();
+		List<MateriaUce> materiaUces = new ArrayList<MateriaUce>();
 		for (AsignaturaDTO asiganturaDTO : docenteBean.getAsignaturasList()) {
 			EscuelaUce escuelaUce = new EscuelaUce();
 
 			escuelaUce.setDocente(docente);
 			escuelaUce.setEscuelaUce(asiganturaDTO.getEscuela());
-
-			List<MateriaUce> materiaUces = new ArrayList<MateriaUce>();
+			escuelasUce.add(escuelaUce);
+			
+			
 			for (MateriaDTO materiaDTO : asiganturaDTO.getMaterias()) {
 				MateriaUce materiaUce = new MateriaUce();
-				materiaUce.setEscuelaUce(escuelaUce);
+				materiaUce.setDocente(docente);
 				materiaUce.setMateriaUce(materiaDTO.getDesMateria());
 				materiaUces.add(materiaUce);
 			}
-			escuelaUce.setMateriaUces(materiaUces);
-
-			escuelasUce.add(escuelaUce);
 		}
 		docente.setEscuelaUces(escuelasUce);
+		docente.setMateriaUces(materiaUces);
+		
 
 		try {
 			docenteService.guardarDocente(docente);
