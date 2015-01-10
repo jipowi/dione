@@ -15,7 +15,9 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
 
 import ec.com.uce.ejb.dto.CompetenciaDTO;
+import ec.com.uce.ejb.dto.ElementosCompetenciaDTO;
 import ec.com.uce.ejb.dto.ObjetivoDTO;
+import ec.com.uce.ejb.dto.UnidadCompetenciaDTO;
 
 /**
  * <b> Permite manejar la informacion de la interfaz del cliente. </b>
@@ -37,9 +39,14 @@ public class SyllabusBean implements Serializable {
 	private String cedula;
 	private String objetivo;
 	private String competencia;
+	private String unidadCompetencia;
+	private Integer planificacion;
+	private String elementoCompetencia;
+	private List<ElementosCompetenciaDTO> elementosCompetencia = new ArrayList<ElementosCompetenciaDTO>();
 
 	private static List<ObjetivoDTO> objetivosDTOs = new ArrayList<ObjetivoDTO>();
 	private static List<CompetenciaDTO> competenciasDTOs = new ArrayList<CompetenciaDTO>();
+	private static List<UnidadCompetenciaDTO> unidadesDTOs = new ArrayList<UnidadCompetenciaDTO>();
 
 	/**
 	 * @return the materia
@@ -169,6 +176,51 @@ public class SyllabusBean implements Serializable {
 	}
 
 	/**
+	 * @return the unidadCompetencia
+	 */
+	public String getUnidadCompetencia() {
+		return unidadCompetencia;
+	}
+
+	/**
+	 * @param unidadCompetencia
+	 *            the unidadCompetencia to set
+	 */
+	public void setUnidadCompetencia(String unidadCompetencia) {
+		this.unidadCompetencia = unidadCompetencia;
+	}
+
+	/**
+	 * @return the planificacion
+	 */
+	public Integer getPlanificacion() {
+		return planificacion;
+	}
+
+	/**
+	 * @param planificacion
+	 *            the planificacion to set
+	 */
+	public void setPlanificacion(Integer planificacion) {
+		this.planificacion = planificacion;
+	}
+
+	/**
+	 * @return the elementosCompetencia
+	 */
+	public List<ElementosCompetenciaDTO> getElementosCompetencia() {
+		return elementosCompetencia;
+	}
+
+	/**
+	 * @param elementosCompetencia
+	 *            the elementosCompetencia to set
+	 */
+	public void setElementosCompetencia(List<ElementosCompetenciaDTO> elementosCompetencia) {
+		this.elementosCompetencia = elementosCompetencia;
+	}
+
+	/**
 	 * @return the competencia
 	 */
 	public String getCompetencia() {
@@ -191,6 +243,37 @@ public class SyllabusBean implements Serializable {
 		SyllabusBean.competenciasDTOs = competenciasDTOs;
 	}
 
+	/**
+	 * @return the unidadesDTOs
+	 */
+	public List<UnidadCompetenciaDTO> getUnidadesDTOs() {
+		return unidadesDTOs;
+	}
+
+	/**
+	 * @param unidadesDTOs
+	 *            the unidadesDTOs to set
+	 */
+	public static void setUnidadesDTOs(List<UnidadCompetenciaDTO> unidadesDTOs) {
+		SyllabusBean.unidadesDTOs = unidadesDTOs;
+	}
+
+	/**
+	 * @return the elementoCompetencia
+	 */
+	public String getElementoCompetencia() {
+		return elementoCompetencia;
+	}
+
+	/**
+	 * @param elementoCompetencia
+	 *            the elementoCompetencia to set
+	 */
+	public void setElementoCompetencia(String elementoCompetencia) {
+		this.elementoCompetencia = elementoCompetencia;
+	}
+
+	// OBJETIVOS
 	/**
 	 * 
 	 * <b> Permite agregar un registro de objetivos. </b>
@@ -234,7 +317,8 @@ public class SyllabusBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		objetivosDTOs.remove((ObjetivoDTO) event.getObject());
 	}
-	
+
+	// COMPETENCIAS
 	/**
 	 * 
 	 * <b> Permite agregar un registro de competencias. </b>
@@ -277,5 +361,98 @@ public class SyllabusBean implements Serializable {
 		FacesMessage msg = new FacesMessage("Item Cancelled");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		competenciasDTOs.remove((CompetenciaDTO) event.getObject());
+	}
+
+	// UNIDADES DE COMPETENCIA
+	/**
+	 * 
+	 * <b> Permite agregar un registro de uniades de competencias. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * </p>
+	 * 
+	 */
+	public void addUnidad() {
+		UnidadCompetenciaDTO item = new UnidadCompetenciaDTO(this.unidadCompetencia, this.planificacion, this.elementosCompetencia);
+		unidadesDTOs.add(item);
+
+		unidadCompetencia = "";
+		planificacion = 0;
+		elementosCompetencia = new ArrayList<ElementosCompetenciaDTO>();
+	}
+
+	/**
+	 * 
+	 * <b> Permite editar un registro </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * </p>
+	 * 
+	 * @param event
+	 */
+	public void onEditUnidad(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Item Edited", ((UnidadCompetenciaDTO) event.getObject()).getUnidadCompetencia());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+
+	/**
+	 * 
+	 * <b> Permite eliminar un registro </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * </p>
+	 * 
+	 * @param event
+	 */
+	public void onCancelUnidad(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Item Cancelled");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		unidadesDTOs.remove((UnidadCompetenciaDTO) event.getObject());
+	}
+
+	// ELEMENTOS DE COMPETENCIA
+	/**
+	 * 
+	 * <b> Permite agregar un registro de elementos de competencias. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * </p>
+	 * 
+	 */
+	public void addElemento() {
+		ElementosCompetenciaDTO item = new ElementosCompetenciaDTO(this.elementoCompetencia);
+		elementosCompetencia.add(item);
+
+		elementoCompetencia = "";
+		
+	}
+
+	/**
+	 * 
+	 * <b> Permite editar un registro </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * </p>
+	 * 
+	 * @param event
+	 */
+	public void onEditElemento(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Item Edited", ((ElementosCompetenciaDTO) event.getObject()).getElementoCompetencia());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+
+	/**
+	 * 
+	 * <b> Permite eliminar un registro </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * </p>
+	 * 
+	 * @param event
+	 */
+	public void onCancelElemento(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Item Cancelled");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		unidadesDTOs.remove((ElementosCompetenciaDTO) event.getObject());
 	}
 }
