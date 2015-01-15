@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 8                                 */
-/* Created on:     07/01/2015 13:10:32                          */
+/* Created on:     15/01/2015 10:22:32                          */
 /*==============================================================*/
 
 
@@ -123,7 +123,7 @@ ID_DOCENTE
 /*==============================================================*/
 create table ELEMENTO_COMPETENCIA (
    ID_ELEMENTO_COMPETENCIA SERIAL               not null,
-   ID_COMPETENCIA       INT4                 null,
+   ID_UNIDAD_COMPETENCIA INT4                 null,
    ELEMENTO_COMPETENCIA TEXT                 null,
    constraint PK_ELEMENTO_COMPETENCIA primary key (ID_ELEMENTO_COMPETENCIA)
 );
@@ -139,7 +139,7 @@ ID_ELEMENTO_COMPETENCIA
 /* Index: COMPETENCIA_ELEMENTOS_FK                              */
 /*==============================================================*/
 create  index COMPETENCIA_ELEMENTOS_FK on ELEMENTO_COMPETENCIA (
-ID_COMPETENCIA
+ID_UNIDAD_COMPETENCIA
 );
 
 /*==============================================================*/
@@ -211,7 +211,7 @@ ID_ESCUELA
 /*==============================================================*/
 create table MATERIA_UCE (
    ID_MATERIA_UCE       SERIAL               not null,
-   ID_DOCENTE           INT4                 null,
+   ID_ESCUELA_UCE       INT4                 null,
    MATERIA_UCE          TEXT                 null,
    constraint PK_MATERIA_UCE primary key (ID_MATERIA_UCE)
 );
@@ -224,10 +224,10 @@ ID_MATERIA_UCE
 );
 
 /*==============================================================*/
-/* Index: DOCENTE_ASIGNATURA_FK                                 */
+/* Index: ESCUELA_ASIGNATURA_FK                                 */
 /*==============================================================*/
-create  index DOCENTE_ASIGNATURA_FK on MATERIA_UCE (
-ID_DOCENTE
+create  index ESCUELA_ASIGNATURA_FK on MATERIA_UCE (
+ID_ESCUELA_UCE
 );
 
 /*==============================================================*/
@@ -279,6 +279,30 @@ ID_SYLLABUS
 );
 
 /*==============================================================*/
+/* Table: RESULTADOS_APRENDIZAJE                                */
+/*==============================================================*/
+create table RESULTADOS_APRENDIZAJE (
+   ID_RESULTADO         SERIAL               not null,
+   ID_SYLLABUS          INT4                 null,
+   RESULTADO_APRENDIZAJE TEXT                 null,
+   constraint PK_RESULTADOS_APRENDIZAJE primary key (ID_RESULTADO)
+);
+
+/*==============================================================*/
+/* Index: RESULTADOS_APRENDIZAJE_PK                             */
+/*==============================================================*/
+create unique index RESULTADOS_APRENDIZAJE_PK on RESULTADOS_APRENDIZAJE (
+ID_RESULTADO
+);
+
+/*==============================================================*/
+/* Index: SYLLABUS_RESULTADOS_FK                                */
+/*==============================================================*/
+create  index SYLLABUS_RESULTADOS_FK on RESULTADOS_APRENDIZAJE (
+ID_SYLLABUS
+);
+
+/*==============================================================*/
 /* Table: SYLLABUS                                              */
 /*==============================================================*/
 create table SYLLABUS (
@@ -304,6 +328,31 @@ ID_SYLLABUS
 /*==============================================================*/
 create  index MATERIA_SYLLABUS_FK on SYLLABUS (
 ID_MATERIA_UCE
+);
+
+/*==============================================================*/
+/* Table: UNIDAD_COMPETENCIA                                    */
+/*==============================================================*/
+create table UNIDAD_COMPETENCIA (
+   ID_UNIDAD_COMPETENCIA SERIAL               not null,
+   ID_SYLLABUS          INT4                 null,
+   HORAS_COMPETENCIA    INT4                 null,
+   UNIDAD_COMPETENCIA   TEXT                 null,
+   constraint PK_UNIDAD_COMPETENCIA primary key (ID_UNIDAD_COMPETENCIA)
+);
+
+/*==============================================================*/
+/* Index: UNIDAD_COMPETENCIA_PK                                 */
+/*==============================================================*/
+create unique index UNIDAD_COMPETENCIA_PK on UNIDAD_COMPETENCIA (
+ID_UNIDAD_COMPETENCIA
+);
+
+/*==============================================================*/
+/* Index: SYLLABUS_UNIDADES_FK                                  */
+/*==============================================================*/
+create  index SYLLABUS_UNIDADES_FK on UNIDAD_COMPETENCIA (
+ID_SYLLABUS
 );
 
 /*==============================================================*/
@@ -346,8 +395,8 @@ alter table DETALLE_CATALOGO
       on delete restrict on update restrict;
 
 alter table ELEMENTO_COMPETENCIA
-   add constraint FK_ELEMENTO_COMPETENC_COMPETEN foreign key (ID_COMPETENCIA)
-      references COMPETENCIA (ID_COMPETENCIA)
+   add constraint FK_ELEMENTO_COMPETENC_UNIDAD_C foreign key (ID_UNIDAD_COMPETENCIA)
+      references UNIDAD_COMPETENCIA (ID_UNIDAD_COMPETENCIA)
       on delete restrict on update restrict;
 
 alter table ESCUELA_UCE
@@ -361,8 +410,8 @@ alter table MATERIA
       on delete restrict on update restrict;
 
 alter table MATERIA_UCE
-   add constraint FK_MATERIA__DOCENTE_A_DOCENTE foreign key (ID_DOCENTE)
-      references DOCENTE (ID_DOCENTE)
+   add constraint FK_MATERIA__ESCUELA_A_ESCUELA_ foreign key (ID_ESCUELA_UCE)
+      references ESCUELA_UCE (ID_ESCUELA_UCE)
       on delete restrict on update restrict;
 
 alter table OBJETIVO
@@ -375,8 +424,18 @@ alter table RECURSOS_DIDACTICOS
       references SYLLABUS (ID_SYLLABUS)
       on delete restrict on update restrict;
 
+alter table RESULTADOS_APRENDIZAJE
+   add constraint FK_RESULTAD_SYLLABUS__SYLLABUS foreign key (ID_SYLLABUS)
+      references SYLLABUS (ID_SYLLABUS)
+      on delete restrict on update restrict;
+
 alter table SYLLABUS
    add constraint FK_SYLLABUS_MATERIA_S_MATERIA_ foreign key (ID_MATERIA_UCE)
       references MATERIA_UCE (ID_MATERIA_UCE)
+      on delete restrict on update restrict;
+
+alter table UNIDAD_COMPETENCIA
+   add constraint FK_UNIDAD_C_SYLLABUS__SYLLABUS foreign key (ID_SYLLABUS)
+      references SYLLABUS (ID_SYLLABUS)
       on delete restrict on update restrict;
 
