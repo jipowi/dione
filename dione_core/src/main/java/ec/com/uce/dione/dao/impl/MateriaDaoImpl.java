@@ -24,10 +24,10 @@ import ec.com.uce.dione.entities.Materia;
  * @since JDK1.6
  */
 @Stateless
-public class MateriaDaoImpl implements MateriaDao {
+public class MateriaDaoImpl extends GenericDAOImpl<Materia, Long> implements MateriaDao {
 
 	Logger log = Logger.getLogger(MateriaDaoImpl.class);
-	
+
 	@PersistenceContext(unitName = "dione_core")
 	private EntityManager em;
 
@@ -45,7 +45,7 @@ public class MateriaDaoImpl implements MateriaDao {
 			List<Materia> materias = query.getResultList();
 
 			return materias;
-			
+
 		} catch (Exception ex) {
 			log.error("Error: No se pudo realizar la Consulta --> consultarMateriaByEscuela", ex);
 			throw new DioneException(ex);

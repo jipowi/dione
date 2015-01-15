@@ -26,7 +26,7 @@ import ec.com.uce.dione.entities.Docente;
 @Stateless
 public class DocenteDaoImpl extends GenericDAOImpl<Docente, Long> implements DocenteDao {
 
-	Logger log = Logger.getLogger(MateriaDaoImpl.class);
+	Logger log = Logger.getLogger(DocenteDaoImpl.class);
 
 	@PersistenceContext(unitName = "dione_core")
 	private EntityManager em;
@@ -43,8 +43,11 @@ public class DocenteDaoImpl extends GenericDAOImpl<Docente, Long> implements Doc
 			Query query = em.createNamedQuery("Docente.findByCedula");
 			query.setParameter("cedula", cedula);
 			List<Docente> docentes = query.getResultList();
-
-			return docentes.get(0);
+			if (docentes.isEmpty()) {
+				return null;
+			} else {
+				return docentes.get(0);
+			}
 
 		} catch (Exception ex) {
 			log.error("Error: No se pudo realizar la Consulta --> cosultarDocenteByCedula", ex);

@@ -22,15 +22,14 @@ public interface MateriaUceDao extends GenericDAO<MateriaUce, Long> {
 
 	/**
 	 * 
-	 * <b> Permite consultar las materias relacionadas a un docente </b>
+	 * <b> Permite consultar las materias correspondientes a una determinada escuela. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Paul Jimenez, Date: 14/01/2015]
 	 * </p>
 	 * 
-	 * @param idDocente
+	 * @param idEscuela
 	 * @return
 	 * @throws DioneException
 	 */
-	public List<MateriaUce> consultarMateriasByDocente(Integer idDocente) throws DioneException;
-
+	public List<MateriaUce> consultarMateriasByEscuela(Long idEscuela) throws DioneException;
 }

@@ -4,52 +4,55 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the syllabus database table.
  * 
  */
 @Entity
-@NamedQuery(name="Syllabus.findAll", query="SELECT s FROM Syllabus s")
+@NamedQuery(name = "Syllabus.findAll", query = "SELECT s FROM Syllabus s")
 public class Syllabus implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_syllabus")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_syllabus")
 	private Integer idSyllabus;
 
 	private String corequisito;
 
-	@Column(name="descripcion_asignatura")
+	@Column(name = "descripcion_asignatura")
 	private String descripcionAsignatura;
 
 	private String metodologia;
 
-	@Column(name="num_horas_clase")
+	@Column(name = "num_horas_clase")
 	private Integer numHorasClase;
 
 	private String prerequisito;
 
-	//bi-directional many-to-one association to Bibliografia
-	@OneToMany(mappedBy="syllabus")
+	// bi-directional many-to-one association to Bibliografia
+	@OneToMany(mappedBy = "syllabus")
 	private List<Bibliografia> bibliografias;
 
-	//bi-directional many-to-one association to Competencia
-	@OneToMany(mappedBy="syllabus")
-	private List<Competencia> competencias;
+	// bi-directional many-to-one association to UnidadCompetencia
+	@OneToMany(mappedBy = "syllabus")
+	private List<UnidadCompetencia> unidadCompetencias;
 
-	//bi-directional many-to-one association to Objetivo
-	@OneToMany(mappedBy="syllabus")
+	// bi-directional many-to-one association to Objetivo
+	@OneToMany(mappedBy = "syllabus")
 	private List<Objetivo> objetivos;
 
-	//bi-directional many-to-one association to RecursosDidactico
-	@OneToMany(mappedBy="syllabus")
+	// bi-directional many-to-one association to RecursosDidactico
+	@OneToMany(mappedBy = "syllabus")
 	private List<RecursosDidactico> recursosDidacticos;
 
-	//bi-directional many-to-one association to MateriaUce
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_materia_uce")
+	// bi-directional many-to-one association to ResultadosAprendizaje
+	@OneToMany(mappedBy = "syllabus")
+	private List<ResultadosAprendizaje> resultadosAprendizajes;
+
+	// bi-directional many-to-one association to MateriaUce
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_materia_uce")
 	private MateriaUce materiaUce;
 
 	public Syllabus() {
@@ -125,28 +128,6 @@ public class Syllabus implements Serializable {
 		return bibliografia;
 	}
 
-	public List<Competencia> getCompetencias() {
-		return this.competencias;
-	}
-
-	public void setCompetencias(List<Competencia> competencias) {
-		this.competencias = competencias;
-	}
-
-	public Competencia addCompetencia(Competencia competencia) {
-		getCompetencias().add(competencia);
-		competencia.setSyllabus(this);
-
-		return competencia;
-	}
-
-	public Competencia removeCompetencia(Competencia competencia) {
-		getCompetencias().remove(competencia);
-		competencia.setSyllabus(null);
-
-		return competencia;
-	}
-
 	public List<Objetivo> getObjetivos() {
 		return this.objetivos;
 	}
@@ -189,6 +170,28 @@ public class Syllabus implements Serializable {
 		recursosDidactico.setSyllabus(null);
 
 		return recursosDidactico;
+	}
+
+	public List<ResultadosAprendizaje> getResultadosAprendizajes() {
+		return this.resultadosAprendizajes;
+	}
+
+	public void setResultadosAprendizajes(List<ResultadosAprendizaje> resultadosAprendizajes) {
+		this.resultadosAprendizajes = resultadosAprendizajes;
+	}
+
+	public ResultadosAprendizaje addResultadosAprendizaje(ResultadosAprendizaje resultadosAprendizaje) {
+		getResultadosAprendizajes().add(resultadosAprendizaje);
+		resultadosAprendizaje.setSyllabus(this);
+
+		return resultadosAprendizaje;
+	}
+
+	public ResultadosAprendizaje removeResultadosAprendizaje(ResultadosAprendizaje resultadosAprendizaje) {
+		getResultadosAprendizajes().remove(resultadosAprendizaje);
+		resultadosAprendizaje.setSyllabus(null);
+
+		return resultadosAprendizaje;
 	}
 
 	public MateriaUce getMateriaUce() {

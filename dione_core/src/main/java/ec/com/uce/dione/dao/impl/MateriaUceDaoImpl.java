@@ -31,19 +31,24 @@ public class MateriaUceDaoImpl extends GenericDAOImpl<MateriaUce, Long> implemen
 	@PersistenceContext(unitName = "dione_core")
 	private EntityManager em;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ec.com.uce.dione.dao.MateriaUceDao#consultarMateriasByDocente(java.lang.Long)
+	/* (non-Javadoc)
+	 * @see ec.com.uce.dione.dao.MateriaUceDao#consultarMateriasByEscuela(java.lang.Long)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<MateriaUce> consultarMateriasByDocente(Integer idDocente) throws DioneException {
-		Query query = em.createNamedQuery("MateriaUce.findByDocente");
-		query.setParameter("idDocente", idDocente);
+	public List<MateriaUce> consultarMateriasByEscuela(Long idEscuela) throws DioneException {
+		try {
+			Query query = em.createNamedQuery("MateriaUce.findByEscuela");
+			query.setParameter("idEscuela", idEscuela);
+			List<MateriaUce> materias = query.getResultList();
 
-		return query.getResultList();
+			return materias;
 
+		} catch (Exception ex) {
+			log.error("Error: No se pudo realizar la Consulta --> consultarMateriasByEscuela", ex);
+			throw new DioneException(ex);
+		}
 	}
+
 
 }

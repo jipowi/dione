@@ -17,5 +17,7 @@
 		<class>ec.com.uce.dione.entities.Objetivo</class>
 		<class>ec.com.uce.dione.entities.RecursosDidactico</class>
 		<class>ec.com.uce.dione.entities.Syllabus</class>
+		<class>ec.com.uce.dione.entities.ResultadosAprendizaje</class>
+		<class>ec.com.uce.dione.entities.UnidadCompetencia</class>
    	</persistence-unit>
 </persistence>

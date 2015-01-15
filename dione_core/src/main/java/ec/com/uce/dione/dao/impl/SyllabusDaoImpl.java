@@ -5,8 +5,8 @@ package ec.com.uce.dione.dao.impl;
 
 import javax.ejb.Stateless;
 
-import ec.com.uce.dione.dao.EscuelaDao;
-import ec.com.uce.dione.entities.Escuela;
+import ec.com.uce.dione.dao.SyllabusDao;
+import ec.com.uce.dione.entities.Syllabus;
 
 /**
  * <b> Implementacion de la interfaz para realizar operaciones sobre la tabla Escuela. </b>
@@ -16,8 +16,6 @@ import ec.com.uce.dione.entities.Escuela;
  * @since JDK1.6
  */
 @Stateless
-public class EscuelaDaoImpl extends GenericDAOImpl<Escuela, Long> implements EscuelaDao {
-
-
+public class SyllabusDaoImpl extends GenericDAOImpl<Syllabus, Long> implements SyllabusDao {
 
 }

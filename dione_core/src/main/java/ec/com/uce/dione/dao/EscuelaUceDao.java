@@ -3,8 +3,11 @@
  */
 package ec.com.uce.dione.dao;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
+import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.EscuelaUce;
 
 /**
@@ -16,5 +19,17 @@ import ec.com.uce.dione.entities.EscuelaUce;
  */
 @Local
 public interface EscuelaUceDao extends GenericDAO<EscuelaUce, Long> {
+
+	/**
+	 * 
+	 * <b> Permite consultar las escuelas en las que se encuetra el docente </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 14/01/2015]
+	 * </p>
+	 * 
+	 * @return
+	 * @throws DioneException
+	 */
+	public List<EscuelaUce> consultarEscuelaByDocente(String idDocente) throws DioneException;
 
 }

@@ -2,6 +2,7 @@ package ec.com.uce.dione.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -17,7 +18,7 @@ public class EscuelaUce implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_escuela_uce")
-	private Integer idEscuelaUce;
+	private Long idEscuelaUce;
 
 	@Column(name="escuela_uce")
 	private String escuelaUce;
@@ -27,14 +28,18 @@ public class EscuelaUce implements Serializable {
 	@JoinColumn(name="id_docente")
 	private Docente docente;
 
+	//bi-directional many-to-one association to MateriaUce
+	@OneToMany(mappedBy="escuelaUce")
+	private List<MateriaUce> materiaUces;
+
 	public EscuelaUce() {
 	}
 
-	public Integer getIdEscuelaUce() {
+	public Long getIdEscuelaUce() {
 		return this.idEscuelaUce;
 	}
 
-	public void setIdEscuelaUce(Integer idEscuelaUce) {
+	public void setIdEscuelaUce(Long idEscuelaUce) {
 		this.idEscuelaUce = idEscuelaUce;
 	}
 
@@ -52,6 +57,28 @@ public class EscuelaUce implements Serializable {
 
 	public void setDocente(Docente docente) {
 		this.docente = docente;
+	}
+
+	public List<MateriaUce> getMateriaUces() {
+		return this.materiaUces;
+	}
+
+	public void setMateriaUces(List<MateriaUce> materiaUces) {
+		this.materiaUces = materiaUces;
+	}
+
+	public MateriaUce addMateriaUce(MateriaUce materiaUce) {
+		getMateriaUces().add(materiaUce);
+		materiaUce.setEscuelaUce(this);
+
+		return materiaUce;
+	}
+
+	public MateriaUce removeMateriaUce(MateriaUce materiaUce) {
+		getMateriaUces().remove(materiaUce);
+		materiaUce.setEscuelaUce(null);
+
+		return materiaUce;
 	}
 
 }

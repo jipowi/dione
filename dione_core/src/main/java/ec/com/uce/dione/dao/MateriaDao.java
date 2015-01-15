@@ -11,24 +11,14 @@ import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.Materia;
 
 /**
- * <b> Interfaz local para realizar las operaciones necesarias en la tabla Materia </b>
+ * <b> Interfaz local de la tabla Materia para relaizar las operaciones necesarias sobre la base </b>
  * 
  * @author Paul Jimenez
  * @version 1.0,29/12/2014
  * @since JDK1.6
  */
 @Local
-public interface MateriaDao  {
+public interface MateriaDao extends GenericDAO<Materia, Long> {
 
-	/**
-	 * 
-	 * <b> Permite consultar la lista de materias correspondientes a una escuela </b>
-	 * <p>
-	 * [Author: Paul Jimenez, Date: 29/12/2014]
-	 * </p>
-	 * 
-	 * @param idEscuela
-	 * @return
-	 */
 	public List<Materia> consultarMateriaByEscuela(Integer idEscuela) throws DioneException;
 }
