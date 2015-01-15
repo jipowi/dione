@@ -14,9 +14,11 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.RowEditEvent;
 
+import ec.com.uce.ejb.dto.BibliografiaDTO;
 import ec.com.uce.ejb.dto.CompetenciaDTO;
 import ec.com.uce.ejb.dto.ElementosCompetenciaDTO;
 import ec.com.uce.ejb.dto.ObjetivoDTO;
+import ec.com.uce.ejb.dto.ResultadoAprendizajeDTO;
 import ec.com.uce.ejb.dto.UnidadCompetenciaDTO;
 
 /**
@@ -42,11 +44,16 @@ public class SyllabusBean implements Serializable {
 	private String unidadCompetencia;
 	private Integer planificacion;
 	private String elementoCompetencia;
-	private List<ElementosCompetenciaDTO> elementosCompetencia = new ArrayList<ElementosCompetenciaDTO>();
-
+	private String metodologia;
+	private String bibliografia;
+	private String resultadoAprendizaje;
+	private static List<ElementosCompetenciaDTO> elementosCompetenciaDTOs = new ArrayList<ElementosCompetenciaDTO>();
+	private List<ElementosCompetenciaDTO> elementosCompetenciasDTOList = new ArrayList<ElementosCompetenciaDTO>();
+	private static List<BibliografiaDTO> bibliografiaDTOs = new ArrayList<BibliografiaDTO>();
 	private static List<ObjetivoDTO> objetivosDTOs = new ArrayList<ObjetivoDTO>();
 	private static List<CompetenciaDTO> competenciasDTOs = new ArrayList<CompetenciaDTO>();
 	private static List<UnidadCompetenciaDTO> unidadesDTOs = new ArrayList<UnidadCompetenciaDTO>();
+	private static List<ResultadoAprendizajeDTO> resultadoAprendizajeDTOs = new ArrayList<ResultadoAprendizajeDTO>();
 
 	/**
 	 * @return the materia
@@ -146,6 +153,36 @@ public class SyllabusBean implements Serializable {
 	}
 
 	/**
+	 * @return the elementosCompetenciaDTOs
+	 */
+	public List<ElementosCompetenciaDTO> getElementosCompetenciaDTOs() {
+		return elementosCompetenciaDTOs;
+	}
+
+	/**
+	 * @param elementosCompetenciaDTOs
+	 *            the elementosCompetenciaDTOs to set
+	 */
+	public static void setElementosCompetenciaDTOs(List<ElementosCompetenciaDTO> elementosCompetenciaDTOs) {
+		SyllabusBean.elementosCompetenciaDTOs = elementosCompetenciaDTOs;
+	}
+
+	/**
+	 * @return the elementosCompetenciasDTOList
+	 */
+	public List<ElementosCompetenciaDTO> getElementosCompetenciasDTOList() {
+		return elementosCompetenciasDTOList;
+	}
+
+	/**
+	 * @param elementosCompetenciasDTOList
+	 *            the elementosCompetenciasDTOList to set
+	 */
+	public void setElementosCompetenciasDTOList(List<ElementosCompetenciaDTO> elementosCompetenciasDTOList) {
+		this.elementosCompetenciasDTOList = elementosCompetenciasDTOList;
+	}
+
+	/**
 	 * @param objetivosDTOs
 	 *            the objetivosDTOs to set
 	 */
@@ -206,18 +243,33 @@ public class SyllabusBean implements Serializable {
 	}
 
 	/**
-	 * @return the elementosCompetencia
+	 * @return the bibliografia
 	 */
-	public List<ElementosCompetenciaDTO> getElementosCompetencia() {
-		return elementosCompetencia;
+	public String getBibliografia() {
+		return bibliografia;
 	}
 
 	/**
-	 * @param elementosCompetencia
-	 *            the elementosCompetencia to set
+	 * @param bibliografia
+	 *            the bibliografia to set
 	 */
-	public void setElementosCompetencia(List<ElementosCompetenciaDTO> elementosCompetencia) {
-		this.elementosCompetencia = elementosCompetencia;
+	public void setBibliografia(String bibliografia) {
+		this.bibliografia = bibliografia;
+	}
+
+	/**
+	 * @return the resultadoAprendizaje
+	 */
+	public String getResultadoAprendizaje() {
+		return resultadoAprendizaje;
+	}
+
+	/**
+	 * @param resultadoAprendizaje
+	 *            the resultadoAprendizaje to set
+	 */
+	public void setResultadoAprendizaje(String resultadoAprendizaje) {
+		this.resultadoAprendizaje = resultadoAprendizaje;
 	}
 
 	/**
@@ -271,6 +323,51 @@ public class SyllabusBean implements Serializable {
 	 */
 	public void setElementoCompetencia(String elementoCompetencia) {
 		this.elementoCompetencia = elementoCompetencia;
+	}
+
+	/**
+	 * @return the metodologia
+	 */
+	public String getMetodologia() {
+		return metodologia;
+	}
+
+	/**
+	 * @param metodologia
+	 *            the metodologia to set
+	 */
+	public void setMetodologia(String metodologia) {
+		this.metodologia = metodologia;
+	}
+
+	/**
+	 * @return the bibliografiaDTOs
+	 */
+	public List<BibliografiaDTO> getBibliografiaDTOs() {
+		return bibliografiaDTOs;
+	}
+
+	/**
+	 * @param bibliografiaDTOs
+	 *            the bibliografiaDTOs to set
+	 */
+	public static void setBibliografiaDTOs(List<BibliografiaDTO> bibliografiaDTOs) {
+		SyllabusBean.bibliografiaDTOs = bibliografiaDTOs;
+	}
+
+	/**
+	 * @return the resultadoAprendizajeDTOs
+	 */
+	public List<ResultadoAprendizajeDTO> getResultadoAprendizajeDTOs() {
+		return resultadoAprendizajeDTOs;
+	}
+
+	/**
+	 * @param resultadoAprendizajeDTOs
+	 *            the resultadoAprendizajeDTOs to set
+	 */
+	public static void setResultadoAprendizajeDTOs(List<ResultadoAprendizajeDTO> resultadoAprendizajeDTOs) {
+		SyllabusBean.resultadoAprendizajeDTOs = resultadoAprendizajeDTOs;
 	}
 
 	// OBJETIVOS
@@ -373,12 +470,13 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 */
 	public void addUnidad() {
-		UnidadCompetenciaDTO item = new UnidadCompetenciaDTO(this.unidadCompetencia, this.planificacion, this.elementosCompetencia);
+		this.elementosCompetenciasDTOList = this.getElementosCompetenciaDTOs();
+		UnidadCompetenciaDTO item = new UnidadCompetenciaDTO(this.unidadCompetencia, this.planificacion, this.elementosCompetenciasDTOList);
 		unidadesDTOs.add(item);
 
 		unidadCompetencia = "";
 		planificacion = 0;
-		elementosCompetencia = new ArrayList<ElementosCompetenciaDTO>();
+		elementosCompetenciaDTOs = new ArrayList<ElementosCompetenciaDTO>();
 	}
 
 	/**
@@ -421,10 +519,10 @@ public class SyllabusBean implements Serializable {
 	 */
 	public void addElemento() {
 		ElementosCompetenciaDTO item = new ElementosCompetenciaDTO(this.elementoCompetencia);
-		elementosCompetencia.add(item);
+		elementosCompetenciaDTOs.add(item);
 
 		elementoCompetencia = "";
-		
+
 	}
 
 	/**
@@ -454,5 +552,97 @@ public class SyllabusBean implements Serializable {
 		FacesMessage msg = new FacesMessage("Item Cancelled");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		unidadesDTOs.remove((ElementosCompetenciaDTO) event.getObject());
+	}
+
+	// BIBLIOGRAFIA
+	/**
+	 * 
+	 * <b> Permite agregar un registro. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * </p>
+	 * 
+	 */
+	public void addBibliografia() {
+		BibliografiaDTO item = new BibliografiaDTO(this.bibliografia);
+		bibliografiaDTOs.add(item);
+
+		bibliografia = "";
+
+	}
+
+	/**
+	 * 
+	 * <b> Permite editar un registro </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * </p>
+	 * 
+	 * @param event
+	 */
+	public void onEditBibliografia(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Item Edited", ((BibliografiaDTO) event.getObject()).getBiografia());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+
+	/**
+	 * 
+	 * <b> Permite eliminar un registro </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * </p>
+	 * 
+	 * @param event
+	 */
+	public void onCancelBibliografia(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Item Cancelled");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		bibliografiaDTOs.remove((BibliografiaDTO) event.getObject());
+	}
+
+	// RESULTADO APRENDIZAJE
+	/**
+	 * 
+	 * <b> Permite agregar un registro. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * </p>
+	 * 
+	 */
+	public void addResultado() {
+		ResultadoAprendizajeDTO item = new ResultadoAprendizajeDTO(this.resultadoAprendizaje);
+		resultadoAprendizajeDTOs.add(item);
+
+		resultadoAprendizaje = "";
+
+	}
+
+	/**
+	 * 
+	 * <b> Permite editar un registro </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * </p>
+	 * 
+	 * @param event
+	 */
+	public void onEditResultado(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Item Edited", ((ResultadoAprendizajeDTO) event.getObject()).getResultado());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+
+	/**
+	 * 
+	 * <b> Permite eliminar un registro </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * </p>
+	 * 
+	 * @param event
+	 */
+	public void onCancelResultado(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Item Cancelled");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		resultadoAprendizajeDTOs.remove((ResultadoAprendizajeDTO) event.getObject());
 	}
 }

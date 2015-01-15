@@ -164,17 +164,15 @@ public class DocenteBacking implements Serializable {
 			
 			for (MateriaDTO materiaDTO : asiganturaDTO.getMaterias()) {
 				MateriaUce materiaUce = new MateriaUce();
-				materiaUce.setDocente(docente);
 				materiaUce.setMateriaUce(materiaDTO.getDesMateria());
 				materiaUces.add(materiaUce);
 			}
 		}
 		docente.setEscuelaUces(escuelasUce);
-		docente.setMateriaUces(materiaUces);
 		
 
 		try {
-			docenteService.guardarDocente(docente);
+			docenteService.guardarDocente(docente, materiaUces);
 			MessagesController.addInfo(null, HiperionMensajes.getInstancia().getString("dione.mensaje.exito.save"));
 
 		} catch (DioneException e) {

@@ -16,11 +16,27 @@ import javax.faces.model.SelectItem;
 import org.apache.log4j.Logger;
 
 import ec.com.uce.dione.comun.DioneException;
+import ec.com.uce.dione.entities.Bibliografia;
+import ec.com.uce.dione.entities.Competencia;
 import ec.com.uce.dione.entities.Docente;
+import ec.com.uce.dione.entities.ElementoCompetencia;
+import ec.com.uce.dione.entities.EscuelaUce;
 import ec.com.uce.dione.entities.MateriaUce;
+import ec.com.uce.dione.entities.Objetivo;
+import ec.com.uce.dione.entities.ResultadosAprendizaje;
+import ec.com.uce.dione.entities.Syllabus;
+import ec.com.uce.dione.entities.UnidadCompetencia;
+import ec.com.uce.ejb.dto.BibliografiaDTO;
+import ec.com.uce.ejb.dto.CompetenciaDTO;
+import ec.com.uce.ejb.dto.ElementosCompetenciaDTO;
+import ec.com.uce.ejb.dto.ObjetivoDTO;
+import ec.com.uce.ejb.dto.ResultadoAprendizajeDTO;
+import ec.com.uce.ejb.dto.UnidadCompetenciaDTO;
 import ec.com.uce.ejb.service.DocenteService;
 import ec.com.uce.ejb.service.SyllabusService;
 import ec.com.uce.web.bean.SyllabusBean;
+import ec.com.uce.web.util.HiperionMensajes;
+import ec.com.uce.web.util.MessagesController;
 
 /**
  * <b> Permite almacenar la informacion de la pagina web y administrar las acciones de la misma </b>
@@ -37,7 +53,7 @@ public class SyllabusBacking implements Serializable {
 
 	@EJB
 	private DocenteService docenteService;
-	
+
 	@EJB
 	private SyllabusService syllabusService;
 
@@ -65,14 +81,123 @@ public class SyllabusBacking implements Serializable {
 			docente = docenteService.consultarDocenteByCedula(syllabusBean.getCedula());
 			if (docente != null) {
 				docenteEncontrado = true;
-				materiaUces = syllabusService.consultarMateriasByDocente(docente.getIdDocente());
+				List<EscuelaUce> escuelas = syllabusService.consultarEscuelaByDocente(docente.getIdDocente().toString());
+
+				for (EscuelaUce escuelaUce : escuelas) {
+					List<MateriaUce> materiasTemp = syllabusService.consultarMateriasByEscuela(new Long(escuelaUce.getIdEscuelaUce()));
+					for (MateriaUce materiaUce : materiasTemp) {
+						materiaUces.add(materiaUce);
+					}
+				}
+
 			} else {
 				docenteEncontrado = false;
+				MessagesController.addError(null, HiperionMensajes.getInstancia().getString("dione.mensaje.error.buscar"));
 			}
 
 		} catch (DioneException e) {
 			log.error("Error al momento consultar el docente", e);
 			throw new DioneException(e);
+		}
+
+	}
+
+	/**
+	 * 
+	 * <b> Permite guardar el syllabus en la base de datos </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 14/01/2015]
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@SuppressWarnings("static-access")
+	public void guardarSyllabus() throws Exception {
+		try {
+			// Cabecera Syllabus
+			Syllabus syllabus = new Syllabus();
+
+			MateriaUce materiaUce = syllabusService.consultarMateriaById(Integer.parseInt(syllabusBean.getMateria()));
+			syllabus.setMateriaUce(materiaUce);
+
+			syllabus.setDescripcionAsignatura(syllabusBean.getDesAsigantura());
+			syllabus.setNumHorasClase(syllabusBean.getNumHorasClase());
+			syllabus.setPrerequisito(syllabusBean.getPrerequisito());
+			syllabus.setCorequisito(syllabusBean.getCorequisito());
+			syllabus.setMetodologia(syllabusBean.getMetodologia());
+
+			syllabusBean.setDesAsigantura("");
+			syllabusBean.setNumHorasClase(0);
+			syllabusBean.setPrerequisito("");
+			syllabusBean.setCorequisito("");
+			syllabusBean.setMetodologia("");
+
+			// Objetivos
+			List<Objetivo> objetivos = new ArrayList<Objetivo>();
+			for (ObjetivoDTO objetivoDTO : syllabusBean.getObjetivosDTOs()) {
+				Objetivo objetivo = new Objetivo();
+				objetivo.setObjetivo(objetivoDTO.getObjetivo());
+				objetivos.add(objetivo);
+			}
+			syllabusBean.setObjetivo("");
+			syllabusBean.setObjetivosDTOs(null);
+
+			// Competencias
+			List<Competencia> competencias = new ArrayList<Competencia>();
+			for (CompetenciaDTO competenciaDTO : syllabusBean.getCompetenciasDTOs()) {
+				Competencia competencia = new Competencia();
+				competencia.setCompetencia(competenciaDTO.getCompetencia());
+
+				competencias.add(competencia);
+			}
+			syllabusBean.setCompetencia("");
+			syllabusBean.setCompetenciasDTOs(null);
+
+			List<UnidadCompetencia> unidades = new ArrayList<UnidadCompetencia>();
+			
+			for (UnidadCompetenciaDTO unidadCompetenciaDTO : syllabusBean.getUnidadesDTOs()) {
+				UnidadCompetencia unidadCompetencia = new UnidadCompetencia();
+				unidadCompetencia.setUnidadCompetencia(unidadCompetenciaDTO.getUnidadCompetencia());
+				unidadCompetencia.setHorasCompetencia(unidadCompetenciaDTO.getPlanificacionHoras());
+				
+				List<ElementoCompetencia> elementos = new ArrayList<ElementoCompetencia>();
+				for(ElementosCompetenciaDTO elemCompetenciaDTO: unidadCompetenciaDTO.getElementosCompetencias()){
+					ElementoCompetencia elementoCompetencia = new ElementoCompetencia();
+					elementoCompetencia.setElementoCompetencia(elemCompetenciaDTO.getElementoCompetencia());
+					elementos.add(elementoCompetencia);
+				}
+				unidades.add(unidadCompetencia);
+				unidadCompetencia.setElementoCompetencias(elementos);
+			}
+			syllabusBean.setUnidadesDTOs(null);
+
+			// Bibliografias
+			List<Bibliografia> bibliografias = new ArrayList<Bibliografia>();
+			for (BibliografiaDTO bibliografiaDTO : syllabusBean.getBibliografiaDTOs()) {
+				Bibliografia bibliografia = new Bibliografia();
+				bibliografia.setBibliografia(bibliografiaDTO.getBiografia());
+				bibliografias.add(bibliografia);
+			}
+			syllabusBean.setBibliografia("");
+			syllabusBean.setBibliografiaDTOs(null);
+
+			// Resultados Aprendizaje
+			List<ResultadosAprendizaje> resultados = new ArrayList<ResultadosAprendizaje>();
+			for (ResultadoAprendizajeDTO resultadoAprendizajeDTO : syllabusBean.getResultadoAprendizajeDTOs()) {
+				ResultadosAprendizaje resultado = new ResultadosAprendizaje();
+				resultado.setResultadoAprendizaje(resultadoAprendizajeDTO.getResultado());
+				resultados.add(resultado);
+			}
+			syllabusBean.setResultadoAprendizaje("");
+			syllabusBean.setResultadoAprendizajeDTOs(null);
+
+			syllabusService.guardarSyllabus(syllabus, objetivos, competencias, bibliografias, resultados, unidades);
+			MessagesController.addInfo(null, HiperionMensajes.getInstancia().getString("dione.mensaje.exito.save"));
+
+		} catch (Exception e) {
+			log.error("Error al momento guardar los datos del syllabus", e);
+			MessagesController.addError(null, HiperionMensajes.getInstancia().getString("dione.mensaje.error.save"));
+			throw new Exception(e);
 		}
 
 	}
