@@ -18,28 +18,29 @@
 						<p:inputText id="nombre" value="#{docenteBean.nombresDocente}" required="true" requiredMessage="#{message['msn.obligatorio']}" />
 
 						<p:outputLabel for="apellidos" value="#{message['lbl.apellidos']}:" styleClass="negrita" />
-						<p:inputText id="apellidos" value="#{docenteBean.apellidosDocente}" required="true" requiredMessage="#{message['msn.obligatorio']}"/>
+						<p:inputText id="apellidos" value="#{docenteBean.apellidosDocente}" required="true" requiredMessage="#{message['msn.obligatorio']}" />
 
 						<p:outputLabel for="cedula" value="#{message['lbl.cedula']}:" styleClass="negrita" />
-						<p:inputText id="cedula" value="#{docenteBean.cedulaDocente}" required="true" requiredMessage="#{message['msn.obligatorio']}"/>
+						<p:inputText id="cedula" value="#{docenteBean.cedulaDocente}" required="true" requiredMessage="#{message['msn.obligatorio']}" />
 
 						<p:outputLabel for="cedula" value="#{message['lbl.direccion']}:" styleClass="negrita" />
-						<p:inputText id="direccion" value="#{docenteBean.direccionDocente}" required="true" requiredMessage="#{message['msn.obligatorio']}"/>
+						<p:inputText id="direccion" value="#{docenteBean.direccionDocente}" required="true" requiredMessage="#{message['msn.obligatorio']}" />
 
 					</h:panelGrid>
 					<h:panelGrid columns="3">
 						<h:graphicImage name="help.png" library="img" />
 
-						<p:outputLabel value="#{message['lbl.infoAsignaturas']}" styleClass="negrita" />
+						<p:outputLabel value="#{message['lbl.infoAsignaturas']}" style="color: green;" styleClass="negrita"/>
 
-						<p:commandLink title="Agregar escuela" oncomplete="escuelas.show();" update=":idEscuela">
+						<p:commandLink title=" Agregar
+							escuela" oncomplete="escuelas.show();" update=":idEscuela">
 							<h:graphicImage name="escuela.png" library="img" />
 						</p:commandLink>
 					</h:panelGrid>
 
 					<p:spacer height="30px;" />
-					<p:commandButton id="guardarBtnId" actionListener="#{docenteBacking.guardarDatosGenerales()}" icon="icon-save" value="#{message['boton.guardar']}"
-						update="formPrincipal" title="Guardar" />
+					<p:commandButton id="guardarBtnId" actionListener="#{docenteBacking.guardarDatosGenerales()}" icon="icon-save"
+						value="#{message['boton.guardar']}" update="formPrincipal" title="Guardar" />
 					<p:commandButton id="cancelarBtnId" icon="icon-cancel" value="#{message['boton.cancelar']}" title="Cancelar" />
 				</div>
 			</h:form>
@@ -92,7 +93,7 @@
 							</p:cellEditor>
 						</p:column>
 						<p:column>
-						<f:facet name="header">
+							<f:facet name="header">
 								<h:outputLabel value="#{message['lbl.asignaturas']}" />
 							</f:facet>
 							<p:dataList value="#{obj.materias}" var="escuela" type="ordered">
