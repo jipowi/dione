@@ -11,6 +11,7 @@ import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.Docente;
 import ec.com.uce.dione.entities.Escuela;
 import ec.com.uce.dione.entities.Materia;
+import ec.com.uce.dione.entities.MateriaUce;
 
 /**
  * <b> Servicio de interface local para realizar las operaciones necesarias. </b>
@@ -70,7 +71,7 @@ public interface DocenteService {
 	 * @param docente
 	 * @throws DioneException
 	 */
-	public void guardarDocente(Docente docente) throws DioneException;
+	public void guardarDocente(Docente docente, List<MateriaUce> materias) throws DioneException;
 
 	/**
 	 * 

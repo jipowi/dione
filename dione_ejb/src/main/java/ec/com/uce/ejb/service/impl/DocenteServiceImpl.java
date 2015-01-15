@@ -83,14 +83,15 @@ public class DocenteServiceImpl implements DocenteService {
 	 * @see ec.com.uce.ejb.service.DocenteService#guardarDocente(ec.com.uce.dione.entities.Docente)
 	 */
 	@Override
-	public void guardarDocente(Docente docente) throws DioneException {
+	public void guardarDocente(Docente docente, List<MateriaUce> materias) throws DioneException {
 		docenteDao.persist(docente);
-		if (!docente.getEscuelaUces().isEmpty() && !docente.getMateriaUces().isEmpty()) {
+		if (!docente.getEscuelaUces().isEmpty()) {
 			for (EscuelaUce escuelaUce : docente.getEscuelaUces()) {
 				escuelaUceDao.persist(escuelaUce);
-			}
-			for (MateriaUce materiaUce : docente.getMateriaUces()) {
-				materiaUceDao.persist(materiaUce);
+				for (MateriaUce materiaUce : materias) {
+					materiaUce.setEscuelaUce(escuelaUce);
+					materiaUceDao.persist(materiaUce);
+				}
 			}
 		}
 
