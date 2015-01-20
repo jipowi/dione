@@ -19,22 +19,25 @@
 		<div>
 			<!-- Menu del Template ubicado en la parte derecha -->
 			<div id="left">
-				<h:form>
-					<p:panelMenu>
-						<p:submenu label="#{message['titulo.docente']}">
-							<p:menuitem value="#{message['subtitulo.datosGenerales']}" action="/pages/docente.xhtml" />
-							<p:menuitem value="#{message['subtitulo.hojaVida']}" action="/pages/hojaVida.xhtml" />
-							<p:menuitem value="#{message['subtitulo.experiencia']}" action="/pages/experiencia.xhtml" />
-						</p:submenu>
-						<p:submenu label="#{message['titulo.sillybus']}">
-							<p:menuitem value="#{message['subtitulo.ingresarSyllabus']}" action="/pages/syllabus.xhtml" />
-							<p:menuitem value="#{message['subtitulo.cumplimientoSyllabus']}" action="/pages/cumplimientoSyllabus.xhtml" />
-						</p:submenu>
-						<p:submenu label="#{message['titulo.planificacion']}">
-							<p:menuitem value="#{message['subtitulo.datosGenerales']}" action="/pages/docente.xhtml" />
-						</p:submenu>
-					</p:panelMenu>
-				</h:form>
+				<p:spacer height="15px;" />
+				<div align="center">
+					<h:panelGrid columns="2">
+						<h:panelGrid columns="1">
+							<div id="left">
+								<h:form>
+									<p:panelMenu model="#{usuarioBacking.menumodel}">
+
+									</p:panelMenu>
+								</h:form>
+							</div>
+						</h:panelGrid>
+						<h:panelGrid columns="1">
+							<div id="content" class="left_content">
+								<ui:insert name="content">Content</ui:insert>
+							</div>
+						</h:panelGrid>
+					</h:panelGrid>
+				</div>
 			</div>
 			<!-- Contenido del Template unicado en la parte izquierda -->
 			<div id="content" class="left_content">
