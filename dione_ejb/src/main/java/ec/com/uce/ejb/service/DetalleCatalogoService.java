@@ -35,4 +35,18 @@ public interface DetalleCatalogoService {
 	 */
 	public List<DetalleCatalogo> consultarDetalleCatalogoByCodCatalogo(Long idCatalogo) throws DioneException;
 
+	/**
+	 * 
+	 * <b> Permite consultar un detalle de catalogo por medio del idCatalogo y idDetalle </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: Aug 27, 2014]
+	 * </p>
+	 * 
+	 * @param codCatalogo
+	 * @param codDetCalogo
+	 * @return
+	 * @throws DioneException
+	 */
+	public DetalleCatalogo consultarDetalleByCatalogoAndDetalle(Integer codCatalogo, Integer codDetCalogo) throws DioneException;
+
 }

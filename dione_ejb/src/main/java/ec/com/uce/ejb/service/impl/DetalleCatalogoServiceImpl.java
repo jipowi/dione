@@ -35,4 +35,14 @@ public class DetalleCatalogoServiceImpl implements DetalleCatalogoService {
 		return detalleCatalogoDao.consultarDetalleCatalogoByCodCatalogo(idCatalogo);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.avila.hiperion.servicio.DetalleCatalogoService#consultarDetalleByCatalogoAndDetalle(java.lang.Integer, java.lang.Integer)
+	 */
+	@Override
+	public DetalleCatalogo consultarDetalleByCatalogoAndDetalle(Integer codCatalogo, Integer codDetCalogo) throws DioneException {
+		return detalleCatalogoDao.consultarDetalleByCatalogoAndDetalle(codCatalogo, codDetCalogo);
+	}
+
 }
