@@ -19,5 +19,8 @@
 		<class>ec.com.uce.dione.entities.Syllabus</class>
 		<class>ec.com.uce.dione.entities.ResultadosAprendizaje</class>
 		<class>ec.com.uce.dione.entities.UnidadCompetencia</class>
+		<class>ec.com.uce.dione.entities.Rol</class>
+		<class>ec.com.uce.dione.entities.Menu</class>
+		<class>ec.com.uce.dione.entities.RolMenu</class>
    	</persistence-unit>
 </persistence>

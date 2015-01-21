@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.dao.DetalleCatalogoDao;
 import ec.com.uce.dione.entities.DetalleCatalogo;
 
@@ -36,5 +37,20 @@ public class DetalleCatalogoDaoImpl extends GenericDAOImpl<DetalleCatalogo, Long
 		return detalleCatalogo;
 	}
 
-		
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.avila.hiperion.dao.DetalleCatalogoDao#consultarDetalleByCatalogoAndDetalle(java.lang.Integer, java.lang.Integer)
+	 */
+	@Override
+	public DetalleCatalogo consultarDetalleByCatalogoAndDetalle(Integer codCatalogo, Integer codDetCalogo) throws DioneException {
+
+		Query query = em.createNamedQuery("DetalleCatalogo.findByCodCatalogoAndCodDetalle");
+		query.setParameter("idCatalogo", new Long(codCatalogo.toString()));
+		query.setParameter("codDetalleCatalogo", codDetCalogo.toString());
+
+		DetalleCatalogo detalle = (DetalleCatalogo) query.getSingleResult();
+
+		return detalle;
+	}
 }

@@ -1,48 +1,46 @@
 package ec.com.uce.dione.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.Date;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 /**
  * The persistent class for the usuario database table.
  * 
  */
 @Entity
-@NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u")
-public class Usuario implements Serializable {
+@NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
+public class Usuario extends Auditoria implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_usuario")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_usuario")
 	private Integer idUsuario;
 
 	private String clave;
 
-	@Column(name="email_usuario")
+	@Column(name = "email_usuario")
 	private String emailUsuario;
 
-	private String estado;
+	@Column(name = "identificacion_usuario")
+	private String identificacionUsuario;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_actualizacion")
-	private Date fechaActualizacion;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_creacion")
-	private Date fechaCreacion;
-
-	@Column(name="id_usuario_actualizacion")
-	private Integer idUsuarioActualizacion;
-
-	@Column(name="id_usuario_creacion")
-	private Integer idUsuarioCreacion;
-
-	private String telefono;
+	@Column(name = "nombre_usuario")
+	private String nombreUsuario;
 
 	private String usuario;
+
+	// bi-directional many-to-one association to Rol
+	@OneToMany(mappedBy = "usuario")
+	private List<Rol> rols;
 
 	public Usuario() {
 	}
@@ -71,52 +69,20 @@ public class Usuario implements Serializable {
 		this.emailUsuario = emailUsuario;
 	}
 
-	public String getEstado() {
-		return this.estado;
+	public String getIdentificacionUsuario() {
+		return this.identificacionUsuario;
 	}
 
-	public void setEstado(String estado) {
-		this.estado = estado;
+	public void setIdentificacionUsuario(String identificacionUsuario) {
+		this.identificacionUsuario = identificacionUsuario;
 	}
 
-	public Date getFechaActualizacion() {
-		return this.fechaActualizacion;
+	public String getNombreUsuario() {
+		return this.nombreUsuario;
 	}
 
-	public void setFechaActualizacion(Date fechaActualizacion) {
-		this.fechaActualizacion = fechaActualizacion;
-	}
-
-	public Date getFechaCreacion() {
-		return this.fechaCreacion;
-	}
-
-	public void setFechaCreacion(Date fechaCreacion) {
-		this.fechaCreacion = fechaCreacion;
-	}
-
-	public Integer getIdUsuarioActualizacion() {
-		return this.idUsuarioActualizacion;
-	}
-
-	public void setIdUsuarioActualizacion(Integer idUsuarioActualizacion) {
-		this.idUsuarioActualizacion = idUsuarioActualizacion;
-	}
-
-	public Integer getIdUsuarioCreacion() {
-		return this.idUsuarioCreacion;
-	}
-
-	public void setIdUsuarioCreacion(Integer idUsuarioCreacion) {
-		this.idUsuarioCreacion = idUsuarioCreacion;
-	}
-
-	public String getTelefono() {
-		return this.telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
 	}
 
 	public String getUsuario() {
@@ -127,4 +93,25 @@ public class Usuario implements Serializable {
 		this.usuario = usuario;
 	}
 
+	public List<Rol> getRols() {
+		return this.rols;
+	}
+
+	public void setRols(List<Rol> rols) {
+		this.rols = rols;
+	}
+
+	public Rol addRol(Rol rol) {
+		getRols().add(rol);
+		rol.setUsuario(this);
+
+		return rol;
+	}
+
+	public Rol removeRol(Rol rol) {
+		getRols().remove(rol);
+		rol.setUsuario(null);
+
+		return rol;
+	}
 }
