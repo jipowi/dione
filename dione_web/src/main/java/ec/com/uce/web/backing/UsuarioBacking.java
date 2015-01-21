@@ -252,7 +252,7 @@ public class UsuarioBacking implements Serializable {
 				// Rol de usuario
 				Integer idRol = Integer.parseInt(usuarioBean.getRol());
 				DetalleCatalogo detalleCatalogo = detalleCatalogoService.consultarDetalleByCatalogoAndDetalle(HiperionMensajes.getInstancia()
-						.getInteger("ec.gob.avila.hiperion.recursos.catalogoRoles"), idRol);
+						.getInteger("recursos.catalogoRoles"), idRol);
 				Rol rol = new Rol();
 
 				rol.setDescripcionRol(detalleCatalogo.getDescDetCatalogo());
@@ -318,7 +318,7 @@ public class UsuarioBacking implements Serializable {
 	public List<SelectItem> getRolesItems() throws DioneException {
 		this.rolesItems = new ArrayList<SelectItem>();
 		Catalogo catalogo = catalogoService.consultarCatalogoById(HiperionMensajes.getInstancia().getLong(
-				"ec.gob.avila.hiperion.recursos.catalogoRoles"));
+				"recursos.catalogoRoles"));
 		List<DetalleCatalogo> roles = catalogo.getDetalleCatalogos();
 
 		for (DetalleCatalogo detalle : roles) {
