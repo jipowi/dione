@@ -16,9 +16,16 @@ import javax.faces.model.SelectItem;
 import org.apache.log4j.Logger;
 
 import ec.com.uce.dione.comun.DioneException;
+import ec.com.uce.dione.entities.Competencia;
 import ec.com.uce.dione.entities.Docente;
 import ec.com.uce.dione.entities.EscuelaUce;
 import ec.com.uce.dione.entities.MateriaUce;
+import ec.com.uce.dione.entities.Objetivo;
+import ec.com.uce.dione.entities.ResultadosAprendizaje;
+import ec.com.uce.dione.entities.Syllabus;
+import ec.com.uce.ejb.dto.EvaluacionCompetenciasDTO;
+import ec.com.uce.ejb.dto.EvaluacionObjetivosDTO;
+import ec.com.uce.ejb.dto.EvaluacionResAprendizajeDTO;
 import ec.com.uce.ejb.service.DocenteService;
 import ec.com.uce.ejb.service.SyllabusService;
 import ec.com.uce.web.bean.ResultadoBean;
@@ -46,10 +53,15 @@ public class ResultadosBacking implements Serializable {
 	@EJB
 	private SyllabusService syllabusService;
 
+	private Syllabus syllabus;
 	private Docente docente;
 	private Boolean docenteEncontrado = false;
 	private List<MateriaUce> materiaUces = new ArrayList<MateriaUce>();
 	private List<SelectItem> materias = new ArrayList<SelectItem>();
+	private List<EvaluacionObjetivosDTO> resultObjetivosDTO = new ArrayList<EvaluacionObjetivosDTO>();
+	private List<EvaluacionCompetenciasDTO> resultCompetenciasDTO = new ArrayList<EvaluacionCompetenciasDTO>();
+	private List<EvaluacionResAprendizajeDTO> resultadosDTO = new ArrayList<EvaluacionResAprendizajeDTO>();
+	private Boolean activarGrafico = false;
 
 	Logger log = Logger.getLogger(SyllabusBacking.class);
 
@@ -86,6 +98,110 @@ public class ResultadosBacking implements Serializable {
 			throw new DioneException(e);
 		}
 
+	}
+
+	/**
+	 * 
+	 * <b> Permite actualizar la tabla de obetivos, elementos de competencia y resultados de aprendizaje. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 25/01/2015]
+	 * </p>
+	 * 
+	 * @throws DioneException
+	 */
+	public void guardarEvaluacion() throws DioneException {
+		try {
+
+			List<Objetivo> objetivos = new ArrayList<Objetivo>();
+			for (EvaluacionObjetivosDTO objetivoDTO : resultObjetivosDTO) {
+				Objetivo objetivo = new Objetivo();
+
+				objetivo.setIdObjetivo(objetivoDTO.getIdObjetivo());
+				objetivo.setObjetivo(objetivoDTO.getObjetivo());
+				objetivo.setObjetivoCumplido(objetivoDTO.getCumplido());
+				objetivo.setSyllabus(syllabus);
+
+				objetivos.add(objetivo);
+			}
+
+			syllabusService.actualizarObjetivos(objetivos);
+
+			List<ResultadosAprendizaje> resultados = new ArrayList<ResultadosAprendizaje>();
+			for (EvaluacionResAprendizajeDTO resultadoDTO : resultadosDTO) {
+				ResultadosAprendizaje resultado = new ResultadosAprendizaje();
+
+				resultado.setIdResultado(resultadoDTO.getIdResultado());
+				resultado.setResultadoAprendizaje(resultadoDTO.getResultado());
+				resultado.setInicio(resultadoDTO.getInicio());
+				resultado.setSyllabus(syllabus);
+				resultado.setDominio(resultadoDTO.getDomina());
+				resultado.setAvance(resultadoDTO.getAvance());
+				resultado.setProceso(resultadoDTO.getProceso());
+
+				resultados.add(resultado);
+			}
+
+			syllabusService.actualizarResultados(resultados);
+			
+			activarGrafico = true;
+
+		} catch (DioneException e) {
+			log.error("Error al momento guardar la evaluacion", e);
+			throw new DioneException(e);
+		}
+	}
+
+	/**
+	 * 
+	 * <b> Permite buscar el syllabus y con este objeto agregar ls objetivos, competencias y resultados de aprendizaje </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 21/01/2015]
+	 * </p>
+	 * 
+	 * @throws DioneException
+	 */
+	public void buscarSyllabus() throws DioneException {
+
+		resultObjetivosDTO = new ArrayList<EvaluacionObjetivosDTO>();
+		resultCompetenciasDTO = new ArrayList<EvaluacionCompetenciasDTO>();
+		resultadosDTO = new ArrayList<EvaluacionResAprendizajeDTO>();
+
+		Long idDocente = docente.getIdDocente();
+		Long idMateria = Long.parseLong(resultadoBean.getMateria());
+
+		try {
+			syllabus = syllabusService.consultarSyllabusByDocenteAndMateria(idDocente, idMateria);
+			List<Objetivo> objetivos = syllabusService.conusltarObjetivos(syllabus.getIdSyllabus());
+			List<Competencia> competencias = syllabusService.consultarCompetenciasBySyllabus(syllabus.getIdSyllabus());
+			List<ResultadosAprendizaje> resultados = syllabusService.consultarResultadosAprendizaje(syllabus.getIdSyllabus());
+
+			for (Objetivo objetivo : objetivos) {
+				EvaluacionObjetivosDTO objetivoDTO = new EvaluacionObjetivosDTO();
+				objetivoDTO.setObjetivo(objetivo.getObjetivo());
+				objetivoDTO.setIdObjetivo(objetivo.getIdObjetivo());
+				resultObjetivosDTO.add(objetivoDTO);
+			}
+			for (Competencia competencia : competencias) {
+				EvaluacionCompetenciasDTO competenciaDTO = new EvaluacionCompetenciasDTO();
+				competenciaDTO.setIdCompetencia(competencia.getIdCompetencia());
+				competenciaDTO.setCompetencia(competencia.getCompetencia());
+				resultCompetenciasDTO.add(competenciaDTO);
+			}
+			for (ResultadosAprendizaje resultado : resultados) {
+				EvaluacionResAprendizajeDTO resultadoDTO = new EvaluacionResAprendizajeDTO();
+				resultadoDTO.setIdResultado(resultado.getIdResultado());
+				resultadoDTO.setResultado(resultado.getResultadoAprendizaje());
+				resultadosDTO.add(resultadoDTO);
+			}
+
+			resultadoBean.setResultObjetivosDTO(resultObjetivosDTO);
+			resultadoBean.setResultCompetenciasDTO(resultCompetenciasDTO);
+			resultadoBean.setResultadosDTO(resultadosDTO);
+			
+		} catch (DioneException e) {
+			log.error("Error al momento consultar el syllabus", e);
+			throw new DioneException(e);
+		}
 	}
 
 	/**
@@ -166,6 +282,65 @@ public class ResultadosBacking implements Serializable {
 	 */
 	public void setMaterias(List<SelectItem> materias) {
 		this.materias = materias;
+	}
+
+	/**
+	 * @return the resultObjetivosDTO
+	 */
+	public List<EvaluacionObjetivosDTO> getResultObjetivosDTO() {
+		return resultObjetivosDTO;
+	}
+
+	/**
+	 * @param resultObjetivosDTO
+	 *            the resultObjetivosDTO to set
+	 */
+	public void setResultObjetivosDTO(List<EvaluacionObjetivosDTO> resultObjetivosDTO) {
+		this.resultObjetivosDTO = resultObjetivosDTO;
+	}
+
+	/**
+	 * @return the resultCompetenciasDTO
+	 */
+	public List<EvaluacionCompetenciasDTO> getResultCompetenciasDTO() {
+		return resultCompetenciasDTO;
+	}
+
+	/**
+	 * @param resultCompetenciasDTO
+	 *            the resultCompetenciasDTO to set
+	 */
+	public void setResultCompetenciasDTO(List<EvaluacionCompetenciasDTO> resultCompetenciasDTO) {
+		this.resultCompetenciasDTO = resultCompetenciasDTO;
+	}
+
+	/**
+	 * @return the resultadosDTO
+	 */
+	public List<EvaluacionResAprendizajeDTO> getResultadosDTO() {
+		return resultadosDTO;
+	}
+
+	/**
+	 * @param resultadosDTO
+	 *            the resultadosDTO to set
+	 */
+	public void setResultadosDTO(List<EvaluacionResAprendizajeDTO> resultadosDTO) {
+		this.resultadosDTO = resultadosDTO;
+	}
+
+	/**
+	 * @return the activarGrafico
+	 */
+	public Boolean getActivarGrafico() {
+		return activarGrafico;
+	}
+
+	/**
+	 * @param activarGrafico the activarGrafico to set
+	 */
+	public void setActivarGrafico(Boolean activarGrafico) {
+		this.activarGrafico = activarGrafico;
 	}
 
 }
