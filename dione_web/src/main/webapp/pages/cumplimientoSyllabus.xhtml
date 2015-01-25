@@ -43,28 +43,110 @@
 							<h:panelGrid columns="2">
 								<h:panelGrid columns="2">
 									<p:outputLabel value="#{message['lbl.asignatura']}:" styleClass="negrita" />
-									<p:selectOneMenu id="selecMateria" value="#{syllabusBean.materia}" effect="drop">
+									<p:selectOneMenu id="selecMateria" value="#{resultadoBean.materia}" effect="drop">
 										<f:selectItem itemLabel="Seleccione" noSelectionOption="true" />
 										<f:selectItems value="#{resultadosBacking.materias}" />
 									</p:selectOneMenu>
 								</h:panelGrid>
-								<p:commandLink title="Buscar syllaus" action="#{resultadosBacking.buscarDocente()}" update="@form, formPrincipal:idSyllabus">
+								<p:commandLink title="Buscar syllaus" action="#{resultadosBacking.buscarSyllabus()}" update="@form, formPrincipal:idSyllabus">
 									<h:graphicImage name="search.png" library="img" />
 								</p:commandLink>
 							</h:panelGrid>
-
 							<p:spacer height="20px;" />
 						</p:panel>
 					</h:panelGrid>
+
+					<h:panelGrid columns="1" id="tablaObjetivos">
+						<!-- OBJETIVOS -->
+						<h:panelGrid columns="2">
+							<h:graphicImage name="help.png" library="img" />
+							<p:outputLabel value="#{message['lbl.infoResultadoObjetivo']}" style="color: green;" />
+						</h:panelGrid>
+						<p:dataTable value="#{resultadosBacking.resultObjetivosDTO}" var="objetivo" widgetVar="50">
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.objetivo']}" />
+								</f:facet>
+								<h:outputText value="#{objetivo.objetivo}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.cumplido']}" />
+								</f:facet>
+								<p:selectBooleanCheckbox value="#{objetivo.cumplido}" />
+							</p:column>
+						</p:dataTable>
+						<p:spacer height="20px;" />
+						<!-- COMPETENCIAS -->
+						<h:panelGrid columns="2">
+							<h:graphicImage name="help.png" library="img" />
+							<p:outputLabel value="#{message['lbl.infoResultadoCompetencias']}" style="color: green;" />
+						</h:panelGrid>
+						<p:dataTable value="#{resultadosBacking.resultCompetenciasDTO}" var="competencia" widgetVar="50">
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.competencia']}" />
+								</f:facet>
+								<h:outputText value="#{competencia.competencia}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.cumplido']}" />
+								</f:facet>
+								<p:selectBooleanCheckbox value="#{competencia.cumplido}" />
+							</p:column>
+						</p:dataTable>
+						<p:spacer height="20px;" />
+						<!-- RESULTADOS -->
+						<h:panelGrid columns="2">
+							<h:graphicImage name="help.png" library="img" />
+							<p:outputLabel value="#{message['lbl.infoEvaluacionResultados']}" style="color: green;" />
+						</h:panelGrid>
+						<p:dataTable value="#{resultadosBacking.resultadosDTO}" var="resultado" widgetVar="50">
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.resultadosAprendizaje']}" />
+								</f:facet>
+								<h:outputText value="#{resultado.resultado}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.inicio']}" />
+								</f:facet>
+								<p:selectBooleanCheckbox value="#{resultado.inicio}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.proceso']}" />
+								</f:facet>
+								<p:selectBooleanCheckbox value="#{resultado.proceso}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.avance']}" />
+								</f:facet>
+								<p:selectBooleanCheckbox value="#{resultado.domina}" />
+							</p:column>
+						</p:dataTable>
+					</h:panelGrid>
+
 				</div>
 				<p:spacer height="20px;" />
+				<p:commandLink title="Presentar grafico">
+					<h:graphicImage name="calculate.jpg" library="img" onclick="grafico.show();" />
+				</p:commandLink>
+				<h:panelGrid id="grafico" columns="1" rendered="#{resultadosBacking.activarGrafico}">
+					<p:barChart value="#{evaluacionBean.evaluacion}" legendPosition="e" title="Elementos de Evaluacion" style="height:300px" xaxisLabel="Indicadores"
+						yaxisLabel="Porcentaje de Cumplimiento" />
+				</h:panelGrid>
 				<div align="center">
-					<p:commandButton id="guardarBtnId" actionListener="#{resultadosBacking.guardarSyllabus()}" icon="icon-save" value="#{message['boton.guardar']}"
-						update="formPrincipal" title="Guardar" />
+					<p:commandButton id="guardarBtnId" actionListener="#{resultadosBacking.guardarEvaluacion()}" icon="icon-save" value="#{message['boton.guardar']}"
+						update="formPrincipal,grafico" title="Guardar" />
 					<p:commandButton id="cancelarBtnId" icon="icon-cancel" value="#{message['boton.cancelar']}" title="Cancelar" />
 				</div>
 			</h:form>
 		</p:panel>
+
 	</ui:define>
 </ui:composition>
 </html>
