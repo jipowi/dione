@@ -29,16 +29,16 @@ public interface SyllabusService {
 
 	/**
 	 * 
-	 * <b>
-	 * Permite consultar una escuela por 
-	 * </b>
-	 * <p>[Author: Paul Jimenez, Date: 14/01/2015]</p>
-	 *
+	 * <b> Permite consultar una escuela por </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 14/01/2015]
+	 * </p>
+	 * 
 	 * @param idEscuela
 	 * @throws DioneException
 	 */
-	public EscuelaUce consultarEscuelaById(String idEscuela)throws DioneException;
-	
+	public EscuelaUce consultarEscuelaById(String idEscuela) throws DioneException;
+
 	/**
 	 * 
 	 * <b> Permite consultar las escuelas en las que se encuetra el docente </b>
@@ -50,7 +50,7 @@ public interface SyllabusService {
 	 * @throws DioneException
 	 */
 	public List<EscuelaUce> consultarEscuelaByDocente(String idDocente) throws DioneException;
-	
+
 	/**
 	 * 
 	 * <b> Permite consultar la materia por medio del id </b>
@@ -76,7 +76,7 @@ public interface SyllabusService {
 	 * @throws DioneException
 	 */
 	public List<MateriaUce> consultarMateriasByEscuela(Long idEscuela) throws DioneException;
-	
+
 	/**
 	 * 
 	 * <b> Permite guardar el syllabus </b>
@@ -93,5 +93,82 @@ public interface SyllabusService {
 	 */
 	public void guardarSyllabus(Syllabus syllabus, List<Objetivo> objetivos, List<Competencia> competencias, List<Bibliografia> bibliografias,
 			List<ResultadosAprendizaje> resultados, List<UnidadCompetencia> unidades) throws DioneException;
+
+	/**
+	 * 
+	 * <b> Permite consutlar un syllabus por docente y materia </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 21/01/2015]
+	 * </p>
+	 * 
+	 * @param idDocente
+	 * @param idMateria
+	 * @return
+	 * @throws DioneException
+	 */
+	public Syllabus consultarSyllabusByDocenteAndMateria(Long idDocente, Long idMateria) throws DioneException;
+
+	/**
+	 * 
+	 * <b> Permite consultar los objetivos correspondientes a un syllabus </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 23/01/2015]
+	 * </p>
+	 * 
+	 * @param idSyllabus
+	 * @return
+	 * @throws DioneException
+	 */
+	public List<Objetivo> conusltarObjetivos(Integer idSyllabus) throws DioneException;
+
+	/**
+	 * 
+	 * <b> Permite consultar los resultados de aprendizaje correspondientes a un syllabus. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 23/01/2015]
+	 * </p>
+	 * 
+	 * @param idSyllabus
+	 * @return
+	 * @throws DioneException
+	 */
+	public List<ResultadosAprendizaje> consultarResultadosAprendizaje(Integer idSyllabus) throws DioneException;
+
+	/**
+	 * 
+	 * <b> Permite consultar las competencias correspondientes a un syllabus. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 23/01/2015]
+	 * </p>
+	 * 
+	 * @param idSyllabus
+	 * @return
+	 * @throws DioneException
+	 */
+	public List<Competencia> consultarCompetenciasBySyllabus(Integer idSyllabus) throws DioneException;
+
+	/**
+	 * 
+	 * <b> Permite actualizar los objetivos. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 25/01/2015]
+	 * </p>
+	 * 
+	 * @param objetivos
+	 * @throws DioneException
+	 */
+	public void actualizarObjetivos(List<Objetivo> objetivos) throws DioneException;
+
+	/**
+	 * 
+	 * <b> Permite actualizar el registro de los resultados en la tabla. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 25/01/2015]
+	 * </p>
+	 * 
+	 * @param resultados
+	 * @throws DioneException
+	 */
+	public void actualizarResultados(List<ResultadosAprendizaje> resultados) throws DioneException;
 
 }

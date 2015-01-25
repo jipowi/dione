@@ -96,11 +96,11 @@ public class SyllabusServiceImpl implements SyllabusService {
 			bibliografia.setSyllabus(syllabus);
 			bibliografiaDao.persist(bibliografia);
 		}
-		
-		for(UnidadCompetencia unidad: unidades){
+
+		for (UnidadCompetencia unidad : unidades) {
 			unidad.setSyllabus(syllabus);
 			unidadCompetenciaDao.persist(unidad);
-			for(ElementoCompetencia elemento: unidad.getElementoCompetencias()){
+			for (ElementoCompetencia elemento : unidad.getElementoCompetencias()) {
 				elemento.setUnidadCompetencia(unidad);
 				elementoCompetenciaDao.persist(elemento);
 			}
@@ -115,11 +115,13 @@ public class SyllabusServiceImpl implements SyllabusService {
 	 */
 	@Override
 	public EscuelaUce consultarEscuelaById(String idEscuela) throws DioneException {
-		return escuelaUceDao.findById(new Long (idEscuela));
-		
+		return escuelaUceDao.findById(new Long(idEscuela));
+
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ec.com.uce.ejb.service.SyllabusService#consultarEscuelaByDocente(java.lang.String)
 	 */
 	@Override
@@ -127,11 +129,78 @@ public class SyllabusServiceImpl implements SyllabusService {
 		return escuelaUceDao.consultarEscuelaByDocente(idDocente);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ec.com.uce.ejb.service.SyllabusService#consultarMateriasByEscuela(java.lang.Long)
 	 */
 	@Override
 	public List<MateriaUce> consultarMateriasByEscuela(Long idEscuela) throws DioneException {
 		return materiaUceDao.consultarMateriasByEscuela(idEscuela);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.uce.ejb.service.SyllabusService#consultarSyllabusByDocenteAndMateria(java.lang.Long, java.lang.Long)
+	 */
+	@Override
+	public Syllabus consultarSyllabusByDocenteAndMateria(Long idDocente, Long idMateria) throws DioneException {
+		return syllabusDao.consultarSyllabusByDocenteAndMateria(idDocente, idMateria);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.uce.ejb.service.SyllabusService#conusltarObjetivos(java.lang.Integer)
+	 */
+	@Override
+	public List<Objetivo> conusltarObjetivos(Integer idSyllabus) throws DioneException {
+		return objetivoDao.consultarObjetivos(idSyllabus);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.uce.ejb.service.SyllabusService#consultarResultadosAprendizaje(java.lang.Integer)
+	 */
+	@Override
+	public List<ResultadosAprendizaje> consultarResultadosAprendizaje(Integer idSyllabus) throws DioneException {
+		return resultadoAprendizajeDao.consultarResultadosAprendizaje(idSyllabus);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.uce.ejb.service.SyllabusService#consultarCompetenciasBySyllabus(java.lang.Integer)
+	 */
+	@Override
+	public List<Competencia> consultarCompetenciasBySyllabus(Integer idSyllabus) throws DioneException {
+		return competenciaDao.consultarCompetenciasBySyllabus(idSyllabus);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.uce.ejb.service.SyllabusService#actualizarObjetivos(java.util.List)
+	 */
+	@Override
+	public void actualizarObjetivos(List<Objetivo> objetivos) throws DioneException {
+		for (Objetivo objetivo : objetivos) {
+			objetivoDao.update(objetivo);
+		}
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.uce.ejb.service.SyllabusService#actualizarResultados(java.util.List)
+	 */
+	@Override
+	public void actualizarResultados(List<ResultadosAprendizaje> resultados) throws DioneException {
+		for (ResultadosAprendizaje resultadosAprendizaje : resultados) {
+			resultadoAprendizajeDao.update(resultadosAprendizaje);
+		}
 	}
 }
