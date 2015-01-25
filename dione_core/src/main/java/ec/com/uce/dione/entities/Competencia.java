@@ -3,25 +3,26 @@ package ec.com.uce.dione.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+
 /**
  * The persistent class for the competencia database table.
  * 
  */
 @Entity
-@NamedQuery(name = "Competencia.findAll", query = "SELECT c FROM Competencia c")
+@NamedQuery(name="Competencia.findAll", query="SELECT c FROM Competencia c")
 public class Competencia implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_competencia")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_competencia")
 	private Integer idCompetencia;
 
 	private String competencia;
 
-	// bi-directional many-to-one association to Syllabus
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_syllabus")
+	//bi-directional many-to-one association to Syllabus
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_syllabus")
 	private Syllabus syllabus;
 
 	public Competencia() {
@@ -43,17 +44,10 @@ public class Competencia implements Serializable {
 		this.competencia = competencia;
 	}
 
-	/**
-	 * @return the syllabus
-	 */
 	public Syllabus getSyllabus() {
-		return syllabus;
+		return this.syllabus;
 	}
 
-	/**
-	 * @param syllabus
-	 *            the syllabus to set
-	 */
 	public void setSyllabus(Syllabus syllabus) {
 		this.syllabus = syllabus;
 	}

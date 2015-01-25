@@ -41,15 +41,11 @@ public class Docente extends Auditoria implements Serializable {
 	@OneToMany(mappedBy = "docente")
 	private List<EscuelaUce> escuelaUces;
 
+	// bi-directional many-to-one association to Syllabus
+	@OneToMany(mappedBy = "docente")
+	private List<Syllabus> syllabuses;
+
 	public Docente() {
-	}
-
-	public Long getIdDocente() {
-		return this.idDocente;
-	}
-
-	public void setIdDocente(Long idDocente) {
-		this.idDocente = idDocente;
 	}
 
 	public String getApellidosDocente() {
@@ -104,6 +100,43 @@ public class Docente extends Auditoria implements Serializable {
 		escuelaUce.setDocente(null);
 
 		return escuelaUce;
+	}
+
+	public List<Syllabus> getSyllabuses() {
+		return this.syllabuses;
+	}
+
+	public void setSyllabuses(List<Syllabus> syllabuses) {
+		this.syllabuses = syllabuses;
+	}
+
+	public Syllabus addSyllabus(Syllabus syllabus) {
+		getSyllabuses().add(syllabus);
+		syllabus.setDocente(this);
+
+		return syllabus;
+	}
+
+	public Syllabus removeSyllabus(Syllabus syllabus) {
+		getSyllabuses().remove(syllabus);
+		syllabus.setDocente(null);
+
+		return syllabus;
+	}
+
+	/**
+	 * @return the idDocente
+	 */
+	public Long getIdDocente() {
+		return idDocente;
+	}
+
+	/**
+	 * @param idDocente
+	 *            the idDocente to set
+	 */
+	public void setIdDocente(Long idDocente) {
+		this.idDocente = idDocente;
 	}
 
 }

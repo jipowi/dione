@@ -20,6 +20,9 @@ public class ElementoCompetencia implements Serializable {
 
 	@Column(name = "elemento_competencia")
 	private String elementoCompetencia;
+	
+	@Column(name = "elemento_cumplido")
+	private Boolean elementoCumplido;
 
 	// bi-directional many-to-one association to Competencia
 	@ManyToOne(fetch = FetchType.LAZY)

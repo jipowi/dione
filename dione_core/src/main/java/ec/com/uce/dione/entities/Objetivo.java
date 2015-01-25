@@ -18,12 +18,17 @@ public class Objetivo implements Serializable {
 	@Column(name="id_objetivo")
 	private Integer idObjetivo;
 
+	
 	private String objetivo;
+	
 
 	//bi-directional many-to-one association to Syllabus
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_syllabus")
 	private Syllabus syllabus;
+
+	@Column(name="objetivo_cumplido")
+	private Boolean objetivoCumplido;
 
 	public Objetivo() {
 	}
@@ -36,6 +41,8 @@ public class Objetivo implements Serializable {
 		this.idObjetivo = idObjetivo;
 	}
 
+	
+
 	public String getObjetivo() {
 		return this.objetivo;
 	}
@@ -44,6 +51,13 @@ public class Objetivo implements Serializable {
 		this.objetivo = objetivo;
 	}
 
+	public Boolean getObjetivoCumplido() {
+		return this.objetivoCumplido;
+	}
+
+	public void setObjetivoCumplido(Boolean objetivoCumplido) {
+		this.objetivoCumplido = objetivoCumplido;
+	}
 	public Syllabus getSyllabus() {
 		return this.syllabus;
 	}
@@ -51,5 +65,4 @@ public class Objetivo implements Serializable {
 	public void setSyllabus(Syllabus syllabus) {
 		this.syllabus = syllabus;
 	}
-
 }

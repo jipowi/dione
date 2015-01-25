@@ -3,8 +3,14 @@
  */
 package ec.com.uce.dione.dao.impl;
 
-import javax.ejb.Stateless;
+import java.util.List;
 
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.dao.ResultadoAprendizajeDao;
 import ec.com.uce.dione.entities.ResultadosAprendizaje;
 
@@ -17,5 +23,25 @@ import ec.com.uce.dione.entities.ResultadosAprendizaje;
  */
 @Stateless
 public class ResultadoAprendizajeDaoImpl extends GenericDAOImpl<ResultadosAprendizaje, Long> implements ResultadoAprendizajeDao {
+
+	@PersistenceContext(unitName = "dione_core")
+	private EntityManager em;
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.uce.dione.dao.ResultadoAprendizajeDao#consultarResultadosAprendizaje(java.lang.Integer)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ResultadosAprendizaje> consultarResultadosAprendizaje(Integer idSyllabus) throws DioneException {
+
+		Query query = em.createNamedQuery("ResultadosAprendizaje.findBySyllabus");
+		query.setParameter("idSyllabus", idSyllabus);
+
+		List<ResultadosAprendizaje> listSyllabus = query.getResultList();
+
+		return listSyllabus;
+	}
 
 }

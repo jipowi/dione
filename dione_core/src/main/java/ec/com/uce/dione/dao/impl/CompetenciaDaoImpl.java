@@ -3,8 +3,14 @@
  */
 package ec.com.uce.dione.dao.impl;
 
-import javax.ejb.Stateless;
+import java.util.List;
 
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.dao.CompetenciaDao;
 import ec.com.uce.dione.entities.Competencia;
 
@@ -18,4 +24,23 @@ import ec.com.uce.dione.entities.Competencia;
 @Stateless
 public class CompetenciaDaoImpl extends GenericDAOImpl<Competencia, Long> implements CompetenciaDao {
 
+	@PersistenceContext(unitName = "dione_core")
+	private EntityManager em;
+
+	/* (non-Javadoc)
+	 * @see ec.com.uce.dione.dao.CompetenciaDao#consultarCompetenciasBySyllabus(java.lang.Integer)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Competencia> consultarCompetenciasBySyllabus(Integer idSyllabus) throws DioneException {
+		Query query = em.createNamedQuery("Competencia.findBySyllabus");
+		query.setParameter("idSyllabus", idSyllabus);
+
+		List<Competencia> listSyllabus = query.getResultList();
+
+		return listSyllabus;
+	}
+	
+	
+	
 }
