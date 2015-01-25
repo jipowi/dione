@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 8                                 */
-/* Created on:     15/01/2015 10:22:32                          */
+/* Created on:     24/01/2015 23:52:04                          */
 /*==============================================================*/
 
 
@@ -125,6 +125,7 @@ create table ELEMENTO_COMPETENCIA (
    ID_ELEMENTO_COMPETENCIA SERIAL               not null,
    ID_UNIDAD_COMPETENCIA INT4                 null,
    ELEMENTO_COMPETENCIA TEXT                 null,
+   ELEMENTO_CUMPLIDO    BOOL                 null,
    constraint PK_ELEMENTO_COMPETENCIA primary key (ID_ELEMENTO_COMPETENCIA)
 );
 
@@ -231,12 +232,32 @@ ID_ESCUELA_UCE
 );
 
 /*==============================================================*/
+/* Table: MENU                                                  */
+/*==============================================================*/
+create table MENU (
+   ID_MENU              SERIAL               not null,
+   ID_PADRE             INT4                 null,
+   NOMBRE_MENU          TEXT                 null,
+   URL                  TEXT                 null,
+   ESTADO_MENU          TEXT                 null,
+   constraint PK_MENU primary key (ID_MENU)
+);
+
+/*==============================================================*/
+/* Index: MENU_PK                                               */
+/*==============================================================*/
+create unique index MENU_PK on MENU (
+ID_MENU
+);
+
+/*==============================================================*/
 /* Table: OBJETIVO                                              */
 /*==============================================================*/
 create table OBJETIVO (
    ID_OBJETIVO          SERIAL               not null,
    ID_SYLLABUS          INT4                 null,
    OBJETIVO             TEXT                 null,
+   OBJETIVO_CUMPLIDO    BOOL                 null,
    constraint PK_OBJETIVO primary key (ID_OBJETIVO)
 );
 
@@ -285,6 +306,10 @@ create table RESULTADOS_APRENDIZAJE (
    ID_RESULTADO         SERIAL               not null,
    ID_SYLLABUS          INT4                 null,
    RESULTADO_APRENDIZAJE TEXT                 null,
+   INICIO               BOOL                 null,
+   PROCESO              BOOL                 null,
+   AVANCE               BOOL                 null,
+   DOMINIO              BOOL                 null,
    constraint PK_RESULTADOS_APRENDIZAJE primary key (ID_RESULTADO)
 );
 
@@ -303,10 +328,68 @@ ID_SYLLABUS
 );
 
 /*==============================================================*/
+/* Table: ROL                                                   */
+/*==============================================================*/
+create table ROL (
+   ID_ROL               SERIAL               not null,
+   ID_USUARIO           INT4                 null,
+   NOMBRE_ROL           TEXT                 null,
+   DESCRIPCION_ROL      TEXT                 null,
+   ESTADO_ROL           TEXT                 null,
+   constraint PK_ROL primary key (ID_ROL)
+);
+
+/*==============================================================*/
+/* Index: ROL_PK                                                */
+/*==============================================================*/
+create unique index ROL_PK on ROL (
+ID_ROL
+);
+
+/*==============================================================*/
+/* Index: USUARIO_ROL_FK                                        */
+/*==============================================================*/
+create  index USUARIO_ROL_FK on ROL (
+ID_USUARIO
+);
+
+/*==============================================================*/
+/* Table: ROL_MENU                                              */
+/*==============================================================*/
+create table ROL_MENU (
+   ID_MENU_ROL          SERIAL               not null,
+   ID_MENU              INT4                 null,
+   ID_ROL               INT4                 null,
+   constraint PK_ROL_MENU primary key (ID_MENU_ROL)
+);
+
+/*==============================================================*/
+/* Index: ROL_MENU_PK                                           */
+/*==============================================================*/
+create unique index ROL_MENU_PK on ROL_MENU (
+ID_MENU_ROL
+);
+
+/*==============================================================*/
+/* Index: ROL_MENUS_FK                                          */
+/*==============================================================*/
+create  index ROL_MENUS_FK on ROL_MENU (
+ID_ROL
+);
+
+/*==============================================================*/
+/* Index: MENU_ROLES_FK                                         */
+/*==============================================================*/
+create  index MENU_ROLES_FK on ROL_MENU (
+ID_MENU
+);
+
+/*==============================================================*/
 /* Table: SYLLABUS                                              */
 /*==============================================================*/
 create table SYLLABUS (
    ID_SYLLABUS          SERIAL               not null,
+   ID_DOCENTE           INT4                 null,
    ID_MATERIA_UCE       INT4                 null,
    NUM_HORAS_CLASE      INT4                 null,
    PREREQUISITO         TEXT                 null,
@@ -328,6 +411,13 @@ ID_SYLLABUS
 /*==============================================================*/
 create  index MATERIA_SYLLABUS_FK on SYLLABUS (
 ID_MATERIA_UCE
+);
+
+/*==============================================================*/
+/* Index: DOCENTE_SYLLABUS_FK                                   */
+/*==============================================================*/
+create  index DOCENTE_SYLLABUS_FK on SYLLABUS (
+ID_DOCENTE
 );
 
 /*==============================================================*/
@@ -361,14 +451,15 @@ ID_SYLLABUS
 create table USUARIO (
    ID_USUARIO           SERIAL               not null,
    USUARIO              TEXT                 null,
+   NOMBRE_USUARIO       TEXT                 null,
    CLAVE                TEXT                 null,
+   IDENTIFICACION_USUARIO TEXT                 null,
    EMAIL_USUARIO        TEXT                 null,
-   TELEFONO             TEXT                 null,
-   ID_USUARIO_CREACION  INT4                 not null,
-   ID_USUARIO_ACTUALIZACION INT4                 not null,
-   FECHA_CREACION       DATE                 not null,
-   FECHA_ACTUALIZACION  DATE                 not null,
-   ESTADO               TEXT                 not null,
+   ESTADO               TEXT                 null,
+   ID_USUARIO_CREACION  INT4                 null,
+   FECHA_CREACION       DATE                 null,
+   ID_USUARIO_ACTUALIZACION INT4                 null,
+   FECHA_ACTUALIZACION  DATE                 null,
    constraint PK_USUARIO primary key (ID_USUARIO)
 );
 
@@ -427,6 +518,26 @@ alter table RECURSOS_DIDACTICOS
 alter table RESULTADOS_APRENDIZAJE
    add constraint FK_RESULTAD_SYLLABUS__SYLLABUS foreign key (ID_SYLLABUS)
       references SYLLABUS (ID_SYLLABUS)
+      on delete restrict on update restrict;
+
+alter table ROL
+   add constraint FK_ROL_USUARIO_R_USUARIO foreign key (ID_USUARIO)
+      references USUARIO (ID_USUARIO)
+      on delete restrict on update restrict;
+
+alter table ROL_MENU
+   add constraint FK_ROL_MENU_MENU_ROLE_MENU foreign key (ID_MENU)
+      references MENU (ID_MENU)
+      on delete restrict on update restrict;
+
+alter table ROL_MENU
+   add constraint FK_ROL_MENU_ROL_MENUS_ROL foreign key (ID_ROL)
+      references ROL (ID_ROL)
+      on delete restrict on update restrict;
+
+alter table SYLLABUS
+   add constraint FK_SYLLABUS_DOCENTE_S_DOCENTE foreign key (ID_DOCENTE)
+      references DOCENTE (ID_DOCENTE)
       on delete restrict on update restrict;
 
 alter table SYLLABUS
