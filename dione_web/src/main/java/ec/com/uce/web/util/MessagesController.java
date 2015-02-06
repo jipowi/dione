@@ -29,7 +29,7 @@ public class MessagesController {
 	 *            - Contenido del mensaje
 	 */
 	public static void addInfo(String keyMessage, String message) {
-		FacesContext.getCurrentInstance().addMessage(keyMessage, new FacesMessage(FacesMessage.SEVERITY_INFO, message, message));
+		FacesContext.getCurrentInstance().addMessage(keyMessage, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info:", message));
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class MessagesController {
 	 *            - Contenido del mensaje
 	 */
 	public static void addWarn(String keyMessage, String message) {
-		FacesContext.getCurrentInstance().addMessage(keyMessage, new FacesMessage(FacesMessage.SEVERITY_WARN, message, message));
+		FacesContext.getCurrentInstance().addMessage(keyMessage, new FacesMessage(FacesMessage.SEVERITY_WARN, "Warn:", message));
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class MessagesController {
 	 *            - Contenido del mensaje
 	 */
 	public static void addError(String keyMessage, String message) {
-		FacesContext.getCurrentInstance().addMessage(keyMessage, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
+		FacesContext.getCurrentInstance().addMessage(keyMessage, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error:", message));
 	}
 
 	/**
