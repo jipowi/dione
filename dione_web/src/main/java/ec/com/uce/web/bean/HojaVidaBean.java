@@ -40,6 +40,10 @@ public class HojaVidaBean implements Serializable {
 	private Integer duracion;
 	private String tipoDuracion;
 	private List<SelectItem> tipoDuracionItems;
+	private String cedula;
+	private String apellidosDocente;
+	private String direccionDocente;
+	private String nombresDocente;
 
 	private static ArrayList<FormacionAcademicaDTO> formacionAcademicaList = new ArrayList<FormacionAcademicaDTO>();
 	private static ArrayList<FormacionContinuaDTO> formacionContinuaList = new ArrayList<FormacionContinuaDTO>();
@@ -273,6 +277,68 @@ public class HojaVidaBean implements Serializable {
 	 */
 	public static void setFormacionContinuaList(ArrayList<FormacionContinuaDTO> formacionContinuaList) {
 		HojaVidaBean.formacionContinuaList = formacionContinuaList;
+	}
+
+	/**
+	 * @return the cedula
+	 */
+	public String getCedula() {
+		return cedula;
+	}
+
+	/**
+	 * @param cedula
+	 *            the cedula to set
+	 */
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
+
+	/**
+	 * @return the apellidosDocente
+	 */
+	public String getApellidosDocente() {
+		return apellidosDocente;
+	}
+
+	/**
+	 * @param apellidosDocente
+	 *            the apellidosDocente to set
+	 */
+	public void setApellidosDocente(String apellidosDocente) {
+		this.apellidosDocente = apellidosDocente;
+	}
+
+
+
+	/**
+	 * @return the direccionDocente
+	 */
+	public String getDireccionDocente() {
+		return direccionDocente;
+	}
+
+	/**
+	 * @param direccionDocente
+	 *            the direccionDocente to set
+	 */
+	public void setDireccionDocente(String direccionDocente) {
+		this.direccionDocente = direccionDocente;
+	}
+
+	/**
+	 * @return the nombresDocente
+	 */
+	public String getNombresDocente() {
+		return nombresDocente;
+	}
+
+	/**
+	 * @param nombresDocente
+	 *            the nombresDocente to set
+	 */
+	public void setNombresDocente(String nombresDocente) {
+		this.nombresDocente = nombresDocente;
 	}
 
 }
