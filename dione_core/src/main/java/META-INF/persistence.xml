@@ -22,5 +22,7 @@
 		<class>ec.com.uce.dione.entities.Rol</class>
 		<class>ec.com.uce.dione.entities.Menu</class>
 		<class>ec.com.uce.dione.entities.RolMenu</class>
+		<class>ec.com.uce.dione.entities.FormacionAcademica</class>
+		<class>ec.com.uce.dione.entities.FormacionContinua</class>
    	</persistence-unit>
 </persistence>

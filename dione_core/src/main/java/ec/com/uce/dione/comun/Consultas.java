@@ -16,6 +16,10 @@ import javax.persistence.NamedQuery;
 		@NamedQuery(name = "Materia.findByEscuela", query = "SELECT m FROM Materia m WHERE m.escuela.idEscuela =:idEscuela"),
 		// ESCUELA UCE
 		@NamedQuery(name = "EscuelaUce.findByDocente", query = "SELECT m FROM EscuelaUce m WHERE m.docente.idDocente =:idDocente"),
+		// FORMACION ACADEMICA
+		@NamedQuery(name = "FormacionAcademica.findByDocente", query = "SELECT m FROM FormacionAcademica m WHERE m.docente.idDocente =:idDocente"),
+		// FORMACION CONTINUA
+		@NamedQuery(name = "FormacionContinua.findByDocente", query = "SELECT m FROM FormacionContinua m WHERE m.docente.idDocente =:idDocente"),
 		// USUARIO
 		@NamedQuery(name = "Usuario.loginUser", query = "SELECT u FROM Usuario u WHERE u.usuario =:usuario AND u.clave =:clave"),
 		// DOCENTE

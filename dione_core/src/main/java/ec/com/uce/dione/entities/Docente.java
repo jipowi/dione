@@ -41,6 +41,14 @@ public class Docente extends Auditoria implements Serializable {
 	@OneToMany(mappedBy = "docente")
 	private List<EscuelaUce> escuelaUces;
 
+	// bi-directional many-to-one association to EscuelaUce
+	@OneToMany(mappedBy = "docente")
+	private List<FormacionAcademica> formacionAcademicas;
+
+	// bi-directional many-to-one association to EscuelaUce
+	@OneToMany(mappedBy = "docente")
+	private List<FormacionContinua> formacionContinuas;
+
 	// bi-directional many-to-one association to Syllabus
 	@OneToMany(mappedBy = "docente")
 	private List<Syllabus> syllabuses;
@@ -137,6 +145,36 @@ public class Docente extends Auditoria implements Serializable {
 	 */
 	public void setIdDocente(Long idDocente) {
 		this.idDocente = idDocente;
+	}
+
+	/**
+	 * @return the formacionAcademicas
+	 */
+	public List<FormacionAcademica> getFormacionAcademicas() {
+		return formacionAcademicas;
+	}
+
+	/**
+	 * @param formacionAcademicas
+	 *            the formacionAcademicas to set
+	 */
+	public void setFormacionAcademicas(List<FormacionAcademica> formacionAcademicas) {
+		this.formacionAcademicas = formacionAcademicas;
+	}
+
+	/**
+	 * @return the formacionContinuas
+	 */
+	public List<FormacionContinua> getFormacionContinuas() {
+		return formacionContinuas;
+	}
+
+	/**
+	 * @param formacionContinuas
+	 *            the formacionContinuas to set
+	 */
+	public void setFormacionContinuas(List<FormacionContinua> formacionContinuas) {
+		this.formacionContinuas = formacionContinuas;
 	}
 
 }
