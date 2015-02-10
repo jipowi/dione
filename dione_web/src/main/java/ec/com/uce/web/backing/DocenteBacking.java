@@ -98,7 +98,7 @@ public class DocenteBacking implements Serializable {
 
 			for (Materia materia : materias) {
 				MateriaDTO materiaDTO = new MateriaDTO();
-				materiaDTO.setIdMateria(materia.getIdMateria());
+				materiaDTO.setIdMateria(Integer.parseInt(materia.getIdMateria().toString()));
 				materiaDTO.setDesMateria(materia.getMateria());
 				this.materias.add(materiaDTO);
 			}
@@ -156,12 +156,12 @@ public class DocenteBacking implements Serializable {
 		List<MateriaUce> materiaUces = new ArrayList<MateriaUce>();
 		for (AsignaturaDTO asiganturaDTO : docenteBean.getAsignaturasList()) {
 			EscuelaUce escuelaUce = new EscuelaUce();
-			
-			EscuelaUce escuelaUceTemp = docenteService.consultarEscuelaUceById(Long.valueOf(asiganturaDTO.getEscuela()));
-			escuelaUce.setEscuelaUce(escuelaUceTemp.getEscuelaUce());
+
+			Escuela escuela = docenteService.consultarEscuelaById(Long.valueOf(asiganturaDTO.getEscuela()));
+			escuelaUce.setEscuelaUce(escuela.getEscuela());
 			escuelaUce.setDocente(docente);
 			escuelasUce.add(escuelaUce);
-			
+
 			for (MateriaDTO materiaDTO : asiganturaDTO.getMaterias()) {
 				MateriaUce materiaUce = new MateriaUce();
 				materiaUce.setMateriaUce(materiaDTO.getDesMateria());
@@ -169,16 +169,15 @@ public class DocenteBacking implements Serializable {
 			}
 		}
 		docente.setEscuelaUces(escuelasUce);
-		
 
 		try {
 			docenteService.guardarDocente(docente, materiaUces);
-			
+
 			docenteBean.setNombresDocente(null);
 			docenteBean.setApellidosDocente(null);
 			docenteBean.setCedulaDocente(null);
 			docenteBean.setDireccionDocente(null);
-			
+
 			MessagesController.addInfo(null, HiperionMensajes.getInstancia().getString("dione.mensaje.exito.save"));
 
 		} catch (DioneException e) {

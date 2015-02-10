@@ -16,7 +16,7 @@ import javax.faces.model.SelectItem;
 import org.apache.log4j.Logger;
 
 import ec.com.uce.dione.comun.DioneException;
-import ec.com.uce.dione.entities.Competencia;
+import ec.com.uce.dione.entities.CompetenciaGenerale;
 import ec.com.uce.dione.entities.Docente;
 import ec.com.uce.dione.entities.EscuelaUce;
 import ec.com.uce.dione.entities.MateriaUce;
@@ -118,7 +118,7 @@ public class ResultadosBacking implements Serializable {
 
 				objetivo.setIdObjetivo(objetivoDTO.getIdObjetivo());
 				objetivo.setObjetivo(objetivoDTO.getObjetivo());
-				objetivo.setObjetivoCumplido(objetivoDTO.getCumplido());
+				//objetivo.setObjetivoCumplido(objetivoDTO.getCumplido());
 				objetivo.setSyllabus(syllabus);
 
 				objetivos.add(objetivo);
@@ -132,11 +132,11 @@ public class ResultadosBacking implements Serializable {
 
 				resultado.setIdResultado(resultadoDTO.getIdResultado());
 				resultado.setResultadoAprendizaje(resultadoDTO.getResultado());
-				resultado.setInicio(resultadoDTO.getInicio());
+				resultado.setInicioResul(resultadoDTO.getInicio());
 				resultado.setSyllabus(syllabus);
-				resultado.setDominio(resultadoDTO.getDomina());
-				resultado.setAvance(resultadoDTO.getAvance());
-				resultado.setProceso(resultadoDTO.getProceso());
+				resultado.setDominioResul(resultadoDTO.getDomina());
+				resultado.setAvanceResul(resultadoDTO.getAvance());
+				resultado.setProcesoResul(resultadoDTO.getProceso());
 
 				resultados.add(resultado);
 			}
@@ -172,7 +172,7 @@ public class ResultadosBacking implements Serializable {
 		try {
 			syllabus = syllabusService.consultarSyllabusByDocenteAndMateria(idDocente, idMateria);
 			List<Objetivo> objetivos = syllabusService.conusltarObjetivos(syllabus.getIdSyllabus());
-			List<Competencia> competencias = syllabusService.consultarCompetenciasBySyllabus(syllabus.getIdSyllabus());
+			List<CompetenciaGenerale> competencias = syllabusService.consultarCompetenciasBySyllabus(syllabus.getIdSyllabus());
 			List<ResultadosAprendizaje> resultados = syllabusService.consultarResultadosAprendizaje(syllabus.getIdSyllabus());
 
 			for (Objetivo objetivo : objetivos) {
@@ -181,10 +181,10 @@ public class ResultadosBacking implements Serializable {
 				objetivoDTO.setIdObjetivo(objetivo.getIdObjetivo());
 				resultObjetivosDTO.add(objetivoDTO);
 			}
-			for (Competencia competencia : competencias) {
+			for (CompetenciaGenerale competencia : competencias) {
 				EvaluacionCompetenciasDTO competenciaDTO = new EvaluacionCompetenciasDTO();
-				competenciaDTO.setIdCompetencia(competencia.getIdCompetencia());
-				competenciaDTO.setCompetencia(competencia.getCompetencia());
+				competenciaDTO.setIdCompetencia(competencia.getIdCompetenciaGeneral());
+				competenciaDTO.setCompetencia(competencia.getCompetenciaGeneral());
 				resultCompetenciasDTO.add(competenciaDTO);
 			}
 			for (ResultadosAprendizaje resultado : resultados) {

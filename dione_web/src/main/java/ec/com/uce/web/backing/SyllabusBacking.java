@@ -17,7 +17,7 @@ import org.apache.log4j.Logger;
 
 import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.Bibliografia;
-import ec.com.uce.dione.entities.Competencia;
+import ec.com.uce.dione.entities.CompetenciaGenerale;
 import ec.com.uce.dione.entities.Docente;
 import ec.com.uce.dione.entities.ElementoCompetencia;
 import ec.com.uce.dione.entities.EscuelaUce;
@@ -122,9 +122,7 @@ public class SyllabusBacking implements Serializable {
 			syllabus.setMateriaUce(materiaUce);
 
 			syllabus.setDescripcionAsignatura(syllabusBean.getDesAsigantura());
-			syllabus.setNumHorasClase(syllabusBean.getNumHorasClase());
-			syllabus.setPrerequisito(syllabusBean.getPrerequisito());
-			syllabus.setCorequisito(syllabusBean.getCorequisito());
+
 			syllabus.setMetodologia(syllabusBean.getMetodologia());
 
 			syllabusBean.setDesAsigantura("");
@@ -144,10 +142,10 @@ public class SyllabusBacking implements Serializable {
 			syllabusBean.setObjetivosDTOs(null);
 
 			// Competencias
-			List<Competencia> competencias = new ArrayList<Competencia>();
+			List<CompetenciaGenerale> competencias = new ArrayList<CompetenciaGenerale>();
 			for (CompetenciaDTO competenciaDTO : syllabusBean.getCompetenciasDTOs()) {
-				Competencia competencia = new Competencia();
-				competencia.setCompetencia(competenciaDTO.getCompetencia());
+				CompetenciaGenerale competencia = new CompetenciaGenerale();
+				competencia.setCompetenciaGeneral(competenciaDTO.getCompetencia());
 
 				competencias.add(competencia);
 			}
@@ -155,14 +153,14 @@ public class SyllabusBacking implements Serializable {
 			syllabusBean.setCompetenciasDTOs(null);
 
 			List<UnidadCompetencia> unidades = new ArrayList<UnidadCompetencia>();
-			
+
 			for (UnidadCompetenciaDTO unidadCompetenciaDTO : syllabusBean.getUnidadesDTOs()) {
 				UnidadCompetencia unidadCompetencia = new UnidadCompetencia();
 				unidadCompetencia.setUnidadCompetencia(unidadCompetenciaDTO.getUnidadCompetencia());
 				unidadCompetencia.setHorasCompetencia(unidadCompetenciaDTO.getPlanificacionHoras());
-				
+
 				List<ElementoCompetencia> elementos = new ArrayList<ElementoCompetencia>();
-				for(ElementosCompetenciaDTO elemCompetenciaDTO: unidadCompetenciaDTO.getElementosCompetencias()){
+				for (ElementosCompetenciaDTO elemCompetenciaDTO : unidadCompetenciaDTO.getElementosCompetencias()) {
 					ElementoCompetencia elementoCompetencia = new ElementoCompetencia();
 					elementoCompetencia.setElementoCompetencia(elemCompetenciaDTO.getElementoCompetencia());
 					elementos.add(elementoCompetencia);
