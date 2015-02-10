@@ -8,7 +8,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import ec.com.uce.dione.comun.DioneException;
-import ec.com.uce.dione.entities.Competencia;
+import ec.com.uce.dione.entities.CompetenciaGenerale;
 
 /**
  * <b> Interfaz local para realizar las operaciones necesarias en la tabla Competencia </b>
@@ -18,7 +18,7 @@ import ec.com.uce.dione.entities.Competencia;
  * @since JDK1.6
  */
 @Local
-public interface CompetenciaDao extends GenericDAO<Competencia, Long> {
+public interface CompetenciaDao extends GenericDAO<CompetenciaGenerale, Long> {
 
 	/**
 	 * 
@@ -31,5 +31,5 @@ public interface CompetenciaDao extends GenericDAO<Competencia, Long> {
 	 * @return
 	 * @throws DioneException
 	 */
-	public List<Competencia> consultarCompetenciasBySyllabus(Integer idSyllabus) throws DioneException;
+	public List<CompetenciaGenerale> consultarCompetenciasBySyllabus(Integer idSyllabus) throws DioneException;
 }

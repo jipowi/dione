@@ -34,7 +34,7 @@ import javax.persistence.NamedQuery;
 		// OBJETIVOS
 		@NamedQuery(name = "Objetivo.findBysyllabus", query = "SELECT o FROM Objetivo o WHERE o.syllabus.idSyllabus =:idSyllabus"),
 		// COMPETENCIAS
-		@NamedQuery(name = "Competencia.findBySyllabus", query = "SELECT c FROM Competencia c WHERE c.syllabus.idSyllabus =:idSyllabus"),
+		@NamedQuery(name = "CompetenciaGenerale.findBySyllabus", query = "SELECT c FROM CompetenciaGenerale c WHERE c.syllabus.idSyllabus =:idSyllabus"),
 		// RESULTADOS APRENDIZAJE
 		@NamedQuery(name = "ResultadosAprendizaje.findBySyllabus", query = "SELECT r FROM ResultadosAprendizaje r WHERE r.syllabus.idSyllabus =:idSyllabus"),
 		// MENU

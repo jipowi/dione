@@ -1,7 +1,6 @@
 package ec.com.uce.dione.entities;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
 
 
@@ -20,22 +19,26 @@ public class ResultadosAprendizaje implements Serializable {
 	@Column(name="id_resultado")
 	private Integer idResultado;
 
-	private Boolean avance;
+	@Column(name="avance_resul")
+	private Boolean avanceResul;
 
-	private Boolean dominio;
+	@Column(name="dominio_resul")
+	private Boolean dominioResul;
 
-	private Boolean inicio;
+	@Column(name="inicio_resul")
+	private Boolean inicioResul;
 
-	private Boolean proceso;
+	@Column(name="proceso_resul")
+	private Boolean procesoResul;
 
 	@Column(name="resultado_aprendizaje")
 	private String resultadoAprendizaje;
 
 	//bi-directional many-to-one association to Syllabus
-		@ManyToOne(fetch=FetchType.LAZY)
-		@JoinColumn(name="id_syllabus")
-		private Syllabus syllabus;
-		
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_syllabus")
+	private Syllabus syllabus;
+
 	public ResultadosAprendizaje() {
 	}
 
@@ -47,36 +50,36 @@ public class ResultadosAprendizaje implements Serializable {
 		this.idResultado = idResultado;
 	}
 
-	public Boolean getAvance() {
-		return this.avance;
+	public Boolean getAvanceResul() {
+		return this.avanceResul;
 	}
 
-	public void setAvance(Boolean avance) {
-		this.avance = avance;
+	public void setAvanceResul(Boolean avanceResul) {
+		this.avanceResul = avanceResul;
 	}
 
-	public Boolean getDominio() {
-		return this.dominio;
+	public Boolean getDominioResul() {
+		return this.dominioResul;
 	}
 
-	public void setDominio(Boolean dominio) {
-		this.dominio = dominio;
+	public void setDominioResul(Boolean dominioResul) {
+		this.dominioResul = dominioResul;
 	}
 
-	public Boolean getInicio() {
-		return this.inicio;
+	public Boolean getInicioResul() {
+		return this.inicioResul;
 	}
 
-	public void setInicio(Boolean inicio) {
-		this.inicio = inicio;
+	public void setInicioResul(Boolean inicioResul) {
+		this.inicioResul = inicioResul;
 	}
 
-	public Boolean getProceso() {
-		return this.proceso;
+	public Boolean getProcesoResul() {
+		return this.procesoResul;
 	}
 
-	public void setProceso(Boolean proceso) {
-		this.proceso = proceso;
+	public void setProcesoResul(Boolean procesoResul) {
+		this.procesoResul = procesoResul;
 	}
 
 	public String getResultadoAprendizaje() {
@@ -87,16 +90,10 @@ public class ResultadosAprendizaje implements Serializable {
 		this.resultadoAprendizaje = resultadoAprendizaje;
 	}
 
-	/**
-	 * @return the syllabus
-	 */
 	public Syllabus getSyllabus() {
-		return syllabus;
+		return this.syllabus;
 	}
 
-	/**
-	 * @param syllabus the syllabus to set
-	 */
 	public void setSyllabus(Syllabus syllabus) {
 		this.syllabus = syllabus;
 	}

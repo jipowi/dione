@@ -17,7 +17,7 @@ public class Escuela implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_escuela")
-	private Integer idEscuela;
+	private Long idEscuela;
 
 	private String escuela;
 
@@ -28,11 +28,11 @@ public class Escuela implements Serializable {
 	public Escuela() {
 	}
 
-	public Integer getIdEscuela() {
+	public Long getIdEscuela() {
 		return this.idEscuela;
 	}
 
-	public void setIdEscuela(Integer idEscuela) {
+	public void setIdEscuela(Long idEscuela) {
 		this.idEscuela = idEscuela;
 	}
 

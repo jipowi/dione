@@ -41,19 +41,27 @@ public class Docente extends Auditoria implements Serializable {
 	@OneToMany(mappedBy = "docente")
 	private List<EscuelaUce> escuelaUces;
 
-	// bi-directional many-to-one association to EscuelaUce
-	@OneToMany(mappedBy = "docente")
-	private List<FormacionAcademica> formacionAcademicas;
-
-	// bi-directional many-to-one association to EscuelaUce
-	@OneToMany(mappedBy = "docente")
-	private List<FormacionContinua> formacionContinuas;
-
 	// bi-directional many-to-one association to Syllabus
 	@OneToMany(mappedBy = "docente")
 	private List<Syllabus> syllabuses;
 
+	// bi-directional many-to-one association to FormacionAcademica
+	@OneToMany(mappedBy = "docente")
+	private List<FormacionAcademica> formacionAcademicas;
+
+	// bi-directional many-to-one association to FormacionContinua
+	@OneToMany(mappedBy = "docente")
+	private List<FormacionContinua> formacionContinuas;
+
 	public Docente() {
+	}
+
+	public Long getIdDocente() {
+		return this.idDocente;
+	}
+
+	public void setIdDocente(Long idDocente) {
+		this.idDocente = idDocente;
 	}
 
 	public String getApellidosDocente() {
@@ -132,49 +140,48 @@ public class Docente extends Auditoria implements Serializable {
 		return syllabus;
 	}
 
-	/**
-	 * @return the idDocente
-	 */
-	public Long getIdDocente() {
-		return idDocente;
-	}
-
-	/**
-	 * @param idDocente
-	 *            the idDocente to set
-	 */
-	public void setIdDocente(Long idDocente) {
-		this.idDocente = idDocente;
-	}
-
-	/**
-	 * @return the formacionAcademicas
-	 */
 	public List<FormacionAcademica> getFormacionAcademicas() {
-		return formacionAcademicas;
+		return this.formacionAcademicas;
 	}
 
-	/**
-	 * @param formacionAcademicas
-	 *            the formacionAcademicas to set
-	 */
 	public void setFormacionAcademicas(List<FormacionAcademica> formacionAcademicas) {
 		this.formacionAcademicas = formacionAcademicas;
 	}
 
-	/**
-	 * @return the formacionContinuas
-	 */
-	public List<FormacionContinua> getFormacionContinuas() {
-		return formacionContinuas;
+	public FormacionAcademica addFormacionAcademica(FormacionAcademica formacionAcademica) {
+		getFormacionAcademicas().add(formacionAcademica);
+		formacionAcademica.setDocente(this);
+
+		return formacionAcademica;
 	}
 
-	/**
-	 * @param formacionContinuas
-	 *            the formacionContinuas to set
-	 */
+	public FormacionAcademica removeFormacionAcademica(FormacionAcademica formacionAcademica) {
+		getFormacionAcademicas().remove(formacionAcademica);
+		formacionAcademica.setDocente(null);
+
+		return formacionAcademica;
+	}
+
+	public List<FormacionContinua> getFormacionContinuas() {
+		return this.formacionContinuas;
+	}
+
 	public void setFormacionContinuas(List<FormacionContinua> formacionContinuas) {
 		this.formacionContinuas = formacionContinuas;
+	}
+
+	public FormacionContinua addFormacionContinua(FormacionContinua formacionContinua) {
+		getFormacionContinuas().add(formacionContinua);
+		formacionContinua.setDocente(this);
+
+		return formacionContinua;
+	}
+
+	public FormacionContinua removeFormacionContinua(FormacionContinua formacionContinua) {
+		getFormacionContinuas().remove(formacionContinua);
+		formacionContinua.setDocente(null);
+
+		return formacionContinua;
 	}
 
 }

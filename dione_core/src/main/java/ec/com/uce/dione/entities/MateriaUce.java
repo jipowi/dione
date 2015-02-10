@@ -32,6 +32,14 @@ public class MateriaUce implements Serializable {
 	@OneToMany(mappedBy="materiaUce")
 	private List<Syllabus> syllabuses;
 
+	//bi-directional many-to-one association to CorequisitoUce
+	@OneToMany(mappedBy="materiaUce")
+	private List<CorequisitoUce> corequisitoUces;
+
+	//bi-directional many-to-one association to PrerequisitoUce
+	@OneToMany(mappedBy="materiaUce")
+	private List<PrerequisitoUce> prerequisitoUces;
+
 	public MateriaUce() {
 	}
 
@@ -79,6 +87,50 @@ public class MateriaUce implements Serializable {
 		syllabus.setMateriaUce(null);
 
 		return syllabus;
+	}
+
+	public List<CorequisitoUce> getCorequisitoUces() {
+		return this.corequisitoUces;
+	}
+
+	public void setCorequisitoUces(List<CorequisitoUce> corequisitoUces) {
+		this.corequisitoUces = corequisitoUces;
+	}
+
+	public CorequisitoUce addCorequisitoUce(CorequisitoUce corequisitoUce) {
+		getCorequisitoUces().add(corequisitoUce);
+		corequisitoUce.setMateriaUce(this);
+
+		return corequisitoUce;
+	}
+
+	public CorequisitoUce removeCorequisitoUce(CorequisitoUce corequisitoUce) {
+		getCorequisitoUces().remove(corequisitoUce);
+		corequisitoUce.setMateriaUce(null);
+
+		return corequisitoUce;
+	}
+
+	public List<PrerequisitoUce> getPrerequisitoUces() {
+		return this.prerequisitoUces;
+	}
+
+	public void setPrerequisitoUces(List<PrerequisitoUce> prerequisitoUces) {
+		this.prerequisitoUces = prerequisitoUces;
+	}
+
+	public PrerequisitoUce addPrerequisitoUce(PrerequisitoUce prerequisitoUce) {
+		getPrerequisitoUces().add(prerequisitoUce);
+		prerequisitoUce.setMateriaUce(this);
+
+		return prerequisitoUce;
+	}
+
+	public PrerequisitoUce removePrerequisitoUce(PrerequisitoUce prerequisitoUce) {
+		getPrerequisitoUces().remove(prerequisitoUce);
+		prerequisitoUce.setMateriaUce(null);
+
+		return prerequisitoUce;
 	}
 
 }

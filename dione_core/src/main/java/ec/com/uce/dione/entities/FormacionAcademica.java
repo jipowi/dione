@@ -1,7 +1,6 @@
 package ec.com.uce.dione.entities;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
 
 /**
@@ -17,30 +16,28 @@ public class FormacionAcademica implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_f_academica")
-	private Integer idFAcademica;
+	private Long idFAcademica;
 
 	@Column(name = "institucion_aca")
 	private String institucionAca;
+
+	private String titulo;
 
 	// bi-directional many-to-one association to Docente
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_docente")
 	private Docente docente;
 
-	private String titulo;
-
 	public FormacionAcademica() {
 	}
 
-	public Integer getIdFAcademica() {
+	public Long getIdFAcademica() {
 		return this.idFAcademica;
 	}
 
-	public void setIdFAcademica(Integer idFAcademica) {
+	public void setIdFAcademica(Long idFAcademica) {
 		this.idFAcademica = idFAcademica;
 	}
-
-	
 
 	public String getInstitucionAca() {
 		return this.institucionAca;
@@ -58,17 +55,10 @@ public class FormacionAcademica implements Serializable {
 		this.titulo = titulo;
 	}
 
-	/**
-	 * @return the docente
-	 */
 	public Docente getDocente() {
-		return docente;
+		return this.docente;
 	}
 
-	/**
-	 * @param docente
-	 *            the docente to set
-	 */
 	public void setDocente(Docente docente) {
 		this.docente = docente;
 	}

@@ -19,25 +19,20 @@ public class Syllabus implements Serializable {
 	@Column(name="id_syllabus")
 	private Integer idSyllabus;
 
-	private String corequisito;
-
 	@Column(name="descripcion_asignatura")
 	private String descripcionAsignatura;
 
+	@Column(name="horas_tutorias")
+	private Integer horasTutorias;
+
 	private String metodologia;
 
-	@Column(name="num_horas_clase")
-	private Integer numHorasClase;
-
-	private String prerequisito;
+	@Column(name="num_horas_presenciales")
+	private Integer numHorasPresenciales;
 
 	//bi-directional many-to-one association to Bibliografia
 	@OneToMany(mappedBy="syllabus")
 	private List<Bibliografia> bibliografias;
-
-	//bi-directional many-to-one association to Competencia
-	@OneToMany(mappedBy="syllabus")
-	private List<Competencia> competencias;
 
 	//bi-directional many-to-one association to Objetivo
 	@OneToMany(mappedBy="syllabus")
@@ -51,19 +46,31 @@ public class Syllabus implements Serializable {
 	@OneToMany(mappedBy="syllabus")
 	private List<ResultadosAprendizaje> resultadosAprendizajes;
 
-	//bi-directional many-to-one association to MateriaUce
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_materia_uce")
-	private MateriaUce materiaUce;
-
 	//bi-directional many-to-one association to Docente
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_docente")
 	private Docente docente;
 
+	//bi-directional many-to-one association to MateriaUce
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_materia_uce")
+	private MateriaUce materiaUce;
+
 	//bi-directional many-to-one association to UnidadCompetencia
 	@OneToMany(mappedBy="syllabus")
 	private List<UnidadCompetencia> unidadCompetencias;
+
+	//bi-directional many-to-one association to CompetenciaGenerale
+	@OneToMany(mappedBy="syllabus")
+	private List<CompetenciaGenerale> competenciaGenerales;
+
+	//bi-directional many-to-one association to CompetenciasEspecifica
+	@OneToMany(mappedBy="syllabus")
+	private List<CompetenciasEspecifica> competenciasEspecificas;
+
+	//bi-directional many-to-one association to CompetenciasGenerica
+	@OneToMany(mappedBy="syllabus")
+	private List<CompetenciasGenerica> competenciasGenericas;
 
 	public Syllabus() {
 	}
@@ -76,20 +83,20 @@ public class Syllabus implements Serializable {
 		this.idSyllabus = idSyllabus;
 	}
 
-	public String getCorequisito() {
-		return this.corequisito;
-	}
-
-	public void setCorequisito(String corequisito) {
-		this.corequisito = corequisito;
-	}
-
 	public String getDescripcionAsignatura() {
 		return this.descripcionAsignatura;
 	}
 
 	public void setDescripcionAsignatura(String descripcionAsignatura) {
 		this.descripcionAsignatura = descripcionAsignatura;
+	}
+
+	public Integer getHorasTutorias() {
+		return this.horasTutorias;
+	}
+
+	public void setHorasTutorias(Integer horasTutorias) {
+		this.horasTutorias = horasTutorias;
 	}
 
 	public String getMetodologia() {
@@ -100,20 +107,12 @@ public class Syllabus implements Serializable {
 		this.metodologia = metodologia;
 	}
 
-	public Integer getNumHorasClase() {
-		return this.numHorasClase;
+	public Integer getNumHorasPresenciales() {
+		return this.numHorasPresenciales;
 	}
 
-	public void setNumHorasClase(Integer numHorasClase) {
-		this.numHorasClase = numHorasClase;
-	}
-
-	public String getPrerequisito() {
-		return this.prerequisito;
-	}
-
-	public void setPrerequisito(String prerequisito) {
-		this.prerequisito = prerequisito;
+	public void setNumHorasPresenciales(Integer numHorasPresenciales) {
+		this.numHorasPresenciales = numHorasPresenciales;
 	}
 
 	public List<Bibliografia> getBibliografias() {
@@ -136,28 +135,6 @@ public class Syllabus implements Serializable {
 		bibliografia.setSyllabus(null);
 
 		return bibliografia;
-	}
-
-	public List<Competencia> getCompetencias() {
-		return this.competencias;
-	}
-
-	public void setCompetencias(List<Competencia> competencias) {
-		this.competencias = competencias;
-	}
-
-	public Competencia addCompetencia(Competencia competencia) {
-		getCompetencias().add(competencia);
-		competencia.setSyllabus(this);
-
-		return competencia;
-	}
-
-	public Competencia removeCompetencia(Competencia competencia) {
-		getCompetencias().remove(competencia);
-		competencia.setSyllabus(null);
-
-		return competencia;
 	}
 
 	public List<Objetivo> getObjetivos() {
@@ -226,20 +203,20 @@ public class Syllabus implements Serializable {
 		return resultadosAprendizaje;
 	}
 
-	public MateriaUce getMateriaUce() {
-		return this.materiaUce;
-	}
-
-	public void setMateriaUce(MateriaUce materiaUce) {
-		this.materiaUce = materiaUce;
-	}
-
 	public Docente getDocente() {
 		return this.docente;
 	}
 
 	public void setDocente(Docente docente) {
 		this.docente = docente;
+	}
+
+	public MateriaUce getMateriaUce() {
+		return this.materiaUce;
+	}
+
+	public void setMateriaUce(MateriaUce materiaUce) {
+		this.materiaUce = materiaUce;
 	}
 
 	public List<UnidadCompetencia> getUnidadCompetencias() {
@@ -262,6 +239,72 @@ public class Syllabus implements Serializable {
 		unidadCompetencia.setSyllabus(null);
 
 		return unidadCompetencia;
+	}
+
+	public List<CompetenciaGenerale> getCompetenciaGenerales() {
+		return this.competenciaGenerales;
+	}
+
+	public void setCompetenciaGenerales(List<CompetenciaGenerale> competenciaGenerales) {
+		this.competenciaGenerales = competenciaGenerales;
+	}
+
+	public CompetenciaGenerale addCompetenciaGenerale(CompetenciaGenerale competenciaGenerale) {
+		getCompetenciaGenerales().add(competenciaGenerale);
+		competenciaGenerale.setSyllabus(this);
+
+		return competenciaGenerale;
+	}
+
+	public CompetenciaGenerale removeCompetenciaGenerale(CompetenciaGenerale competenciaGenerale) {
+		getCompetenciaGenerales().remove(competenciaGenerale);
+		competenciaGenerale.setSyllabus(null);
+
+		return competenciaGenerale;
+	}
+
+	public List<CompetenciasEspecifica> getCompetenciasEspecificas() {
+		return this.competenciasEspecificas;
+	}
+
+	public void setCompetenciasEspecificas(List<CompetenciasEspecifica> competenciasEspecificas) {
+		this.competenciasEspecificas = competenciasEspecificas;
+	}
+
+	public CompetenciasEspecifica addCompetenciasEspecifica(CompetenciasEspecifica competenciasEspecifica) {
+		getCompetenciasEspecificas().add(competenciasEspecifica);
+		competenciasEspecifica.setSyllabus(this);
+
+		return competenciasEspecifica;
+	}
+
+	public CompetenciasEspecifica removeCompetenciasEspecifica(CompetenciasEspecifica competenciasEspecifica) {
+		getCompetenciasEspecificas().remove(competenciasEspecifica);
+		competenciasEspecifica.setSyllabus(null);
+
+		return competenciasEspecifica;
+	}
+
+	public List<CompetenciasGenerica> getCompetenciasGenericas() {
+		return this.competenciasGenericas;
+	}
+
+	public void setCompetenciasGenericas(List<CompetenciasGenerica> competenciasGenericas) {
+		this.competenciasGenericas = competenciasGenericas;
+	}
+
+	public CompetenciasGenerica addCompetenciasGenerica(CompetenciasGenerica competenciasGenerica) {
+		getCompetenciasGenericas().add(competenciasGenerica);
+		competenciasGenerica.setSyllabus(this);
+
+		return competenciasGenerica;
+	}
+
+	public CompetenciasGenerica removeCompetenciasGenerica(CompetenciasGenerica competenciasGenerica) {
+		getCompetenciasGenericas().remove(competenciasGenerica);
+		competenciasGenerica.setSyllabus(null);
+
+		return competenciasGenerica;
 	}
 
 }

@@ -18,17 +18,24 @@ public class Objetivo implements Serializable {
 	@Column(name="id_objetivo")
 	private Integer idObjetivo;
 
-	
+	@Column(name="avance_obj")
+	private Boolean avanceObj;
+
+	@Column(name="dominio_obj")
+	private Boolean dominioObj;
+
+	@Column(name="inicio_obj")
+	private Boolean inicioObj;
+
 	private String objetivo;
-	
+
+	@Column(name="proceso_obj")
+	private Boolean procesoObj;
 
 	//bi-directional many-to-one association to Syllabus
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_syllabus")
 	private Syllabus syllabus;
-
-	@Column(name="objetivo_cumplido")
-	private Boolean objetivoCumplido;
 
 	public Objetivo() {
 	}
@@ -41,7 +48,29 @@ public class Objetivo implements Serializable {
 		this.idObjetivo = idObjetivo;
 	}
 
-	
+	public Boolean getAvanceObj() {
+		return this.avanceObj;
+	}
+
+	public void setAvanceObj(Boolean avanceObj) {
+		this.avanceObj = avanceObj;
+	}
+
+	public Boolean getDominioObj() {
+		return this.dominioObj;
+	}
+
+	public void setDominioObj(Boolean dominioObj) {
+		this.dominioObj = dominioObj;
+	}
+
+	public Boolean getInicioObj() {
+		return this.inicioObj;
+	}
+
+	public void setInicioObj(Boolean inicioObj) {
+		this.inicioObj = inicioObj;
+	}
 
 	public String getObjetivo() {
 		return this.objetivo;
@@ -51,13 +80,14 @@ public class Objetivo implements Serializable {
 		this.objetivo = objetivo;
 	}
 
-	public Boolean getObjetivoCumplido() {
-		return this.objetivoCumplido;
+	public Boolean getProcesoObj() {
+		return this.procesoObj;
 	}
 
-	public void setObjetivoCumplido(Boolean objetivoCumplido) {
-		this.objetivoCumplido = objetivoCumplido;
+	public void setProcesoObj(Boolean procesoObj) {
+		this.procesoObj = procesoObj;
 	}
+
 	public Syllabus getSyllabus() {
 		return this.syllabus;
 	}
@@ -65,4 +95,5 @@ public class Objetivo implements Serializable {
 	public void setSyllabus(Syllabus syllabus) {
 		this.syllabus = syllabus;
 	}
+
 }

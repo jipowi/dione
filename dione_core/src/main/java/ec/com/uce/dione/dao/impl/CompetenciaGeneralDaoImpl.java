@@ -12,7 +12,7 @@ import javax.persistence.Query;
 
 import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.dao.CompetenciaDao;
-import ec.com.uce.dione.entities.Competencia;
+import ec.com.uce.dione.entities.CompetenciaGenerale;
 
 /**
  * <b> Implementacion de la interfaz para realizar operaciones sobre la tabla Competencia. </b>
@@ -22,7 +22,7 @@ import ec.com.uce.dione.entities.Competencia;
  * @since JDK1.6
  */
 @Stateless
-public class CompetenciaDaoImpl extends GenericDAOImpl<Competencia, Long> implements CompetenciaDao {
+public class CompetenciaGeneralDaoImpl extends GenericDAOImpl<CompetenciaGenerale, Long> implements CompetenciaDao {
 
 	@PersistenceContext(unitName = "dione_core")
 	private EntityManager em;
@@ -32,11 +32,11 @@ public class CompetenciaDaoImpl extends GenericDAOImpl<Competencia, Long> implem
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Competencia> consultarCompetenciasBySyllabus(Integer idSyllabus) throws DioneException {
-		Query query = em.createNamedQuery("Competencia.findBySyllabus");
+	public List<CompetenciaGenerale> consultarCompetenciasBySyllabus(Integer idSyllabus) throws DioneException {
+		Query query = em.createNamedQuery("CompetenciaGenerale.findBySyllabus");
 		query.setParameter("idSyllabus", idSyllabus);
 
-		List<Competencia> listSyllabus = query.getResultList();
+		List<CompetenciaGenerale> listSyllabus = query.getResultList();
 
 		return listSyllabus;
 	}

@@ -9,7 +9,6 @@
 		<class>ec.com.uce.dione.entities.Escuela</class>
 		<class>ec.com.uce.dione.entities.Materia</class>
 		<class>ec.com.uce.dione.entities.Bibliografia</class>
-		<class>ec.com.uce.dione.entities.Competencia</class>
 		<class>ec.com.uce.dione.entities.Docente</class>
 		<class>ec.com.uce.dione.entities.ElementoCompetencia</class>
 		<class>ec.com.uce.dione.entities.EscuelaUce</class>
@@ -24,5 +23,12 @@
 		<class>ec.com.uce.dione.entities.RolMenu</class>
 		<class>ec.com.uce.dione.entities.FormacionAcademica</class>
 		<class>ec.com.uce.dione.entities.FormacionContinua</class>
+		<class>ec.com.uce.dione.entities.CompetenciaGenerale</class>
+		<class>ec.com.uce.dione.entities.CompetenciasEspecifica</class>
+		<class>ec.com.uce.dione.entities.CompetenciasGenerica</class>
+		<class>ec.com.uce.dione.entities.Corequisito</class>
+		<class>ec.com.uce.dione.entities.CorequisitoUce</class>
+		<class>ec.com.uce.dione.entities.Prerequisito</class>
+		<class>ec.com.uce.dione.entities.PrerequisitoUce</class>
    	</persistence-unit>
 </persistence>
