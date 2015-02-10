@@ -18,8 +18,11 @@ public class AsignaturaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String escuela;
 	private List<MateriaDTO> materias;
-	
-	
+
+	public AsignaturaDTO() {
+
+	}
+
 	/**
 	 * @param escuela
 	 * @param materias
@@ -30,8 +33,6 @@ public class AsignaturaDTO implements Serializable {
 		this.materias = materias;
 	}
 
-	
-
 	/**
 	 * @return the escuela
 	 */
@@ -39,16 +40,13 @@ public class AsignaturaDTO implements Serializable {
 		return escuela;
 	}
 
-
-
 	/**
-	 * @param escuela the escuela to set
+	 * @param escuela
+	 *            the escuela to set
 	 */
 	public void setEscuela(String escuela) {
 		this.escuela = escuela;
 	}
-
-
 
 	/**
 	 * @return the materias
@@ -64,7 +62,5 @@ public class AsignaturaDTO implements Serializable {
 	public void setMaterias(List<MateriaDTO> materias) {
 		this.materias = materias;
 	}
-
-	
 
 }

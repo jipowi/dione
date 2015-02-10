@@ -10,6 +10,9 @@ import javax.ejb.Local;
 import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.Docente;
 import ec.com.uce.dione.entities.Escuela;
+import ec.com.uce.dione.entities.EscuelaUce;
+import ec.com.uce.dione.entities.FormacionAcademica;
+import ec.com.uce.dione.entities.FormacionContinua;
 import ec.com.uce.dione.entities.Materia;
 import ec.com.uce.dione.entities.MateriaUce;
 
@@ -63,6 +66,19 @@ public interface DocenteService {
 
 	/**
 	 * 
+	 * <b> Permite consultar la escuela por el Id. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 09/02/2015]
+	 * </p>
+	 * 
+	 * @param escuela
+	 * @return
+	 * @throws DioneException
+	 */
+	public EscuelaUce consultarEscuelaUceById(Long escuela) throws DioneException;
+
+	/**
+	 * 
 	 * <b> Permite guardar la informacion del docente en la base de datos </b>
 	 * <p>
 	 * [Author: Paul Jimenez, Date: 05/01/2015]
@@ -85,5 +101,44 @@ public interface DocenteService {
 	 * @throws DioneException
 	 */
 	public Docente consultarDocenteByCedula(String cedula) throws DioneException;
+
+	/**
+	 * 
+	 * <b> Permite guardar la hoja de vida del docente </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 06/02/2015]
+	 * </p>
+	 * 
+	 * @param formacionAcademicas
+	 * @param formacionContinuas
+	 * @throws DioneException
+	 */
+	public void guardarHojaVida(List<FormacionAcademica> formacionAcademicas, List<FormacionContinua> formacionContinuas) throws DioneException;
+
+	/**
+	 * 
+	 * <b> Permite consultar la lista de formaciones academicas que tiene un docente </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 09/02/2015]
+	 * </p>
+	 * 
+	 * @param idDocente
+	 * @return
+	 * @throws DioneException
+	 */
+	public List<FormacionAcademica> consultarFormacionAByDocente(Long idDocente) throws DioneException;
+	
+	/**
+	 * 
+	 * <b> Permite consultar la lista de formaciones continuas que tiene un docente </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 09/02/2015]
+	 * </p>
+	 * 
+	 * @param idDocente
+	 * @return
+	 * @throws DioneException
+	 */
+	public List<FormacionContinua> consultarFormacionCByDocente(Long idDocente) throws DioneException;
 
 }

@@ -12,11 +12,15 @@ import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.dao.DocenteDao;
 import ec.com.uce.dione.dao.EscuelaDao;
 import ec.com.uce.dione.dao.EscuelaUceDao;
+import ec.com.uce.dione.dao.FormacionADao;
+import ec.com.uce.dione.dao.FormacionCDao;
 import ec.com.uce.dione.dao.MateriaDao;
 import ec.com.uce.dione.dao.MateriaUceDao;
 import ec.com.uce.dione.entities.Docente;
 import ec.com.uce.dione.entities.Escuela;
 import ec.com.uce.dione.entities.EscuelaUce;
+import ec.com.uce.dione.entities.FormacionAcademica;
+import ec.com.uce.dione.entities.FormacionContinua;
 import ec.com.uce.dione.entities.Materia;
 import ec.com.uce.dione.entities.MateriaUce;
 import ec.com.uce.ejb.service.DocenteService;
@@ -33,18 +37,18 @@ public class DocenteServiceImpl implements DocenteService {
 
 	@EJB
 	private EscuelaDao escuelaDao;
-
 	@EJB
 	private MateriaDao materiaDao;
-
 	@EJB
 	private EscuelaUceDao escuelaUceDao;
-
 	@EJB
 	private MateriaUceDao materiaUceDao;
-
 	@EJB
 	private DocenteDao docenteDao;
+	@EJB
+	private FormacionADao formacionADao;
+	@EJB
+	private FormacionCDao formacionCDao;
 
 	/*
 	 * (non-Javadoc)
@@ -105,6 +109,45 @@ public class DocenteServiceImpl implements DocenteService {
 	@Override
 	public Docente consultarDocenteByCedula(String cedula) throws DioneException {
 		return docenteDao.cosultarDocenteByCedula(cedula);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.uce.ejb.service.DocenteService#guardarHojaVida(java.util.List, java.util.List)
+	 */
+	@Override
+	public void guardarHojaVida(List<FormacionAcademica> formacionAcademicas, List<FormacionContinua> formacionContinuas) throws DioneException {
+		for (FormacionContinua formacionContinua : formacionContinuas) {
+			formacionCDao.persist(formacionContinua);
+		}
+		for (FormacionAcademica formacionAcademinca : formacionAcademicas) {
+			formacionADao.persist(formacionAcademinca);
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see ec.com.uce.ejb.service.DocenteService#consultarEscuelaUceById(java.lang.Long)
+	 */
+	@Override
+	public EscuelaUce consultarEscuelaUceById(Long escuela) throws DioneException {
+		return escuelaUceDao.findById(escuela);
+	}
+
+	/* (non-Javadoc)
+	 * @see ec.com.uce.ejb.service.DocenteService#consultarFormacionAByDocente(java.lang.Long)
+	 */
+	@Override
+	public List<FormacionAcademica> consultarFormacionAByDocente(Long idDocente) throws DioneException {
+		return formacionADao.consultarFormacionByDocente(idDocente);
+	}
+
+	/* (non-Javadoc)
+	 * @see ec.com.uce.ejb.service.DocenteService#consultarFormacionCByDocente(java.lang.Long)
+	 */
+	@Override
+	public List<FormacionContinua> consultarFormacionCByDocente(Long idDocente) throws DioneException {
+		return formacionCDao.consultarFormacionByDocente(idDocente);
 	}
 
 }
