@@ -7,6 +7,7 @@
 			<p:messages></p:messages>
 		</p:outputPanel>
 		<p:panel>
+		<p:messages id="msnHoja" showDetail="true" autoUpdate="true" closable="true" />
 			<h:form id="formPrincipal">
 				<div align="center">
 					<h:panelGrid columns="1">
@@ -17,6 +18,37 @@
 						</h:panelGrid>
 
 						<p:spacer height="15px;" />
+						<!-- BUSCADOR DOCENTE -->
+						<h:panelGrid columns="1">
+							<p:panel>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.buscarDocente']}" />
+								</f:facet>
+								<h:panelGrid columns="2">
+									<h:panelGrid columns="2">
+										<p:outputLabel value="#{message['lbl.cedula']}" styleClass="negrita" />
+										<p:inputText value="#{hojaVidaBean.cedula}" />
+									</h:panelGrid>
+									<p:commandLink title="Buscar docente" action="#{hojaVidaBacking.buscarDocente()}" update="@form, idDocente">
+										<h:graphicImage name="search.png" library="img" />
+									</p:commandLink>
+								</h:panelGrid>
+							</p:panel>
+						</h:panelGrid>
+						<h:panelGrid columns="2" cellspacing="3" id="idDocente">
+							<p:outputLabel value="#{message['lbl.nombres']}:" styleClass="negrita" />
+							<p:outputLabel value="#{hojaVidaBean.nombresDocente}" />
+
+							<p:outputLabel value="#{message['lbl.apellidos']}:" styleClass="negrita" />
+							<p:outputLabel value="#{hojaVidaBean.apellidosDocente}" />
+
+							<p:outputLabel value="#{message['lbl.cedula']}:" styleClass="negrita" />
+							<p:outputLabel value="#{hojaVidaBean.cedula}" />
+
+							<p:outputLabel value="#{message['lbl.direccion']}:" styleClass="negrita" />
+							<p:outputLabel value="#{hojaVidaBean.direccionDocente}" />
+						</h:panelGrid>
+
 						<!-- FORMACION ACADEMICA -->
 						<h:panelGrid columns="2">
 							<h:graphicImage name="help.png" library="img" />
@@ -158,7 +190,7 @@
 						</p:dataTable>
 					</h:panelGrid>
 					<p:spacer height="30px;" />
-					<p:commandButton id="guardarBtnId" actionListener="#{agropecuarioBacking.guardarRamo()}" icon="icon-save" value="#{message['boton.guardar']}"
+					<p:commandButton id="guardarBtnId" actionListener="#{hojaVidaBacking.guardarHojaVida()}" icon="icon-save" value="#{message['boton.guardar']}"
 						update="formPrincipal" title="Guardar" />
 					<p:commandButton id="cancelarBtnId" icon="icon-cancel" value="#{message['boton.cancelar']}" title="Cancelar" />
 				</div>

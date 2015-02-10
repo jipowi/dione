@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/menuPrincipalTemplate.xhtml">
+	<ui:define name="content">
+		<p:panel>
+			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+			<h:form id="formPrincipal">
+				<div align="center">
+					<h:panelGrid columns="1">
+						<p:outputLabel value="#{message['lbl.titulo.datosDocente']}" styleClass="negrita" />
+					</h:panelGrid>
+				</div>
+				<p:spacer height="15px;" />
+				<!-- BUSCADOR DOCENTE -->
+				<h:panelGrid columns="1">
+					<p:panel>
+						<f:facet name="header">
+							<h:outputText value="#{message['lbl.buscarDocente']}" />
+						</f:facet>
+						<h:panelGrid columns="2">
+							<h:panelGrid columns="2">
+								<p:outputLabel value="#{message['lbl.cedula']}" styleClass="negrita" />
+								<p:inputText value="#{buscarDocenteBean.cedulaDocente}" />
+							</h:panelGrid>
+							<p:commandLink title="Buscar docente" action="#{buscarDocenteBacking.buscarDocente()}" update="@form, idDatos">
+								<h:graphicImage name="search.png" library="img" />
+							</p:commandLink>
+						</h:panelGrid>
+					</p:panel>
+				</h:panelGrid>
+
+				<div align="center">
+					<!-- INFORMACION BASICA -->
+					<h:panelGrid columns="1" id="idDatos" rendered="#{buscarDocenteBacking.activarHojaVida}">
+						<p:panel>
+							<h:panelGrid columns="2" cellspacing="3">
+								<p:outputLabel value="#{message['lbl.nombres']}:" styleClass="negrita" />
+								<p:outputLabel value="#{buscarDocenteBean.nombresDocente}" />
+
+								<p:outputLabel value="#{message['lbl.apellidos']}:" styleClass="negrita" />
+								<p:outputLabel value="#{buscarDocenteBean.apellidosDocente}" />
+
+								<p:outputLabel value="#{message['lbl.cedula']}:" styleClass="negrita" />
+								<p:outputLabel value="#{buscarDocenteBean.cedulaDocente}" />
+
+								<p:outputLabel value="#{message['lbl.direccion']}:" styleClass="negrita" />
+								<p:outputLabel value="#{buscarDocenteBean.direccionDocente}" />
+							</h:panelGrid>
+						</p:panel>
+						<!-- LINKS POPUPS -->
+						<h:panelGrid columns="2">
+							<p:commandLink title="Ver hoja de vida" oncomplete="hojaVida.show();">
+								<h:graphicImage name="curriculum2.png" library="img" />
+							</p:commandLink>
+							<p:commandLink title="Ver Syllabus" oncomplete="hojaVida.show();">
+								<h:graphicImage name="syllabus.png" library="img" />
+							</p:commandLink>
+						</h:panelGrid>
+
+					</h:panelGrid>
+				</div>
+				<!-- POPUP HOJA DE VIDA -->
+				<p:dialog id="idHojaVida" header="Hoja de Vida" widgetVar="hojaVida" modal="true" width="500" position="center" showEffect="fade"
+					hideEffect="explode" resizable="false" closable="true">
+					<div align="center">
+						<h:panelGrid columns="1">
+							<!-- DATOS BASICOS -->
+							<p:panel>
+							<p:outputLabel value="#{message['lbl.datosBasicos']}" styleClass="negrita" />
+								<h:panelGrid columns="2" cellspacing="3">
+									<p:outputLabel value="#{message['lbl.nombres']}:" styleClass="negrita" />
+									<p:outputLabel value="#{buscarDocenteBean.nombresDocente}" />
+
+									<p:outputLabel value="#{message['lbl.apellidos']}:" styleClass="negrita" />
+									<p:outputLabel value="#{buscarDocenteBean.apellidosDocente}" />
+
+									<p:outputLabel value="#{message['lbl.cedula']}:" styleClass="negrita" />
+									<p:outputLabel value="#{buscarDocenteBean.cedulaDocente}" />
+
+									<p:outputLabel value="#{message['lbl.direccion']}:" styleClass="negrita" />
+									<p:outputLabel value="#{buscarDocenteBean.direccionDocente}" />
+								</h:panelGrid>
+							</p:panel>
+
+							<p:spacer height="20px;" />
+							<!-- ESCUELAS - ASIGNATURAS -->
+							<p:dataTable id="tablaAsignatura" value="#{buscarDocenteBean.escuelaMateriasList}" var="obj" widgetVar="50" style="width: 70%;" editable="true">
+								<p:column>
+									<f:facet name="header">
+										<h:outputLabel value="#{message['lbl.escuela']}" />
+									</f:facet>
+									<h:outputText value="#{obj.escuela}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputLabel value="#{message['lbl.asignaturas']}" />
+									</f:facet>
+									<p:dataList value="#{obj.materias}" var="escuela" type="ordered">
+										<h:outputText value="#{escuela.desMateria}" />
+									</p:dataList>
+								</p:column>
+							</p:dataTable>
+
+							<p:spacer height="20px;" />
+							<!-- FORMACION ACADEMICA -->
+							<p:outputLabel value="#{message['lbl.formacionAcademica']}" styleClass="negrita" />
+							<p:dataTable id="tablaFormacionA" value="#{buscarDocenteBean.formacionesA}" var="obj" widgetVar="50" style="width: 70%;" editable="true">
+								<p:column>
+									<f:facet name="header">
+										<h:outputLabel value="#{message['lbl.institucion']}" />
+									</f:facet>
+									<h:outputText value="#{obj.institucionAca}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputLabel value="#{message['lbl.titulo']}" />
+									</f:facet>
+									<h:outputText value="#{obj.titulo}" />
+								</p:column>
+							</p:dataTable>
+							
+							<p:spacer height="20px;" />
+							<!-- FORMACION CONTINUA -->
+							<p:outputLabel value="#{message['lbl.formacionContinua']}" styleClass="negrita" />
+							<p:dataTable id="tablaFormacionC" value="#{buscarDocenteBean.formacionesC}" var="obj" widgetVar="50" style="width: 70%;" editable="true">
+								<p:column>
+									<f:facet name="header">
+										<h:outputLabel value="#{message['lbl.institucion']}" />
+									</f:facet>
+									<h:outputText value="#{obj.institucionContinua}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputLabel value="#{message['lbl.curso']}" />
+									</f:facet>
+									<h:outputText value="#{obj.curso}" />
+								</p:column>
+							</p:dataTable>
+						</h:panelGrid>
+					</div>
+				</p:dialog>
+				<p:spacer height="20px;" />
+				<div align="center">
+					<p:commandButton id="guardarBtnId" actionListener="#{syllabusBacking.guardarSyllabus()}" icon="icon-save" value="#{message['boton.guardar']}"
+						update="formPrincipal" title="Guardar" />
+					<p:commandButton id="cancelarBtnId" icon="icon-cancel" value="#{message['boton.cancelar']}" title="Cancelar" />
+				</div>
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>
