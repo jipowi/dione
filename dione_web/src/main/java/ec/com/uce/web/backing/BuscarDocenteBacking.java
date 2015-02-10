@@ -1,7 +1,7 @@
-/**
- * 
- */
 package ec.com.uce.web.backing;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -12,8 +12,13 @@ import org.apache.log4j.Logger;
 
 import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.Docente;
+import ec.com.uce.dione.entities.EscuelaUce;
+import ec.com.uce.dione.entities.MateriaUce;
+import ec.com.uce.ejb.dto.AsignaturaDTO;
+import ec.com.uce.ejb.dto.MateriaDTO;
 import ec.com.uce.ejb.service.DocenteService;
-import ec.com.uce.web.bean.DocenteBean;
+import ec.com.uce.ejb.service.SyllabusService;
+import ec.com.uce.web.bean.BuscarDocenteBean;
 import ec.com.uce.web.util.HiperionMensajes;
 import ec.com.uce.web.util.MessagesController;
 
@@ -30,11 +35,14 @@ public class BuscarDocenteBacking {
 
 	@EJB
 	private DocenteService docenteService;
+	@EJB
+	private SyllabusService syllabusService;
 
-	@ManagedProperty(value = "#{docenteBean}")
-	private DocenteBean docenteBean;
+	@ManagedProperty(value = "#{buscarDocenteBean}")
+	private BuscarDocenteBean buscarDocenteBean;
 
 	private Docente docente;
+	private Boolean activarHojaVida = false;
 
 	Logger log = Logger.getLogger(BuscarDocenteBacking.class);
 
@@ -49,8 +57,38 @@ public class BuscarDocenteBacking {
 	 */
 	public void buscarDocente() throws DioneException {
 		try {
-			docente = docenteService.consultarDocenteByCedula(docenteBean.getCedulaDocente());
+			docente = docenteService.consultarDocenteByCedula(buscarDocenteBean.getCedulaDocente());
+
 			if (docente != null) {
+				activarHojaVida = true;
+				buscarDocenteBean.setApellidosDocente(docente.getApellidosDocente());
+				buscarDocenteBean.setNombresDocente(docente.getNombresDocente());
+				buscarDocenteBean.setDireccionDocente(docente.getDireccionDocente());
+
+				List<AsignaturaDTO> escuelasMateriasDTO = new ArrayList<AsignaturaDTO>();
+
+				List<EscuelaUce> escuelas = syllabusService.consultarEscuelaByDocente(docente.getIdDocente().toString());
+
+				for (EscuelaUce escuelaUce : escuelas) {
+					AsignaturaDTO asignaturaDTO = new AsignaturaDTO();
+					asignaturaDTO.setEscuela(escuelaUce.getEscuelaUce());
+
+					List<MateriaUce> materias = syllabusService.consultarMateriasByEscuela(escuelaUce.getIdEscuelaUce());
+					List<MateriaDTO> materiasDTO = new ArrayList<MateriaDTO>();
+					for (MateriaUce materia : materias) {
+						MateriaDTO materiaDTO = new MateriaDTO();
+						materiaDTO.setDesMateria(materia.getMateriaUce());
+						materiasDTO.add(materiaDTO);
+					}
+
+					asignaturaDTO.setMaterias(materiasDTO);
+
+					escuelasMateriasDTO.add(asignaturaDTO);
+				}
+				buscarDocenteBean.setEscuelaMateriasList(escuelasMateriasDTO);
+
+				buscarDocenteBean.setFormacionesA(docenteService.consultarFormacionAByDocente(docente.getIdDocente()));
+				buscarDocenteBean.setFormacionesC(docenteService.consultarFormacionCByDocente(docente.getIdDocente()));
 
 			} else {
 				MessagesController.addError(null, HiperionMensajes.getInstancia().getString("dione.mensaje.error.buscar"));
@@ -64,18 +102,18 @@ public class BuscarDocenteBacking {
 	}
 
 	/**
-	 * @return the docenteBean
+	 * @return the buscarDocenteBean
 	 */
-	public DocenteBean getDocenteBean() {
-		return docenteBean;
+	public BuscarDocenteBean getBuscarDocenteBean() {
+		return buscarDocenteBean;
 	}
 
 	/**
-	 * @param docenteBean
-	 *            the docenteBean to set
+	 * @param buscarDocenteBean
+	 *            the buscarDocenteBean to set
 	 */
-	public void setDocenteBean(DocenteBean docenteBean) {
-		this.docenteBean = docenteBean;
+	public void setBuscarDocenteBean(BuscarDocenteBean buscarDocenteBean) {
+		this.buscarDocenteBean = buscarDocenteBean;
 	}
 
 	/**
@@ -91,6 +129,21 @@ public class BuscarDocenteBacking {
 	 */
 	public void setDocente(Docente docente) {
 		this.docente = docente;
+	}
+
+	/**
+	 * @return the activarHojaVida
+	 */
+	public Boolean getActivarHojaVida() {
+		return activarHojaVida;
+	}
+
+	/**
+	 * @param activarHojaVida
+	 *            the activarHojaVida to set
+	 */
+	public void setActivarHojaVida(Boolean activarHojaVida) {
+		this.activarHojaVida = activarHojaVida;
 	}
 
 }
