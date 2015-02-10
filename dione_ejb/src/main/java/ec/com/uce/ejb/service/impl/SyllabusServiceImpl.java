@@ -19,7 +19,7 @@ import ec.com.uce.dione.dao.ResultadoAprendizajeDao;
 import ec.com.uce.dione.dao.SyllabusDao;
 import ec.com.uce.dione.dao.UnidadCompetenciaDao;
 import ec.com.uce.dione.entities.Bibliografia;
-import ec.com.uce.dione.entities.Competencia;
+import ec.com.uce.dione.entities.CompetenciaGenerale;
 import ec.com.uce.dione.entities.ElementoCompetencia;
 import ec.com.uce.dione.entities.EscuelaUce;
 import ec.com.uce.dione.entities.MateriaUce;
@@ -75,7 +75,7 @@ public class SyllabusServiceImpl implements SyllabusService {
 	 * java.util.List)
 	 */
 	@Override
-	public void guardarSyllabus(Syllabus syllabus, List<Objetivo> objetivos, List<Competencia> competencias, List<Bibliografia> bibliografias,
+	public void guardarSyllabus(Syllabus syllabus, List<Objetivo> objetivos, List<CompetenciaGenerale> competencias, List<Bibliografia> bibliografias,
 			List<ResultadosAprendizaje> resultados, List<UnidadCompetencia> unidades) throws DioneException {
 
 		syllabusDao.persist(syllabus);
@@ -88,7 +88,7 @@ public class SyllabusServiceImpl implements SyllabusService {
 			resultadosAprendizaje.setSyllabus(syllabus);
 			resultadoAprendizajeDao.persist(resultadosAprendizaje);
 		}
-		for (Competencia competencia : competencias) {
+		for (CompetenciaGenerale competencia : competencias) {
 			competencia.setSyllabus(syllabus);
 			competenciaDao.persist(competencia);
 		}
@@ -175,7 +175,7 @@ public class SyllabusServiceImpl implements SyllabusService {
 	 * @see ec.com.uce.ejb.service.SyllabusService#consultarCompetenciasBySyllabus(java.lang.Integer)
 	 */
 	@Override
-	public List<Competencia> consultarCompetenciasBySyllabus(Integer idSyllabus) throws DioneException {
+	public List<CompetenciaGenerale> consultarCompetenciasBySyllabus(Integer idSyllabus) throws DioneException {
 		return competenciaDao.consultarCompetenciasBySyllabus(idSyllabus);
 	}
 

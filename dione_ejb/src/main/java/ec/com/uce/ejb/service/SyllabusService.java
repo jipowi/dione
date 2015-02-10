@@ -9,7 +9,7 @@ import javax.ejb.Local;
 
 import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.Bibliografia;
-import ec.com.uce.dione.entities.Competencia;
+import ec.com.uce.dione.entities.CompetenciaGenerale;
 import ec.com.uce.dione.entities.EscuelaUce;
 import ec.com.uce.dione.entities.MateriaUce;
 import ec.com.uce.dione.entities.Objetivo;
@@ -91,7 +91,7 @@ public interface SyllabusService {
 	 * @param resultados
 	 * @throws DioneException
 	 */
-	public void guardarSyllabus(Syllabus syllabus, List<Objetivo> objetivos, List<Competencia> competencias, List<Bibliografia> bibliografias,
+	public void guardarSyllabus(Syllabus syllabus, List<Objetivo> objetivos, List<CompetenciaGenerale> competencias, List<Bibliografia> bibliografias,
 			List<ResultadosAprendizaje> resultados, List<UnidadCompetencia> unidades) throws DioneException;
 
 	/**
@@ -145,7 +145,7 @@ public interface SyllabusService {
 	 * @return
 	 * @throws DioneException
 	 */
-	public List<Competencia> consultarCompetenciasBySyllabus(Integer idSyllabus) throws DioneException;
+	public List<CompetenciaGenerale> consultarCompetenciasBySyllabus(Integer idSyllabus) throws DioneException;
 
 	/**
 	 * 
