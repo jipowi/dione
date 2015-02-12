@@ -10,9 +10,11 @@ import javax.ejb.Local;
 import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.Bibliografia;
 import ec.com.uce.dione.entities.CompetenciaGenerale;
+import ec.com.uce.dione.entities.Corequisito;
 import ec.com.uce.dione.entities.EscuelaUce;
 import ec.com.uce.dione.entities.MateriaUce;
 import ec.com.uce.dione.entities.Objetivo;
+import ec.com.uce.dione.entities.Prerequisito;
 import ec.com.uce.dione.entities.ResultadosAprendizaje;
 import ec.com.uce.dione.entities.Syllabus;
 import ec.com.uce.dione.entities.UnidadCompetencia;
@@ -171,4 +173,29 @@ public interface SyllabusService {
 	 */
 	public void actualizarResultados(List<ResultadosAprendizaje> resultados) throws DioneException;
 
+	/**
+	 * 
+	 * <b> Permite obtener los corequisitos por materia seleccionada </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 11/02/2015]
+	 * </p>
+	 * 
+	 * @param idMateria
+	 * @return
+	 * @throws DioneException
+	 */
+	public List<Corequisito> obtenerCorequisitos(Integer idMateria) throws DioneException;
+
+	/**
+	 * 
+	 * <b> Permite obtener los prerequisitos por materia seleccionada </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 11/02/2015]
+	 * </p>
+	 * 
+	 * @param idMateria
+	 * @return
+	 * @throws DioneException
+	 */
+	public List<Prerequisito> obtenerPrerequisitos(Integer idMateria) throws DioneException;
 }

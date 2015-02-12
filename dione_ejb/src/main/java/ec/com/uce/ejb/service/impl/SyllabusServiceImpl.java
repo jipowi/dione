@@ -11,19 +11,23 @@ import javax.ejb.Stateless;
 import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.dao.BibliografiaDao;
 import ec.com.uce.dione.dao.CompetenciaDao;
+import ec.com.uce.dione.dao.CorequisitoDao;
 import ec.com.uce.dione.dao.ElementoCompetenciaDao;
 import ec.com.uce.dione.dao.EscuelaUceDao;
 import ec.com.uce.dione.dao.MateriaUceDao;
 import ec.com.uce.dione.dao.ObjetivoDao;
+import ec.com.uce.dione.dao.PrerequisitoDao;
 import ec.com.uce.dione.dao.ResultadoAprendizajeDao;
 import ec.com.uce.dione.dao.SyllabusDao;
 import ec.com.uce.dione.dao.UnidadCompetenciaDao;
 import ec.com.uce.dione.entities.Bibliografia;
 import ec.com.uce.dione.entities.CompetenciaGenerale;
+import ec.com.uce.dione.entities.Corequisito;
 import ec.com.uce.dione.entities.ElementoCompetencia;
 import ec.com.uce.dione.entities.EscuelaUce;
 import ec.com.uce.dione.entities.MateriaUce;
 import ec.com.uce.dione.entities.Objetivo;
+import ec.com.uce.dione.entities.Prerequisito;
 import ec.com.uce.dione.entities.ResultadosAprendizaje;
 import ec.com.uce.dione.entities.Syllabus;
 import ec.com.uce.dione.entities.UnidadCompetencia;
@@ -57,6 +61,10 @@ public class SyllabusServiceImpl implements SyllabusService {
 	private ObjetivoDao objetivoDao;
 	@EJB
 	private EscuelaUceDao escuelaUceDao;
+	@EJB
+	private PrerequisitoDao prerequisitoDao;
+	@EJB
+	private CorequisitoDao corequisitoDao;
 
 	/*
 	 * (non-Javadoc)
@@ -202,5 +210,25 @@ public class SyllabusServiceImpl implements SyllabusService {
 		for (ResultadosAprendizaje resultadosAprendizaje : resultados) {
 			resultadoAprendizajeDao.update(resultadosAprendizaje);
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.uce.ejb.service.SyllabusService#obtenerPrerequisitos(java.lang.Integer)
+	 */
+	@Override
+	public List<Prerequisito> obtenerPrerequisitos(Integer idMateria) throws DioneException {
+		return prerequisitoDao.consultarPreByMateria(idMateria);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.uce.ejb.service.SyllabusService#obtenerCorequisitos(java.lang.Integer)
+	 */
+	@Override
+	public List<Corequisito> obtenerCorequisitos(Integer idMateria) throws DioneException {
+		return corequisitoDao.consultarCorequisitoByMateria(idMateria);
 	}
 }
