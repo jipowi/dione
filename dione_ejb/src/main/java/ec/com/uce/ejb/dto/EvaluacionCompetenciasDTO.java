@@ -17,7 +17,10 @@ public class EvaluacionCompetenciasDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer idCompetencia;
 	private String competencia;
-	private Boolean cumplido;
+	private Boolean domina;
+	private Boolean avance;
+	private Boolean proceso;
+	private Boolean inicio;
 
 	/**
 	 * @return the competencia
@@ -35,18 +38,63 @@ public class EvaluacionCompetenciasDTO implements Serializable {
 	}
 
 	/**
-	 * @return the cumplido
+	 * @return the domina
 	 */
-	public Boolean getCumplido() {
-		return cumplido;
+	public Boolean getDomina() {
+		return domina;
 	}
 
 	/**
-	 * @param cumplido
-	 *            the cumplido to set
+	 * @param domina
+	 *            the domina to set
 	 */
-	public void setCumplido(Boolean cumplido) {
-		this.cumplido = cumplido;
+	public void setDomina(Boolean domina) {
+		this.domina = domina;
+	}
+
+	/**
+	 * @return the avance
+	 */
+	public Boolean getAvance() {
+		return avance;
+	}
+
+	/**
+	 * @param avance
+	 *            the avance to set
+	 */
+	public void setAvance(Boolean avance) {
+		this.avance = avance;
+	}
+
+	/**
+	 * @return the proceso
+	 */
+	public Boolean getProceso() {
+		return proceso;
+	}
+
+	/**
+	 * @param proceso
+	 *            the proceso to set
+	 */
+	public void setProceso(Boolean proceso) {
+		this.proceso = proceso;
+	}
+
+	/**
+	 * @return the inicio
+	 */
+	public Boolean getInicio() {
+		return inicio;
+	}
+
+	/**
+	 * @param inicio
+	 *            the inicio to set
+	 */
+	public void setInicio(Boolean inicio) {
+		this.inicio = inicio;
 	}
 
 	/**
