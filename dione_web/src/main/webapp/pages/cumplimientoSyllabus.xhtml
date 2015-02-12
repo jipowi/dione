@@ -71,9 +71,27 @@
 							</p:column>
 							<p:column>
 								<f:facet name="header">
-									<h:outputText value="#{message['lbl.cumplido']}" />
+									<h:outputText value="#{message['lbl.inicio']}" />
 								</f:facet>
-								<p:selectBooleanCheckbox value="#{objetivo.cumplido}" />
+								<p:selectBooleanCheckbox value="#{objetivo.inicio}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.proceso']}" />
+								</f:facet>
+								<p:selectBooleanCheckbox value="#{objetivo.proceso}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.avance']}" />
+								</f:facet>
+								<p:selectBooleanCheckbox value="#{objetivo.avance}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.domina']}" />
+								</f:facet>
+								<p:selectBooleanCheckbox value="#{objetivo.domina}" />
 							</p:column>
 						</p:dataTable>
 						<p:spacer height="20px;" />
@@ -91,9 +109,27 @@
 							</p:column>
 							<p:column>
 								<f:facet name="header">
-									<h:outputText value="#{message['lbl.cumplido']}" />
+									<h:outputText value="#{message['lbl.inicio']}" />
 								</f:facet>
-								<p:selectBooleanCheckbox value="#{competencia.cumplido}" />
+								<p:selectBooleanCheckbox value="#{competencia.inicio}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.proceso']}" />
+								</f:facet>
+								<p:selectBooleanCheckbox value="#{competencia.proceso}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.avance']}" />
+								</f:facet>
+								<p:selectBooleanCheckbox value="#{competencia.avance}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.domina']}" />
+								</f:facet>
+								<p:selectBooleanCheckbox value="#{competencia.domina}" />
 							</p:column>
 						</p:dataTable>
 						<p:spacer height="20px;" />
@@ -124,6 +160,12 @@
 							<p:column>
 								<f:facet name="header">
 									<h:outputText value="#{message['lbl.avance']}" />
+								</f:facet>
+								<p:selectBooleanCheckbox value="#{resultado.avance}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{message['lbl.domina']}" />
 								</f:facet>
 								<p:selectBooleanCheckbox value="#{resultado.domina}" />
 							</p:column>

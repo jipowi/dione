@@ -38,16 +38,14 @@
 							<p:selectOneMenu id="selecMateria" value="#{syllabusBean.materia}" effect="drop">
 								<f:selectItem itemLabel="Seleccione" noSelectionOption="true" />
 								<f:selectItems value="#{syllabusBacking.materias}" />
+								<p:ajax event="change" listener="#{syllabusBacking.obtenerPrerequisitos()}" update="@form, requisitos" />
 							</p:selectOneMenu>
 
-							<p:outputLabel value="#{message['lbl.numHorasClase']}:" styleClass="negrita" />
-							<p:inputText value="#{syllabusBean.numHorasClase}" />
+							<p:outputLabel value="#{message['lbl.numHorasPresenciales']}:" styleClass="negrita" />
+							<p:inputText value="#{syllabusBean.numHorasPresenciales}" />
 
-							<p:outputLabel value="#{message['lbl.prerequisito']}:" styleClass="negrita" />
-							<p:inputTextarea cols="50" value="#{syllabusBean.prerequisito}" />
-
-							<p:outputLabel value="#{message['lbl.corequisito']}:" styleClass="negrita" />
-							<p:inputTextarea cols="50" value="#{syllabusBean.corequisito}" />
+							<p:outputLabel value="#{message['lbl.numHorasTutorias']}:" styleClass="negrita" />
+							<p:inputText value="#{syllabusBean.numHorasTutorias}" />
 
 							<p:outputLabel value="#{message['lbl.desAsignatura']}:" styleClass="negrita" />
 							<p:inputTextarea cols="50" value="#{syllabusBean.desAsigantura}" />
@@ -55,10 +53,36 @@
 							<p:outputLabel value="#{message['lbl.metodologia']}:" styleClass="negrita" />
 							<p:inputTextarea cols="50" value="#{syllabusBean.metodologia}" />
 						</h:panelGrid>
-
+						<h:panelGroup id="requisitos" columns="1" rendered="#{syllabusBacking.activarRequisitos}">
+							<h:panelGrid columns="1" cellpadding="3">
+								<p:outputLabel value="#{message['lbl.infoPrerequisito']}" styleClass="negrita" />
+								<p:dataTable id="tablaPrerequisitos" value="#{syllabusBacking.prerequisitos}" var="obj" widgetVar="50">
+									<p:column>
+										<f:facet name="header">
+											<h:outputText value="#{message['lbl.prerequisito']}" />
+										</f:facet>
+										<h:outputText value="#{obj.prerequisito}" />
+									</p:column>
+								</p:dataTable>
+								<p:outputLabel value="#{message['lbl.infoCorequisito']}" styleClass="negrita" />
+								<p:dataTable id="tablaCorequisitos" value="#{syllabusBacking.corequisitos}" var="obj" widgetVar="50">
+									<p:column>
+										<f:facet name="header">
+											<h:outputText value="#{message['lbl.prerequisito']}" />
+										</f:facet>
+										<h:outputText value="#{obj.corequisito}" />
+									</p:column>
+								</p:dataTable>
+							</h:panelGrid>
+						</h:panelGroup>
 						<p:spacer height="20px;" />
 						<!-- OBJETIVOS -->
 						<p:panel>
+							<div align="center">
+								<h:panelGrid columns="1">
+									<p:outputLabel value="OBJETIVOS" styleClass="negrita" />
+								</h:panelGrid>
+							</div>
 							<h:panelGrid columns="2">
 								<h:graphicImage name="help.png" library="img" />
 								<p:outputLabel value="#{message['lbl.infoObjetivo']}" style="color: green;" />
@@ -73,7 +97,7 @@
 										actionListener="#{syllabusBean.addObjetivo()}" title="Agregar" />
 								</div>
 								<p:spacer height="30px;" />
-								<p:dataTable id="tablaObjetivos" value="#{syllabusBean.objetivosDTOs}" var="obj" widgetVar="50" style="width: 40%;" editable="true">
+								<p:dataTable id="tablaObjetivos" value="#{syllabusBean.objetivosDTOs}" var="obj" widgetVar="50" editable="true">
 									<p:ajax event="rowEdit" listener="#{syllabusBean.onEditObjetivo}" update="tablaObjetivos" />
 									<p:ajax event="rowEditCancel" listener="#{syllabusBean.onCancelObjetivo}" update="tablaObjetivos" />
 									<p:column>
@@ -96,35 +120,89 @@
 							</h:panelGrid>
 						</p:panel>
 						<p:spacer height="20px;" />
-						<!-- COMPETENCIAS -->
+						<!-- COMPETENCIAS GENERALES-->
 						<p:panel>
+							<div align="center">
+								<h:panelGrid columns="1">
+									<p:outputLabel value="COMPETENCIAS GENERALES" styleClass="negrita" />
+								</h:panelGrid>
+							</div>
 							<h:panelGrid columns="2">
 								<h:graphicImage name="help.png" library="img" />
-								<p:outputLabel value="#{message['lbl.infoCompetencia']}" style="color: green;" />
+								<p:outputLabel value="#{message['lbl.infoCompetenciaGeneral']}" style="color: green;" />
 							</h:panelGrid>
 							<h:panelGrid columns="1">
 								<h:panelGrid columns="2">
-									<p:outputLabel value="#{message['lbl.competencia']}:" styleClass="negrita" />
-									<p:inputText value="#{syllabusBean.competencia}" />
+									<p:outputLabel value="#{message['lbl.competenciaGeneral']}:" styleClass="negrita" />
+									<p:inputText value="#{syllabusBean.competenciaGeneral}" />
 								</h:panelGrid>
 								<div align="center">
-									<p:commandButton id="agregarCompetencia" update="tablaCompetencias" icon="icon-add" value="#{message['boton.agregar']}"
-										actionListener="#{syllabusBean.addCompetencia()}" title="Agregar" />
+									<p:commandButton id="agregarCompetencia" update="tablaCompetenciasGenerales" icon="icon-add" value="#{message['boton.agregar']}"
+										actionListener="#{syllabusBean.addCompetenciaGeneral()}" title="Agregar" />
 								</div>
 								<p:spacer height="30px;" />
-								<p:dataTable id="tablaCompetencias" value="#{syllabusBean.competenciasDTOs}" var="obj" widgetVar="50" style="width: 40%;" editable="true">
-									<p:ajax event="rowEdit" listener="#{syllabusBean.onEditCompetencia}" update="tablaCompetencias" />
-									<p:ajax event="rowEditCancel" listener="#{syllabusBean.onCancelCompetencia}" update="tablaCompetencias" />
+								<p:dataTable id="tablaCompetenciasGenerales" value="#{syllabusBean.competenciasGeneralesDTOs}" var="obj" widgetVar="50" editable="true">
+									<p:ajax event="rowEdit" listener="#{syllabusBean.onEditCompetenciaGeneral}" update="tablaCompetenciasGenerales" />
+									<p:ajax event="rowEditCancel" listener="#{syllabusBean.onCancelCompetenciaGeneral}" update="tablaCompetenciasGenerales" />
 									<p:column>
 										<f:facet name="header">
-											<h:outputText value="#{message['lbl.competencia']}" />
+											<h:outputText value="#{message['lbl.competenciaGeneral']}" />
 										</f:facet>
 										<p:cellEditor>
 											<f:facet name="output">
-												<h:outputText value="#{obj.competencia}" />
+												<h:outputText value="#{obj.competenciaGeneral}" />
 											</f:facet>
 											<f:facet name="input">
-												<p:inputText value="#{obj.competencia}" />
+												<p:inputText value="#{obj.competenciaGeneral}" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+									<p:column headerText="Options" style="width:50px">
+										<p:rowEditor />
+									</p:column>
+								</p:dataTable>
+							</h:panelGrid>
+						</p:panel>
+						<p:spacer height="20px;" />
+						<!-- COMPETENCIAS GENERICAS-->
+						<p:commandLink title="Seleccionar competencias genericas" oncomplete="competenciasGenericas.show();" update=":idCompetenciaGenerica">
+							<h:graphicImage name="materia.png" library="img" />
+						</p:commandLink>
+
+						<!-- COMPETENCIAS ESPECIFICAS-->
+						<p:panel>
+							<div align="center">
+								<h:panelGrid columns="1">
+									<p:outputLabel value="COMPETENCIAS ESPECIFICAS" styleClass="negrita" />
+								</h:panelGrid>
+							</div>
+							<h:panelGrid columns="2">
+								<h:graphicImage name="help.png" library="img" />
+								<p:outputLabel value="#{message['lbl.infoCompetenciaEspecifica']}" style="color: green;" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:panelGrid columns="2">
+									<p:outputLabel value="#{message['lbl.competenciaEspecifica']}:" styleClass="negrita" />
+									<p:inputText value="#{syllabusBean.competenciaEspecifica}" />
+								</h:panelGrid>
+								<div align="center">
+									<p:commandButton update="tablaCompetenciasEspecificas" icon="icon-add" value="#{message['boton.agregar']}"
+										actionListener="#{syllabusBean.addCompetenciaEspecifica()}" title="Agregar" />
+								</div>
+								<p:spacer height="30px;" />
+								<p:dataTable id="tablaCompetenciasEspecificas" value="#{syllabusBean.competenciasEspecificasDTOs}" var="obj" widgetVar="50" editable="true">
+									<p:ajax event="rowEdit" listener="#{syllabusBean.onEditCompetenciaEspecifica}" update="tablaCompetenciasEspecificas" />
+									<p:ajax event="rowEditCancel" listener="#{syllabusBean.onCancelCompetenciaEspecifica}" update="tablaCompetenciasEspecificas" />
+									<p:column>
+										<f:facet name="header">
+											<h:outputText value="#{message['lbl.competenciaEspecifica']}" />
+										</f:facet>
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{obj.competenciaEspecifica}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText value="#{obj.competenciaEspecifica}" />
 											</f:facet>
 										</p:cellEditor>
 									</p:column>
@@ -137,6 +215,11 @@
 						<p:spacer height="20px;" />
 						<!-- UNIDAD DE COMPETENCIA -->
 						<p:panel>
+							<div align="center">
+								<h:panelGrid columns="1">
+									<p:outputLabel value="UNIDADES DE COMPETENCIA" styleClass="negrita" />
+								</h:panelGrid>
+							</div>
 							<h:panelGrid columns="2">
 								<h:graphicImage name="help.png" library="img" />
 								<p:outputLabel value="#{message['lbl.infoUnidad']}" style="color: green;" />
@@ -162,8 +245,7 @@
 													actionListener="#{syllabusBean.addElemento()}" title="Agregar" />
 											</div>
 											<p:spacer height="20px;" />
-											<p:dataTable id="tablaElementos" value="#{syllabusBean.elementosCompetenciaDTOs}" var="obj" widgetVar="50" style="width: 40%;"
-												editable="true">
+											<p:dataTable id="tablaElementos" value="#{syllabusBean.elementosCompetenciaDTOs}" var="obj" widgetVar="50" editable="true">
 												<p:ajax event="rowEdit" listener="#{syllabusBean.onEditElemento}" update="tablaElementos" />
 												<p:ajax event="rowEditCancel" listener="#{syllabusBean.onCancelElemento}" update="tablaElementos" />
 												<p:column>
@@ -308,6 +390,71 @@
 				</div>
 			</h:form>
 		</p:panel>
+		<!-- COMPETENCIAS GENERICAS -->
+		<p:dialog id="idCompetenciaGenerica" header="Competencias Genericas" widgetVar="competenciasGenericas" modal="true" position="center"
+			showEffect="fade" hideEffect="explode" resizable="false" closable="true" width="500" height="600">
+			<h:form id="formCompetencias">
+				<!-- INTERPESONALES -->
+				<h:panelGrid columns="2">
+					<h:graphicImage name="help.png" library="img" />
+					<p:outputLabel value="#{message['lbl.infoCompetenciaInterpersonal']}" style="color: green;" />
+				</h:panelGrid>
+				<p:dataTable id="tablaInterpersonal" value="#{syllabusBacking.competenciasInterpersonales}" var="obj">
+					<p:column>
+						<f:facet name="header">
+							<h:outputLabel value="#{message['lbl.competenciaGenerica']}" />
+						</f:facet>
+						<h:outputText value="#{obj.competenciaGenerica}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputLabel value="#{message['lbl.seleccion']}" />
+						</f:facet>
+						<p:selectBooleanCheckbox value="#{obj.seleccion}" />
+					</p:column>
+				</p:dataTable>
+				<p:spacer height="15px;" />
+				<!-- INSTRUMENTALES -->
+				<h:panelGrid columns="2">
+					<h:graphicImage name="help.png" library="img" />
+					<p:outputLabel value="#{message['lbl.infoCompetenciaInstrumental']}" style="color: green;" />
+				</h:panelGrid>
+				<p:dataTable id="tablaInstrumental" value="#{syllabusBacking.competenciasInstrumentales}" var="obj">
+					<p:column>
+						<f:facet name="header">
+							<h:outputLabel value="#{message['lbl.competenciaGenerica']}" />
+						</f:facet>
+						<h:outputText value="#{obj.competenciaGenerica}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputLabel value="#{message['lbl.seleccion']}" />
+						</f:facet>
+						<p:selectBooleanCheckbox value="#{obj.seleccion}" />
+					</p:column>
+				</p:dataTable>
+				<p:spacer height="15px;" />
+				<!-- SISTEMATICAS -->
+				<h:panelGrid columns="2">
+					<h:graphicImage name="help.png" library="img" />
+					<p:outputLabel value="#{message['lbl.infoCompetenciaInterpersonal']}" style="color: green;" />
+				</h:panelGrid>
+				<p:dataTable id="tablaSistematica" value="#{syllabusBacking.competenciasSistematicas}" var="obj">
+					<p:column>
+						<f:facet name="header">
+							<h:outputLabel value="#{message['lbl.competenciaGenerica']}" />
+						</f:facet>
+						<h:outputText value="#{obj.competenciaGenerica}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputLabel value="#{message['lbl.seleccion']}" />
+						</f:facet>
+						<p:selectBooleanCheckbox value="#{obj.seleccion}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</p:dialog>
 	</ui:define>
 </ui:composition>
 </html>
