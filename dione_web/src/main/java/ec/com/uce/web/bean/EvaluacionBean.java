@@ -75,9 +75,9 @@ public class EvaluacionBean implements Serializable {
 
 		ChartSeries objetivosReales = new ChartSeries("Objetivo Real");
 		for (EvaluacionObjetivosDTO objetivoDTO : resultadoBean.getResultObjetivosDTO()) {
-			if (objetivoDTO.getCumplido()) {
-				valorYObjetivo += valorObjetivo;
-			}
+//			if (objetivoDTO.getCumplido()) {
+//				valorYObjetivo += valorObjetivo;
+//			}
 		}
 		objetivosReales.set("Objetivos", valorYObjetivo);
 		
@@ -95,9 +95,9 @@ public class EvaluacionBean implements Serializable {
 
 		ChartSeries competenciasReales = new ChartSeries("Competencias");
 		for (EvaluacionCompetenciasDTO competenciaDTO : resultadoBean.getResultCompetenciasDTO()) {
-			if (competenciaDTO.getCumplido()) {
-				valorYCompetencia += valorCompetencia;
-			}
+//			if (competenciaDTO.getCumplido()) {
+//				valorYCompetencia += valorCompetencia;
+//			}
 		}
 		competenciasReales.set("Competencias", valorYCompetencia);
 		

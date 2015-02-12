@@ -15,7 +15,8 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
 
 import ec.com.uce.ejb.dto.BibliografiaDTO;
-import ec.com.uce.ejb.dto.CompetenciaDTO;
+import ec.com.uce.ejb.dto.CompetenciaEspecificaDTO;
+import ec.com.uce.ejb.dto.CompetenciaGeneralDTO;
 import ec.com.uce.ejb.dto.ElementosCompetenciaDTO;
 import ec.com.uce.ejb.dto.ObjetivoDTO;
 import ec.com.uce.ejb.dto.ResultadoAprendizajeDTO;
@@ -34,13 +35,14 @@ public class SyllabusBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String materia;
-	private Integer numHorasClase;
-	private String prerequisito;
-	private String corequisito;
+	private Integer numHorasPresenciales;
+	private Integer numHorasTutorias;
+
 	private String desAsigantura;
 	private String cedula;
 	private String objetivo;
-	private String competencia;
+	private String competenciaGeneral;
+	private String competenciaEspecifica;
 	private String unidadCompetencia;
 	private Integer planificacion;
 	private String elementoCompetencia;
@@ -51,7 +53,8 @@ public class SyllabusBean implements Serializable {
 	private List<ElementosCompetenciaDTO> elementosCompetenciasDTOList = new ArrayList<ElementosCompetenciaDTO>();
 	private static List<BibliografiaDTO> bibliografiaDTOs = new ArrayList<BibliografiaDTO>();
 	private static List<ObjetivoDTO> objetivosDTOs = new ArrayList<ObjetivoDTO>();
-	private static List<CompetenciaDTO> competenciasDTOs = new ArrayList<CompetenciaDTO>();
+	private static List<CompetenciaGeneralDTO> competenciasGeneralesDTOs = new ArrayList<CompetenciaGeneralDTO>();
+	private static List<CompetenciaEspecificaDTO> competenciasEspecificasDTOs = new ArrayList<CompetenciaEspecificaDTO>();
 	private static List<UnidadCompetenciaDTO> unidadesDTOs = new ArrayList<UnidadCompetenciaDTO>();
 	private static List<ResultadoAprendizajeDTO> resultadoAprendizajeDTOs = new ArrayList<ResultadoAprendizajeDTO>();
 
@@ -71,48 +74,33 @@ public class SyllabusBean implements Serializable {
 	}
 
 	/**
-	 * @return the numHorasClase
+	 * @return the numHorasPresenciales
 	 */
-	public Integer getNumHorasClase() {
-		return numHorasClase;
+	public Integer getNumHorasPresenciales() {
+		return numHorasPresenciales;
 	}
 
 	/**
-	 * @param numHorasClase
-	 *            the numHorasClase to set
+	 * @param numHorasPresenciales
+	 *            the numHorasPresenciales to set
 	 */
-	public void setNumHorasClase(Integer numHorasClase) {
-		this.numHorasClase = numHorasClase;
+	public void setNumHorasPresenciales(Integer numHorasPresenciales) {
+		this.numHorasPresenciales = numHorasPresenciales;
 	}
 
 	/**
-	 * @return the prerequisito
+	 * @return the numHorasTutorias
 	 */
-	public String getPrerequisito() {
-		return prerequisito;
+	public Integer getNumHorasTutorias() {
+		return numHorasTutorias;
 	}
 
 	/**
-	 * @param prerequisito
-	 *            the prerequisito to set
+	 * @param numHorasTutorias
+	 *            the numHorasTutorias to set
 	 */
-	public void setPrerequisito(String prerequisito) {
-		this.prerequisito = prerequisito;
-	}
-
-	/**
-	 * @return the corequisito
-	 */
-	public String getCorequisito() {
-		return corequisito;
-	}
-
-	/**
-	 * @param corequisito
-	 *            the corequisito to set
-	 */
-	public void setCorequisito(String corequisito) {
-		this.corequisito = corequisito;
+	public void setNumHorasTutorias(Integer numHorasTutorias) {
+		this.numHorasTutorias = numHorasTutorias;
 	}
 
 	/**
@@ -191,13 +179,6 @@ public class SyllabusBean implements Serializable {
 	}
 
 	/**
-	 * @return the competenciasDTOs
-	 */
-	public List<CompetenciaDTO> getCompetenciasDTOs() {
-		return competenciasDTOs;
-	}
-
-	/**
 	 * @return the objetivo
 	 */
 	public String getObjetivo() {
@@ -270,29 +251,6 @@ public class SyllabusBean implements Serializable {
 	 */
 	public void setResultadoAprendizaje(String resultadoAprendizaje) {
 		this.resultadoAprendizaje = resultadoAprendizaje;
-	}
-
-	/**
-	 * @return the competencia
-	 */
-	public String getCompetencia() {
-		return competencia;
-	}
-
-	/**
-	 * @param competencia
-	 *            the competencia to set
-	 */
-	public void setCompetencia(String competencia) {
-		this.competencia = competencia;
-	}
-
-	/**
-	 * @param competenciasDTOs
-	 *            the competenciasDTOs to set
-	 */
-	public static void setCompetenciasDTOs(List<CompetenciaDTO> competenciasDTOs) {
-		SyllabusBean.competenciasDTOs = competenciasDTOs;
 	}
 
 	/**
@@ -370,6 +328,66 @@ public class SyllabusBean implements Serializable {
 		SyllabusBean.resultadoAprendizajeDTOs = resultadoAprendizajeDTOs;
 	}
 
+	/**
+	 * @return the competenciaGeneral
+	 */
+	public String getCompetenciaGeneral() {
+		return competenciaGeneral;
+	}
+
+	/**
+	 * @param competenciaGeneral
+	 *            the competenciaGeneral to set
+	 */
+	public void setCompetenciaGeneral(String competenciaGeneral) {
+		this.competenciaGeneral = competenciaGeneral;
+	}
+
+	/**
+	 * @return the competenciaEspecifica
+	 */
+	public String getCompetenciaEspecifica() {
+		return competenciaEspecifica;
+	}
+
+	/**
+	 * @param competenciaEspecifica
+	 *            the competenciaEspecifica to set
+	 */
+	public void setCompetenciaEspecifica(String competenciaEspecifica) {
+		this.competenciaEspecifica = competenciaEspecifica;
+	}
+
+	/**
+	 * @return the competenciasGeneralesDTOs
+	 */
+	public List<CompetenciaGeneralDTO> getCompetenciasGeneralesDTOs() {
+		return competenciasGeneralesDTOs;
+	}
+
+	/**
+	 * @param competenciasGeneralesDTOs
+	 *            the competenciasGeneralesDTOs to set
+	 */
+	public static void setCompetenciasGeneralesDTOs(List<CompetenciaGeneralDTO> competenciasGeneralesDTOs) {
+		SyllabusBean.competenciasGeneralesDTOs = competenciasGeneralesDTOs;
+	}
+
+	/**
+	 * @return the competenciasEspecificasDTOs
+	 */
+	public List<CompetenciaEspecificaDTO> getCompetenciasEspecificasDTOs() {
+		return competenciasEspecificasDTOs;
+	}
+
+	/**
+	 * @param competenciasEspecificasDTOs
+	 *            the competenciasEspecificasDTOs to set
+	 */
+	public static void setCompetenciasEspecificasDTOs(List<CompetenciaEspecificaDTO> competenciasEspecificasDTOs) {
+		SyllabusBean.competenciasEspecificasDTOs = competenciasEspecificasDTOs;
+	}
+
 	// OBJETIVOS
 	/**
 	 * 
@@ -415,7 +433,7 @@ public class SyllabusBean implements Serializable {
 		objetivosDTOs.remove((ObjetivoDTO) event.getObject());
 	}
 
-	// COMPETENCIAS
+	// COMPETENCIAS GENERALES
 	/**
 	 * 
 	 * <b> Permite agregar un registro de competencias. </b>
@@ -424,11 +442,11 @@ public class SyllabusBean implements Serializable {
 	 * </p>
 	 * 
 	 */
-	public void addCompetencia() {
-		CompetenciaDTO item = new CompetenciaDTO(this.competencia);
-		competenciasDTOs.add(item);
+	public void addCompetenciaGeneral() {
+		CompetenciaGeneralDTO item = new CompetenciaGeneralDTO(this.competenciaGeneral);
+		competenciasGeneralesDTOs.add(item);
 
-		competencia = "";
+		competenciaGeneral = "";
 	}
 
 	/**
@@ -440,8 +458,8 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * @param event
 	 */
-	public void onEditCompetencia(RowEditEvent event) {
-		FacesMessage msg = new FacesMessage("Item Edited", ((CompetenciaDTO) event.getObject()).getCompetencia());
+	public void onEditCompetenciaGeneral(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Item Edited", ((CompetenciaGeneralDTO) event.getObject()).getCompetenciaGeneral());
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
@@ -454,10 +472,55 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * @param event
 	 */
-	public void onCancelCompetencia(RowEditEvent event) {
+	public void onCancelCompetenciaGeneral(RowEditEvent event) {
 		FacesMessage msg = new FacesMessage("Item Cancelled");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-		competenciasDTOs.remove((CompetenciaDTO) event.getObject());
+		competenciasGeneralesDTOs.remove((CompetenciaGeneralDTO) event.getObject());
+	}
+
+	// COMPETENCIAS ESPECIFICAS
+	/**
+	 * 
+	 * <b> Permite agregar un registro de competencias. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * </p>
+	 * 
+	 */
+	public void addCompetenciaEspecifica() {
+		CompetenciaEspecificaDTO item = new CompetenciaEspecificaDTO(this.competenciaEspecifica);
+		competenciasEspecificasDTOs.add(item);
+
+		competenciaGeneral = "";
+	}
+
+	/**
+	 * 
+	 * <b> Permite editar un registro </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * </p>
+	 * 
+	 * @param event
+	 */
+	public void onEditCompetenciaEspecifica(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Item Edited", ((CompetenciaEspecificaDTO) event.getObject()).getCompetenciaEspecifica());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+
+	/**
+	 * 
+	 * <b> Permite eliminar un registro </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * </p>
+	 * 
+	 * @param event
+	 */
+	public void onCancelCompetenciaEspecifica(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Item Cancelled");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		competenciasEspecificasDTOs.remove((CompetenciaEspecificaDTO) event.getObject());
 	}
 
 	// UNIDADES DE COMPETENCIA

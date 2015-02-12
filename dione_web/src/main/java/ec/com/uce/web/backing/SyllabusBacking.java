@@ -17,21 +17,28 @@ import org.apache.log4j.Logger;
 
 import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.Bibliografia;
+import ec.com.uce.dione.entities.Catalogo;
 import ec.com.uce.dione.entities.CompetenciaGenerale;
+import ec.com.uce.dione.entities.CompetenciasGenerica;
+import ec.com.uce.dione.entities.Corequisito;
+import ec.com.uce.dione.entities.DetalleCatalogo;
 import ec.com.uce.dione.entities.Docente;
 import ec.com.uce.dione.entities.ElementoCompetencia;
 import ec.com.uce.dione.entities.EscuelaUce;
 import ec.com.uce.dione.entities.MateriaUce;
 import ec.com.uce.dione.entities.Objetivo;
+import ec.com.uce.dione.entities.Prerequisito;
 import ec.com.uce.dione.entities.ResultadosAprendizaje;
 import ec.com.uce.dione.entities.Syllabus;
 import ec.com.uce.dione.entities.UnidadCompetencia;
 import ec.com.uce.ejb.dto.BibliografiaDTO;
-import ec.com.uce.ejb.dto.CompetenciaDTO;
+import ec.com.uce.ejb.dto.CompetenciaGeneralDTO;
+import ec.com.uce.ejb.dto.CompetenciaGenericaDTO;
 import ec.com.uce.ejb.dto.ElementosCompetenciaDTO;
 import ec.com.uce.ejb.dto.ObjetivoDTO;
 import ec.com.uce.ejb.dto.ResultadoAprendizajeDTO;
 import ec.com.uce.ejb.dto.UnidadCompetenciaDTO;
+import ec.com.uce.ejb.service.CatalogoService;
 import ec.com.uce.ejb.service.DocenteService;
 import ec.com.uce.ejb.service.SyllabusService;
 import ec.com.uce.web.bean.SyllabusBean;
@@ -53,17 +60,28 @@ public class SyllabusBacking implements Serializable {
 
 	@EJB
 	private DocenteService docenteService;
-
 	@EJB
 	private SyllabusService syllabusService;
+	@EJB
+	private CatalogoService catalogoService;
 
 	@ManagedProperty(value = "#{syllabusBean}")
 	private SyllabusBean syllabusBean;
 
 	private List<SelectItem> materias = new ArrayList<SelectItem>();
 	private List<MateriaUce> materiaUces = new ArrayList<MateriaUce>();
+	private List<Prerequisito> prerequisitos = new ArrayList<Prerequisito>();
+	private List<Corequisito> corequisitos = new ArrayList<Corequisito>();
+	private List<CompetenciaGenericaDTO> competenciasInterpersonalesDTO = new ArrayList<CompetenciaGenericaDTO>();
+	private List<CompetenciaGenericaDTO> competenciasInstrumentalesDTO = new ArrayList<CompetenciaGenericaDTO>();
+	private List<CompetenciaGenericaDTO> competenciasSistematicasDTO = new ArrayList<CompetenciaGenericaDTO>();
+	private List<CompetenciasGenerica> competenciasInterpersonales = new ArrayList<CompetenciasGenerica>();
+	private List<CompetenciasGenerica> competenciasInstrumentales = new ArrayList<CompetenciasGenerica>();
+	private List<CompetenciasGenerica> competenciasSistematicas = new ArrayList<CompetenciasGenerica>();
+
 	private Docente docente;
 	private Boolean docenteEncontrado = false;
+	private Boolean activarRequisitos = false;
 
 	Logger log = Logger.getLogger(SyllabusBacking.class);
 
@@ -89,6 +107,7 @@ public class SyllabusBacking implements Serializable {
 						materiaUces.add(materiaUce);
 					}
 				}
+				obtenerCompetenciasGenericas();
 
 			} else {
 				docenteEncontrado = false;
@@ -100,6 +119,57 @@ public class SyllabusBacking implements Serializable {
 			throw new DioneException(e);
 		}
 
+	}
+
+	/**
+	 * 
+	 * <b> Permite obtener los prerequisitos de la materia seleccionada </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 11/02/2015]
+	 * </p>
+	 * 
+	 * @throws DioneException
+	 */
+	public void obtenerPrerequisitos() throws DioneException {
+		Integer idMateria = Integer.parseInt(syllabusBean.getMateria());
+		prerequisitos = syllabusService.obtenerPrerequisitos(idMateria);
+		corequisitos = syllabusService.obtenerCorequisitos(idMateria);
+		activarRequisitos = true;
+	}
+
+	/**
+	 * 
+	 * <b> Permite visualizar las competencias seleccionadas en el popup </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 12/02/2015]
+	 * </p>
+	 * 
+	 */
+	public void agregarCompetenciasGenericas() {
+		for (CompetenciaGenericaDTO instrumentalDTO : competenciasInterpersonalesDTO) {
+			CompetenciasGenerica compGenerica = new CompetenciasGenerica();
+			if (instrumentalDTO.getSeleccion()) {
+				compGenerica.setCompetenciaGenerica(instrumentalDTO.getCompetenciaGenerica());
+				compGenerica.setTipoCompetencia(instrumentalDTO.getTipoCompetencia());
+				competenciasInterpersonales.add(compGenerica);
+			}
+		}
+		for (CompetenciaGenericaDTO instrumentalDTO : competenciasInstrumentalesDTO) {
+			CompetenciasGenerica compGenerica = new CompetenciasGenerica();
+			if (instrumentalDTO.getSeleccion()) {
+				compGenerica.setCompetenciaGenerica(instrumentalDTO.getCompetenciaGenerica());
+				compGenerica.setTipoCompetencia(instrumentalDTO.getTipoCompetencia());
+				competenciasInstrumentales.add(compGenerica);
+			}
+		}
+		for (CompetenciaGenericaDTO instrumentalDTO : competenciasSistematicasDTO) {
+			CompetenciasGenerica compGenerica = new CompetenciasGenerica();
+			if (instrumentalDTO.getSeleccion()) {
+				compGenerica.setCompetenciaGenerica(instrumentalDTO.getCompetenciaGenerica());
+				compGenerica.setTipoCompetencia(instrumentalDTO.getTipoCompetencia());
+				competenciasSistematicas.add(compGenerica);
+			}
+		}
 	}
 
 	/**
@@ -126,9 +196,8 @@ public class SyllabusBacking implements Serializable {
 			syllabus.setMetodologia(syllabusBean.getMetodologia());
 
 			syllabusBean.setDesAsigantura("");
-			syllabusBean.setNumHorasClase(0);
-			syllabusBean.setPrerequisito("");
-			syllabusBean.setCorequisito("");
+			syllabusBean.setNumHorasPresenciales(0);
+			syllabusBean.setNumHorasTutorias(0);
 			syllabusBean.setMetodologia("");
 
 			// Objetivos
@@ -142,15 +211,15 @@ public class SyllabusBacking implements Serializable {
 			syllabusBean.setObjetivosDTOs(null);
 
 			// Competencias
-			List<CompetenciaGenerale> competencias = new ArrayList<CompetenciaGenerale>();
-			for (CompetenciaDTO competenciaDTO : syllabusBean.getCompetenciasDTOs()) {
+			List<CompetenciaGenerale> competenciasGenerales = new ArrayList<CompetenciaGenerale>();
+			for (CompetenciaGeneralDTO competenciaDTO : syllabusBean.getCompetenciasGeneralesDTOs()) {
 				CompetenciaGenerale competencia = new CompetenciaGenerale();
-				competencia.setCompetenciaGeneral(competenciaDTO.getCompetencia());
+				competencia.setCompetenciaGeneral(competenciaDTO.getCompetenciaGeneral());
 
-				competencias.add(competencia);
+				competenciasGenerales.add(competencia);
 			}
-			syllabusBean.setCompetencia("");
-			syllabusBean.setCompetenciasDTOs(null);
+			syllabusBean.setCompetenciaGeneral("");
+			syllabusBean.setCompetenciasGeneralesDTOs(null);
 
 			List<UnidadCompetencia> unidades = new ArrayList<UnidadCompetencia>();
 
@@ -190,7 +259,7 @@ public class SyllabusBacking implements Serializable {
 			syllabusBean.setResultadoAprendizaje("");
 			syllabusBean.setResultadoAprendizajeDTOs(null);
 
-			syllabusService.guardarSyllabus(syllabus, objetivos, competencias, bibliografias, resultados, unidades);
+			syllabusService.guardarSyllabus(syllabus, objetivos, competenciasGenerales, bibliografias, resultados, unidades);
 			MessagesController.addInfo(null, HiperionMensajes.getInstancia().getString("dione.mensaje.exito.save"));
 
 		} catch (Exception e) {
@@ -212,6 +281,59 @@ public class SyllabusBacking implements Serializable {
 			materias.add(selectItem);
 		}
 		return materias;
+	}
+
+	/**
+	 * 
+	 * <b> Permite obtener las competencias interpersonales, instrumentales y sistematicas. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 12/02/2015]
+	 * </p>
+	 * 
+	 * @throws DioneException
+	 */
+	public void obtenerCompetenciasGenericas() throws DioneException {
+		try {
+			// Interpersonales
+			Catalogo catalogoInterpersonales = catalogoService.consultarCatalogoById(HiperionMensajes.getInstancia().getLong("recursos.catalogoCompetenciasInterpersonales"));
+
+			List<DetalleCatalogo> competenciasInter = catalogoInterpersonales.getDetalleCatalogos();
+
+			for (DetalleCatalogo detalle : competenciasInter) {
+				CompetenciaGenericaDTO competenciaInterpersonal = new CompetenciaGenericaDTO();
+				competenciaInterpersonal.setIdCompetenciaGenerica(detalle.getIdDetalleCatalogo());
+				competenciaInterpersonal.setCompetenciaGenerica(detalle.getDescDetCatalogo());
+				competenciaInterpersonal.setTipoCompetencia(1);
+				competenciasInterpersonalesDTO.add(competenciaInterpersonal);
+			}
+			// Instrumentales
+			Catalogo catalogoInstr = catalogoService.consultarCatalogoById(HiperionMensajes.getInstancia().getLong("recursos.catalogoCompetenciasInstrumentales"));
+
+			List<DetalleCatalogo> competenciasInstr = catalogoInstr.getDetalleCatalogos();
+
+			for (DetalleCatalogo detalle : competenciasInstr) {
+				CompetenciaGenericaDTO competenciaInstrumental = new CompetenciaGenericaDTO();
+				competenciaInstrumental.setIdCompetenciaGenerica(detalle.getIdDetalleCatalogo());
+				competenciaInstrumental.setCompetenciaGenerica(detalle.getDescDetCatalogo());
+				competenciaInstrumental.setTipoCompetencia(2);
+				competenciasInstrumentalesDTO.add(competenciaInstrumental);
+			}
+			// Sistematicas
+			Catalogo catalogoSist = catalogoService.consultarCatalogoById(HiperionMensajes.getInstancia().getLong("recursos.catalogoCompetenciasSistematicas"));
+
+			List<DetalleCatalogo> competenciasSist = catalogoSist.getDetalleCatalogos();
+
+			for (DetalleCatalogo detalle : competenciasSist) {
+				CompetenciaGenericaDTO competenciaSistematica = new CompetenciaGenericaDTO();
+				competenciaSistematica.setIdCompetenciaGenerica(detalle.getIdDetalleCatalogo());
+				competenciaSistematica.setCompetenciaGenerica(detalle.getDescDetCatalogo());
+				competenciaSistematica.setTipoCompetencia(3);
+				competenciasSistematicasDTO.add(competenciaSistematica);
+			}
+		} catch (DioneException e) {
+			log.error("Error al momento consultar las competencias genericas", e);
+			throw new DioneException(e);
+		}
 	}
 
 	/**
@@ -250,6 +372,141 @@ public class SyllabusBacking implements Serializable {
 	 */
 	public void setDocenteEncontrado(Boolean docenteEncontrado) {
 		this.docenteEncontrado = docenteEncontrado;
+	}
+
+	/**
+	 * @return the prerequisitos
+	 */
+	public List<Prerequisito> getPrerequisitos() {
+		return prerequisitos;
+	}
+
+	/**
+	 * @param prerequisitos
+	 *            the prerequisitos to set
+	 */
+	public void setPrerequisitos(List<Prerequisito> prerequisitos) {
+		this.prerequisitos = prerequisitos;
+	}
+
+	/**
+	 * @return the corequisitos
+	 */
+	public List<Corequisito> getCorequisitos() {
+		return corequisitos;
+	}
+
+	/**
+	 * @param corequisitos
+	 *            the corequisitos to set
+	 */
+	public void setCorequisitos(List<Corequisito> corequisitos) {
+		this.corequisitos = corequisitos;
+	}
+
+	/**
+	 * @return the activarRequisitos
+	 */
+	public Boolean getActivarRequisitos() {
+		return activarRequisitos;
+	}
+
+	/**
+	 * @param activarRequisitos
+	 *            the activarRequisitos to set
+	 */
+	public void setActivarRequisitos(Boolean activarRequisitos) {
+		this.activarRequisitos = activarRequisitos;
+	}
+
+	/**
+	 * @return the competenciasInterpersonalesDTO
+	 */
+	public List<CompetenciaGenericaDTO> getCompetenciasInterpersonalesDTO() {
+		return competenciasInterpersonalesDTO;
+	}
+
+	/**
+	 * @param competenciasInterpersonalesDTO
+	 *            the competenciasInterpersonalesDTO to set
+	 */
+	public void setCompetenciasInterpersonalesDTO(List<CompetenciaGenericaDTO> competenciasInterpersonalesDTO) {
+		this.competenciasInterpersonalesDTO = competenciasInterpersonalesDTO;
+	}
+
+	/**
+	 * @return the competenciasInstrumentalesDTO
+	 */
+	public List<CompetenciaGenericaDTO> getCompetenciasInstrumentalesDTO() {
+		return competenciasInstrumentalesDTO;
+	}
+
+	/**
+	 * @param competenciasInstrumentalesDTO
+	 *            the competenciasInstrumentalesDTO to set
+	 */
+	public void setCompetenciasInstrumentalesDTO(List<CompetenciaGenericaDTO> competenciasInstrumentalesDTO) {
+		this.competenciasInstrumentalesDTO = competenciasInstrumentalesDTO;
+	}
+
+	/**
+	 * @return the competenciasSistematicasDTO
+	 */
+	public List<CompetenciaGenericaDTO> getCompetenciasSistematicasDTO() {
+		return competenciasSistematicasDTO;
+	}
+
+	/**
+	 * @param competenciasSistematicasDTO
+	 *            the competenciasSistematicasDTO to set
+	 */
+	public void setCompetenciasSistematicasDTO(List<CompetenciaGenericaDTO> competenciasSistematicasDTO) {
+		this.competenciasSistematicasDTO = competenciasSistematicasDTO;
+	}
+
+	/**
+	 * @return the competenciasInterpersonales
+	 */
+	public List<CompetenciasGenerica> getCompetenciasInterpersonales() {
+		return competenciasInterpersonales;
+	}
+
+	/**
+	 * @param competenciasInterpersonales
+	 *            the competenciasInterpersonales to set
+	 */
+	public void setCompetenciasInterpersonales(List<CompetenciasGenerica> competenciasInterpersonales) {
+		this.competenciasInterpersonales = competenciasInterpersonales;
+	}
+
+	/**
+	 * @return the competenciasInstrumentales
+	 */
+	public List<CompetenciasGenerica> getCompetenciasInstrumentales() {
+		return competenciasInstrumentales;
+	}
+
+	/**
+	 * @param competenciasInstrumentales
+	 *            the competenciasInstrumentales to set
+	 */
+	public void setCompetenciasInstrumentales(List<CompetenciasGenerica> competenciasInstrumentales) {
+		this.competenciasInstrumentales = competenciasInstrumentales;
+	}
+
+	/**
+	 * @return the competenciasSistematicas
+	 */
+	public List<CompetenciasGenerica> getCompetenciasSistematicas() {
+		return competenciasSistematicas;
+	}
+
+	/**
+	 * @param competenciasSistematicas
+	 *            the competenciasSistematicas to set
+	 */
+	public void setCompetenciasSistematicas(List<CompetenciasGenerica> competenciasSistematicas) {
+		this.competenciasSistematicas = competenciasSistematicas;
 	}
 
 }
