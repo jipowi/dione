@@ -30,6 +30,7 @@ import ec.com.uce.ejb.service.DocenteService;
 import ec.com.uce.web.bean.DocenteBean;
 import ec.com.uce.web.util.HiperionMensajes;
 import ec.com.uce.web.util.MessagesController;
+import ec.com.uce.web.validator.ValidatorCedula;
 
 /**
  * <b> Permite almacenar la informacion y manejar las acciones de la pagina. </b>
@@ -144,47 +145,70 @@ public class DocenteBacking implements Serializable {
 
 		Docente docente = new Docente();
 
-		docente.setNombresDocente(docenteBean.getNombresDocente());
-		docente.setApellidosDocente(docenteBean.getApellidosDocente());
-		docente.setCedulaDocente(docenteBean.getCedulaDocente());
-		docente.setDireccionDocente(docenteBean.getDireccionDocente());
-		docente.setFechaCreacion(new Date());
-		docente.setEstado(EstadoEnum.A);
-		docente.setIdUsuarioCreacion(1);
+		if (validarDocumentos(docenteBean.getCedulaDocente())) {
+			docente.setNombresDocente(docenteBean.getNombresDocente());
+			docente.setApellidosDocente(docenteBean.getApellidosDocente());
+			docente.setCedulaDocente(docenteBean.getCedulaDocente());
+			docente.setDireccionDocente(docenteBean.getDireccionDocente());
+			docente.setFechaCreacion(new Date());
+			docente.setEstado(EstadoEnum.A);
+			docente.setIdUsuarioCreacion(1);
 
-		List<EscuelaUce> escuelasUce = new ArrayList<EscuelaUce>();
-		List<MateriaUce> materiaUces = new ArrayList<MateriaUce>();
-		for (AsignaturaDTO asiganturaDTO : docenteBean.getAsignaturasList()) {
-			EscuelaUce escuelaUce = new EscuelaUce();
+			List<EscuelaUce> escuelasUce = new ArrayList<EscuelaUce>();
+			List<MateriaUce> materiaUces = new ArrayList<MateriaUce>();
+			for (AsignaturaDTO asiganturaDTO : docenteBean.getAsignaturasList()) {
+				EscuelaUce escuelaUce = new EscuelaUce();
 
-			Escuela escuela = docenteService.consultarEscuelaById(Long.valueOf(asiganturaDTO.getEscuela()));
-			escuelaUce.setEscuelaUce(escuela.getEscuela());
-			escuelaUce.setDocente(docente);
-			escuelasUce.add(escuelaUce);
+				Escuela escuela = docenteService.consultarEscuelaById(Long.valueOf(asiganturaDTO.getEscuela()));
+				escuelaUce.setEscuelaUce(escuela.getEscuela());
+				escuelaUce.setDocente(docente);
+				escuelasUce.add(escuelaUce);
 
-			for (MateriaDTO materiaDTO : asiganturaDTO.getMaterias()) {
-				MateriaUce materiaUce = new MateriaUce();
-				materiaUce.setMateriaUce(materiaDTO.getDesMateria());
-				materiaUces.add(materiaUce);
+				for (MateriaDTO materiaDTO : asiganturaDTO.getMaterias()) {
+					MateriaUce materiaUce = new MateriaUce();
+					materiaUce.setMateriaUce(materiaDTO.getDesMateria());
+					materiaUces.add(materiaUce);
+				}
 			}
+			docente.setEscuelaUces(escuelasUce);
+
+			try {
+				docenteService.guardarDocente(docente, materiaUces);
+
+				docenteBean.setNombresDocente(null);
+				docenteBean.setApellidosDocente(null);
+				docenteBean.setCedulaDocente(null);
+				docenteBean.setDireccionDocente(null);
+
+				MessagesController.addInfo(null, HiperionMensajes.getInstancia().getString("dione.mensaje.exito.save"));
+
+			} catch (DioneException e) {
+				log.error("Error al momento guardar los datos del docente", e);
+				MessagesController.addError(null, HiperionMensajes.getInstancia().getString("dione.mensaje.error.save"));
+				throw new DioneException(e);
+			}
+			
+		} else {
+			MessagesController.addError(null, HiperionMensajes.getInstancia().getString("hiperion.mensage.error.identificacionNoValido"));
 		}
-		docente.setEscuelaUces(escuelasUce);
+	}
 
-		try {
-			docenteService.guardarDocente(docente, materiaUces);
+	/**
+	 * 
+	 * <b> Permite validar el numero de identificacion tanto para cedula como ruc </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 02/02/2015]
+	 * </p>
+	 * 
+	 * @param identificacion
+	 * @return
+	 */
+	public Boolean validarDocumentos(String identificacion) {
+		Boolean pasaValidacion = false;
 
-			docenteBean.setNombresDocente(null);
-			docenteBean.setApellidosDocente(null);
-			docenteBean.setCedulaDocente(null);
-			docenteBean.setDireccionDocente(null);
+		pasaValidacion = ValidatorCedula.getInstancia().validateCedula(identificacion);
 
-			MessagesController.addInfo(null, HiperionMensajes.getInstancia().getString("dione.mensaje.exito.save"));
-
-		} catch (DioneException e) {
-			log.error("Error al momento guardar los datos del docente", e);
-			MessagesController.addError(null, HiperionMensajes.getInstancia().getString("dione.mensaje.error.save"));
-			throw new DioneException(e);
-		}
+		return pasaValidacion;
 	}
 
 	/**

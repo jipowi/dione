@@ -44,7 +44,6 @@ import ec.com.uce.ejb.service.SyllabusService;
 import ec.com.uce.web.bean.SyllabusBean;
 import ec.com.uce.web.util.HiperionMensajes;
 import ec.com.uce.web.util.MessagesController;
-import ec.com.uce.web.util.XSLUtil;
 
 /**
  * <b> Permite almacenar la informacion de la pagina web y administrar las acciones de la misma </b>
@@ -109,7 +108,6 @@ public class SyllabusBacking implements Serializable {
 					}
 				}
 				obtenerCompetenciasGenericas();
-				obtenerMensaje(docente);
 
 			} else {
 				docenteEncontrado = false;
@@ -175,11 +173,7 @@ public class SyllabusBacking implements Serializable {
 	
 	}
 	
-	private String obtenerMensaje(Docente docente) throws DioneException {
-		String contenido="";
-				contenido=XSLUtil.getInstancia().obtenerCorreoHtml(docente);
-		return contenido;
-	}
+	
 
 	/**
 	 * 
