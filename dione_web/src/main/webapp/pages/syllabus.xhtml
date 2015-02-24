@@ -166,6 +166,11 @@
 						<p:spacer height="20px;" />
 						<!-- COMPETENCIAS GENERICAS-->
 						<p:panel>
+							<div align="center">
+								<h:panelGrid columns="1">
+									<p:outputLabel value="COMPETENCIAS GENERICAS" styleClass="negrita" />
+								</h:panelGrid>
+							</div>
 							<h:panelGrid columns="2">
 								<p:outputLabel value="#{message['lbl.infoSeleccionCompetenciaGenerica']}" styleClass="negrita" />
 								<p:commandLink title="Seleccionar competencias genericas" oncomplete="competenciasGenericas.show();" update=":idCompetenciaGenerica">
@@ -173,30 +178,30 @@
 								</p:commandLink>
 							</h:panelGrid>
 							<h:panelGrid columns="1" id="competenciasSeleccionadas">
-							<p:dataTable id="tablaInterpersonal" value="#{syllabusBacking.competenciasInterpersonales}" var="obj">
-								<p:column>
-									<f:facet name="header">
-										<h:outputLabel value="#{message['lbl.competenciasInterpersonales']}" />
-									</f:facet>
-									<h:outputText value="#{obj.competenciaGenerica}" />
-								</p:column>
-							</p:dataTable>
-							<p:dataTable id="tablaInstrumental" value="#{syllabusBacking.competenciasInstrumentales}" var="obj">
-								<p:column>
-									<f:facet name="header">
-										<h:outputLabel value="#{message['lbl.competenciasInstrumentales']}" />
-									</f:facet>
-									<h:outputText value="#{obj.competenciaGenerica}" />
-								</p:column>
-							</p:dataTable>
-							<p:dataTable id="tablaSistematica" value="#{syllabusBacking.competenciasSistematicas}" var="obj">
-								<p:column>
-									<f:facet name="header">
-										<h:outputLabel value="#{message['lbl.competenciasSistematicas']}" />
-									</f:facet>
-									<h:outputText value="#{obj.competenciaGenerica}" />
-								</p:column>
-							</p:dataTable>
+								<p:dataTable id="tablaInterpersonal" value="#{syllabusBacking.competenciasInterpersonales}" var="obj">
+									<p:column>
+										<f:facet name="header">
+											<h:outputLabel value="#{message['lbl.competenciasInterpersonales']}" />
+										</f:facet>
+										<h:outputText value="#{obj.competenciaGenerica}" />
+									</p:column>
+								</p:dataTable>
+								<p:dataTable id="tablaInstrumental" value="#{syllabusBacking.competenciasInstrumentales}" var="obj">
+									<p:column>
+										<f:facet name="header">
+											<h:outputLabel value="#{message['lbl.competenciasInstrumentales']}" />
+										</f:facet>
+										<h:outputText value="#{obj.competenciaGenerica}" />
+									</p:column>
+								</p:dataTable>
+								<p:dataTable id="tablaSistematica" value="#{syllabusBacking.competenciasSistematicas}" var="obj">
+									<p:column>
+										<f:facet name="header">
+											<h:outputLabel value="#{message['lbl.competenciasSistematicas']}" />
+										</f:facet>
+										<h:outputText value="#{obj.competenciaGenerica}" />
+									</p:column>
+								</p:dataTable>
 							</h:panelGrid>
 						</p:panel>
 

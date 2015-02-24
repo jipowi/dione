@@ -67,7 +67,7 @@
 						<h:panelGrid columns="1">
 							<!-- DATOS BASICOS -->
 							<p:panel>
-							<p:outputLabel value="#{message['lbl.datosBasicos']}" styleClass="negrita" />
+								<p:outputLabel value="#{message['lbl.datosBasicos']}" styleClass="negrita" />
 								<h:panelGrid columns="2" cellspacing="3">
 									<p:outputLabel value="#{message['lbl.nombres']}:" styleClass="negrita" />
 									<p:outputLabel value="#{buscarDocenteBean.nombresDocente}" />
@@ -119,7 +119,7 @@
 									<h:outputText value="#{obj.titulo}" />
 								</p:column>
 							</p:dataTable>
-							
+
 							<p:spacer height="20px;" />
 							<!-- FORMACION CONTINUA -->
 							<p:outputLabel value="#{message['lbl.formacionContinua']}" styleClass="negrita" />
@@ -140,12 +140,7 @@
 						</h:panelGrid>
 					</div>
 				</p:dialog>
-				<p:spacer height="20px;" />
-				<div align="center">
-					<p:commandButton id="guardarBtnId" actionListener="#{syllabusBacking.guardarSyllabus()}" icon="icon-save" value="#{message['boton.guardar']}"
-						update="formPrincipal" title="Guardar" />
-					<p:commandButton id="cancelarBtnId" icon="icon-cancel" value="#{message['boton.cancelar']}" title="Cancelar" />
-				</div>
+
 			</h:form>
 		</p:panel>
 	</ui:define>
