@@ -4,7 +4,7 @@ function handleLoginRequest(xhr, status, args) {
 			times : 5
 		}, 100);
 	} else {
-		location.href = "/hiperion_web/pages/hiperion.jsf";
+		location.href = "/dione_web/pages/dione.jsf";
 	}
 }
 
