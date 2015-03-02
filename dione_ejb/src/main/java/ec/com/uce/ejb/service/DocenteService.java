@@ -75,7 +75,7 @@ public interface DocenteService {
 	 * @return
 	 * @throws DioneException
 	 */
-	public EscuelaUce consultarEscuelaUceById(Long escuela) throws DioneException;
+	public EscuelaUce consultarEscuelaUceById(Integer escuela) throws DioneException;
 
 	/**
 	 * 
@@ -126,8 +126,8 @@ public interface DocenteService {
 	 * @return
 	 * @throws DioneException
 	 */
-	public List<FormacionAcademica> consultarFormacionAByDocente(Long idDocente) throws DioneException;
-	
+	public List<FormacionAcademica> consultarFormacionAByDocente(Integer idDocente) throws DioneException;
+
 	/**
 	 * 
 	 * <b> Permite consultar la lista de formaciones continuas que tiene un docente </b>
@@ -139,6 +139,6 @@ public interface DocenteService {
 	 * @return
 	 * @throws DioneException
 	 */
-	public List<FormacionContinua> consultarFormacionCByDocente(Long idDocente) throws DioneException;
+	public List<FormacionContinua> consultarFormacionCByDocente(Integer idDocente) throws DioneException;
 
 }

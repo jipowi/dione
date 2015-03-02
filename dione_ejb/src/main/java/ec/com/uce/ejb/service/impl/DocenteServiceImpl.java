@@ -130,23 +130,23 @@ public class DocenteServiceImpl implements DocenteService {
 	 * @see ec.com.uce.ejb.service.DocenteService#consultarEscuelaUceById(java.lang.Long)
 	 */
 	@Override
-	public EscuelaUce consultarEscuelaUceById(Long escuela) throws DioneException {
+	public EscuelaUce consultarEscuelaUceById(Integer escuela) throws DioneException {
 		return escuelaUceDao.findById(escuela);
 	}
 
 	/* (non-Javadoc)
-	 * @see ec.com.uce.ejb.service.DocenteService#consultarFormacionAByDocente(java.lang.Long)
+	 * @see ec.com.uce.ejb.service.DocenteService#consultarFormacionAByDocente(java.lang.Integer)
 	 */
 	@Override
-	public List<FormacionAcademica> consultarFormacionAByDocente(Long idDocente) throws DioneException {
+	public List<FormacionAcademica> consultarFormacionAByDocente(Integer idDocente) throws DioneException {
 		return formacionADao.consultarFormacionByDocente(idDocente);
 	}
 
 	/* (non-Javadoc)
-	 * @see ec.com.uce.ejb.service.DocenteService#consultarFormacionCByDocente(java.lang.Long)
+	 * @see ec.com.uce.ejb.service.DocenteService#consultarFormacionCByDocente(java.lang.Integer)
 	 */
 	@Override
-	public List<FormacionContinua> consultarFormacionCByDocente(Long idDocente) throws DioneException {
+	public List<FormacionContinua> consultarFormacionCByDocente(Integer idDocente) throws DioneException {
 		return formacionCDao.consultarFormacionByDocente(idDocente);
 	}
 

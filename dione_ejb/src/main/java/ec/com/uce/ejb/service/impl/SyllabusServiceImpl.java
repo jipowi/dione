@@ -11,9 +11,12 @@ import javax.ejb.Stateless;
 import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.dao.BibliografiaDao;
 import ec.com.uce.dione.dao.CompetenciaDao;
+import ec.com.uce.dione.dao.CompetenciaEspecificaDao;
+import ec.com.uce.dione.dao.CompetenciaGenericaDao;
 import ec.com.uce.dione.dao.CorequisitoDao;
 import ec.com.uce.dione.dao.ElementoCompetenciaDao;
 import ec.com.uce.dione.dao.EscuelaUceDao;
+import ec.com.uce.dione.dao.MateriaSyllabusDao;
 import ec.com.uce.dione.dao.MateriaUceDao;
 import ec.com.uce.dione.dao.ObjetivoDao;
 import ec.com.uce.dione.dao.PrerequisitoDao;
@@ -22,9 +25,12 @@ import ec.com.uce.dione.dao.SyllabusDao;
 import ec.com.uce.dione.dao.UnidadCompetenciaDao;
 import ec.com.uce.dione.entities.Bibliografia;
 import ec.com.uce.dione.entities.CompetenciaGenerale;
+import ec.com.uce.dione.entities.CompetenciasEspecifica;
+import ec.com.uce.dione.entities.CompetenciasGenerica;
 import ec.com.uce.dione.entities.Corequisito;
 import ec.com.uce.dione.entities.ElementoCompetencia;
 import ec.com.uce.dione.entities.EscuelaUce;
+import ec.com.uce.dione.entities.MateriaSyllabus;
 import ec.com.uce.dione.entities.MateriaUce;
 import ec.com.uce.dione.entities.Objetivo;
 import ec.com.uce.dione.entities.Prerequisito;
@@ -65,6 +71,12 @@ public class SyllabusServiceImpl implements SyllabusService {
 	private PrerequisitoDao prerequisitoDao;
 	@EJB
 	private CorequisitoDao corequisitoDao;
+	@EJB
+	private MateriaSyllabusDao materiaSyllabusDao;
+	@EJB
+	private CompetenciaGenericaDao competenciaGenericaDao;
+	@EJB
+	private CompetenciaEspecificaDao competenciaEspecificaDao;
 
 	/*
 	 * (non-Javadoc)
@@ -73,7 +85,7 @@ public class SyllabusServiceImpl implements SyllabusService {
 	 */
 	@Override
 	public MateriaUce consultarMateriaById(Integer idMateria) throws DioneException {
-		return materiaUceDao.findById(new Long(idMateria));
+		return materiaUceDao.findById(idMateria);
 	}
 
 	/*
@@ -114,6 +126,20 @@ public class SyllabusServiceImpl implements SyllabusService {
 			}
 		}
 
+		for (MateriaSyllabus materiaSyllabus : syllabus.getMateriaSyllabuses()) {
+			materiaSyllabus.setSyllabus(syllabus);
+			materiaSyllabusDao.persist(materiaSyllabus);
+		}
+
+		for (CompetenciasGenerica competenciasGenerica : syllabus.getCompetenciasGenericas()) {
+			competenciasGenerica.setSyllabus(syllabus);
+			competenciaGenericaDao.persist(competenciasGenerica);
+		}
+
+		for (CompetenciasEspecifica competencia : syllabus.getCompetenciasEspecificas()) {
+			competencia.setSyllabus(syllabus);
+			competenciaEspecificaDao.persist(competencia);
+		}
 	}
 
 	/*
@@ -123,7 +149,7 @@ public class SyllabusServiceImpl implements SyllabusService {
 	 */
 	@Override
 	public EscuelaUce consultarEscuelaById(String idEscuela) throws DioneException {
-		return escuelaUceDao.findById(new Long(idEscuela));
+		return escuelaUceDao.findById(Integer.parseInt(idEscuela));
 
 	}
 
@@ -140,21 +166,11 @@ public class SyllabusServiceImpl implements SyllabusService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ec.com.uce.ejb.service.SyllabusService#consultarMateriasByEscuela(java.lang.Long)
+	 * @see ec.com.uce.ejb.service.SyllabusService#consultarMateriasByEscuela(java.lang.Integer)
 	 */
 	@Override
-	public List<MateriaUce> consultarMateriasByEscuela(Long idEscuela) throws DioneException {
+	public List<MateriaUce> consultarMateriasByEscuela(Integer idEscuela) throws DioneException {
 		return materiaUceDao.consultarMateriasByEscuela(idEscuela);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ec.com.uce.ejb.service.SyllabusService#consultarSyllabusByDocenteAndMateria(java.lang.Long, java.lang.Long)
-	 */
-	@Override
-	public Syllabus consultarSyllabusByDocenteAndMateria(Long idDocente, Long idMateria) throws DioneException {
-		return syllabusDao.consultarSyllabusByDocenteAndMateria(idDocente, idMateria);
 	}
 
 	/*
@@ -230,5 +246,25 @@ public class SyllabusServiceImpl implements SyllabusService {
 	@Override
 	public List<Corequisito> obtenerCorequisitos(Integer idMateria) throws DioneException {
 		return corequisitoDao.consultarCorequisitoByMateria(idMateria);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.uce.ejb.service.SyllabusService#consultarSyllabusByDocente(java.lang.Integer)
+	 */
+	@Override
+	public Syllabus consultarSyllabusByDocente(Integer idDocente) throws DioneException {
+		return syllabusDao.consultarSyllabusByDocente(idDocente);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.uce.ejb.service.SyllabusService#consultarMateriaSyllabusBySyllabus(java.lang.Integer)
+	 */
+	@Override
+	public MateriaSyllabus consultarMateriaSyllabusBySyllabus(Integer idSyllabus) throws DioneException {
+		return materiaSyllabusDao.consultarMateriaSyllabusBySyllabus(idSyllabus);
 	}
 }

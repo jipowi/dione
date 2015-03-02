@@ -12,6 +12,7 @@ import ec.com.uce.dione.entities.Bibliografia;
 import ec.com.uce.dione.entities.CompetenciaGenerale;
 import ec.com.uce.dione.entities.Corequisito;
 import ec.com.uce.dione.entities.EscuelaUce;
+import ec.com.uce.dione.entities.MateriaSyllabus;
 import ec.com.uce.dione.entities.MateriaUce;
 import ec.com.uce.dione.entities.Objetivo;
 import ec.com.uce.dione.entities.Prerequisito;
@@ -77,7 +78,7 @@ public interface SyllabusService {
 	 * @return
 	 * @throws DioneException
 	 */
-	public List<MateriaUce> consultarMateriasByEscuela(Long idEscuela) throws DioneException;
+	public List<MateriaUce> consultarMateriasByEscuela(Integer idEscuela) throws DioneException;
 
 	/**
 	 * 
@@ -95,20 +96,6 @@ public interface SyllabusService {
 	 */
 	public void guardarSyllabus(Syllabus syllabus, List<Objetivo> objetivos, List<CompetenciaGenerale> competencias, List<Bibliografia> bibliografias,
 			List<ResultadosAprendizaje> resultados, List<UnidadCompetencia> unidades) throws DioneException;
-
-	/**
-	 * 
-	 * <b> Permite consutlar un syllabus por docente y materia </b>
-	 * <p>
-	 * [Author: Paul Jimenez, Date: 21/01/2015]
-	 * </p>
-	 * 
-	 * @param idDocente
-	 * @param idMateria
-	 * @return
-	 * @throws DioneException
-	 */
-	public Syllabus consultarSyllabusByDocenteAndMateria(Long idDocente, Long idMateria) throws DioneException;
 
 	/**
 	 * 
@@ -198,4 +185,30 @@ public interface SyllabusService {
 	 * @throws DioneException
 	 */
 	public List<Prerequisito> obtenerPrerequisitos(Integer idMateria) throws DioneException;
+
+	/**
+	 * 
+	 * <b> Permite consultar el syllabus por un medio de un docente. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 02/03/2015]
+	 * </p>
+	 * 
+	 * @param idDocente
+	 * @return
+	 * @throws DioneException
+	 */
+	public Syllabus consultarSyllabusByDocente(Integer idDocente) throws DioneException;
+	
+	/**
+	 * 
+	 * <b> Permite consultar la materia y el syllabus de la tabla MateriaSyllabus. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 02/03/2015]
+	 * </p>
+	 * 
+	 * @param idSyllabus
+	 * @return
+	 * @throws DioneException
+	 */
+	public MateriaSyllabus consultarMateriaSyllabusBySyllabus(Integer idSyllabus) throws DioneException;
 }
