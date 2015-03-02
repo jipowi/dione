@@ -1,6 +1,3 @@
-/**
- * 
- */
 package ec.com.uce.dione.dao.impl;
 
 import javax.ejb.Stateless;
@@ -36,6 +33,22 @@ public class SyllabusDaoImpl extends GenericDAOImpl<Syllabus, Long> implements S
 		Query query = em.createNamedQuery("Syllabus.findByDocenteAndMateria");
 		query.setParameter("idDocente", idDocente);
 		query.setParameter("idMateria", idMateria);
+
+		Syllabus syllabus = (Syllabus) query.getSingleResult();
+
+		return syllabus;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.uce.dione.dao.SyllabusDao#consultarSyllabusByDocente(java.lang.Long)
+	 */
+	@Override
+	public Syllabus consultarSyllabusByDocente(Long idDocente) throws DioneException {
+
+		Query query = em.createNamedQuery("Syllabus.findByDocente");
+		query.setParameter("idDocente", idDocente);
 
 		Syllabus syllabus = (Syllabus) query.getSingleResult();
 

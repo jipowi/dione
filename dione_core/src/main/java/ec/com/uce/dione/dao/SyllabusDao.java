@@ -31,4 +31,17 @@ public interface SyllabusDao extends GenericDAO<Syllabus, Long> {
 	 * @throws DioneException
 	 */
 	public Syllabus consultarSyllabusByDocenteAndMateria(Long idDocente, Long idMateria) throws DioneException;
+
+	/**
+	 * 
+	 * <b> Permite consultar el syllabus de un determinado docente. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 01/03/2015]
+	 * </p>
+	 * 
+	 * @param idDocente
+	 * @return
+	 * @throws DioneException
+	 */
+	public Syllabus consultarSyllabusByDocente(Long idDocente) throws DioneException;
 }
