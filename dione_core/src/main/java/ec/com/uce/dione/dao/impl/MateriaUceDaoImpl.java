@@ -24,7 +24,7 @@ import ec.com.uce.dione.entities.MateriaUce;
  * @since JDK1.6
  */
 @Stateless
-public class MateriaUceDaoImpl extends GenericDAOImpl<MateriaUce, Long> implements MateriaUceDao {
+public class MateriaUceDaoImpl extends GenericDAOImpl<MateriaUce, Integer> implements MateriaUceDao {
 
 	Logger log = Logger.getLogger(MateriaUceDaoImpl.class);
 
@@ -36,7 +36,7 @@ public class MateriaUceDaoImpl extends GenericDAOImpl<MateriaUce, Long> implemen
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<MateriaUce> consultarMateriasByEscuela(Long idEscuela) throws DioneException {
+	public List<MateriaUce> consultarMateriasByEscuela(Integer idEscuela) throws DioneException {
 		try {
 			Query query = em.createNamedQuery("MateriaUce.findByEscuela");
 			query.setParameter("idEscuela", idEscuela);

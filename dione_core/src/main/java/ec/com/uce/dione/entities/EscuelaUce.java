@@ -18,13 +18,13 @@ public class EscuelaUce implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_escuela_uce")
-	private Long idEscuelaUce;
+	private Integer idEscuelaUce;
 
 	@Column(name="escuela_uce")
 	private String escuelaUce;
 
 	//bi-directional many-to-one association to Docente
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_docente")
 	private Docente docente;
 
@@ -35,11 +35,11 @@ public class EscuelaUce implements Serializable {
 	public EscuelaUce() {
 	}
 
-	public Long getIdEscuelaUce() {
+	public Integer getIdEscuelaUce() {
 		return this.idEscuelaUce;
 	}
 
-	public void setIdEscuelaUce(Long idEscuelaUce) {
+	public void setIdEscuelaUce(Integer idEscuelaUce) {
 		this.idEscuelaUce = idEscuelaUce;
 	}
 

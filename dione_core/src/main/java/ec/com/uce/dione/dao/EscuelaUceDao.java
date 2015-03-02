@@ -18,7 +18,7 @@ import ec.com.uce.dione.entities.EscuelaUce;
  * @since JDK1.6
  */
 @Local
-public interface EscuelaUceDao extends GenericDAO<EscuelaUce, Long> {
+public interface EscuelaUceDao extends GenericDAO<EscuelaUce, Integer> {
 
 	/**
 	 * 

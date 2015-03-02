@@ -30,5 +30,7 @@
 		<class>ec.com.uce.dione.entities.CorequisitoUce</class>
 		<class>ec.com.uce.dione.entities.Prerequisito</class>
 		<class>ec.com.uce.dione.entities.PrerequisitoUce</class>
+		<class>ec.com.uce.dione.entities.Experiencia</class>
+		<class>ec.com.uce.dione.entities.MateriaSyllabus</class>
    	</persistence-unit>
 </persistence>

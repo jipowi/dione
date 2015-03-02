@@ -23,7 +23,7 @@ public class PrerequisitoUce implements Serializable {
 	private String prerequisitoUce;
 
 	//bi-directional many-to-one association to MateriaUce
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_materia_uce")
 	private MateriaUce materiaUce;
 

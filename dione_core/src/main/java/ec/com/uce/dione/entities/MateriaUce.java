@@ -18,23 +18,23 @@ public class MateriaUce implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_materia_uce")
-	private Long idMateriaUce;
+	private Integer idMateriaUce;
 
 	@Column(name="materia_uce")
 	private String materiaUce;
 
-	//bi-directional many-to-one association to EscuelaUce
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_escuela_uce")
-	private EscuelaUce escuelaUce;
-
-	//bi-directional many-to-one association to Syllabus
-	@OneToMany(mappedBy="materiaUce")
-	private List<Syllabus> syllabuses;
-
 	//bi-directional many-to-one association to CorequisitoUce
 	@OneToMany(mappedBy="materiaUce")
 	private List<CorequisitoUce> corequisitoUces;
+
+	//bi-directional many-to-one association to MateriaSyllabus
+	@OneToMany(mappedBy="materiaUce")
+	private List<MateriaSyllabus> materiaSyllabuses;
+
+	//bi-directional many-to-one association to EscuelaUce
+	@ManyToOne
+	@JoinColumn(name="id_escuela_uce")
+	private EscuelaUce escuelaUce;
 
 	//bi-directional many-to-one association to PrerequisitoUce
 	@OneToMany(mappedBy="materiaUce")
@@ -43,11 +43,11 @@ public class MateriaUce implements Serializable {
 	public MateriaUce() {
 	}
 
-	public Long getIdMateriaUce() {
+	public Integer getIdMateriaUce() {
 		return this.idMateriaUce;
 	}
 
-	public void setIdMateriaUce(Long idMateriaUce) {
+	public void setIdMateriaUce(Integer idMateriaUce) {
 		this.idMateriaUce = idMateriaUce;
 	}
 
@@ -57,36 +57,6 @@ public class MateriaUce implements Serializable {
 
 	public void setMateriaUce(String materiaUce) {
 		this.materiaUce = materiaUce;
-	}
-
-	public EscuelaUce getEscuelaUce() {
-		return this.escuelaUce;
-	}
-
-	public void setEscuelaUce(EscuelaUce escuelaUce) {
-		this.escuelaUce = escuelaUce;
-	}
-
-	public List<Syllabus> getSyllabuses() {
-		return this.syllabuses;
-	}
-
-	public void setSyllabuses(List<Syllabus> syllabuses) {
-		this.syllabuses = syllabuses;
-	}
-
-	public Syllabus addSyllabus(Syllabus syllabus) {
-		getSyllabuses().add(syllabus);
-		syllabus.setMateriaUce(this);
-
-		return syllabus;
-	}
-
-	public Syllabus removeSyllabus(Syllabus syllabus) {
-		getSyllabuses().remove(syllabus);
-		syllabus.setMateriaUce(null);
-
-		return syllabus;
 	}
 
 	public List<CorequisitoUce> getCorequisitoUces() {
@@ -109,6 +79,36 @@ public class MateriaUce implements Serializable {
 		corequisitoUce.setMateriaUce(null);
 
 		return corequisitoUce;
+	}
+
+	public List<MateriaSyllabus> getMateriaSyllabuses() {
+		return this.materiaSyllabuses;
+	}
+
+	public void setMateriaSyllabuses(List<MateriaSyllabus> materiaSyllabuses) {
+		this.materiaSyllabuses = materiaSyllabuses;
+	}
+
+	public MateriaSyllabus addMateriaSyllabus(MateriaSyllabus materiaSyllabus) {
+		getMateriaSyllabuses().add(materiaSyllabus);
+		materiaSyllabus.setMateriaUce(this);
+
+		return materiaSyllabus;
+	}
+
+	public MateriaSyllabus removeMateriaSyllabus(MateriaSyllabus materiaSyllabus) {
+		getMateriaSyllabuses().remove(materiaSyllabus);
+		materiaSyllabus.setMateriaUce(null);
+
+		return materiaSyllabus;
+	}
+
+	public EscuelaUce getEscuelaUce() {
+		return this.escuelaUce;
+	}
+
+	public void setEscuelaUce(EscuelaUce escuelaUce) {
+		this.escuelaUce = escuelaUce;
 	}
 
 	public List<PrerequisitoUce> getPrerequisitoUces() {

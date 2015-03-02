@@ -16,22 +16,9 @@ import ec.com.uce.dione.entities.Syllabus;
  * @since JDK1.6
  */
 @Local
-public interface SyllabusDao extends GenericDAO<Syllabus, Long> {
+public interface SyllabusDao extends GenericDAO<Syllabus, Integer> {
 
-	/**
-	 * 
-	 * <b> Permite consutlar un syllabus por docente y materia </b>
-	 * <p>
-	 * [Author: Paul Jimenez, Date: 21/01/2015]
-	 * </p>
-	 * 
-	 * @param idDocente
-	 * @param idMateria
-	 * @return
-	 * @throws DioneException
-	 */
-	public Syllabus consultarSyllabusByDocenteAndMateria(Long idDocente, Long idMateria) throws DioneException;
-
+	
 	/**
 	 * 
 	 * <b> Permite consultar el syllabus de un determinado docente. </b>
@@ -43,5 +30,5 @@ public interface SyllabusDao extends GenericDAO<Syllabus, Long> {
 	 * @return
 	 * @throws DioneException
 	 */
-	public Syllabus consultarSyllabusByDocente(Long idDocente) throws DioneException;
+	public Syllabus consultarSyllabusByDocente(Integer idDocente) throws DioneException;
 }

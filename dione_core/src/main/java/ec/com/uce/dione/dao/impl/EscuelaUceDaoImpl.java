@@ -24,7 +24,7 @@ import ec.com.uce.dione.entities.EscuelaUce;
  * @since JDK1.6
  */
 @Stateless
-public class EscuelaUceDaoImpl extends GenericDAOImpl<EscuelaUce, Long> implements EscuelaUceDao {
+public class EscuelaUceDaoImpl extends GenericDAOImpl<EscuelaUce, Integer> implements EscuelaUceDao {
 
 	Logger log = Logger.getLogger(EscuelaUceDaoImpl.class);
 
@@ -41,7 +41,7 @@ public class EscuelaUceDaoImpl extends GenericDAOImpl<EscuelaUce, Long> implemen
 	public List<EscuelaUce> consultarEscuelaByDocente(String idDocente) throws DioneException {
 		try {
 			Query query = em.createNamedQuery("EscuelaUce.findByDocente");
-			query.setParameter("idDocente", new Long(idDocente));
+			query.setParameter("idDocente", Integer.parseInt(idDocente));
 			List<EscuelaUce> escuelas = query.getResultList();
 
 			return escuelas;

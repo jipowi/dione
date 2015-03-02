@@ -17,7 +17,7 @@ import ec.com.uce.dione.entities.Syllabus;
  * @since JDK1.6
  */
 @Stateless
-public class SyllabusDaoImpl extends GenericDAOImpl<Syllabus, Long> implements SyllabusDao {
+public class SyllabusDaoImpl extends GenericDAOImpl<Syllabus, Integer> implements SyllabusDao {
 
 	@PersistenceContext(unitName = "dione_core")
 	private EntityManager em;
@@ -25,27 +25,10 @@ public class SyllabusDaoImpl extends GenericDAOImpl<Syllabus, Long> implements S
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ec.com.uce.dione.dao.SyllabusDao#consultarSyllabusByDocenteAndMateria(java.lang.Long, java.lang.Long)
-	 */
-	@Override
-	public Syllabus consultarSyllabusByDocenteAndMateria(Long idDocente, Long idMateria) throws DioneException {
-
-		Query query = em.createNamedQuery("Syllabus.findByDocenteAndMateria");
-		query.setParameter("idDocente", idDocente);
-		query.setParameter("idMateria", idMateria);
-
-		Syllabus syllabus = (Syllabus) query.getSingleResult();
-
-		return syllabus;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see ec.com.uce.dione.dao.SyllabusDao#consultarSyllabusByDocente(java.lang.Long)
 	 */
 	@Override
-	public Syllabus consultarSyllabusByDocente(Long idDocente) throws DioneException {
+	public Syllabus consultarSyllabusByDocente(Integer idDocente) throws DioneException {
 
 		Query query = em.createNamedQuery("Syllabus.findByDocente");
 		query.setParameter("idDocente", idDocente);

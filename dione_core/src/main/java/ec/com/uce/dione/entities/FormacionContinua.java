@@ -17,7 +17,7 @@ public class FormacionContinua implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_f_continua")
-	private Long idFContinua;
+	private Integer idFContinua;
 
 	private String curso;
 
@@ -30,18 +30,18 @@ public class FormacionContinua implements Serializable {
 	private String tipoDuracion;
 
 	//bi-directional many-to-one association to Docente
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_docente")
 	private Docente docente;
 
 	public FormacionContinua() {
 	}
 
-	public Long getIdFContinua() {
+	public Integer getIdFContinua() {
 		return this.idFContinua;
 	}
 
-	public void setIdFContinua(Long idFContinua) {
+	public void setIdFContinua(Integer idFContinua) {
 		this.idFContinua = idFContinua;
 	}
 

@@ -18,7 +18,7 @@ import ec.com.uce.dione.entities.MateriaUce;
  * @since JDK1.6
  */
 @Local
-public interface MateriaUceDao extends GenericDAO<MateriaUce, Long> {
+public interface MateriaUceDao extends GenericDAO<MateriaUce, Integer> {
 
 	/**
 	 * 
@@ -31,5 +31,5 @@ public interface MateriaUceDao extends GenericDAO<MateriaUce, Long> {
 	 * @return
 	 * @throws DioneException
 	 */
-	public List<MateriaUce> consultarMateriasByEscuela(Long idEscuela) throws DioneException;
+	public List<MateriaUce> consultarMateriasByEscuela(Integer idEscuela) throws DioneException;
 }

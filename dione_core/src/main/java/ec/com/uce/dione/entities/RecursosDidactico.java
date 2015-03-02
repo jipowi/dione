@@ -22,7 +22,7 @@ public class RecursosDidactico implements Serializable {
 	private String recurso;
 
 	//bi-directional many-to-one association to Syllabus
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_syllabus")
 	private Syllabus syllabus;
 

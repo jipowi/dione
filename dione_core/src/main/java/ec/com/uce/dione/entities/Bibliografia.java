@@ -21,7 +21,7 @@ public class Bibliografia implements Serializable {
 	private String bibliografia;
 
 	//bi-directional many-to-one association to Syllabus
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_syllabus")
 	private Syllabus syllabus;
 

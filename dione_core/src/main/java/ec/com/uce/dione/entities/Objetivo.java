@@ -33,7 +33,7 @@ public class Objetivo implements Serializable {
 	private Boolean procesoObj;
 
 	//bi-directional many-to-one association to Syllabus
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_syllabus")
 	private Syllabus syllabus;
 

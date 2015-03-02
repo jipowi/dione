@@ -3,30 +3,31 @@ package ec.com.uce.dione.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+
 /**
  * The persistent class for the competencias_genericas database table.
  * 
  */
 @Entity
-@Table(name = "competencias_genericas")
-@NamedQuery(name = "CompetenciasGenerica.findAll", query = "SELECT c FROM CompetenciasGenerica c")
+@Table(name="competencias_genericas")
+@NamedQuery(name="CompetenciasGenerica.findAll", query="SELECT c FROM CompetenciasGenerica c")
 public class CompetenciasGenerica implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_competencia_generica")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_competencia_generica")
 	private Integer idCompetenciaGenerica;
 
-	@Column(name = "tipo_competencia")
-	private Integer tipoCompetencia;
-
-	@Column(name = "competencia_generica")
+	@Column(name="competencia_generica")
 	private String competenciaGenerica;
 
-	// bi-directional many-to-one association to Syllabus
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_syllabus")
+	@Column(name="tipo_competencia")
+	private Integer tipoCompetencia;
+
+	//bi-directional many-to-one association to Syllabus
+	@ManyToOne
+	@JoinColumn(name="id_syllabus")
 	private Syllabus syllabus;
 
 	public CompetenciasGenerica() {
@@ -48,27 +49,20 @@ public class CompetenciasGenerica implements Serializable {
 		this.competenciaGenerica = competenciaGenerica;
 	}
 
+	public Integer getTipoCompetencia() {
+		return this.tipoCompetencia;
+	}
+
+	public void setTipoCompetencia(Integer tipoCompetencia) {
+		this.tipoCompetencia = tipoCompetencia;
+	}
+
 	public Syllabus getSyllabus() {
 		return this.syllabus;
 	}
 
 	public void setSyllabus(Syllabus syllabus) {
 		this.syllabus = syllabus;
-	}
-
-	/**
-	 * @return the tipoCompetencia
-	 */
-	public Integer getTipoCompetencia() {
-		return tipoCompetencia;
-	}
-
-	/**
-	 * @param tipoCompetencia
-	 *            the tipoCompetencia to set
-	 */
-	public void setTipoCompetencia(Integer tipoCompetencia) {
-		this.tipoCompetencia = tipoCompetencia;
 	}
 
 }

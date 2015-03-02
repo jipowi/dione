@@ -23,7 +23,7 @@ public class Docente extends Auditoria implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_docente")
-	private Long idDocente;
+	private Integer idDocente;
 
 	@Column(name = "apellidos_docente")
 	private String apellidosDocente;
@@ -41,9 +41,9 @@ public class Docente extends Auditoria implements Serializable {
 	@OneToMany(mappedBy = "docente")
 	private List<EscuelaUce> escuelaUces;
 
-	// bi-directional many-to-one association to Syllabus
+	// bi-directional many-to-one association to Experiencia
 	@OneToMany(mappedBy = "docente")
-	private List<Syllabus> syllabuses;
+	private List<Experiencia> experiencias;
 
 	// bi-directional many-to-one association to FormacionAcademica
 	@OneToMany(mappedBy = "docente")
@@ -53,14 +53,18 @@ public class Docente extends Auditoria implements Serializable {
 	@OneToMany(mappedBy = "docente")
 	private List<FormacionContinua> formacionContinuas;
 
+	// bi-directional many-to-one association to Syllabus
+	@OneToMany(mappedBy = "docente")
+	private List<Syllabus> syllabuses;
+
 	public Docente() {
 	}
 
-	public Long getIdDocente() {
+	public Integer getIdDocente() {
 		return this.idDocente;
 	}
 
-	public void setIdDocente(Long idDocente) {
+	public void setIdDocente(Integer idDocente) {
 		this.idDocente = idDocente;
 	}
 
@@ -118,26 +122,26 @@ public class Docente extends Auditoria implements Serializable {
 		return escuelaUce;
 	}
 
-	public List<Syllabus> getSyllabuses() {
-		return this.syllabuses;
+	public List<Experiencia> getExperiencias() {
+		return this.experiencias;
 	}
 
-	public void setSyllabuses(List<Syllabus> syllabuses) {
-		this.syllabuses = syllabuses;
+	public void setExperiencias(List<Experiencia> experiencias) {
+		this.experiencias = experiencias;
 	}
 
-	public Syllabus addSyllabus(Syllabus syllabus) {
-		getSyllabuses().add(syllabus);
-		syllabus.setDocente(this);
+	public Experiencia addExperiencia(Experiencia experiencia) {
+		getExperiencias().add(experiencia);
+		experiencia.setDocente(this);
 
-		return syllabus;
+		return experiencia;
 	}
 
-	public Syllabus removeSyllabus(Syllabus syllabus) {
-		getSyllabuses().remove(syllabus);
-		syllabus.setDocente(null);
+	public Experiencia removeExperiencia(Experiencia experiencia) {
+		getExperiencias().remove(experiencia);
+		experiencia.setDocente(null);
 
-		return syllabus;
+		return experiencia;
 	}
 
 	public List<FormacionAcademica> getFormacionAcademicas() {
@@ -182,6 +186,28 @@ public class Docente extends Auditoria implements Serializable {
 		formacionContinua.setDocente(null);
 
 		return formacionContinua;
+	}
+
+	public List<Syllabus> getSyllabuses() {
+		return this.syllabuses;
+	}
+
+	public void setSyllabuses(List<Syllabus> syllabuses) {
+		this.syllabuses = syllabuses;
+	}
+
+	public Syllabus addSyllabus(Syllabus syllabus) {
+		getSyllabuses().add(syllabus);
+		syllabus.setDocente(this);
+
+		return syllabus;
+	}
+
+	public Syllabus removeSyllabus(Syllabus syllabus) {
+		getSyllabuses().remove(syllabus);
+		syllabus.setDocente(null);
+
+		return syllabus;
 	}
 
 }

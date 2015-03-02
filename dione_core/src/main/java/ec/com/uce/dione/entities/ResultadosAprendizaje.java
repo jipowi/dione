@@ -35,7 +35,7 @@ public class ResultadosAprendizaje implements Serializable {
 	private String resultadoAprendizaje;
 
 	//bi-directional many-to-one association to Syllabus
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_syllabus")
 	private Syllabus syllabus;
 

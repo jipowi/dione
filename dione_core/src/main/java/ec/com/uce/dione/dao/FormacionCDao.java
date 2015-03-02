@@ -18,7 +18,7 @@ import ec.com.uce.dione.entities.FormacionContinua;
  * @since JDK1.6
  */
 @Local
-public interface FormacionCDao extends GenericDAO<FormacionContinua, Long> {
+public interface FormacionCDao extends GenericDAO<FormacionContinua, Integer> {
 
 	/**
 	 * 
@@ -31,6 +31,6 @@ public interface FormacionCDao extends GenericDAO<FormacionContinua, Long> {
 	 * @return
 	 * @throws DioneException
 	 */
-	public List<FormacionContinua> consultarFormacionByDocente(Long idDocente) throws DioneException;
+	public List<FormacionContinua> consultarFormacionByDocente(Integer idDocente) throws DioneException;
 
 }

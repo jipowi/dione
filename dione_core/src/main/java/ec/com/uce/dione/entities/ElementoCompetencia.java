@@ -26,7 +26,7 @@ public class ElementoCompetencia implements Serializable {
 	private Boolean elementoCumplido;
 
 	//bi-directional many-to-one association to UnidadCompetencia
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_unidad_competencia")
 	private UnidadCompetencia unidadCompetencia;
 

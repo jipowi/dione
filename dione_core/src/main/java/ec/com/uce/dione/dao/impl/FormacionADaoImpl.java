@@ -24,7 +24,7 @@ import ec.com.uce.dione.entities.FormacionAcademica;
  * @since JDK1.6
  */
 @Stateless
-public class FormacionADaoImpl extends GenericDAOImpl<FormacionAcademica, Long> implements FormacionADao {
+public class FormacionADaoImpl extends GenericDAOImpl<FormacionAcademica, Integer> implements FormacionADao {
 
 	Logger log = Logger.getLogger(FormacionADaoImpl.class);
 
@@ -38,10 +38,10 @@ public class FormacionADaoImpl extends GenericDAOImpl<FormacionAcademica, Long> 
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<FormacionAcademica> consultarFormacionByDocente(Long idDocente) throws DioneException {
+	public List<FormacionAcademica> consultarFormacionByDocente(Integer idDocente) throws DioneException {
 		try {
 			Query query = em.createNamedQuery("FormacionAcademica.findByDocente");
-			query.setParameter("idDocente", new Long(idDocente));
+			query.setParameter("idDocente", idDocente);
 			List<FormacionAcademica> formaciones = query.getResultList();
 
 			return formaciones;

@@ -29,8 +29,9 @@ import javax.persistence.NamedQuery;
 		// DOCENTE
 		@NamedQuery(name = "Docente.findByCedula", query = "SELECT d FROM Docente d WHERE d.cedulaDocente =:cedula"),
 		// SYLLABUS
-		@NamedQuery(name = "Syllabus.findByDocenteAndMateria", query = "SELECT d FROM Syllabus d WHERE d.materiaUce.idMateriaUce =:idMateria AND d.docente.idDocente=:idDocente"),
 		@NamedQuery(name = "Syllabus.findByDocente", query = "SELECT d FROM Syllabus d WHERE d.docente.idDocente=:idDocente"),
+		// MATERIA SYLLABUS
+		@NamedQuery(name = "MateriaSyllabus.findBySyllabus", query = "SELECT d FROM MateriaSyllabus d WHERE d.syllabus.idSyllabus=:idSyllabus"),
 		// DETALLE_CATALOGO
 		@NamedQuery(name = "DetalleCatalogo.findByCodCatalogo", query = "SELECT d FROM DetalleCatalogo d WHERE d.catalogo.idCatalogo =:idCatalogo ORDER BY d.descDetCatalogo"),
 		@NamedQuery(name = "DetalleCatalogo.findByCodCatalogoAndCodDetalle", query = "SELECT d FROM DetalleCatalogo d WHERE d.catalogo.idCatalogo =:idCatalogo AND d.codDetalleCatalogo=:codDetalleCatalogo"),
