@@ -53,7 +53,7 @@
 							<p:commandLink title="Ver hoja de vida" oncomplete="hojaVida.show();">
 								<h:graphicImage name="curriculum2.png" library="img" />
 							</p:commandLink>
-							<p:commandLink title="Ver Syllabus" oncomplete="hojaVida.show();">
+							<p:commandLink title="Ver Syllabus" oncomplete="syllabus.show();">
 								<h:graphicImage name="syllabus.png" library="img" />
 							</p:commandLink>
 						</h:panelGrid>
@@ -138,9 +138,44 @@
 								</p:column>
 							</p:dataTable>
 						</h:panelGrid>
+						<h:panelGrid columns="2">
+							<p:outputLabel value="#{message['lbl.descargarHoja']}" style="color: green;" />
+							<p:commandLink title="Descargar hoja de vida" actionListener="#{buscarDocenteBacking.descargarHojaVidaPDF()}">
+								<h:graphicImage name="pdf.png" library="img" />
+							</p:commandLink>
+						</h:panelGrid>
+					</div>
+
+				</p:dialog>
+				<!-- POPUP SYLLABUS -->
+				<p:dialog id="idSyllabus" header="Syllabus" widgetVar="syllabus" modal="true" width="500" position="center" showEffect="fade" hideEffect="explode"
+					resizable="false" closable="true">
+					<div align="center">
+						<h:panelGrid columns="1">
+							<p:panel>
+								<h:panelGrid columns="2" cellspacing="2">
+									<p:outputLabel value="#{message['lbl.asignatura']}:" styleClass="negrita" />
+									<p:outputLabel value="#{buscarDocenteBean.materia}" />
+
+									<p:outputLabel value="#{message['lbl.numHorasPresenciales']}:" styleClass="negrita" />
+									<p:outputLabel value="#{buscarDocenteBean.numHorasPresenciales}" />
+
+									<p:outputLabel value="#{message['lbl.numHorasTutorias']}:" styleClass="negrita" />
+									<p:outputLabel value="#{buscarDocenteBean.numHorasTutorias}" />
+
+									<p:outputLabel value="#{message['lbl.desAsignatura']}:" styleClass="negrita" />
+									<p:outputLabel value="#{buscarDocenteBean.desAsignatura}" />
+								</h:panelGrid>
+							</p:panel>
+						</h:panelGrid>
+						<h:panelGrid columns="2">
+							<p:outputLabel value="#{message['lbl.descargarHoja']}" style="color: green;" />
+							<p:commandLink title="Descargar hoja de vida" actionListener="#{buscarDocenteBacking.descargarHojaVidaPDF()}">
+								<h:graphicImage name="pdf.png" library="img" />
+							</p:commandLink>
+						</h:panelGrid>
 					</div>
 				</p:dialog>
-
 			</h:form>
 		</p:panel>
 	</ui:define>
