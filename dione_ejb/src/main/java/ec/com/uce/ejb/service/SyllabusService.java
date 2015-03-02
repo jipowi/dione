@@ -10,6 +10,8 @@ import javax.ejb.Local;
 import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.Bibliografia;
 import ec.com.uce.dione.entities.CompetenciaGenerale;
+import ec.com.uce.dione.entities.CompetenciasEspecifica;
+import ec.com.uce.dione.entities.CompetenciasGenerica;
 import ec.com.uce.dione.entities.Corequisito;
 import ec.com.uce.dione.entities.EscuelaUce;
 import ec.com.uce.dione.entities.MateriaSyllabus;
@@ -211,4 +213,30 @@ public interface SyllabusService {
 	 * @throws DioneException
 	 */
 	public MateriaSyllabus consultarMateriaSyllabusBySyllabus(Integer idSyllabus) throws DioneException;
+	
+	/**
+	 * 
+	 * <b> Permite consultar las competencias por syllabus. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 02/03/2015]
+	 * </p>
+	 * 
+	 * @param idSyllabus
+	 * @return
+	 * @throws DioneException
+	 */
+	public List<CompetenciasGenerica> consultarCompGenricasBySyllabus(Integer idSyllabus) throws DioneException;
+	
+	/**
+	 * 
+	 * <b> Permiete consultar las competencias especificas por syllabus. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 02/03/2015]
+	 * </p>
+	 * 
+	 * @param idSyllabus
+	 * @return
+	 * @throws DioneException
+	 */
+	public List<CompetenciasEspecifica> consultarCompEspecificaBySyllabus(Integer idSyllabus) throws DioneException;
 }

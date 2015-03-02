@@ -267,4 +267,24 @@ public class SyllabusServiceImpl implements SyllabusService {
 	public MateriaSyllabus consultarMateriaSyllabusBySyllabus(Integer idSyllabus) throws DioneException {
 		return materiaSyllabusDao.consultarMateriaSyllabusBySyllabus(idSyllabus);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.uce.ejb.service.SyllabusService#consultarCompGenricasBySyllabus(java.lang.Integer)
+	 */
+	@Override
+	public List<CompetenciasGenerica> consultarCompGenricasBySyllabus(Integer idSyllabus) throws DioneException {
+		return competenciaGenericaDao.consultarCompGenricasBySyllabus(idSyllabus);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.uce.ejb.service.SyllabusService#consultarCompEspecificaBySyllabus(java.lang.Integer)
+	 */
+	@Override
+	public List<CompetenciasEspecifica> consultarCompEspecificaBySyllabus(Integer idSyllabus) throws DioneException {
+		return competenciaEspecificaDao.consultarCompEspecificaBySyllabus(idSyllabus);
+	}
 }
