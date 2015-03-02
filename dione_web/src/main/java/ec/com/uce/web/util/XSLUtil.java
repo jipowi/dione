@@ -3,17 +3,22 @@
  */
 package ec.com.uce.web.util;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
 import org.apache.log4j.Logger;
 import org.jdom.Document;
 
 import ec.com.kruger.framework.common.util.TransformerUtil;
 import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.Docente;
-import ec.com.uce.web.xsl.HojaVida;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
+import ec.com.uce.ejb.doc.GenerarDocumento;
+import ec.com.uce.web.xsl.XSLHelper;
 
 /**
  * @author jarana
@@ -37,25 +42,24 @@ public class XSLUtil {
 
 	/**
 	 * 
-	 * @param propuestaProyectoDTO
-	 * @param accionesDTO
-	 * @param personasDTO
-	 * @param clienteDTO
-	 * @param nombreArchivo
+	 * <b> Permite generar un contenido XML. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 01/03/2015]
+	 * </p>
+	 * 
+	 * @param docente
 	 * @return
-	 * @throws MercadoValoresException
-	 * @throws DAOException
 	 */
-	public String generarXmlCorreo(Docente docente) {
+	public String generarXml(Docente docente) {
 		StringBuilder xml = new StringBuilder();
 
 		try {
 			xml.append(tagInicioMail);
 
 			try {
-				String nombreClase = "java:app/dione_web/HojaVida";
-				HojaVida generarMail = (HojaVida) getObjectByJndi(nombreClase);
-				xml.append(generarMail.generarXml(docente));
+				String nombreClase = "java:app/dione_web/HojaVidaImpl";
+				GenerarDocumento generarDocumento = (GenerarDocumento) getObjectByJndi(nombreClase);
+				xml.append(generarDocumento.generarXml(docente));
 
 			} catch (Exception e) {
 				log.error("Error, generacion xml reporte, e{}", e);
@@ -81,19 +85,31 @@ public class XSLUtil {
 	 *            Datos del mail a enviar
 	 * @return Devuelve el texto a enviar en el correo
 	 */
-	public String obtenerCorreoHtml(Docente docente) {
+	public String obtenerHtml(Docente docente) {
 		String html = null;
 		try {
+			InputStream in = XSLHelper.class.getResourceAsStream("HojaVidaHTML.xsl");
+			InputStreamReader is = new InputStreamReader(in);
+			StringBuilder sb = new StringBuilder();
+			BufferedReader br = new BufferedReader(is);
+			String read = br.readLine();
 
-			String contenidoXSL = "";
+			while (read != null) {
+				sb.append(read);
+				read = br.readLine();
+
+			}
+
+			String contenidoXSL = sb.toString();
 
 			// Se genera el XML con los datos del correo
-			String contenidoXml = generarXmlCorreo(docente);
+			String contenidoXml = generarXml(docente);
 			Document docXML = TransformerUtil.stringToXMLDocument(contenidoXml.toString());
 			Document docXSL = TransformerUtil.stringToXML(contenidoXSL);
 			Document result = TransformerUtil.transformar(docXML, docXSL);
 			html = TransformerUtil.xmlToString(result);
 			html = html.replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&amp;", "&").replace("UTF-8", "ISO-8859-1");
+
 		} catch (Exception e) {
 			log.error("Error ", e);
 

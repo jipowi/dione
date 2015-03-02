@@ -1,7 +1,10 @@
 package ec.com.uce.web.backing;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -13,13 +16,18 @@ import org.apache.log4j.Logger;
 import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.Docente;
 import ec.com.uce.dione.entities.EscuelaUce;
+import ec.com.uce.dione.entities.MateriaSyllabus;
 import ec.com.uce.dione.entities.MateriaUce;
+import ec.com.uce.dione.entities.Syllabus;
 import ec.com.uce.ejb.dto.AsignaturaDTO;
 import ec.com.uce.ejb.dto.MateriaDTO;
 import ec.com.uce.ejb.service.DocenteService;
 import ec.com.uce.ejb.service.SyllabusService;
 import ec.com.uce.web.bean.BuscarDocenteBean;
+import ec.com.uce.web.util.ConstantesUtil;
+import ec.com.uce.web.util.GenerarPdfUtil;
 import ec.com.uce.web.util.HiperionMensajes;
+import ec.com.uce.web.util.JsfUtil;
 import ec.com.uce.web.util.MessagesController;
 
 /**
@@ -31,8 +39,9 @@ import ec.com.uce.web.util.MessagesController;
  */
 @ManagedBean
 @SessionScoped
-public class BuscarDocenteBacking {
+public class BuscarDocenteBacking implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	@EJB
 	private DocenteService docenteService;
 	@EJB
@@ -59,6 +68,7 @@ public class BuscarDocenteBacking {
 		try {
 			docente = docenteService.consultarDocenteByCedula(buscarDocenteBean.getCedulaDocente());
 
+			// Hoja de vida
 			if (docente != null) {
 				activarHojaVida = true;
 				buscarDocenteBean.setApellidosDocente(docente.getApellidosDocente());
@@ -90,11 +100,21 @@ public class BuscarDocenteBacking {
 				buscarDocenteBean.setFormacionesA(docenteService.consultarFormacionAByDocente(docente.getIdDocente()));
 				buscarDocenteBean.setFormacionesC(docenteService.consultarFormacionCByDocente(docente.getIdDocente()));
 
+				// Syllabus
+				Syllabus syllabus = syllabusService.consultarSyllabusByDocente(docente.getIdDocente());
+
+				MateriaSyllabus materiaSyllabus = syllabusService.consultarMateriaSyllabusBySyllabus(syllabus.getIdSyllabus());
+				buscarDocenteBean.setMateria(materiaSyllabus.getMateriaUce().getMateriaUce());
+				buscarDocenteBean.setNumHorasPresenciales(syllabus.getNumHorasPresenciales());
+				buscarDocenteBean.setNumHorasTutorias(syllabus.getHorasTutorias());
+				buscarDocenteBean.setDesAsignatura(syllabus.getDescripcionAsignatura());
+				
+
 			} else {
 				MessagesController.addError(null, HiperionMensajes.getInstancia().getString("dione.mensaje.error.buscar"));
 			}
 
-		} catch (DioneException e) {
+		} catch (Exception e) {
 			log.error("Error al momento consultar el docente", e);
 			throw new DioneException(e);
 		}
@@ -144,6 +164,31 @@ public class BuscarDocenteBacking {
 	 */
 	public void setActivarHojaVida(Boolean activarHojaVida) {
 		this.activarHojaVida = activarHojaVida;
+	}
+
+	/**
+	 * 
+	 * <b> Permite generar y descargar la hoja de vida en formato PDF. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 01/03/2015]
+	 * </p>
+	 * 
+	 * @throws DioneException
+	 */
+	public void descargarHojaVidaPDF() throws DioneException {
+		try {
+			Map<String, Object> parametrosReporte = new HashMap<String, Object>();
+			parametrosReporte.put(ConstantesUtil.CONTENT_TYPE_IDENTIFICADOR, ConstantesUtil.CONTENT_TYPE_PDF);
+			parametrosReporte.put(ConstantesUtil.NOMBRE_ARCHIVO_IDENTIFICADOR, docente.getCedulaDocente());
+
+			parametrosReporte.put(ConstantesUtil.CONTENIDO_BYTES_IDENTIFICADOR, GenerarPdfUtil.generarAchivoPDF(docente));
+			JsfUtil.setSessionAttribute(ConstantesUtil.PARAMETROS_DESCARGADOR_IDENTIFICADOR, parametrosReporte);
+			JsfUtil.downloadFile();
+		} catch (Exception e) {
+			log.error("Error al momento generar el a hoja de vida en PDF", e);
+			throw new DioneException(e);
+		}
+
 	}
 
 }

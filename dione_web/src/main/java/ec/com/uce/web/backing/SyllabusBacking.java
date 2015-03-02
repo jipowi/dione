@@ -19,12 +19,14 @@ import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.Bibliografia;
 import ec.com.uce.dione.entities.Catalogo;
 import ec.com.uce.dione.entities.CompetenciaGenerale;
+import ec.com.uce.dione.entities.CompetenciasEspecifica;
 import ec.com.uce.dione.entities.CompetenciasGenerica;
 import ec.com.uce.dione.entities.Corequisito;
 import ec.com.uce.dione.entities.DetalleCatalogo;
 import ec.com.uce.dione.entities.Docente;
 import ec.com.uce.dione.entities.ElementoCompetencia;
 import ec.com.uce.dione.entities.EscuelaUce;
+import ec.com.uce.dione.entities.MateriaSyllabus;
 import ec.com.uce.dione.entities.MateriaUce;
 import ec.com.uce.dione.entities.Objetivo;
 import ec.com.uce.dione.entities.Prerequisito;
@@ -32,6 +34,7 @@ import ec.com.uce.dione.entities.ResultadosAprendizaje;
 import ec.com.uce.dione.entities.Syllabus;
 import ec.com.uce.dione.entities.UnidadCompetencia;
 import ec.com.uce.ejb.dto.BibliografiaDTO;
+import ec.com.uce.ejb.dto.CompetenciaEspecificaDTO;
 import ec.com.uce.ejb.dto.CompetenciaGeneralDTO;
 import ec.com.uce.ejb.dto.CompetenciaGenericaDTO;
 import ec.com.uce.ejb.dto.ElementosCompetenciaDTO;
@@ -102,7 +105,7 @@ public class SyllabusBacking implements Serializable {
 				List<EscuelaUce> escuelas = syllabusService.consultarEscuelaByDocente(docente.getIdDocente().toString());
 
 				for (EscuelaUce escuelaUce : escuelas) {
-					List<MateriaUce> materiasTemp = syllabusService.consultarMateriasByEscuela(new Long(escuelaUce.getIdEscuelaUce()));
+					List<MateriaUce> materiasTemp = syllabusService.consultarMateriasByEscuela(escuelaUce.getIdEscuelaUce());
 					for (MateriaUce materiaUce : materiasTemp) {
 						materiaUces.add(materiaUce);
 					}
@@ -170,10 +173,8 @@ public class SyllabusBacking implements Serializable {
 				competenciasSistematicas.add(compGenerica);
 			}
 		}
-	
+
 	}
-	
-	
 
 	/**
 	 * 
@@ -192,10 +193,18 @@ public class SyllabusBacking implements Serializable {
 
 			syllabus.setDocente(docente);
 			MateriaUce materiaUce = syllabusService.consultarMateriaById(Integer.parseInt(syllabusBean.getMateria()));
-			syllabus.setMateriaUce(materiaUce);
+
+			List<MateriaSyllabus> materiaSyllabuses = new ArrayList<MateriaSyllabus>();
+			MateriaSyllabus materiaSyllabus = new MateriaSyllabus();
+			materiaSyllabus.setMateriaUce(materiaUce);
+			materiaSyllabus.setSyllabus(syllabus);
+			materiaSyllabuses.add(materiaSyllabus);
+
+			syllabus.setMateriaSyllabuses(materiaSyllabuses);
 
 			syllabus.setDescripcionAsignatura(syllabusBean.getDesAsigantura());
-
+			syllabus.setNumHorasPresenciales(syllabusBean.getNumHorasPresenciales());
+			syllabus.setHorasTutorias(syllabusBean.getNumHorasTutorias());
 			syllabus.setMetodologia(syllabusBean.getMetodologia());
 
 			syllabusBean.setDesAsigantura("");
@@ -213,7 +222,7 @@ public class SyllabusBacking implements Serializable {
 			syllabusBean.setObjetivo("");
 			syllabusBean.setObjetivosDTOs(null);
 
-			// Competencias
+			// Competencias Generales
 			List<CompetenciaGenerale> competenciasGenerales = new ArrayList<CompetenciaGenerale>();
 			for (CompetenciaGeneralDTO competenciaDTO : syllabusBean.getCompetenciasGeneralesDTOs()) {
 				CompetenciaGenerale competencia = new CompetenciaGenerale();
@@ -223,6 +232,49 @@ public class SyllabusBacking implements Serializable {
 			}
 			syllabusBean.setCompetenciaGeneral("");
 			syllabusBean.setCompetenciasGeneralesDTOs(null);
+
+			List<CompetenciasGenerica> competenciasGenericas = new ArrayList<CompetenciasGenerica>();
+			// Instrumentales
+			for (CompetenciasGenerica competenciaInstrumental : competenciasInstrumentales) {
+				CompetenciasGenerica competenciaGenericaInst = new CompetenciasGenerica();
+
+				competenciaGenericaInst.setTipoCompetencia(1);
+				competenciaGenericaInst.setCompetenciaGenerica(competenciaInstrumental.getCompetenciaGenerica());
+
+				competenciasGenericas.add(competenciaGenericaInst);
+			}
+			// Interpersonales
+			for (CompetenciasGenerica competenciaInterpersonal : competenciasInterpersonales) {
+				CompetenciasGenerica competenciaGenericaInter = new CompetenciasGenerica();
+
+				competenciaGenericaInter.setTipoCompetencia(2);
+				competenciaGenericaInter.setCompetenciaGenerica(competenciaInterpersonal.getCompetenciaGenerica());
+
+				competenciasGenericas.add(competenciaGenericaInter);
+			}
+			// Sistematicas
+			for (CompetenciasGenerica competenciaSistematica : competenciasSistematicas) {
+				CompetenciasGenerica competenciaGenericaSis = new CompetenciasGenerica();
+
+				competenciaGenericaSis.setTipoCompetencia(3);
+				competenciaGenericaSis.setCompetenciaGenerica(competenciaSistematica.getCompetenciaGenerica());
+
+				competenciasGenericas.add(competenciaGenericaSis);
+			}
+
+			syllabus.setCompetenciasGenericas(competenciasGenericas);
+
+			// Competencias Especificas
+			List<CompetenciasEspecifica> competenciasEspecificas = new ArrayList<CompetenciasEspecifica>();
+			for (CompetenciaEspecificaDTO competenciaEspecificaDTO : syllabusBean.getCompetenciasEspecificasDTOs()) {
+				CompetenciasEspecifica competencia = new CompetenciasEspecifica();
+				competencia.setCompetenciaEspecifica(competenciaEspecificaDTO.getCompetenciaEspecifica());
+
+				competenciasEspecificas.add(competencia);
+			}
+			syllabus.setCompetenciasEspecificas(competenciasEspecificas);
+			syllabusBean.setCompetenciaEspecifica("");
+			syllabusBean.setCompetenciasEspecificasDTOs(null);
 
 			List<UnidadCompetencia> unidades = new ArrayList<UnidadCompetencia>();
 

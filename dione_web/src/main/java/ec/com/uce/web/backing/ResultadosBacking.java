@@ -82,7 +82,7 @@ public class ResultadosBacking implements Serializable {
 				List<EscuelaUce> escuelas = syllabusService.consultarEscuelaByDocente(docente.getIdDocente().toString());
 
 				for (EscuelaUce escuelaUce : escuelas) {
-					List<MateriaUce> materiasTemp = syllabusService.consultarMateriasByEscuela(new Long(escuelaUce.getIdEscuelaUce()));
+					List<MateriaUce> materiasTemp = syllabusService.consultarMateriasByEscuela(escuelaUce.getIdEscuelaUce());
 					for (MateriaUce materiaUce : materiasTemp) {
 						materiaUces.add(materiaUce);
 					}
@@ -166,11 +166,11 @@ public class ResultadosBacking implements Serializable {
 		resultCompetenciasDTO = new ArrayList<EvaluacionCompetenciasDTO>();
 		resultadosDTO = new ArrayList<EvaluacionResAprendizajeDTO>();
 
-		Long idDocente = docente.getIdDocente();
+		Long idDocente = Long.parseLong(docente.getIdDocente().toString());
 		Long idMateria = Long.parseLong(resultadoBean.getMateria());
 
 		try {
-			syllabus = syllabusService.consultarSyllabusByDocenteAndMateria(idDocente, idMateria);
+			//syllabus = syllabusService.consultarSyllabusByDocenteAndMateria(idDocente, idMateria);
 			List<Objetivo> objetivos = syllabusService.conusltarObjetivos(syllabus.getIdSyllabus());
 			List<CompetenciaGenerale> competencias = syllabusService.consultarCompetenciasBySyllabus(syllabus.getIdSyllabus());
 			List<ResultadosAprendizaje> resultados = syllabusService.consultarResultadosAprendizaje(syllabus.getIdSyllabus());
