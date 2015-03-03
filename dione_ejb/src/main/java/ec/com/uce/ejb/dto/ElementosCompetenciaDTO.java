@@ -15,6 +15,14 @@ public class ElementosCompetenciaDTO {
 	private String elementoCompetencia;
 
 	/**
+	 * 
+	 */
+	public ElementosCompetenciaDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
 	 * @param elementoCompetencia
 	 */
 	public ElementosCompetenciaDTO(String elementoCompetencia) {

@@ -3,6 +3,7 @@
  */
 package ec.com.uce.ejb.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -37,6 +38,8 @@ import ec.com.uce.dione.entities.Prerequisito;
 import ec.com.uce.dione.entities.ResultadosAprendizaje;
 import ec.com.uce.dione.entities.Syllabus;
 import ec.com.uce.dione.entities.UnidadCompetencia;
+import ec.com.uce.ejb.dto.ElementosCompetenciaDTO;
+import ec.com.uce.ejb.dto.UnidadCompetenciaDTO;
 import ec.com.uce.ejb.service.SyllabusService;
 
 /**
@@ -286,5 +289,47 @@ public class SyllabusServiceImpl implements SyllabusService {
 	@Override
 	public List<CompetenciasEspecifica> consultarCompEspecificaBySyllabus(Integer idSyllabus) throws DioneException {
 		return competenciaEspecificaDao.consultarCompEspecificaBySyllabus(idSyllabus);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.uce.ejb.service.SyllabusService#consultarBibliografiasBySyllabus(java.lang.Integer)
+	 */
+	@Override
+	public List<Bibliografia> consultarBibliografiasBySyllabus(Integer idSyllabus) throws DioneException {
+		return bibliografiaDao.consultarBibliografiasBySyllabus(idSyllabus);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.uce.ejb.service.SyllabusService#consultarUnidadesDTO(java.lang.Integer)
+	 */
+	@Override
+	public List<UnidadCompetenciaDTO> consultarUnidadesDTO(Integer idSyllabus) throws DioneException {
+
+		List<UnidadCompetenciaDTO> unidadesCompetenciaDTO = new ArrayList<UnidadCompetenciaDTO>();
+
+		List<UnidadCompetencia> unidades = unidadCompetenciaDao.consultarUnidadesBySyllabus(idSyllabus);
+		for (UnidadCompetencia unidadCompetencia : unidades) {
+			UnidadCompetenciaDTO unidadCompetenciaDTO = new UnidadCompetenciaDTO();
+
+			unidadCompetenciaDTO.setUnidadCompetencia(unidadCompetencia.getUnidadCompetencia());
+			unidadCompetenciaDTO.setPlanificacionHoras(unidadCompetencia.getHorasCompetencia());
+
+			List<ElementoCompetencia> elementos = elementoCompetenciaDao.consultarElementoByUnidad(unidadCompetencia.getIdUnidadCompetencia());
+			List<ElementosCompetenciaDTO> elementosCompetenciaDTOs = new ArrayList<ElementosCompetenciaDTO>();
+			for (ElementoCompetencia elementoCompetencia : elementos) {
+				ElementosCompetenciaDTO elementosCompetenciaDTO = new ElementosCompetenciaDTO();
+				elementosCompetenciaDTO.setElementoCompetencia(elementoCompetencia.getElementoCompetencia());
+				elementosCompetenciaDTOs.add(elementosCompetenciaDTO);
+			}
+
+			unidadCompetenciaDTO.setElementosCompetencias(elementosCompetenciaDTOs);
+			unidadesCompetenciaDTO.add(unidadCompetenciaDTO);
+		}
+
+		return unidadesCompetenciaDTO;
 	}
 }

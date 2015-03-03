@@ -21,6 +21,13 @@ public class UnidadCompetenciaDTO implements Serializable {
 	private List<ElementosCompetenciaDTO> elementosCompetencias = new ArrayList<ElementosCompetenciaDTO>();
 
 	/**
+	 * 
+	 */
+	public UnidadCompetenciaDTO() {
+		super();
+	}
+
+	/**
 	 * @param unidadCompetencia
 	 * @param planificacionHoras
 	 * @param elementosCompetencias

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package ec.com.uce.ejb.service;
 
 import java.util.List;
@@ -21,6 +18,7 @@ import ec.com.uce.dione.entities.Prerequisito;
 import ec.com.uce.dione.entities.ResultadosAprendizaje;
 import ec.com.uce.dione.entities.Syllabus;
 import ec.com.uce.dione.entities.UnidadCompetencia;
+import ec.com.uce.ejb.dto.UnidadCompetenciaDTO;
 
 /**
  * <b> Interfaz local para el servicio que permite manejar el syllabus. </b>
@@ -200,7 +198,7 @@ public interface SyllabusService {
 	 * @throws DioneException
 	 */
 	public Syllabus consultarSyllabusByDocente(Integer idDocente) throws DioneException;
-	
+
 	/**
 	 * 
 	 * <b> Permite consultar la materia y el syllabus de la tabla MateriaSyllabus. </b>
@@ -213,7 +211,7 @@ public interface SyllabusService {
 	 * @throws DioneException
 	 */
 	public MateriaSyllabus consultarMateriaSyllabusBySyllabus(Integer idSyllabus) throws DioneException;
-	
+
 	/**
 	 * 
 	 * <b> Permite consultar las competencias por syllabus. </b>
@@ -226,7 +224,7 @@ public interface SyllabusService {
 	 * @throws DioneException
 	 */
 	public List<CompetenciasGenerica> consultarCompGenricasBySyllabus(Integer idSyllabus) throws DioneException;
-	
+
 	/**
 	 * 
 	 * <b> Permiete consultar las competencias especificas por syllabus. </b>
@@ -239,4 +237,30 @@ public interface SyllabusService {
 	 * @throws DioneException
 	 */
 	public List<CompetenciasEspecifica> consultarCompEspecificaBySyllabus(Integer idSyllabus) throws DioneException;
+
+	/**
+	 * 
+	 * <b> Permite consultar las bibliografias por syllabus. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 03/03/2015]
+	 * </p>
+	 * 
+	 * @param idSyllabus
+	 * @return
+	 * @throws DioneException
+	 */
+	public List<Bibliografia> consultarBibliografiasBySyllabus(Integer idSyllabus) throws DioneException;
+
+	/**
+	 * 
+	 * <b> Permite consultar las unidades de competencia y sus elementos por medio del syllabus </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 03/03/2015]
+	 * </p>
+	 * 
+	 * @param idSyllabus
+	 * @return
+	 * @throws DioneException
+	 */
+	public List<UnidadCompetenciaDTO> consultarUnidadesDTO(Integer idSyllabus) throws DioneException;
 }
