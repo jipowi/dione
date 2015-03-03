@@ -148,8 +148,8 @@
 
 				</p:dialog>
 				<!-- POPUP SYLLABUS -->
-				<p:dialog id="idSyllabus" header="Syllabus" widgetVar="syllabus" modal="true" width="500" height="400" position="center" showEffect="fade" hideEffect="explode"
-					resizable="false" closable="true">
+				<p:dialog id="idSyllabus" header="Syllabus" widgetVar="syllabus" modal="true" width="500" height="400" position="center" showEffect="fade"
+					hideEffect="explode" resizable="false" closable="true">
 					<div align="center">
 						<h:panelGrid columns="1">
 							<p:panel>
@@ -274,7 +274,6 @@
 								</h:panelGrid>
 								<p:spacer height="20px;" />
 
-
 								<!-- COMPETENCIAS ESPECIFICAS-->
 								<div align="center">
 									<h:panelGrid columns="1">
@@ -291,13 +290,80 @@
 										</p:column>
 									</p:dataTable>
 								</h:panelGrid>
+								<p:spacer height="20px;" />
+								<!-- BIBLIOGRAFIAS-->
+								<div align="center">
+									<h:panelGrid columns="1">
+										<p:outputLabel value="BILIOGRAFIAS" styleClass="negrita" />
+									</h:panelGrid>
+								</div>
+								<h:panelGrid columns="1">
+									<p:dataTable value="#{buscarDocenteBean.bibliografias}" var="obj" widgetVar="50" editable="true">
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="#{message['lbl.bibliografia']}" />
+											</f:facet>
+											<h:outputText value="#{obj.bibliografia}" />
+										</p:column>
+									</p:dataTable>
+								</h:panelGrid>
+								<p:spacer height="20px;" />
+								<!-- RESULTADOS-->
+								<div align="center">
+									<h:panelGrid columns="1">
+										<p:outputLabel value="RESULTADOS" styleClass="negrita" />
+									</h:panelGrid>
+								</div>
+								<h:panelGrid columns="1">
+									<p:dataTable value="#{buscarDocenteBean.resultados}" var="obj" widgetVar="50" editable="true">
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="#{message['lbl.resultadosAprendizaje']}" />
+											</f:facet>
+											<h:outputText value="#{obj.resultadoAprendizaje}" />
+										</p:column>
+									</p:dataTable>
+								</h:panelGrid>
+								<p:spacer height="20px;" />
+								<!-- UNIDADES-->
+								<div align="center">
+									<h:panelGrid columns="1">
+										<p:outputLabel value="UNIDADES DE COMPETENCIA" styleClass="negrita" />
+									</h:panelGrid>
+								</div>
+								<h:panelGrid columns="1">
+									<p:dataTable value="#{buscarDocenteBean.unidadesDTO}" var="obj" widgetVar="50" editable="true">
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="#{message['lbl.unidadCompetencia']}" />
+											</f:facet>
+											<h:outputText value="#{obj.unidadCompetencia}" />
+										</p:column>
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="#{message['lbl.planificacion']}" />
+											</f:facet>
+											<h:outputText value="#{obj.planificacionHoras}" />
+										</p:column>
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="#{message['lbl.planificacion']}" />
+											</f:facet>
+											<p:dataList value="#{obj.elementosCompetencias}" var="elemento" type="ordered">
+												<h:outputText value="#{elemento.elementoCompetencia}" />
+											</p:dataList>
+										</p:column>
+									</p:dataTable>
+								</h:panelGrid>
 
+								<!-- DESCARGAR DOCUMENTOS -->
 								<h:panelGrid columns="2">
 									<p:outputLabel value="#{message['lbl.descargarHoja']}" style="color: green;" />
 									<p:commandLink title="Descargar hoja de vida" actionListener="#{buscarDocenteBacking.descargarHojaVidaPDF()}">
 										<h:graphicImage name="pdf.png" library="img" />
 									</p:commandLink>
 								</h:panelGrid>
+								<p:spacer height="20px;" />
 							</p:panel>
 						</h:panelGrid>
 					</div>
