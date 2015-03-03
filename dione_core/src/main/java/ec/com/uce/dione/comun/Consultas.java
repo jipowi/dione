@@ -45,6 +45,12 @@ import javax.persistence.NamedQuery;
 		@NamedQuery(name = "CompetenciasEspecifica.findBySyllabus", query = "SELECT c FROM CompetenciasEspecifica c WHERE c.syllabus.idSyllabus =:idSyllabus"),
 		// RESULTADOS APRENDIZAJE
 		@NamedQuery(name = "ResultadosAprendizaje.findBySyllabus", query = "SELECT r FROM ResultadosAprendizaje r WHERE r.syllabus.idSyllabus =:idSyllabus"),
+		// BIBLIOGRAFIAS
+		@NamedQuery(name = "Bibliografia.findBySyllabus", query = "SELECT r FROM Bibliografia r WHERE r.syllabus.idSyllabus =:idSyllabus"),
+		// UNIDADES
+		@NamedQuery(name = "UnidadCompetencia.findBySyllabus", query = "SELECT r FROM UnidadCompetencia r WHERE r.syllabus.idSyllabus =:idSyllabus"),
+		// ELEMENTO COMPETENCIA
+		@NamedQuery(name = "ElementoCompetencia.findBySyllabus", query = "SELECT r FROM ElementoCompetencia r WHERE r.unidadCompetencia.idUnidadCompetencia =:idUnidadCompetencia"),
 		// MENU
 		@NamedQuery(name = "Menu.findByRol", query = "SELECT m FROM RolMenu m WHERE m.rol.idRol =:idRol") })
 public class Consultas implements Serializable {

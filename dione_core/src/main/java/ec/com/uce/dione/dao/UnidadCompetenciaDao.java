@@ -3,8 +3,11 @@
  */
 package ec.com.uce.dione.dao;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
+import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.UnidadCompetencia;
 
 /**
@@ -17,4 +20,16 @@ import ec.com.uce.dione.entities.UnidadCompetencia;
 @Local
 public interface UnidadCompetenciaDao extends GenericDAO<UnidadCompetencia, Long> {
 
+	/**
+	 * 
+	 * <b> Permite consutar las unidades de competencia de un determinado sylalbus. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 03/03/2015]
+	 * </p>
+	 * 
+	 * @param idSyllabus
+	 * @return
+	 * @throws DioneException
+	 */
+	public List<UnidadCompetencia> consultarUnidadesBySyllabus(Integer idSyllabus) throws DioneException;
 }
