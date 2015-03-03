@@ -10,6 +10,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import ec.com.uce.dione.entities.Bibliografia;
 import ec.com.uce.dione.entities.CompetenciaGenerale;
 import ec.com.uce.dione.entities.CompetenciasEspecifica;
 import ec.com.uce.dione.entities.CompetenciasGenerica;
@@ -19,7 +20,9 @@ import ec.com.uce.dione.entities.FormacionAcademica;
 import ec.com.uce.dione.entities.FormacionContinua;
 import ec.com.uce.dione.entities.Objetivo;
 import ec.com.uce.dione.entities.Prerequisito;
+import ec.com.uce.dione.entities.ResultadosAprendizaje;
 import ec.com.uce.ejb.dto.AsignaturaDTO;
+import ec.com.uce.ejb.dto.UnidadCompetenciaDTO;
 
 /**
  * <b> Permite manejar la informacion en la pagina y el backing </b>
@@ -57,6 +60,9 @@ public class BuscarDocenteBean implements Serializable {
 	private List<Prerequisito> prerequisitos = new ArrayList<Prerequisito>();
 	private List<Corequisito> corequisitos = new ArrayList<Corequisito>();
 	private List<Objetivo> objetivos = new ArrayList<Objetivo>();
+	private List<Bibliografia> bibliografias = new ArrayList<Bibliografia>();
+	private List<ResultadosAprendizaje> resultados = new ArrayList<ResultadosAprendizaje>();
+	private List<UnidadCompetenciaDTO> unidadesDTO = new ArrayList<UnidadCompetenciaDTO>();
 
 	/**
 	 * @return the apellidosDocente
@@ -371,6 +377,51 @@ public class BuscarDocenteBean implements Serializable {
 	 */
 	public void setObjetivos(List<Objetivo> objetivos) {
 		this.objetivos = objetivos;
+	}
+
+	/**
+	 * @return the bibliografias
+	 */
+	public List<Bibliografia> getBibliografias() {
+		return bibliografias;
+	}
+
+	/**
+	 * @param bibliografias
+	 *            the bibliografias to set
+	 */
+	public void setBibliografias(List<Bibliografia> bibliografias) {
+		this.bibliografias = bibliografias;
+	}
+
+	/**
+	 * @return the resultados
+	 */
+	public List<ResultadosAprendizaje> getResultados() {
+		return resultados;
+	}
+
+	/**
+	 * @param resultados
+	 *            the resultados to set
+	 */
+	public void setResultados(List<ResultadosAprendizaje> resultados) {
+		this.resultados = resultados;
+	}
+
+	/**
+	 * @return the unidadesDTO
+	 */
+	public List<UnidadCompetenciaDTO> getUnidadesDTO() {
+		return unidadesDTO;
+	}
+
+	/**
+	 * @param unidadesDTO
+	 *            the unidadesDTO to set
+	 */
+	public void setUnidadesDTO(List<UnidadCompetenciaDTO> unidadesDTO) {
+		this.unidadesDTO = unidadesDTO;
 	}
 
 }
