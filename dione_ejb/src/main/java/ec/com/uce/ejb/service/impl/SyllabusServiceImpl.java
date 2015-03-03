@@ -179,7 +179,7 @@ public class SyllabusServiceImpl implements SyllabusService {
 	 * @see ec.com.uce.ejb.service.SyllabusService#conusltarObjetivos(java.lang.Integer)
 	 */
 	@Override
-	public List<Objetivo> conusltarObjetivos(Integer idSyllabus) throws DioneException {
+	public List<Objetivo> consultarObjetivos(Integer idSyllabus) throws DioneException {
 		return objetivoDao.consultarObjetivos(idSyllabus);
 	}
 

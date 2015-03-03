@@ -110,7 +110,7 @@ public interface SyllabusService {
 	 * @return
 	 * @throws DioneException
 	 */
-	public List<Objetivo> conusltarObjetivos(Integer idSyllabus) throws DioneException;
+	public List<Objetivo> consultarObjetivos(Integer idSyllabus) throws DioneException;
 
 	/**
 	 * 
