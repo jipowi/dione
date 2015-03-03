@@ -13,9 +13,12 @@ import javax.faces.bean.SessionScoped;
 import ec.com.uce.dione.entities.CompetenciaGenerale;
 import ec.com.uce.dione.entities.CompetenciasEspecifica;
 import ec.com.uce.dione.entities.CompetenciasGenerica;
+import ec.com.uce.dione.entities.Corequisito;
 import ec.com.uce.dione.entities.EscuelaUce;
 import ec.com.uce.dione.entities.FormacionAcademica;
 import ec.com.uce.dione.entities.FormacionContinua;
+import ec.com.uce.dione.entities.Objetivo;
+import ec.com.uce.dione.entities.Prerequisito;
 import ec.com.uce.ejb.dto.AsignaturaDTO;
 
 /**
@@ -50,7 +53,10 @@ public class BuscarDocenteBean implements Serializable {
 	private List<CompetenciasGenerica> competenciasInstrumentales = new ArrayList<CompetenciasGenerica>();
 	private List<CompetenciasGenerica> competenciasInterpersonales = new ArrayList<CompetenciasGenerica>();
 	private List<CompetenciasGenerica> competenciasSistematicas = new ArrayList<CompetenciasGenerica>();
-	private List<CompetenciasEspecifica> competenciasEspeciificas = new ArrayList<CompetenciasEspecifica>();
+	private List<CompetenciasEspecifica> competenciasEspecificas = new ArrayList<CompetenciasEspecifica>();
+	private List<Prerequisito> prerequisitos = new ArrayList<Prerequisito>();
+	private List<Corequisito> corequisitos = new ArrayList<Corequisito>();
+	private List<Objetivo> objetivos = new ArrayList<Objetivo>();
 
 	/**
 	 * @return the apellidosDocente
@@ -310,16 +316,61 @@ public class BuscarDocenteBean implements Serializable {
 	/**
 	 * @return the competenciasEspeciificas
 	 */
-	public List<CompetenciasEspecifica> getCompetenciasEspeciificas() {
-		return competenciasEspeciificas;
+	public List<CompetenciasEspecifica> getCompetenciasEspecificas() {
+		return competenciasEspecificas;
 	}
 
 	/**
 	 * @param competenciasEspeciificas
 	 *            the competenciasEspeciificas to set
 	 */
-	public void setCompetenciasEspeciificas(List<CompetenciasEspecifica> competenciasEspeciificas) {
-		this.competenciasEspeciificas = competenciasEspeciificas;
+	public void setCompetenciasEspecificas(List<CompetenciasEspecifica> competenciasEspecificas) {
+		this.competenciasEspecificas = competenciasEspecificas;
+	}
+
+	/**
+	 * @return the prerequisitos
+	 */
+	public List<Prerequisito> getPrerequisitos() {
+		return prerequisitos;
+	}
+
+	/**
+	 * @param prerequisitos
+	 *            the prerequisitos to set
+	 */
+	public void setPrerequisitos(List<Prerequisito> prerequisitos) {
+		this.prerequisitos = prerequisitos;
+	}
+
+	/**
+	 * @return the corequisitos
+	 */
+	public List<Corequisito> getCorequisitos() {
+		return corequisitos;
+	}
+
+	/**
+	 * @param corequisitos
+	 *            the corequisitos to set
+	 */
+	public void setCorequisitos(List<Corequisito> corequisitos) {
+		this.corequisitos = corequisitos;
+	}
+
+	/**
+	 * @return the objetivos
+	 */
+	public List<Objetivo> getObjetivos() {
+		return objetivos;
+	}
+
+	/**
+	 * @param objetivos
+	 *            the objetivos to set
+	 */
+	public void setObjetivos(List<Objetivo> objetivos) {
+		this.objetivos = objetivos;
 	}
 
 }

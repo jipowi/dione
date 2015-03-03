@@ -171,7 +171,7 @@ public class ResultadosBacking implements Serializable {
 
 		try {
 			//syllabus = syllabusService.consultarSyllabusByDocenteAndMateria(idDocente, idMateria);
-			List<Objetivo> objetivos = syllabusService.conusltarObjetivos(syllabus.getIdSyllabus());
+			List<Objetivo> objetivos = syllabusService.consultarObjetivos(syllabus.getIdSyllabus());
 			List<CompetenciaGenerale> competencias = syllabusService.consultarCompetenciasBySyllabus(syllabus.getIdSyllabus());
 			List<ResultadosAprendizaje> resultados = syllabusService.consultarResultadosAprendizaje(syllabus.getIdSyllabus());
 

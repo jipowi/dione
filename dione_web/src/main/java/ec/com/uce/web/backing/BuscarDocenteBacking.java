@@ -14,6 +14,9 @@ import javax.faces.bean.SessionScoped;
 import org.apache.log4j.Logger;
 
 import ec.com.uce.dione.comun.DioneException;
+import ec.com.uce.dione.entities.CompetenciaGenerale;
+import ec.com.uce.dione.entities.CompetenciasEspecifica;
+import ec.com.uce.dione.entities.CompetenciasGenerica;
 import ec.com.uce.dione.entities.Docente;
 import ec.com.uce.dione.entities.EscuelaUce;
 import ec.com.uce.dione.entities.MateriaSyllabus;
@@ -103,13 +106,47 @@ public class BuscarDocenteBacking implements Serializable {
 				// Syllabus
 				Syllabus syllabus = syllabusService.consultarSyllabusByDocente(docente.getIdDocente());
 
-				MateriaSyllabus materiaSyllabus = syllabusService.consultarMateriaSyllabusBySyllabus(syllabus.getIdSyllabus());
+				Integer idSyllabus = syllabus.getIdSyllabus();
+
+				MateriaSyllabus materiaSyllabus = syllabusService.consultarMateriaSyllabusBySyllabus(idSyllabus);
+				
 				buscarDocenteBean.setMateria(materiaSyllabus.getMateriaUce().getMateriaUce());
 				buscarDocenteBean.setNumHorasPresenciales(syllabus.getNumHorasPresenciales());
 				buscarDocenteBean.setNumHorasTutorias(syllabus.getHorasTutorias());
 				buscarDocenteBean.setDesAsignatura(syllabus.getDescripcionAsignatura());
-				
 
+				//Prerequisitos
+				buscarDocenteBean.setPrerequisitos(syllabusService.obtenerPrerequisitos(materiaSyllabus.getIdMateriaSyllabus()));
+				buscarDocenteBean.setCorequisitos(syllabusService.obtenerCorequisitos(materiaSyllabus.getIdMateriaSyllabus()));
+				
+				//Objetivos
+				buscarDocenteBean.setObjetivos(syllabusService.consultarObjetivos(idSyllabus));
+				
+				List<CompetenciaGenerale> competenciasGenerales = syllabusService.consultarCompetenciasBySyllabus(idSyllabus);
+				List<CompetenciasGenerica> competenciasGenericas = syllabusService.consultarCompGenricasBySyllabus(idSyllabus);
+				List<CompetenciasEspecifica> competenciasEspecificas = syllabusService.consultarCompEspecificaBySyllabus(idSyllabus);
+
+				List<CompetenciasGenerica> competenciasInstrumentales = new ArrayList<CompetenciasGenerica>();
+				List<CompetenciasGenerica> competenciasInterpersonales = new ArrayList<CompetenciasGenerica>();
+				List<CompetenciasGenerica> competenciasSistematicas = new ArrayList<CompetenciasGenerica>();
+				buscarDocenteBean.setCompetenciasGenerales(competenciasGenerales);
+				
+				for (CompetenciasGenerica competencia : competenciasGenericas) {
+					if (competencia.getTipoCompetencia() == 1) {
+						competenciasInstrumentales.add(competencia);
+					} else if (competencia.getTipoCompetencia() == 2) {
+						competenciasInterpersonales.add(competencia);
+					} else if (competencia.getTipoCompetencia() == 3) {
+						competenciasSistematicas.add(competencia);
+					}
+				}
+
+				buscarDocenteBean.setCompetenciasInstrumentales(competenciasInstrumentales);
+				buscarDocenteBean.setCompetenciasInterpersonales(competenciasInterpersonales);
+				buscarDocenteBean.setCompetenciasSistematicas(competenciasSistematicas);
+				
+				buscarDocenteBean.setCompetenciasEspecificas(competenciasEspecificas);
+				
 			} else {
 				MessagesController.addError(null, HiperionMensajes.getInstancia().getString("dione.mensaje.error.buscar"));
 			}
@@ -121,6 +158,7 @@ public class BuscarDocenteBacking implements Serializable {
 
 	}
 
+	
 	/**
 	 * @return the buscarDocenteBean
 	 */
