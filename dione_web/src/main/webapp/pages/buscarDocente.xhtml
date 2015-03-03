@@ -148,7 +148,7 @@
 
 				</p:dialog>
 				<!-- POPUP SYLLABUS -->
-				<p:dialog id="idSyllabus" header="Syllabus" widgetVar="syllabus" modal="true" width="500" position="center" showEffect="fade" hideEffect="explode"
+				<p:dialog id="idSyllabus" header="Syllabus" widgetVar="syllabus" modal="true" width="500" height="400" position="center" showEffect="fade" hideEffect="explode"
 					resizable="false" closable="true">
 					<div align="center">
 						<h:panelGrid columns="1">
@@ -166,13 +166,139 @@
 									<p:outputLabel value="#{message['lbl.desAsignatura']}:" styleClass="negrita" />
 									<p:outputLabel value="#{buscarDocenteBean.desAsignatura}" />
 								</h:panelGrid>
+								<p:spacer height="30px;" />
+								<!-- PREREQUISITOS -->
+								<div align="center">
+									<h:panelGrid columns="1">
+										<p:outputLabel value="PREREQUISITOS" styleClass="negrita" />
+									</h:panelGrid>
+								</div>
+								<h:panelGrid columns="1">
+									<p:outputLabel value="#{message['lbl.infoPrerequisito']}" styleClass="negrita" />
+									<p:dataTable value="#{buscarDocenteBean.prerequisitos}" var="obj" widgetVar="50" editable="true">
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="#{message['lbl.prerequisito']}" />
+											</f:facet>
+											<h:outputText value="#{obj.prerequisito}" />
+										</p:column>
+									</p:dataTable>
+								</h:panelGrid>
+								<p:spacer height="10px;" />
+								<!-- COREQUISITOS -->
+								<div align="center">
+									<h:panelGrid columns="1">
+										<p:outputLabel value="COREQUISITOS" styleClass="negrita" />
+									</h:panelGrid>
+								</div>
+								<h:panelGrid columns="1">
+									<p:outputLabel value="#{message['lbl.infoPrerequisito']}" styleClass="negrita" />
+									<p:dataTable value="#{buscarDocenteBean.corequisitos}" var="obj" widgetVar="50" editable="true">
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="#{message['lbl.corequisito']}" />
+											</f:facet>
+											<h:outputText value="#{obj.corequisito}" />
+										</p:column>
+									</p:dataTable>
+								</h:panelGrid>
+								<p:spacer height="30px;" />
+								<!-- OBJETIVOS -->
+								<div align="center">
+									<h:panelGrid columns="1">
+										<p:outputLabel value="OBJETIVOS" styleClass="negrita" />
+									</h:panelGrid>
+								</div>
+								<h:panelGrid columns="1">
+									<p:dataTable value="#{buscarDocenteBean.objetivos}" var="obj" widgetVar="50" editable="true">
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="#{message['lbl.objetivo']}" />
+											</f:facet>
+											<h:outputText value="#{obj.objetivo}" />
+										</p:column>
+									</p:dataTable>
+								</h:panelGrid>
+								<!-- COMPETENCIAS GENERALES-->
+								<p:spacer height="30px;" />
+								<div align="center">
+									<h:panelGrid columns="1">
+										<p:outputLabel value="COMPETENCIAS GENERALES" styleClass="negrita" />
+									</h:panelGrid>
+								</div>
+								<h:panelGrid columns="1">
+									<p:dataTable id="tablaCompetenciasGenerales" value="#{buscarDocenteBean.competenciasGenerales}" var="obj" widgetVar="50" editable="true">
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="#{message['lbl.competenciaGeneral']}" />
+											</f:facet>
+											<h:outputText value="#{obj.competenciaGeneral}" />
+										</p:column>
+									</p:dataTable>
+								</h:panelGrid>
+								<p:spacer height="20px;" />
+
+								<!-- COMPETENCIAS GENERICAS-->
+								<div align="center">
+									<h:panelGrid columns="1">
+										<p:outputLabel value="COMPETENCIAS GENERICAS" styleClass="negrita" />
+									</h:panelGrid>
+								</div>
+								<h:panelGrid columns="1">
+									<p:dataTable value="#{buscarDocenteBean.competenciasInstrumentales}" var="obj" widgetVar="50" editable="true">
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="#{message['lbl.competenciasInstrumentales']}" />
+											</f:facet>
+											<h:outputText value="#{obj.competenciaGenerica}" />
+										</p:column>
+									</p:dataTable>
+									<p:spacer height="10px;" />
+									<p:dataTable value="#{buscarDocenteBean.competenciasInterpersonales}" var="obj" widgetVar="50" editable="true">
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="#{message['lbl.competenciasInterpersonales']}" />
+											</f:facet>
+											<h:outputText value="#{obj.competenciaGenerica}" />
+										</p:column>
+									</p:dataTable>
+									<p:spacer height="10px;" />
+									<p:dataTable value="#{buscarDocenteBean.competenciasSistematicas}" var="obj" widgetVar="50" editable="true">
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="#{message['lbl.competenciasSistematicas']}" />
+											</f:facet>
+											<h:outputText value="#{obj.competenciaGenerica}" />
+										</p:column>
+									</p:dataTable>
+								</h:panelGrid>
+								<p:spacer height="20px;" />
+
+
+								<!-- COMPETENCIAS ESPECIFICAS-->
+								<div align="center">
+									<h:panelGrid columns="1">
+										<p:outputLabel value="COMPETENCIAS ESPECIFICAS" styleClass="negrita" />
+									</h:panelGrid>
+								</div>
+								<h:panelGrid columns="1">
+									<p:dataTable id="tablaCompetenciasEspecificas" value="#{buscarDocenteBean.competenciasEspecificas}" var="obj" widgetVar="50" editable="true">
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="#{message['lbl.competenciaEspecifica']}" />
+											</f:facet>
+											<h:outputText value="#{obj.competenciaEspecifica}" />
+										</p:column>
+									</p:dataTable>
+								</h:panelGrid>
+
+								<h:panelGrid columns="2">
+									<p:outputLabel value="#{message['lbl.descargarHoja']}" style="color: green;" />
+									<p:commandLink title="Descargar hoja de vida" actionListener="#{buscarDocenteBacking.descargarHojaVidaPDF()}">
+										<h:graphicImage name="pdf.png" library="img" />
+									</p:commandLink>
+								</h:panelGrid>
 							</p:panel>
-						</h:panelGrid>
-						<h:panelGrid columns="2">
-							<p:outputLabel value="#{message['lbl.descargarHoja']}" style="color: green;" />
-							<p:commandLink title="Descargar hoja de vida" actionListener="#{buscarDocenteBacking.descargarHojaVidaPDF()}">
-								<h:graphicImage name="pdf.png" library="img" />
-							</p:commandLink>
 						</h:panelGrid>
 					</div>
 				</p:dialog>
