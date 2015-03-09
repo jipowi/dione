@@ -12,6 +12,7 @@ import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.dao.DocenteDao;
 import ec.com.uce.dione.dao.EscuelaDao;
 import ec.com.uce.dione.dao.EscuelaUceDao;
+import ec.com.uce.dione.dao.ExperienciaDao;
 import ec.com.uce.dione.dao.FormacionADao;
 import ec.com.uce.dione.dao.FormacionCDao;
 import ec.com.uce.dione.dao.MateriaDao;
@@ -19,6 +20,7 @@ import ec.com.uce.dione.dao.MateriaUceDao;
 import ec.com.uce.dione.entities.Docente;
 import ec.com.uce.dione.entities.Escuela;
 import ec.com.uce.dione.entities.EscuelaUce;
+import ec.com.uce.dione.entities.Experiencia;
 import ec.com.uce.dione.entities.FormacionAcademica;
 import ec.com.uce.dione.entities.FormacionContinua;
 import ec.com.uce.dione.entities.Materia;
@@ -49,7 +51,8 @@ public class DocenteServiceImpl implements DocenteService {
 	private FormacionADao formacionADao;
 	@EJB
 	private FormacionCDao formacionCDao;
-
+	@EJB
+	private ExperienciaDao experienciaDao;
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -117,16 +120,25 @@ public class DocenteServiceImpl implements DocenteService {
 	 * @see ec.com.uce.ejb.service.DocenteService#guardarHojaVida(java.util.List, java.util.List)
 	 */
 	@Override
-	public void guardarHojaVida(List<FormacionAcademica> formacionAcademicas, List<FormacionContinua> formacionContinuas) throws DioneException {
+	public void guardarHojaVida(Docente docente, List<FormacionAcademica> formacionAcademicas, List<FormacionContinua> formacionContinuas, List<Experiencia> experiencias)
+			throws DioneException {
 		for (FormacionContinua formacionContinua : formacionContinuas) {
+			formacionContinua.setDocente(docente);
 			formacionCDao.persist(formacionContinua);
 		}
 		for (FormacionAcademica formacionAcademinca : formacionAcademicas) {
+			formacionAcademinca.setDocente(docente);
 			formacionADao.persist(formacionAcademinca);
+		}
+		for (Experiencia experiencia: experiencias){
+			experiencia.setDocente(docente);
+			experienciaDao.persist(experiencia);
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ec.com.uce.ejb.service.DocenteService#consultarEscuelaUceById(java.lang.Long)
 	 */
 	@Override
@@ -134,7 +146,9 @@ public class DocenteServiceImpl implements DocenteService {
 		return escuelaUceDao.findById(escuela);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ec.com.uce.ejb.service.DocenteService#consultarFormacionAByDocente(java.lang.Integer)
 	 */
 	@Override
@@ -142,7 +156,9 @@ public class DocenteServiceImpl implements DocenteService {
 		return formacionADao.consultarFormacionByDocente(idDocente);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ec.com.uce.ejb.service.DocenteService#consultarFormacionCByDocente(java.lang.Integer)
 	 */
 	@Override

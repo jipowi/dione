@@ -11,6 +11,7 @@ import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.Docente;
 import ec.com.uce.dione.entities.Escuela;
 import ec.com.uce.dione.entities.EscuelaUce;
+import ec.com.uce.dione.entities.Experiencia;
 import ec.com.uce.dione.entities.FormacionAcademica;
 import ec.com.uce.dione.entities.FormacionContinua;
 import ec.com.uce.dione.entities.Materia;
@@ -106,14 +107,17 @@ public interface DocenteService {
 	 * 
 	 * <b> Permite guardar la hoja de vida del docente </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 06/02/2015]
+	 * [Author: Paul Jimenez, Date: 04/03/2015]
 	 * </p>
 	 * 
+	 * @param docente
 	 * @param formacionAcademicas
 	 * @param formacionContinuas
+	 * @param experiencias
 	 * @throws DioneException
 	 */
-	public void guardarHojaVida(List<FormacionAcademica> formacionAcademicas, List<FormacionContinua> formacionContinuas) throws DioneException;
+	public void guardarHojaVida(Docente docente, List<FormacionAcademica> formacionAcademicas, List<FormacionContinua> formacionContinuas, List<Experiencia> experiencias)
+			throws DioneException;
 
 	/**
 	 * 
