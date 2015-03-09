@@ -5,6 +5,7 @@ package ec.com.uce.web.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -15,6 +16,8 @@ import javax.faces.model.SelectItem;
 
 import org.primefaces.event.RowEditEvent;
 
+import ec.com.uce.dione.entities.Experiencia;
+import ec.com.uce.ejb.dto.ExperienciaDTO;
 import ec.com.uce.ejb.dto.FormacionAcademicaDTO;
 import ec.com.uce.ejb.dto.FormacionContinuaDTO;
 
@@ -44,9 +47,15 @@ public class HojaVidaBean implements Serializable {
 	private String apellidosDocente;
 	private String direccionDocente;
 	private String nombresDocente;
+	private String institucion;
+	private String funciones;
+	private Date fechaInicio;
+	private Date fechaFin;
 
+	private static ArrayList<ExperienciaDTO> experienciaList = new ArrayList<ExperienciaDTO>();
 	private static ArrayList<FormacionAcademicaDTO> formacionAcademicaList = new ArrayList<FormacionAcademicaDTO>();
 	private static ArrayList<FormacionContinuaDTO> formacionContinuaList = new ArrayList<FormacionContinuaDTO>();
+	private List<Experiencia> experiencias = new ArrayList<Experiencia>();
 
 	/**
 	 * @return the institucionFc
@@ -309,8 +318,6 @@ public class HojaVidaBean implements Serializable {
 		this.apellidosDocente = apellidosDocente;
 	}
 
-
-
 	/**
 	 * @return the direccionDocente
 	 */
@@ -339,6 +346,145 @@ public class HojaVidaBean implements Serializable {
 	 */
 	public void setNombresDocente(String nombresDocente) {
 		this.nombresDocente = nombresDocente;
+	}
+
+	/**
+	 * 
+	 * <b> Permite agregar un registro de experiencia </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: Dec 1, 2014]
+	 * </p>
+	 * 
+	 * @return
+	 */
+	public String addExperiencia() {
+		ExperienciaDTO item = new ExperienciaDTO(this.institucion, this.fechaInicio, this.fechaFin, this.funciones);
+		experienciaList.add(item);
+
+		institucion = "";
+		fechaInicio = null;
+		fechaFin = null;
+		funciones = "";
+		return null;
+	}
+
+	/**
+	 * 
+	 * <b> Permite editar un registro de la tabla </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: Dec 1, 2014]
+	 * </p>
+	 * 
+	 * @param event
+	 */
+	public void onEditExperiencia(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Item Edited", ((ExperienciaDTO) event.getObject()).getInstitucion().toString());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+
+	/**
+	 * 
+	 * <b> Permite eliminar un registro de la tabla </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: Dec 1, 2014]
+	 * </p>
+	 * 
+	 * @param event
+	 */
+	public void onCancelExperiencia(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Item Cancelled");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		experienciaList.remove((ExperienciaDTO) event.getObject());
+	}
+
+	/**
+	 * @return the institucion
+	 */
+	public String getInstitucion() {
+		return institucion;
+	}
+
+	/**
+	 * @param institucion
+	 *            the institucion to set
+	 */
+	public void setInstitucion(String institucion) {
+		this.institucion = institucion;
+	}
+
+	/**
+	 * @return the funciones
+	 */
+	public String getFunciones() {
+		return funciones;
+	}
+
+	/**
+	 * @param funciones
+	 *            the funciones to set
+	 */
+	public void setFunciones(String funciones) {
+		this.funciones = funciones;
+	}
+
+	/**
+	 * @return the fechaInicio
+	 */
+	public Date getFechaInicio() {
+		return fechaInicio;
+	}
+
+	/**
+	 * @param fechaInicio
+	 *            the fechaInicio to set
+	 */
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	/**
+	 * @return the fechaFin
+	 */
+	public Date getFechaFin() {
+		return fechaFin;
+	}
+
+	/**
+	 * @param fechaFin
+	 *            the fechaFin to set
+	 */
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+
+	/**
+	 * @return the experienciaList
+	 */
+	public ArrayList<ExperienciaDTO> getExperienciaList() {
+		return experienciaList;
+	}
+
+	/**
+	 * @param experienciaList
+	 *            the experienciaList to set
+	 */
+	public static void setExperienciaList(ArrayList<ExperienciaDTO> experienciaList) {
+		HojaVidaBean.experienciaList = experienciaList;
+	}
+
+	/**
+	 * @return the experiencias
+	 */
+	public List<Experiencia> getExperiencias() {
+		return experiencias;
+	}
+
+	/**
+	 * @param experiencias
+	 *            the experiencias to set
+	 */
+	public void setExperiencias(List<Experiencia> experiencias) {
+		this.experiencias = experiencias;
 	}
 
 }

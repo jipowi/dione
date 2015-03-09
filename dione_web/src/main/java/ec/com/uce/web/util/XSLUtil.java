@@ -6,6 +6,7 @@ package ec.com.uce.web.util;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -17,6 +18,8 @@ import org.jdom.Document;
 import ec.com.kruger.framework.common.util.TransformerUtil;
 import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.Docente;
+import ec.com.uce.dione.entities.FormacionAcademica;
+import ec.com.uce.dione.entities.FormacionContinua;
 import ec.com.uce.ejb.doc.GenerarDocumento;
 import ec.com.uce.web.xsl.XSLHelper;
 
@@ -50,7 +53,7 @@ public class XSLUtil {
 	 * @param docente
 	 * @return
 	 */
-	public String generarXml(Docente docente) {
+	public String generarXmlHojaVida(Docente docente, List<FormacionAcademica> formacionesA, List<FormacionContinua> formacionesC) {
 		StringBuilder xml = new StringBuilder();
 
 		try {
@@ -59,7 +62,7 @@ public class XSLUtil {
 			try {
 				String nombreClase = "java:app/dione_web/HojaVidaImpl";
 				GenerarDocumento generarDocumento = (GenerarDocumento) getObjectByJndi(nombreClase);
-				xml.append(generarDocumento.generarXml(docente));
+				xml.append(generarDocumento.generarXml(docente, formacionesA, formacionesC));
 
 			} catch (Exception e) {
 				log.error("Error, generacion xml reporte, e{}", e);
@@ -74,18 +77,18 @@ public class XSLUtil {
 	}
 
 	/**
-	 * <b>Obtiene los datos del correo para envio</b>
+	 * 
+	 * <b> Permite generar el HTML de la hoja de vida. </b>
 	 * <p>
-	 * [Author: gyandun, Date: 30/05/2014]
+	 * [Author: Paul Jimenez, Date: 09/03/2015]
 	 * </p>
 	 * 
-	 * @param evento
-	 *            Datos del evento que se ejecuta
-	 * @param mail
-	 *            Datos del mail a enviar
-	 * @return Devuelve el texto a enviar en el correo
+	 * @param docente
+	 * @param formacionesC
+	 * @param formacionesA
+	 * @return
 	 */
-	public String obtenerHtml(Docente docente) {
+	public String obtenerHtmlHojaVida(Docente docente, List<FormacionAcademica> formacionesA, List<FormacionContinua> formacionesC) {
 		String html = null;
 		try {
 			InputStream in = XSLHelper.class.getResourceAsStream("HojaVidaHTML.xsl");
@@ -103,7 +106,7 @@ public class XSLUtil {
 			String contenidoXSL = sb.toString();
 
 			// Se genera el XML con los datos del correo
-			String contenidoXml = generarXml(docente);
+			String contenidoXml = generarXmlHojaVida(docente, formacionesA, formacionesC);
 			Document docXML = TransformerUtil.stringToXMLDocument(contenidoXml.toString());
 			Document docXSL = TransformerUtil.stringToXML(contenidoXSL);
 			Document result = TransformerUtil.transformar(docXML, docXSL);

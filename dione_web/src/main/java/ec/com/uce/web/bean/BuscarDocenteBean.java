@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package ec.com.uce.web.bean;
 
 import java.io.Serializable;

@@ -14,9 +14,11 @@ import org.apache.log4j.Logger;
 
 import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.Docente;
+import ec.com.uce.dione.entities.Experiencia;
 import ec.com.uce.dione.entities.FormacionAcademica;
 import ec.com.uce.dione.entities.FormacionContinua;
 import ec.com.uce.dione.enumeration.TipoDuracionEnum;
+import ec.com.uce.ejb.dto.ExperienciaDTO;
 import ec.com.uce.ejb.dto.FormacionAcademicaDTO;
 import ec.com.uce.ejb.dto.FormacionContinuaDTO;
 import ec.com.uce.ejb.service.DocenteService;
@@ -120,6 +122,7 @@ public class HojaVidaBacking implements Serializable {
 
 			List<FormacionAcademica> formacionAcademicas = new ArrayList<FormacionAcademica>();
 			List<FormacionContinua> formacionContinuas = new ArrayList<FormacionContinua>();
+			List<Experiencia> experiencias = new ArrayList<Experiencia>();
 
 			for (FormacionAcademicaDTO formacionAcademicaDTO : hojaVidaBean.getFormacionAcademicaList()) {
 				FormacionAcademica formacionAcademica = new FormacionAcademica();
@@ -138,7 +141,16 @@ public class HojaVidaBacking implements Serializable {
 				formacionContinuas.add(formacionContinua);
 			}
 
-			docenteService.guardarHojaVida(formacionAcademicas, formacionContinuas);
+			for(ExperienciaDTO experienciaDTO: hojaVidaBean.getExperienciaList()){
+				Experiencia experiencia = new Experiencia();
+				experiencia.setInstitucionExp(experienciaDTO.getInstitucion());
+				experiencia.setFechaInicioExp(experienciaDTO.getFechaInicio());
+				experiencia.setFechaFinExp(experienciaDTO.getFechaFin());
+				experiencia.setFuncionExp(experienciaDTO.getFunciones());
+				experiencias.add(experiencia);
+			}
+			
+			docenteService.guardarHojaVida(docente, formacionAcademicas, formacionContinuas, experiencias);
 			MessagesController.addInfo(null, HiperionMensajes.getInstancia().getString("dione.mensaje.exito.save"));
 
 			hojaVidaBean.setCedula(null);
