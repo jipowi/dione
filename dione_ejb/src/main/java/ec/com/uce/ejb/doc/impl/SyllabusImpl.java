@@ -19,6 +19,7 @@ import ec.com.uce.dione.entities.Prerequisito;
 import ec.com.uce.dione.entities.ResultadosAprendizaje;
 import ec.com.uce.dione.entities.Syllabus;
 import ec.com.uce.ejb.doc.GenerarDocumentoSyllabus;
+import ec.com.uce.ejb.dto.ElementosCompetenciaDTO;
 import ec.com.uce.ejb.dto.UnidadCompetenciaDTO;
 import ec.com.uce.ejb.service.SyllabusService;
 
@@ -59,39 +60,66 @@ public class SyllabusImpl implements GenerarDocumentoSyllabus {
 
 	private static String tagInicioObjetivos = "<objetivos>";
 	private static String tagFinObjetivos = "</objetivos>";
-	
+
 	private static String tagInicioObjetivo = "<objetivo>";
 	private static String tagFinObjetivo = "</objetivo>";
 
 	private static String tagInicioComGenerales = "<comGenerales>";
 	private static String tagFinComGenerales = "</comGenerales>";
-	
+
 	private static String tagInicioCompGeneral = "<compGeneral>";
 	private static String tagFinCompGeneral = "</compGeneral>";
 
 	private static String tagInicioComInterpersonales = "<comInterpersonales>";
 	private static String tagFinComInterpersonales = "</comInterpersonales>";
-	
+
 	private static String tagInicioComInterpersonal = "<comInterpersonal>";
 	private static String tagFinComInterpersonal = "</comInterpersonal>";
 
 	private static String tagInicioComInstrumentales = "<comInstrumentales>";
 	private static String tagFinComInstrumentales = "</comInstrumentales>";
-	
+
 	private static String tagInicioComInstrumental = "<comInstrumental>";
 	private static String tagFinComInstrumental = "</comInstrumental>";
-	
+
 	private static String tagInicioComSistematicas = "<comSistematicas>";
 	private static String tagFinComSistematicas = "</comSistematicas>";
 
 	private static String tagInicioComSistematica = "<comSistematica>";
 	private static String tagFinComSistematica = "</comSistematica>";
-	
+
 	private static String tagInicioComEspecificas = "<comEspecificas>";
 	private static String tagFinComEspecificas = "</comEspecificas>";
-	
+
 	private static String tagInicioComEspecifica = "<comEspecifica>";
 	private static String tagFinComEspecifica = "</comEspecifica>";
+
+	private static String tagInicioBibliografias = "<bibliografias>";
+	private static String tagFinBibliografias = "</bibliografias>";
+
+	private static String tagInicioBibliografia = "<bibliografia>";
+	private static String tagFinBibliografia = "</bibliografia>";
+
+	private static String tagInicioResultados = "<resultados>";
+	private static String tagFinResultados = "</resultados>";
+
+	private static String tagInicioResultado = "<resultado>";
+	private static String tagFinResultado = "</resultado>";
+
+	private static String tagInicioUnidades = "<unidades>";
+	private static String tagFinUnidades = "</unidades>";
+
+	private static String tagInicioUnidadCompetencia = "<unidadCompetencia>";
+	private static String tagFinUnidadCompetencia = "</unidadCompetencia>";
+
+	private static String tagInicioHoras = "<horas>";
+	private static String tagFinHoras = "</horas>";
+
+	private static String tagInicioElementos = "<elementos>";
+	private static String tagFinElementos = "</elementos>";
+
+	private static String tagInicioElemento = "<elemento>";
+	private static String tagFinElemento = "</elemento>";
 
 	@EJB
 	private SyllabusService syllabusService;
@@ -162,6 +190,32 @@ public class SyllabusImpl implements GenerarDocumentoSyllabus {
 			buffer.append(tagInicioComEspecificas);
 			buffer.append(tagInicioComEspecifica).append(StringEscapeUtils.escapeXml(especifica.getCompetenciaEspecifica())).append(tagFinComEspecifica);
 			buffer.append(tagFinComEspecificas);
+		}
+		// Bibliografias
+		for (Bibliografia bibliografia : bibliografias) {
+			buffer.append(tagInicioBibliografias);
+			buffer.append(tagInicioBibliografia).append(StringEscapeUtils.escapeXml(bibliografia.getBibliografia())).append(tagFinBibliografia);
+			buffer.append(tagFinBibliografias);
+		}
+		// Resultados
+		for (ResultadosAprendizaje resultado : resultados) {
+			buffer.append(tagInicioResultados);
+			buffer.append(tagInicioResultado).append(StringEscapeUtils.escapeXml(resultado.getResultadoAprendizaje())).append(tagFinResultado);
+			buffer.append(tagFinResultados);
+		}
+		// Unidades
+		for (UnidadCompetenciaDTO unidadDTO : unidadesDTO) {
+			buffer.append(tagInicioUnidades);
+			buffer.append(tagInicioUnidadCompetencia).append(StringEscapeUtils.escapeXml(unidadDTO.getUnidadCompetencia())).append(tagFinUnidadCompetencia);
+			buffer.append(tagInicioHoras).append(StringEscapeUtils.escapeXml(unidadDTO.getPlanificacionHoras().toString())).append(tagFinHoras);
+
+			for (ElementosCompetenciaDTO elementoDTO : unidadDTO.getElementosCompetencias()) {
+				buffer.append(tagInicioElementos);
+				buffer.append(tagInicioElemento).append(StringEscapeUtils.escapeXml(elementoDTO.getElementoCompetencia())).append(tagFinElemento);
+				buffer.append(tagFinElementos);
+			}
+
+			buffer.append(tagFinUnidades);
 		}
 
 		return buffer.toString();
