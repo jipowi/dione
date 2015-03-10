@@ -49,6 +49,8 @@ import javax.persistence.NamedQuery;
 		@NamedQuery(name = "Bibliografia.findBySyllabus", query = "SELECT r FROM Bibliografia r WHERE r.syllabus.idSyllabus =:idSyllabus"),
 		// UNIDADES
 		@NamedQuery(name = "UnidadCompetencia.findBySyllabus", query = "SELECT r FROM UnidadCompetencia r WHERE r.syllabus.idSyllabus =:idSyllabus"),
+		// EXPERIENCIAS
+		@NamedQuery(name = "Experiencia.findByDocente", query = "SELECT e FROM Experiencia e WHERE e.docente.idDocente =:idDocente"),
 		// ELEMENTO COMPETENCIA
 		@NamedQuery(name = "ElementoCompetencia.findBySyllabus", query = "SELECT r FROM ElementoCompetencia r WHERE r.unidadCompetencia.idUnidadCompetencia =:idUnidadCompetencia"),
 		// MENU
