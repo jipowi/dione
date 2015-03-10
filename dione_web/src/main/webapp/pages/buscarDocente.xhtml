@@ -126,15 +126,56 @@
 							<p:dataTable id="tablaFormacionC" value="#{buscarDocenteBean.formacionesC}" var="obj" widgetVar="50" style="width: 70%;" editable="true">
 								<p:column>
 									<f:facet name="header">
+										<h:outputLabel value="#{message['lbl.curso']}" />
+									</f:facet>
+									<h:outputText value="#{obj.curso}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputLabel value="#{message['lbl.duracion']}" />
+									</f:facet>
+									<h:outputText value="#{obj.duracion}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">
 										<h:outputLabel value="#{message['lbl.institucion']}" />
 									</f:facet>
 									<h:outputText value="#{obj.institucionContinua}" />
 								</p:column>
+							</p:dataTable>
+						</h:panelGrid>
+						<p:spacer height="20px;" />
+						<!-- EXPERIENCIA-->
+						<div align="center">
+							<h:panelGrid columns="1">
+								<p:outputLabel value="EXPERIENCIA" styleClass="negrita" />
+							</h:panelGrid>
+						</div>
+						<h:panelGrid columns="1">
+							<p:dataTable value="#{buscarDocenteBean.experiencias}" var="obj" widgetVar="50" editable="true">
 								<p:column>
 									<f:facet name="header">
-										<h:outputLabel value="#{message['lbl.curso']}" />
+										<h:outputText value="#{message['lbl.institucion']}" />
 									</f:facet>
-									<h:outputText value="#{obj.curso}" />
+									<h:outputText value="#{obj.institucionExp}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{message['lbl.fechaInicio']}" />
+									</f:facet>
+									<h:outputText value="#{obj.fechaInicioExp}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{message['lbl.fechaFin']}" />
+									</f:facet>
+									<h:outputText value="#{obj.fechaFinExp}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{message['lbl.funciones']}" />
+									</f:facet>
+									<h:outputText value="#{obj.funcionExp}" />
 								</p:column>
 							</p:dataTable>
 						</h:panelGrid>
@@ -356,14 +397,15 @@
 									</p:dataTable>
 								</h:panelGrid>
 
+								<p:spacer height="20px;" />
 								<!-- DESCARGAR DOCUMENTOS -->
 								<h:panelGrid columns="2">
-									<p:outputLabel value="#{message['lbl.descargarHoja']}" style="color: green;" />
-									<p:commandLink title="Descargar hoja de vida" actionListener="#{buscarDocenteBacking.descargarHojaVidaPDF()}">
+									<p:outputLabel value="#{message['lbl.descargarSyllabus']}" style="color: green;" />
+									<p:commandLink title="Descargar syllabus" actionListener="#{buscarDocenteBacking.descargarSyllabusPDF()}">
 										<h:graphicImage name="pdf.png" library="img" />
 									</p:commandLink>
 								</h:panelGrid>
-								<p:spacer height="20px;" />
+
 							</p:panel>
 						</h:panelGrid>
 					</div>

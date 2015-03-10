@@ -23,16 +23,16 @@
 
 								<br />
 								<xsl:text>Cedula de indetidad: </xsl:text>
-								<xsl:value-of select="mail/cedula" />
+								<xsl:value-of select="documento/cedula" />
 								<br />
 								<xsl:text>Nombre: </xsl:text>
-								<xsl:value-of select="mail/nombre" />
+								<xsl:value-of select="documento/nombre" />
 								<br />
 								<xsl:text>Apellido: </xsl:text>
-								<xsl:value-of select="mail/apellido" />
+								<xsl:value-of select="documento/apellido" />
 								<br />
 								<xsl:text>Direcci&#243;n: </xsl:text>
-								<xsl:value-of select="mail/direccion" />
+								<xsl:value-of select="documento/direccion" />
 								<br />
 							</td>
 						</tr>
@@ -80,7 +80,7 @@
 									<col style="width:50%;" />
 									<tbody>
 
-										<xsl:for-each select="mail/formacionAcademica">
+										<xsl:for-each select="documento/formacionAcademica">
 											<tr>
 												<td>
 													<xsl:value-of select="institucionA" />
@@ -143,7 +143,7 @@
 									<col style="width:30%;" />
 									<col style="width:40%;" />
 									<tbody>
-										<xsl:for-each select="mail/formacionC">
+										<xsl:for-each select="documento/formacionC">
 											<tr>
 												<td>
 													<xsl:value-of select="curso" />
@@ -216,7 +216,7 @@
 									<col style="width:20%;" />
 									<col style="width:20%;" />
 									<tbody>
-										<xsl:for-each select="mail/experiencia">
+										<xsl:for-each select="documento/experiencia">
 											<tr>
 												<td>
 													<xsl:value-of select="institucionE" />

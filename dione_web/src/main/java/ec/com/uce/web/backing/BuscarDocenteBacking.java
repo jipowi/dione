@@ -54,6 +54,8 @@ public class BuscarDocenteBacking implements Serializable {
 	private BuscarDocenteBean buscarDocenteBean;
 
 	private Docente docente;
+	private Syllabus syllabus;
+
 	private Boolean activarHojaVida = false;
 
 	Logger log = Logger.getLogger(BuscarDocenteBacking.class);
@@ -105,7 +107,7 @@ public class BuscarDocenteBacking implements Serializable {
 				buscarDocenteBean.setExperiencias(docenteService.consultarExperienciasByDocente(docente.getIdDocente()));
 
 				// Syllabus
-				Syllabus syllabus = syllabusService.consultarSyllabusByDocente(docente.getIdDocente());
+				syllabus = syllabusService.consultarSyllabusByDocente(docente.getIdDocente());
 
 				Integer idSyllabus = syllabus.getIdSyllabus();
 
@@ -225,13 +227,50 @@ public class BuscarDocenteBacking implements Serializable {
 	public void descargarHojaVidaPDF() throws DioneException {
 		try {
 			Map<String, Object> parametrosReporte = new HashMap<String, Object>();
+
 			parametrosReporte.put(ConstantesUtil.CONTENT_TYPE_IDENTIFICADOR, ConstantesUtil.CONTENT_TYPE_PDF);
 			parametrosReporte.put(ConstantesUtil.NOMBRE_ARCHIVO_IDENTIFICADOR, docente.getCedulaDocente());
 
-			parametrosReporte.put(ConstantesUtil.CONTENIDO_BYTES_IDENTIFICADOR,
-					GenerarPdfUtil.generarAchivoPDFHojaVida(docente, buscarDocenteBean.getFormacionesA(), buscarDocenteBean.getFormacionesC(), buscarDocenteBean.getExperiencias()));
+			parametrosReporte
+					.put(ConstantesUtil.CONTENIDO_BYTES_IDENTIFICADOR,
+							GenerarPdfUtil.generarAchivoPDFHojaVida(docente, buscarDocenteBean.getFormacionesA(), buscarDocenteBean.getFormacionesC(),
+									buscarDocenteBean.getExperiencias()));
+
 			JsfUtil.setSessionAttribute(ConstantesUtil.PARAMETROS_DESCARGADOR_IDENTIFICADOR, parametrosReporte);
 			JsfUtil.downloadFile();
+
+		} catch (Exception e) {
+			log.error("Error al momento generar el a hoja de vida en PDF", e);
+			throw new DioneException(e);
+		}
+
+	}
+
+	/**
+	 * 
+	 * <b> Permite generar y descargar el syllabus en formato PDF. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 01/03/2015]
+	 * </p>
+	 * 
+	 * @throws DioneException
+	 */
+	public void descargarSyllabusPDF() throws DioneException {
+		try {
+			Map<String, Object> parametrosReporte = new HashMap<String, Object>();
+
+			parametrosReporte.put(ConstantesUtil.CONTENT_TYPE_IDENTIFICADOR, ConstantesUtil.CONTENT_TYPE_PDF);
+			parametrosReporte.put(ConstantesUtil.NOMBRE_ARCHIVO_IDENTIFICADOR, "syllabus " + docente.getCedulaDocente());
+
+			parametrosReporte.put(ConstantesUtil.CONTENIDO_BYTES_IDENTIFICADOR, GenerarPdfUtil.generarAchivoPDFSyllabus(syllabus, buscarDocenteBean.getPrerequisitos(),
+					buscarDocenteBean.getCorequisitos(), buscarDocenteBean.getObjetivos(), buscarDocenteBean.getCompetenciasGenerales(),
+					buscarDocenteBean.getCompetenciasInstrumentales(), buscarDocenteBean.getCompetenciasInterpersonales(), buscarDocenteBean.getCompetenciasSistematicas(),
+					buscarDocenteBean.getCompetenciasEspecificas(), buscarDocenteBean.getBibliografias(), buscarDocenteBean.getResultados(), buscarDocenteBean.getUnidadesDTO()));
+
+			JsfUtil.setSessionAttribute(ConstantesUtil.PARAMETROS_DESCARGADOR_IDENTIFICADOR, parametrosReporte);
+
+			JsfUtil.downloadFile();
+
 		} catch (Exception e) {
 			log.error("Error al momento generar el a hoja de vida en PDF", e);
 			throw new DioneException(e);
