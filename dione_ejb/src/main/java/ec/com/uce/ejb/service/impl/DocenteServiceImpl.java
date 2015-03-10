@@ -166,4 +166,12 @@ public class DocenteServiceImpl implements DocenteService {
 		return formacionCDao.consultarFormacionByDocente(idDocente);
 	}
 
+	/* (non-Javadoc)
+	 * @see ec.com.uce.ejb.service.DocenteService#consultarExperienciasByDocente(java.lang.Integer)
+	 */
+	@Override
+	public List<Experiencia> consultarExperienciasByDocente(Integer idDocente) throws DioneException {
+		return experienciaDao.consultarExperienciasByDocente(idDocente);
+	}
+
 }

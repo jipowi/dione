@@ -6,6 +6,7 @@ import javax.ejb.Local;
 
 import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.Docente;
+import ec.com.uce.dione.entities.Experiencia;
 import ec.com.uce.dione.entities.FormacionAcademica;
 import ec.com.uce.dione.entities.FormacionContinua;
 
@@ -19,20 +20,22 @@ import ec.com.uce.dione.entities.FormacionContinua;
  *          </p>
  */
 @Local
-public interface GenerarDocumento {
+public interface GenerarDocumentoHojaVida {
 
 	/**
 	 * 
-	 * <b> Permite generar el XMl del documento. </b>
+	 * <b> Permite generar el XMl del documento hoja de vida. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 09/03/2015]
+	 * [Author: Paul Jimenez, Date: 10/03/2015]
 	 * </p>
 	 * 
 	 * @param docente
-	 * @param formacionesC
 	 * @param formacionesA
+	 * @param formacionesC
+	 * @param experiencias
 	 * @return
 	 * @throws DioneException
 	 */
-	String generarXml(Docente docente, List<FormacionAcademica> formacionesA,  List<FormacionContinua> formacionesC) throws DioneException;
+	String generarXmlHojaVida(Docente docente, List<FormacionAcademica> formacionesA, List<FormacionContinua> formacionesC, List<Experiencia> experiencias) throws DioneException;
+
 }

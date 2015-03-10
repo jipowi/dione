@@ -145,4 +145,16 @@ public interface DocenteService {
 	 */
 	public List<FormacionContinua> consultarFormacionCByDocente(Integer idDocente) throws DioneException;
 
+	/**
+	 * 
+	 * <b> Permite consultar las experiencias del docente. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 09/03/2015]
+	 * </p>
+	 * 
+	 * @param idDocente
+	 * @return
+	 */
+	public List<Experiencia> consultarExperienciasByDocente(Integer idDocente) throws DioneException;
+
 }
