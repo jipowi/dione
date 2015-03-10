@@ -1,4 +1,3 @@
-
 package ec.com.uce.web.bean;
 
 import java.io.Serializable;
@@ -14,6 +13,7 @@ import ec.com.uce.dione.entities.CompetenciasEspecifica;
 import ec.com.uce.dione.entities.CompetenciasGenerica;
 import ec.com.uce.dione.entities.Corequisito;
 import ec.com.uce.dione.entities.EscuelaUce;
+import ec.com.uce.dione.entities.Experiencia;
 import ec.com.uce.dione.entities.FormacionAcademica;
 import ec.com.uce.dione.entities.FormacionContinua;
 import ec.com.uce.dione.entities.Objetivo;
@@ -43,6 +43,7 @@ public class BuscarDocenteBean implements Serializable {
 	private List<AsignaturaDTO> escuelaMateriasList;
 	private List<FormacionAcademica> formacionesA;
 	private List<FormacionContinua> formacionesC;
+	private List<Experiencia> experiencias;
 
 	// Informacion syllabus
 	private String materia;
@@ -420,6 +421,21 @@ public class BuscarDocenteBean implements Serializable {
 	 */
 	public void setUnidadesDTO(List<UnidadCompetenciaDTO> unidadesDTO) {
 		this.unidadesDTO = unidadesDTO;
+	}
+
+	/**
+	 * @return the experiencias
+	 */
+	public List<Experiencia> getExperiencias() {
+		return experiencias;
+	}
+
+	/**
+	 * @param experiencias
+	 *            the experiencias to set
+	 */
+	public void setExperiencias(List<Experiencia> experiencias) {
+		this.experiencias = experiencias;
 	}
 
 }

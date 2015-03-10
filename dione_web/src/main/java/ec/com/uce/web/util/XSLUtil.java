@@ -18,6 +18,7 @@ import org.jdom.Document;
 import ec.com.kruger.framework.common.util.TransformerUtil;
 import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.Docente;
+import ec.com.uce.dione.entities.Experiencia;
 import ec.com.uce.dione.entities.FormacionAcademica;
 import ec.com.uce.dione.entities.FormacionContinua;
 import ec.com.uce.ejb.doc.GenerarDocumento;
@@ -53,7 +54,7 @@ public class XSLUtil {
 	 * @param docente
 	 * @return
 	 */
-	public String generarXmlHojaVida(Docente docente, List<FormacionAcademica> formacionesA, List<FormacionContinua> formacionesC) {
+	public String generarXmlHojaVida(Docente docente, List<FormacionAcademica> formacionesA, List<FormacionContinua> formacionesC, List<Experiencia> experiencias) {
 		StringBuilder xml = new StringBuilder();
 
 		try {
@@ -62,7 +63,7 @@ public class XSLUtil {
 			try {
 				String nombreClase = "java:app/dione_web/HojaVidaImpl";
 				GenerarDocumento generarDocumento = (GenerarDocumento) getObjectByJndi(nombreClase);
-				xml.append(generarDocumento.generarXml(docente, formacionesA, formacionesC));
+				xml.append(generarDocumento.generarXml(docente, formacionesA, formacionesC, experiencias));
 
 			} catch (Exception e) {
 				log.error("Error, generacion xml reporte, e{}", e);
@@ -88,7 +89,7 @@ public class XSLUtil {
 	 * @param formacionesA
 	 * @return
 	 */
-	public String obtenerHtmlHojaVida(Docente docente, List<FormacionAcademica> formacionesA, List<FormacionContinua> formacionesC) {
+	public String obtenerHtmlHojaVida(Docente docente, List<FormacionAcademica> formacionesA, List<FormacionContinua> formacionesC, List<Experiencia> experiencias) {
 		String html = null;
 		try {
 			InputStream in = XSLHelper.class.getResourceAsStream("HojaVidaHTML.xsl");
@@ -106,7 +107,7 @@ public class XSLUtil {
 			String contenidoXSL = sb.toString();
 
 			// Se genera el XML con los datos del correo
-			String contenidoXml = generarXmlHojaVida(docente, formacionesA, formacionesC);
+			String contenidoXml = generarXmlHojaVida(docente, formacionesA, formacionesC, experiencias);
 			Document docXML = TransformerUtil.stringToXMLDocument(contenidoXml.toString());
 			Document docXSL = TransformerUtil.stringToXML(contenidoXSL);
 			Document result = TransformerUtil.transformar(docXML, docXSL);

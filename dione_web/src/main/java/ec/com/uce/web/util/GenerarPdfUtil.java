@@ -8,6 +8,7 @@ import javax.faces.context.FacesContext;
 
 import ec.com.kruger.framework.common.util.pdf.HtmltoPDF;
 import ec.com.uce.dione.entities.Docente;
+import ec.com.uce.dione.entities.Experiencia;
 import ec.com.uce.dione.entities.FormacionAcademica;
 import ec.com.uce.dione.entities.FormacionContinua;
 
@@ -25,8 +26,8 @@ public class GenerarPdfUtil implements Serializable {
 	 * @return El contenido del archivo PDF como array de bytes
 	 * @throws LnException
 	 */
-	public static byte[] generarAchivoPDFHojaVida(Docente docente, List<FormacionAcademica> formacionesA, List<FormacionContinua> formacionesC) throws Exception {
-		String pHtml = XSLUtil.getInstancia().obtenerHtmlHojaVida(docente, formacionesA, formacionesC);
+	public static byte[] generarAchivoPDFHojaVida(Docente docente, List<FormacionAcademica> formacionesA, List<FormacionContinua> formacionesC, List<Experiencia> experiencias) throws Exception {
+		String pHtml = XSLUtil.getInstancia().obtenerHtmlHojaVida(docente, formacionesA, formacionesC, experiencias);
 
 		pHtml = pHtml.replace(ConstantesUtil.ENCABEZADO_ISO_XML, "");
 		pHtml = pHtml.replace(ConstantesUtil.ENCABEZADO_XML, "");

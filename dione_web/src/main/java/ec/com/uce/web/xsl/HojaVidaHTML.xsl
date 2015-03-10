@@ -5,17 +5,18 @@
 		<!-- TODO: Auto-generated template -->
 		<html>
 			<center>
-
-				<table width="100%" cellpadding="0" cellspacing="5" border="1">
-
-					<col style="width:50%;" />
+				<table width="100%" cellpadding="0" cellspacing="5" border="0">
+					<col style="width:80%;" />
 					<tbody>
 						<tr>
-							<td>
+							<td align="center" colspan="2" style="font-weight: bold;">
 								<h3>
 									<xsl:text>Hoja de Vida</xsl:text>
 								</h3>
 							</td>
+						</tr>
+						<tr>
+							<td style="height:1.0cm;"></td>
 						</tr>
 						<tr>
 							<td>
@@ -41,7 +42,8 @@
 
 						<tr>
 							<td>
-								<table border="1" cellspacing="0" cellpadding="0" class="blanco">
+								<table width="100%" border="1" cellspacing="0"
+									cellpadding="0" class="blanco">
 									<col style="width:50%;" />
 									<col style="width:50%;" />
 
@@ -72,7 +74,8 @@
 						</tr>
 						<tr>
 							<td>
-								<table border="1" cellspacing="0" cellpadding="0" class="blanco">
+								<table width="100%" border="1" cellspacing="0"
+									cellpadding="0" class="blanco">
 									<col style="width:50%;" />
 									<col style="width:50%;" />
 									<tbody>
@@ -97,7 +100,8 @@
 						<!-- formacion Continua -->
 						<tr>
 							<td>
-								<table border="1" cellspacing="0" cellpadding="0" class="blanco">
+								<table width="100%" border="1" cellspacing="0"
+									cellpadding="0" class="blanco">
 									<col style="width:30%;" />
 									<col style="width:30%;" />
 									<col style="width:40%;" />
@@ -133,7 +137,8 @@
 						</tr>
 						<tr>
 							<td>
-								<table border="1" cellspacing="0" cellpadding="0" class="blanco">
+								<table width="100%" border="1" cellspacing="0"
+									cellpadding="0" class="blanco">
 									<col style="width:30%;" />
 									<col style="width:30%;" />
 									<col style="width:40%;" />
@@ -148,6 +153,82 @@
 												</td>
 												<td>
 													<xsl:value-of select="institucionC" />
+												</td>
+											</tr>
+										</xsl:for-each>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td style="height:0.8cm;"></td>
+						</tr>
+						<!-- Experiencia -->
+						<tr>
+							<td>
+								<table width="100%" border="1" cellspacing="0"
+									cellpadding="0" class="blanco">
+									<col style="width:40%;" />
+									<col style="width:20%;" />
+									<col style="width:20%;" />
+									<col style="width:20%;" />
+									<tbody style="background-color: silver; font-weight: bold;">
+										<tr>
+											<td align="center" colspan="4" style="font-weight: bold;">
+												<h3>
+													<xsl:text> EXPERIENCIA </xsl:text>
+												</h3>
+											</td>
+										</tr>
+
+										<tr>
+											<td align="center">
+												<h4>
+													<xsl:text>Institucion</xsl:text>
+												</h4>
+											</td>
+											<td align="center">
+												<h4>
+													<xsl:text>Fecha Inicio</xsl:text>
+												</h4>
+											</td>
+											<td align="center">
+												<h4>
+													<xsl:text>Fecha Fin</xsl:text>
+												</h4>
+											</td>
+											<td align="center">
+												<h4>
+													<xsl:text>Funciones</xsl:text>
+												</h4>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<table width="100%" border="1" cellspacing="0"
+									cellpadding="0" class="blanco">
+									<col style="width:40%;" />
+									<col style="width:20%;" />
+									<col style="width:20%;" />
+									<col style="width:20%;" />
+									<tbody>
+										<xsl:for-each select="mail/experiencia">
+											<tr>
+												<td>
+													<xsl:value-of select="institucionE" />
+												</td>
+												<td>
+													<xsl:value-of select="fechaInicio" />
+												</td>
+												<td>
+													<xsl:value-of select="fechaFin" />
+												</td>
+												<td>
+													<xsl:value-of select="funcion" />
 												</td>
 											</tr>
 										</xsl:for-each>

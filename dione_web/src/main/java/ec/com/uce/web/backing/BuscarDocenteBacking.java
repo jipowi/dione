@@ -102,6 +102,7 @@ public class BuscarDocenteBacking implements Serializable {
 
 				buscarDocenteBean.setFormacionesA(docenteService.consultarFormacionAByDocente(docente.getIdDocente()));
 				buscarDocenteBean.setFormacionesC(docenteService.consultarFormacionCByDocente(docente.getIdDocente()));
+				buscarDocenteBean.setExperiencias(docenteService.consultarExperienciasByDocente(docente.getIdDocente()));
 
 				// Syllabus
 				Syllabus syllabus = syllabusService.consultarSyllabusByDocente(docente.getIdDocente());
@@ -149,11 +150,11 @@ public class BuscarDocenteBacking implements Serializable {
 
 				// Bibliografias
 				buscarDocenteBean.setBibliografias(syllabusService.consultarBibliografiasBySyllabus(idSyllabus));
-				
+
 				// Resultados
 				buscarDocenteBean.setResultados(syllabusService.consultarResultadosAprendizaje(idSyllabus));
-				
-				//Unidades de competencias
+
+				// Unidades de competencias
 				buscarDocenteBean.setUnidadesDTO(syllabusService.consultarUnidadesDTO(idSyllabus));
 
 			} else {
@@ -227,7 +228,8 @@ public class BuscarDocenteBacking implements Serializable {
 			parametrosReporte.put(ConstantesUtil.CONTENT_TYPE_IDENTIFICADOR, ConstantesUtil.CONTENT_TYPE_PDF);
 			parametrosReporte.put(ConstantesUtil.NOMBRE_ARCHIVO_IDENTIFICADOR, docente.getCedulaDocente());
 
-			parametrosReporte.put(ConstantesUtil.CONTENIDO_BYTES_IDENTIFICADOR, GenerarPdfUtil.generarAchivoPDFHojaVida(docente, buscarDocenteBean.getFormacionesA(), buscarDocenteBean.getFormacionesC()));
+			parametrosReporte.put(ConstantesUtil.CONTENIDO_BYTES_IDENTIFICADOR,
+					GenerarPdfUtil.generarAchivoPDFHojaVida(docente, buscarDocenteBean.getFormacionesA(), buscarDocenteBean.getFormacionesC(), buscarDocenteBean.getExperiencias()));
 			JsfUtil.setSessionAttribute(ConstantesUtil.PARAMETROS_DESCARGADOR_IDENTIFICADOR, parametrosReporte);
 			JsfUtil.downloadFile();
 		} catch (Exception e) {
