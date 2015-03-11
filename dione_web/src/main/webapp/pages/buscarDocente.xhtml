@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/templates/menuPrincipalTemplate.xhtml">
 	<ui:define name="content">
 		<p:panel>
@@ -23,11 +23,30 @@
 								<p:outputLabel value="#{message['lbl.cedula']}" styleClass="negrita" />
 								<p:inputText value="#{buscarDocenteBean.cedulaDocente}" />
 							</h:panelGrid>
-							<p:commandLink title="Buscar docente" action="#{buscarDocenteBacking.buscarDocente()}" update="@form, idDatos">
+							<p:commandLink title="Buscar docente" action="#{buscarDocenteBacking.buscarDocente()}" update="@form, idMaterias">
 								<h:graphicImage name="search.png" library="img" />
 							</p:commandLink>
 						</h:panelGrid>
 					</p:panel>
+				</h:panelGrid>
+				<h:panelGrid columns="1" id="idMaterias" rendered="#{buscarDocenteBacking.docenteEncontrado}">
+					<h:panelGrid columns="2">
+						<h:graphicImage name="help.png" library="img" />
+						<p:outputLabel value="#{message['lbl.infoBuscarSyllabus']}" style="color: green;" />
+					</h:panelGrid>
+					<h:panelGrid columns="2">
+						<h:panelGrid columns="2">
+							<p:outputLabel value="#{message['lbl.asignatura']}:" styleClass="negrita" />
+							<p:selectOneMenu id="selecMateria" value="#{buscarDocenteBean.materia}" effect="drop">
+								<f:selectItem itemLabel="Seleccione" noSelectionOption="true" />
+								<f:selectItems value="#{buscarDocenteBacking.materias}" />
+							</p:selectOneMenu>
+						</h:panelGrid>
+						<p:commandLink title="Buscar syllaus" action="#{buscarDocenteBacking.buscarDatosDocente()}" update="@form, formPrincipal:idSyllabus">
+							<h:graphicImage name="search.png" library="img" />
+						</p:commandLink>
+					</h:panelGrid>
+					<p:spacer height="20px;" />
 				</h:panelGrid>
 
 				<div align="center">
@@ -61,8 +80,8 @@
 					</h:panelGrid>
 				</div>
 				<!-- POPUP HOJA DE VIDA -->
-				<p:dialog id="idHojaVida" header="Hoja de Vida" widgetVar="hojaVida" modal="true" width="500" position="center" showEffect="fade"
-					hideEffect="explode" resizable="false" closable="true">
+				<p:dialog id="idHojaVida" header="Hoja de Vida" widgetVar="hojaVida" modal="true" width="500" position="center" showEffect="fade" hideEffect="explode" resizable="false"
+					closable="true">
 					<div align="center">
 						<h:panelGrid columns="1">
 							<!-- DATOS BASICOS -->
@@ -189,8 +208,8 @@
 
 				</p:dialog>
 				<!-- POPUP SYLLABUS -->
-				<p:dialog id="idSyllabus" header="Syllabus" widgetVar="syllabus" modal="true" width="500" height="400" position="center" showEffect="fade"
-					hideEffect="explode" resizable="false" closable="true">
+				<p:dialog id="idSyllabus" header="Syllabus" widgetVar="syllabus" modal="true" width="500" height="400" position="center" showEffect="fade" hideEffect="explode"
+					resizable="false" closable="true">
 					<div align="center">
 						<h:panelGrid columns="1">
 							<p:panel>
