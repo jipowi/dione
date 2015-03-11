@@ -53,9 +53,9 @@ public class Docente extends Auditoria implements Serializable {
 	@OneToMany(mappedBy = "docente")
 	private List<FormacionContinua> formacionContinuas;
 
-	// bi-directional many-to-one association to Syllabus
+	// bi-directional many-to-one association to MateriaSyllabus
 	@OneToMany(mappedBy = "docente")
-	private List<Syllabus> syllabuses;
+	private List<MateriaSyllabus> materiaSyllabuses;
 
 	public Docente() {
 	}
@@ -188,26 +188,26 @@ public class Docente extends Auditoria implements Serializable {
 		return formacionContinua;
 	}
 
-	public List<Syllabus> getSyllabuses() {
-		return this.syllabuses;
+	public List<MateriaSyllabus> getMateriaSyllabuses() {
+		return this.materiaSyllabuses;
 	}
 
-	public void setSyllabuses(List<Syllabus> syllabuses) {
-		this.syllabuses = syllabuses;
+	public void setMateriaSyllabuses(List<MateriaSyllabus> materiaSyllabuses) {
+		this.materiaSyllabuses = materiaSyllabuses;
 	}
 
-	public Syllabus addSyllabus(Syllabus syllabus) {
-		getSyllabuses().add(syllabus);
-		syllabus.setDocente(this);
+	public MateriaSyllabus addMateriaSyllabus(MateriaSyllabus materiaSyllabus) {
+		getMateriaSyllabuses().add(materiaSyllabus);
+		materiaSyllabus.setDocente(this);
 
-		return syllabus;
+		return materiaSyllabus;
 	}
 
-	public Syllabus removeSyllabus(Syllabus syllabus) {
-		getSyllabuses().remove(syllabus);
-		syllabus.setDocente(null);
+	public MateriaSyllabus removeMateriaSyllabus(MateriaSyllabus materiaSyllabus) {
+		getMateriaSyllabuses().remove(materiaSyllabus);
+		materiaSyllabus.setDocente(null);
 
-		return syllabus;
+		return materiaSyllabus;
 	}
 
 }

@@ -18,7 +18,7 @@ import ec.com.uce.dione.entities.Prerequisito;
  * @since JDK1.6
  */
 @Local
-public interface PrerequisitoDao extends GenericDAO<Prerequisito, Long> {
+public interface PrerequisitoDao extends GenericDAO<Prerequisito, Integer> {
 
 	public List<Prerequisito> consultarPreByMateria(Integer idMateria) throws DioneException;
 }

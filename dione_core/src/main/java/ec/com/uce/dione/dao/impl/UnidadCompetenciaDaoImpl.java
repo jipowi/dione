@@ -22,7 +22,7 @@ import ec.com.uce.dione.entities.UnidadCompetencia;
  * @since JDK1.6
  */
 @Stateless
-public class UnidadCompetenciaDaoImpl extends GenericDAOImpl<UnidadCompetencia, Long> implements UnidadCompetenciaDao {
+public class UnidadCompetenciaDaoImpl extends GenericDAOImpl<UnidadCompetencia, Integer> implements UnidadCompetenciaDao {
 
 	@PersistenceContext(unitName = "dione_core")
 	private EntityManager em;

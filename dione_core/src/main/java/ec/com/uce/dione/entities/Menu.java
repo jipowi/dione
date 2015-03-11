@@ -2,7 +2,6 @@ package ec.com.uce.dione.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -29,10 +28,6 @@ public class Menu implements Serializable {
 	private String nombreMenu;
 
 	private String url;
-
-	//bi-directional many-to-one association to RolMenu
-	@OneToMany(mappedBy="menu")
-	private List<RolMenu> rolMenus;
 
 	public Menu() {
 	}
@@ -75,28 +70,6 @@ public class Menu implements Serializable {
 
 	public void setUrl(String url) {
 		this.url = url;
-	}
-
-	public List<RolMenu> getRolMenus() {
-		return this.rolMenus;
-	}
-
-	public void setRolMenus(List<RolMenu> rolMenus) {
-		this.rolMenus = rolMenus;
-	}
-
-	public RolMenu addRolMenus(RolMenu rolMenus) {
-		getRolMenus().add(rolMenus);
-		rolMenus.setMenu(this);
-
-		return rolMenus;
-	}
-
-	public RolMenu removeRolMenus(RolMenu rolMenus) {
-		getRolMenus().remove(rolMenus);
-		rolMenus.setMenu(null);
-
-		return rolMenus;
 	}
 
 }

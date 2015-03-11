@@ -19,6 +19,11 @@ public class MateriaSyllabus implements Serializable {
 	@Column(name="id_materia_syllabus")
 	private Integer idMateriaSyllabus;
 
+	//bi-directional many-to-one association to Docente
+	@ManyToOne
+	@JoinColumn(name="id_docente")
+	private Docente docente;
+
 	//bi-directional many-to-one association to MateriaUce
 	@ManyToOne
 	@JoinColumn(name="id_materia_uce")
@@ -38,6 +43,14 @@ public class MateriaSyllabus implements Serializable {
 
 	public void setIdMateriaSyllabus(Integer idMateriaSyllabus) {
 		this.idMateriaSyllabus = idMateriaSyllabus;
+	}
+
+	public Docente getDocente() {
+		return this.docente;
+	}
+
+	public void setDocente(Docente docente) {
+		this.docente = docente;
 	}
 
 	public MateriaUce getMateriaUce() {

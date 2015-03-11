@@ -4,43 +4,44 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
+
 /**
  * The persistent class for the materia database table.
  * 
  */
 @Entity
-@NamedQuery(name = "Materia.findAll", query = "SELECT m FROM Materia m")
+@NamedQuery(name="Materia.findAll", query="SELECT m FROM Materia m")
 public class Materia implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_materia")
-	private Long idMateria;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_materia")
+	private Integer idMateria;
 
 	private String materia;
 
-	// bi-directional many-to-one association to Escuela
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_escuela")
-	private Escuela escuela;
-
-	// bi-directional many-to-one association to Corequisito
-	@OneToMany(mappedBy = "materia")
+	//bi-directional many-to-one association to Corequisito
+	@OneToMany(mappedBy="materia")
 	private List<Corequisito> corequisitos;
 
-	// bi-directional many-to-one association to Prerequisito
-	@OneToMany(mappedBy = "materia")
+	//bi-directional many-to-one association to Escuela
+	@ManyToOne
+	@JoinColumn(name="id_escuela")
+	private Escuela escuela;
+
+	//bi-directional many-to-one association to Prerequisito
+	@OneToMany(mappedBy="materia")
 	private List<Prerequisito> prerequisitos;
 
 	public Materia() {
 	}
 
-	public Long getIdMateria() {
+	public Integer getIdMateria() {
 		return this.idMateria;
 	}
 
-	public void setIdMateria(Long idMateria) {
+	public void setIdMateria(Integer idMateria) {
 		this.idMateria = idMateria;
 	}
 
@@ -50,14 +51,6 @@ public class Materia implements Serializable {
 
 	public void setMateria(String materia) {
 		this.materia = materia;
-	}
-
-	public Escuela getEscuela() {
-		return this.escuela;
-	}
-
-	public void setEscuela(Escuela escuela) {
-		this.escuela = escuela;
 	}
 
 	public List<Corequisito> getCorequisitos() {
@@ -80,6 +73,14 @@ public class Materia implements Serializable {
 		corequisito.setMateria(null);
 
 		return corequisito;
+	}
+
+	public Escuela getEscuela() {
+		return this.escuela;
+	}
+
+	public void setEscuela(Escuela escuela) {
+		this.escuela = escuela;
 	}
 
 	public List<Prerequisito> getPrerequisitos() {

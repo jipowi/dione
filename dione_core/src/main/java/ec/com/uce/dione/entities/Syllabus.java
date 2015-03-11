@@ -62,11 +62,6 @@ public class Syllabus implements Serializable {
 	@OneToMany(mappedBy="syllabus")
 	private List<ResultadosAprendizaje> resultadosAprendizajes;
 
-	//bi-directional many-to-one association to Docente
-	@ManyToOne
-	@JoinColumn(name="id_docente")
-	private Docente docente;
-
 	//bi-directional many-to-one association to UnidadCompetencia
 	@OneToMany(mappedBy="syllabus")
 	private List<UnidadCompetencia> unidadCompetencias;
@@ -288,14 +283,6 @@ public class Syllabus implements Serializable {
 		resultadosAprendizaje.setSyllabus(null);
 
 		return resultadosAprendizaje;
-	}
-
-	public Docente getDocente() {
-		return this.docente;
-	}
-
-	public void setDocente(Docente docente) {
-		this.docente = docente;
 	}
 
 	public List<UnidadCompetencia> getUnidadCompetencias() {

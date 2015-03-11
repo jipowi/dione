@@ -18,7 +18,7 @@ import ec.com.uce.dione.entities.UnidadCompetencia;
  * @since JDK1.6
  */
 @Local
-public interface UnidadCompetenciaDao extends GenericDAO<UnidadCompetencia, Long> {
+public interface UnidadCompetenciaDao extends GenericDAO<UnidadCompetencia, Integer> {
 
 	/**
 	 * 

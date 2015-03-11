@@ -16,8 +16,6 @@ import ec.com.uce.dione.entities.Escuela;
  * @since JDK1.6
  */
 @Stateless
-public class EscuelaDaoImpl extends GenericDAOImpl<Escuela, Long> implements EscuelaDao {
-
-
+public class EscuelaDaoImpl extends GenericDAOImpl<Escuela, Integer> implements EscuelaDao {
 
 }

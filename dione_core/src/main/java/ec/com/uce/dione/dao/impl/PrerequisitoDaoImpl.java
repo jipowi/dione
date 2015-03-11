@@ -24,7 +24,7 @@ import ec.com.uce.dione.entities.Prerequisito;
  * @since JDK1.6
  */
 @Stateless
-public class PrerequisitoDaoImpl extends GenericDAOImpl<Prerequisito, Long> implements PrerequisitoDao {
+public class PrerequisitoDaoImpl extends GenericDAOImpl<Prerequisito, Integer> implements PrerequisitoDao {
 
 	Logger log = Logger.getLogger(PrerequisitoDaoImpl.class);
 
@@ -41,7 +41,7 @@ public class PrerequisitoDaoImpl extends GenericDAOImpl<Prerequisito, Long> impl
 	public List<Prerequisito> consultarPreByMateria(Integer idMateria) throws DioneException {
 		try {
 			Query query = em.createNamedQuery("Prerequisito.findByMateria");
-			query.setParameter("idMateria", Long.valueOf(idMateria.toString()));
+			query.setParameter("idMateria", idMateria);
 			List<Prerequisito> prerequisitos = query.getResultList();
 
 			return prerequisitos;

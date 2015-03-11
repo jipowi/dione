@@ -38,4 +38,18 @@ public class MateriaSyllabusDaoImpl extends GenericDAOImpl<MateriaSyllabus, Long
 		return materiaSyllabus;
 	}
 
+	/* (non-Javadoc)
+	 * @see ec.com.uce.dione.dao.MateriaSyllabusDao#consultarSyllabus(java.lang.Integer, java.lang.Integer)
+	 */
+	@Override
+	public MateriaSyllabus consultarSyllabus(Integer idDocente, Integer idMateria) throws DioneException {
+		
+		Query query = em.createNamedQuery("MateriaSyllabus.findByMateriaAndDocente");
+		query.setParameter("idDocente", idDocente);
+		query.setParameter("idMateriaUce", idMateria);
+		MateriaSyllabus materiaSyllabus = (MateriaSyllabus) query.getSingleResult();
+
+		return materiaSyllabus;
+	}
+
 }

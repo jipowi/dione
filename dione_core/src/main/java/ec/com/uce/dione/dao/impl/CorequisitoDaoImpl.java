@@ -24,7 +24,7 @@ import ec.com.uce.dione.entities.Corequisito;
  * @since JDK1.6
  */
 @Stateless
-public class CorequisitoDaoImpl extends GenericDAOImpl<Corequisito, Long> implements CorequisitoDao {
+public class CorequisitoDaoImpl extends GenericDAOImpl<Corequisito, Integer> implements CorequisitoDao {
 
 	Logger log = Logger.getLogger(CorequisitoDaoImpl.class);
 
@@ -41,7 +41,7 @@ public class CorequisitoDaoImpl extends GenericDAOImpl<Corequisito, Long> implem
 	public List<Corequisito> consultarCorequisitoByMateria(Integer idMateria) throws DioneException {
 		try {
 			Query query = em.createNamedQuery("Corequisito.findByMateria");
-			query.setParameter("idMateria", Long.valueOf(idMateria.toString()));
+			query.setParameter("idMateria", idMateria);
 			List<Corequisito> corequisitos = query.getResultList();
 
 			return corequisitos;

@@ -41,7 +41,7 @@ public class MateriaDaoImpl extends GenericDAOImpl<Materia, Long> implements Mat
 	public List<Materia> consultarMateriaByEscuela(Integer idEscuela) throws DioneException {
 		try {
 			Query query = em.createNamedQuery("Materia.findByEscuela");
-			query.setParameter("idEscuela", Long.valueOf(idEscuela.toString()));
+			query.setParameter("idEscuela", idEscuela);
 			List<Materia> materias = query.getResultList();
 
 			return materias;

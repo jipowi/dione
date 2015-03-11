@@ -21,7 +21,7 @@ public class Prerequisito implements Serializable {
 	private String prerequisito;
 
 	//bi-directional many-to-one association to Materia
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_materia")
 	private Materia materia;
 

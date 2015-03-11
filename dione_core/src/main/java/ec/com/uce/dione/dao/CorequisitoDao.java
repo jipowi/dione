@@ -18,7 +18,7 @@ import ec.com.uce.dione.entities.Corequisito;
  * @since JDK1.6
  */
 @Local
-public interface CorequisitoDao extends GenericDAO<Corequisito, Long> {
+public interface CorequisitoDao extends GenericDAO<Corequisito, Integer> {
 
 	public List<Corequisito> consultarCorequisitoByMateria(Integer idMateria) throws DioneException;
 }
