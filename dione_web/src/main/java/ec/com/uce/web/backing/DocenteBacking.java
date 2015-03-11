@@ -159,7 +159,7 @@ public class DocenteBacking implements Serializable {
 			for (AsignaturaDTO asiganturaDTO : docenteBean.getAsignaturasList()) {
 				EscuelaUce escuelaUce = new EscuelaUce();
 
-				Escuela escuela = docenteService.consultarEscuelaById(Long.valueOf(asiganturaDTO.getEscuela()));
+				Escuela escuela = docenteService.consultarEscuelaById(Integer.parseInt(asiganturaDTO.getEscuela()));
 				escuelaUce.setEscuelaUce(escuela.getEscuela());
 				escuelaUce.setDocente(docente);
 				escuelasUce.add(escuelaUce);

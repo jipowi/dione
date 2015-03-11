@@ -19,6 +19,7 @@ import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.CompetenciaGenerale;
 import ec.com.uce.dione.entities.Docente;
 import ec.com.uce.dione.entities.EscuelaUce;
+import ec.com.uce.dione.entities.MateriaSyllabus;
 import ec.com.uce.dione.entities.MateriaUce;
 import ec.com.uce.dione.entities.Objetivo;
 import ec.com.uce.dione.entities.ResultadosAprendizaje;
@@ -166,11 +167,11 @@ public class ResultadosBacking implements Serializable {
 		resultCompetenciasDTO = new ArrayList<EvaluacionCompetenciasDTO>();
 		resultadosDTO = new ArrayList<EvaluacionResAprendizajeDTO>();
 
-		Long idDocente = Long.parseLong(docente.getIdDocente().toString());
-		Long idMateria = Long.parseLong(resultadoBean.getMateria());
+		Integer idDocente = docente.getIdDocente();
+		Integer idMateria = Integer.parseInt(resultadoBean.getMateria());
 
 		try {
-			//syllabus = syllabusService.consultarSyllabusByDocenteAndMateria(idDocente, idMateria);
+			
 			List<Objetivo> objetivos = syllabusService.consultarObjetivos(syllabus.getIdSyllabus());
 			List<CompetenciaGenerale> competencias = syllabusService.consultarCompetenciasBySyllabus(syllabus.getIdSyllabus());
 			List<ResultadosAprendizaje> resultados = syllabusService.consultarResultadosAprendizaje(syllabus.getIdSyllabus());

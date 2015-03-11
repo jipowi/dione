@@ -10,6 +10,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.model.SelectItem;
 
 import org.apache.log4j.Logger;
 
@@ -55,8 +56,11 @@ public class BuscarDocenteBacking implements Serializable {
 
 	private Docente docente;
 	private Syllabus syllabus;
+	private Boolean docenteEncontrado = false;
 
 	private Boolean activarHojaVida = false;
+	private List<SelectItem> materias = new ArrayList<SelectItem>();
+	private List<MateriaUce> materiaUces = new ArrayList<MateriaUce>();
 
 	Logger log = Logger.getLogger(BuscarDocenteBacking.class);
 
@@ -72,10 +76,44 @@ public class BuscarDocenteBacking implements Serializable {
 	public void buscarDocente() throws DioneException {
 		try {
 			docente = docenteService.consultarDocenteByCedula(buscarDocenteBean.getCedulaDocente());
+			if (docente != null) {
+				docenteEncontrado = true;
+				activarHojaVida = true;
+				List<EscuelaUce> escuelas = syllabusService.consultarEscuelaByDocente(docente.getIdDocente().toString());
 
+				for (EscuelaUce escuelaUce : escuelas) {
+					List<MateriaUce> materiasTemp = syllabusService.consultarMateriasByEscuela(escuelaUce.getIdEscuelaUce());
+					for (MateriaUce materiaUce : materiasTemp) {
+						materiaUces.add(materiaUce);
+					}
+				}
+
+			} else {
+				docenteEncontrado = false;
+				MessagesController.addError(null, HiperionMensajes.getInstancia().getString("dione.mensaje.error.buscar"));
+			}
+
+		} catch (DioneException e) {
+			log.error("Error al momento consultar el docente", e);
+			throw new DioneException(e);
+		}
+
+	}
+	
+	/**
+	 * 
+	 * <b> Permite buscar un docente por medio del ingreso de la identificacion. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * </p>
+	 * 
+	 * @throws DioneException
+	 */
+	public void buscarDatosDocente() throws DioneException {
+		try {
 			// Hoja de vida
 			if (docente != null) {
-				activarHojaVida = true;
+				
 				buscarDocenteBean.setApellidosDocente(docente.getApellidosDocente());
 				buscarDocenteBean.setNombresDocente(docente.getNombresDocente());
 				buscarDocenteBean.setDireccionDocente(docente.getDireccionDocente());
@@ -107,12 +145,16 @@ public class BuscarDocenteBacking implements Serializable {
 				buscarDocenteBean.setExperiencias(docenteService.consultarExperienciasByDocente(docente.getIdDocente()));
 
 				// Syllabus
-				syllabus = syllabusService.consultarSyllabusByDocente(docente.getIdDocente());
-
-				Integer idSyllabus = syllabus.getIdSyllabus();
-
-				MateriaSyllabus materiaSyllabus = syllabusService.consultarMateriaSyllabusBySyllabus(idSyllabus);
-
+				
+				Integer idDocente = docente.getIdDocente();
+				Integer idMateria = Integer.parseInt(buscarDocenteBean.getMateria().toString());
+				
+				MateriaSyllabus materiaSyllabus = syllabusService.consultarSyllabus(idDocente, idMateria);
+				
+				Integer idSyllabus = materiaSyllabus.getSyllabus().getIdSyllabus();
+				
+				syllabus = syllabusService.consultarSyllabusById(idSyllabus);
+				
 				buscarDocenteBean.setMateria(materiaSyllabus.getMateriaUce().getMateriaUce());
 				buscarDocenteBean.setNumHorasPresenciales(syllabus.getNumHorasPresenciales());
 				buscarDocenteBean.setNumHorasTutorias(syllabus.getHorasTutorias());
@@ -276,6 +318,56 @@ public class BuscarDocenteBacking implements Serializable {
 			throw new DioneException(e);
 		}
 
+	}
+
+	/**
+	 * @return the materias
+	 */
+	public List<SelectItem> getMaterias() {
+		materias = new ArrayList<SelectItem>();
+		for (MateriaUce materiaUce : materiaUces) {
+			SelectItem selectItem = new SelectItem(materiaUce.getIdMateriaUce(), materiaUce.getMateriaUce());
+			materias.add(selectItem);
+		}
+		return materias;
+	}
+
+	/**
+	 * @param materias
+	 *            the materias to set
+	 */
+	public void setMaterias(List<SelectItem> materias) {
+		this.materias = materias;
+	}
+
+	/**
+	 * @return the docenteEncontrado
+	 */
+	public Boolean getDocenteEncontrado() {
+		return docenteEncontrado;
+	}
+
+	/**
+	 * @param docenteEncontrado
+	 *            the docenteEncontrado to set
+	 */
+	public void setDocenteEncontrado(Boolean docenteEncontrado) {
+		this.docenteEncontrado = docenteEncontrado;
+	}
+
+	/**
+	 * @return the materiaUces
+	 */
+	public List<MateriaUce> getMateriaUces() {
+		return materiaUces;
+	}
+
+	/**
+	 * @param materiaUces
+	 *            the materiaUces to set
+	 */
+	public void setMateriaUces(List<MateriaUce> materiaUces) {
+		this.materiaUces = materiaUces;
 	}
 
 }

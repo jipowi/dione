@@ -191,13 +191,13 @@ public class SyllabusBacking implements Serializable {
 			// Cabecera Syllabus
 			Syllabus syllabus = new Syllabus();
 
-			syllabus.setDocente(docente);
 			MateriaUce materiaUce = syllabusService.consultarMateriaById(Integer.parseInt(syllabusBean.getMateria()));
 
 			List<MateriaSyllabus> materiaSyllabuses = new ArrayList<MateriaSyllabus>();
 			MateriaSyllabus materiaSyllabus = new MateriaSyllabus();
 			materiaSyllabus.setMateriaUce(materiaUce);
 			materiaSyllabus.setSyllabus(syllabus);
+			materiaSyllabus.setDocente(docente);
 			materiaSyllabuses.add(materiaSyllabus);
 
 			syllabus.setMateriaSyllabuses(materiaSyllabuses);

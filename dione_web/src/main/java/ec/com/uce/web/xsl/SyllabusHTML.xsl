@@ -354,12 +354,172 @@
 								</table>
 							</td>
 						</tr>
+
+						<!-- BIBLIOGRAFIAS -->
+						<tr>
+							<td style="height:0.8cm;"></td>
+						</tr>
+						<tr>
+							<td>
+								<table width="100%" border="1" cellspacing="0"
+									cellpadding="0" class="blanco">
+									<col style="width:100%;" />
+
+									<tbody style="background-color: silver; font-weight: bold;">
+										<tr>
+											<td align="center" colspan="2" style="font-weight: bold;">
+												<h3>
+													<xsl:text> BIBLIOGRAFIAS</xsl:text>
+												</h3>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<table width="100%" border="1" cellspacing="0"
+									cellpadding="0" class="blanco">
+									<col style="width:100%;" />
+
+									<tbody>
+										<xsl:for-each select="documento/bibliografias">
+											<tr>
+												<td>
+													<xsl:value-of select="bibliografia" />
+												</td>
+											</tr>
+										</xsl:for-each>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+
+						<!-- RESULTADOS -->
+						<tr>
+							<td style="height:0.8cm;"></td>
+						</tr>
+						<tr>
+							<td>
+								<table width="100%" border="1" cellspacing="0"
+									cellpadding="0" class="blanco">
+									<col style="width:100%;" />
+
+									<tbody style="background-color: silver; font-weight: bold;">
+										<tr>
+											<td align="center" colspan="2" style="font-weight: bold;">
+												<h3>
+													<xsl:text> RESULTADOS DE APRENDIZAJE</xsl:text>
+												</h3>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<table width="100%" border="1" cellspacing="0"
+									cellpadding="0" class="blanco">
+									<col style="width:100%;" />
+
+									<tbody>
+										<xsl:for-each select="documento/resultados">
+											<tr>
+												<td>
+													<xsl:value-of select="resultado" />
+												</td>
+											</tr>
+										</xsl:for-each>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td style="height:0.8cm;"></td>
+						</tr>
+						<!-- UNIDADES DE COMPETENCIA -->
+
+						<tr>
+							<td>
+								<table width="100%" border="1" cellspacing="0"
+									cellpadding="0" class="blanco">
+									<col style="width:30%;" />
+									<col style="width:30%;" />
+									<col style="width:40%;" />
+
+									<tbody style="background-color: silver; font-weight: bold;">
+										<tr>
+											<td align="center" colspan="3" style="font-weight: bold;">
+												<h3>
+													<xsl:text> UNIDADES DE COMPETENCIA </xsl:text>
+												</h3>
+											</td>
+										</tr>
+										<tr>
+											<td align="center">
+												<h4>
+													<xsl:text>Unidad de competencia</xsl:text>
+												</h4>
+											</td>
+											<td align="center">
+												<h4>
+													<xsl:text>Planificacion de horas por competencia</xsl:text>
+												</h4>
+											</td>
+											<td align="center">
+												<h4>
+													<xsl:text>Elementos de competencia</xsl:text>
+												</h4>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<table width="100%" border="1" cellspacing="0"
+									cellpadding="0" class="blanco">
+									<col style="width:30%;" />
+									<col style="width:30%;" />
+									<col style="width:40%;" />
+									<tbody>
+										<xsl:for-each select="documento/unidades">
+											<tr>
+												<td>
+													<xsl:value-of select="unidadCompetencia" />
+												</td>
+												<td>
+													<xsl:value-of select="horas" />
+												</td>
+												<td>
+													<table width="100%" border="1" cellspacing="0"
+														cellpadding="0" class="blanco">
+														<col style="width:100%;" />
+														<tbody>
+															<xsl:for-each select="elementos">
+																<tr>
+																	<td>
+																		<xsl:value-of select="elemento" />
+																	</td>
+																</tr>
+															</xsl:for-each>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+										</xsl:for-each>
+									</tbody>
+								</table>
+							</td>
+						</tr>
 						<tr>
 							<td style="height:0.8cm;"></td>
 						</tr>
 					</tbody>
 				</table>
-
 			</center>
 		</html>
 	</xsl:template>
