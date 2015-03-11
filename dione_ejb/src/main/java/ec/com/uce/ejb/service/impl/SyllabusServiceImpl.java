@@ -332,4 +332,20 @@ public class SyllabusServiceImpl implements SyllabusService {
 
 		return unidadesCompetenciaDTO;
 	}
+
+	/* (non-Javadoc)
+	 * @see ec.com.uce.ejb.service.SyllabusService#consultarSyllabus(java.lang.Integer, java.lang.Integer)
+	 */
+	@Override
+	public MateriaSyllabus consultarSyllabus(Integer idDocente, Integer idMateria) throws DioneException {
+		return materiaSyllabusDao.consultarSyllabus(idDocente, idMateria);
+	}
+
+	/* (non-Javadoc)
+	 * @see ec.com.uce.ejb.service.SyllabusService#consultarSyllabusById(java.lang.Integer)
+	 */
+	@Override
+	public Syllabus consultarSyllabusById(Integer idSyllabus) throws DioneException {
+		return syllabusDao.findById(idSyllabus);
+	}
 }

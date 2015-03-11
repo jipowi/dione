@@ -263,4 +263,31 @@ public interface SyllabusService {
 	 * @throws DioneException
 	 */
 	public List<UnidadCompetenciaDTO> consultarUnidadesDTO(Integer idSyllabus) throws DioneException;
+
+	/**
+	 * 
+	 * <b> Permite consultar el syllabus de un docente por medio de la materia y el codigo de docente. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 10/03/2015]
+	 * </p>
+	 * 
+	 * @param idDocente
+	 * @param idMateria
+	 * @return
+	 * @throws DioneException
+	 */
+	public MateriaSyllabus consultarSyllabus(Integer idDocente, Integer idMateria) throws DioneException;
+
+	/**
+	 * 
+	 * <b> Permite consultar el syllabus por el id. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 10/03/2015]
+	 * </p>
+	 * 
+	 * @param idSyllabus
+	 * @return
+	 * @throws DioneException
+	 */
+	public Syllabus consultarSyllabusById(Integer idSyllabus) throws DioneException;
 }

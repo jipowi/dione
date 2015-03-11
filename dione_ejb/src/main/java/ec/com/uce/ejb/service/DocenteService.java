@@ -63,7 +63,7 @@ public interface DocenteService {
 	 * @return
 	 * @throws DioneException
 	 */
-	public Escuela consultarEscuelaById(Long escuela) throws DioneException;
+	public Escuela consultarEscuelaById(Integer escuela) throws DioneException;
 
 	/**
 	 * 

@@ -80,7 +80,7 @@ public class DocenteServiceImpl implements DocenteService {
 	 * @see ec.com.uce.ejb.service.DocenteService#consultarEscuelaById(java.lang.Long)
 	 */
 	@Override
-	public Escuela consultarEscuelaById(Long escuela) throws DioneException {
+	public Escuela consultarEscuelaById(Integer escuela) throws DioneException {
 		return escuelaDao.findById(escuela);
 	}
 
