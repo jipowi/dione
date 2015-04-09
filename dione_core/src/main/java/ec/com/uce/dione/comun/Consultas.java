@@ -16,6 +16,7 @@ import javax.persistence.NamedQuery;
 		@NamedQuery(name = "Materia.findByEscuela", query = "SELECT m FROM Materia m WHERE m.escuela.idEscuela =:idEscuela"),
 		// ESCUELA UCE
 		@NamedQuery(name = "EscuelaUce.findByDocente", query = "SELECT m FROM EscuelaUce m WHERE m.docente.idDocente =:idDocente"),
+		@NamedQuery(name = "EscuelaUce.findByDescripcion", query = "SELECT m FROM EscuelaUce m WHERE m.escuelaUce =:escuela"),
 		// PREREQUISITO
 		@NamedQuery(name = "Prerequisito.findByMateria", query = "SELECT m FROM Prerequisito m WHERE m.materia.idMateria =:idMateria"),
 		// COREQUISITO
@@ -39,6 +40,8 @@ import javax.persistence.NamedQuery;
 		@NamedQuery(name = "Rol.findByUsuario", query = "SELECT r FROM Rol r WHERE r.usuario.idUsuario =:idUsuario"),
 		// OBJETIVOS
 		@NamedQuery(name = "Objetivo.findBysyllabus", query = "SELECT o FROM Objetivo o WHERE o.syllabus.idSyllabus =:idSyllabus"),
+		// CUMPLIMIENTOS
+		@NamedQuery(name = "Cumplimiento.findByIdMateriaSyllabus", query = "SELECT o FROM Cumplimiento o WHERE o.materiaSyllabus.idMateriaSyllabus =:idMateriaSyllabus"),
 		// COMPETENCIAS
 		@NamedQuery(name = "CompetenciaGenerale.findBySyllabus", query = "SELECT c FROM CompetenciaGenerale c WHERE c.syllabus.idSyllabus =:idSyllabus"),
 		@NamedQuery(name = "CompetenciasGenerica.findBySyllabus", query = "SELECT c FROM CompetenciasGenerica c WHERE c.syllabus.idSyllabus =:idSyllabus"),

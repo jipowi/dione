@@ -25,7 +25,7 @@ public class FormacionAcademica implements Serializable {
 	private String titulo;
 
 	//bi-directional many-to-one association to Docente
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_docente")
 	private Docente docente;
 

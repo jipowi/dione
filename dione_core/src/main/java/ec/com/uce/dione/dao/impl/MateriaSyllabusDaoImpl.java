@@ -1,5 +1,7 @@
 package ec.com.uce.dione.dao.impl;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,7 +19,7 @@ import ec.com.uce.dione.entities.MateriaSyllabus;
  * @since JDK1.6
  */
 @Stateless
-public class MateriaSyllabusDaoImpl extends GenericDAOImpl<MateriaSyllabus, Long> implements MateriaSyllabusDao {
+public class MateriaSyllabusDaoImpl extends GenericDAOImpl<MateriaSyllabus, Integer> implements MateriaSyllabusDao {
 
 	@PersistenceContext(unitName = "dione_core")
 	private EntityManager em;
@@ -27,29 +29,39 @@ public class MateriaSyllabusDaoImpl extends GenericDAOImpl<MateriaSyllabus, Long
 	 * 
 	 * @see ec.com.uce.dione.dao.MateriaSyllabusDao#consultarMateriaSyllabusBySyllabus(java.lang.Integer)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public MateriaSyllabus consultarMateriaSyllabusBySyllabus(Integer idSyllabus) throws DioneException {
 
 		Query query = em.createNamedQuery("MateriaSyllabus.findBySyllabus");
 		query.setParameter("idSyllabus", idSyllabus);
 
-		MateriaSyllabus materiaSyllabus = (MateriaSyllabus) query.getSingleResult();
-
-		return materiaSyllabus;
+		List<MateriaSyllabus> materiaSyllabus = query.getResultList();
+		if (!materiaSyllabus.isEmpty())
+			return materiaSyllabus.get(0);
+		else
+			return null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ec.com.uce.dione.dao.MateriaSyllabusDao#consultarSyllabus(java.lang.Integer, java.lang.Integer)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public MateriaSyllabus consultarSyllabus(Integer idDocente, Integer idMateria) throws DioneException {
-		
+
 		Query query = em.createNamedQuery("MateriaSyllabus.findByMateriaAndDocente");
 		query.setParameter("idDocente", idDocente);
 		query.setParameter("idMateriaUce", idMateria);
-		MateriaSyllabus materiaSyllabus = (MateriaSyllabus) query.getSingleResult();
+		List<MateriaSyllabus> materiaSyllabus = query.getResultList();
 
-		return materiaSyllabus;
+		if (!materiaSyllabus.isEmpty()) {
+			return materiaSyllabus.get(0);
+		} else {
+			return null;
+		}
 	}
 
 }

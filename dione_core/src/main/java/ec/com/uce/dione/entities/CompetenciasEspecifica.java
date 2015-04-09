@@ -23,7 +23,7 @@ public class CompetenciasEspecifica implements Serializable {
 	private String competenciaEspecifica;
 
 	//bi-directional many-to-one association to Syllabus
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_syllabus")
 	private Syllabus syllabus;
 

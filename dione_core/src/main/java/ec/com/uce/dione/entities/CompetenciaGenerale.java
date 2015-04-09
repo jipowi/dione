@@ -35,7 +35,7 @@ public class CompetenciaGenerale implements Serializable {
 	private Boolean procesoComp;
 
 	//bi-directional many-to-one association to Syllabus
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_syllabus")
 	private Syllabus syllabus;
 

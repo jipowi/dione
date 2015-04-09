@@ -31,5 +31,18 @@ public interface EscuelaUceDao extends GenericDAO<EscuelaUce, Integer> {
 	 * @throws DioneException
 	 */
 	public List<EscuelaUce> consultarEscuelaByDocente(String idDocente) throws DioneException;
+	
+	/**
+	 * 
+	 * <b> Permite concsultar las escuelas por medio de la descripcion. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 19/03/2015]
+	 * </p>
+	 * 
+	 * @param escuela
+	 * @return
+	 * @throws DioneException
+	 */
+	public List<EscuelaUce> consultarEscuelas(String escuela) throws DioneException;
 
 }

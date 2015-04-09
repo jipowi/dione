@@ -30,7 +30,7 @@ public class FormacionContinua implements Serializable {
 	private String tipoDuracion;
 
 	//bi-directional many-to-one association to Docente
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_docente")
 	private Docente docente;
 

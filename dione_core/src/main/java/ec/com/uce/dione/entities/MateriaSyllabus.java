@@ -2,6 +2,7 @@ package ec.com.uce.dione.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -18,6 +19,10 @@ public class MateriaSyllabus implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_materia_syllabus")
 	private Integer idMateriaSyllabus;
+
+	//bi-directional many-to-one association to Cumplimiento
+	@OneToMany(mappedBy="materiaSyllabus")
+	private List<Cumplimiento> cumplimientos;
 
 	//bi-directional many-to-one association to Docente
 	@ManyToOne
@@ -43,6 +48,28 @@ public class MateriaSyllabus implements Serializable {
 
 	public void setIdMateriaSyllabus(Integer idMateriaSyllabus) {
 		this.idMateriaSyllabus = idMateriaSyllabus;
+	}
+
+	public List<Cumplimiento> getCumplimientos() {
+		return this.cumplimientos;
+	}
+
+	public void setCumplimientos(List<Cumplimiento> cumplimientos) {
+		this.cumplimientos = cumplimientos;
+	}
+
+	public Cumplimiento addCumplimiento(Cumplimiento cumplimiento) {
+		getCumplimientos().add(cumplimiento);
+		cumplimiento.setMateriaSyllabus(this);
+
+		return cumplimiento;
+	}
+
+	public Cumplimiento removeCumplimiento(Cumplimiento cumplimiento) {
+		getCumplimientos().remove(cumplimiento);
+		cumplimiento.setMateriaSyllabus(null);
+
+		return cumplimiento;
 	}
 
 	public Docente getDocente() {

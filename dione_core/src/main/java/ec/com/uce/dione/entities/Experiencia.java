@@ -34,7 +34,7 @@ public class Experiencia implements Serializable {
 	private String institucionExp;
 
 	//bi-directional many-to-one association to Docente
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_docente")
 	private Docente docente;
 

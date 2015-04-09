@@ -26,7 +26,7 @@ public class Materia implements Serializable {
 	private List<Corequisito> corequisitos;
 
 	//bi-directional many-to-one association to Escuela
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_escuela")
 	private Escuela escuela;
 

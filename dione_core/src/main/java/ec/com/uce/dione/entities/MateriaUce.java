@@ -32,7 +32,7 @@ public class MateriaUce implements Serializable {
 	private List<MateriaSyllabus> materiaSyllabuses;
 
 	//bi-directional many-to-one association to EscuelaUce
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_escuela_uce")
 	private EscuelaUce escuelaUce;
 

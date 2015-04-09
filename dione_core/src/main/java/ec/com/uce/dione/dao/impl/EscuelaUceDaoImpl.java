@@ -52,4 +52,25 @@ public class EscuelaUceDaoImpl extends GenericDAOImpl<EscuelaUce, Integer> imple
 		}
 	}
 
+
+
+	/* (non-Javadoc)
+	 * @see ec.com.uce.dione.dao.EscuelaUceDao#consultarEscuelas(java.lang.String)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<EscuelaUce> consultarEscuelas(String escuela) throws DioneException {
+		try {
+			Query query = em.createNamedQuery("EscuelaUce.findByDescripcion");
+			query.setParameter("escuela", escuela);
+			List<EscuelaUce> escuelas = query.getResultList();
+
+			return escuelas;
+
+		} catch (Exception ex) {
+			log.error("Error: No se pudo realizar la Consulta --> consultarEscuelas", ex);
+			throw new DioneException(ex);
+		}
+	}
+
 }

@@ -24,7 +24,7 @@ import ec.com.uce.dione.entities.Docente;
  * @since JDK1.6
  */
 @Stateless
-public class DocenteDaoImpl extends GenericDAOImpl<Docente, Long> implements DocenteDao {
+public class DocenteDaoImpl extends GenericDAOImpl<Docente, Integer> implements DocenteDao {
 
 	Logger log = Logger.getLogger(DocenteDaoImpl.class);
 

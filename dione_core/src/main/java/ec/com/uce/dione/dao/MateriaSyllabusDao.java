@@ -16,7 +16,7 @@ import ec.com.uce.dione.entities.MateriaSyllabus;
  * @since JDK1.6
  */
 @Local
-public interface MateriaSyllabusDao extends GenericDAO<MateriaSyllabus, Long> {
+public interface MateriaSyllabusDao extends GenericDAO<MateriaSyllabus, Integer> {
 
 	/**
 	 * 
