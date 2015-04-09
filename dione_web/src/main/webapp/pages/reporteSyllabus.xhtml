@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/menuPrincipalTemplate.xhtml">
+	<ui:define name="content">
+		<p:panel>
+			<p:messages id="messagesReportes" showDetail="true" autoUpdate="true" closable="true" />
+			<h:form id="formPrincipal">
+				<div align="center">
+					<h:panelGrid columns="2">
+						<p:outputLabel value="#{message['titulo.reporteSyllabus']}" styleClass="negrita" />
+						<h:graphicImage name="estadistica.png" library="img" />
+					</h:panelGrid>
+				</div>
+				<p:spacer height="15px;" />
+				<!-- BUSCADOR DOCENTE -->
+				<h:panelGrid columns="1">
+					<p:panel>
+						<f:facet name="header">
+							<h:outputText value="#{message['lbl.buscarDocente']}" />
+						</f:facet>
+						<h:panelGrid columns="2">
+							<h:panelGrid columns="2">
+								<p:outputLabel value="#{message['lbl.cedula']}" styleClass="negrita" />
+								<p:inputText value="#{reportesBean.cedulaDocente}" />
+							</h:panelGrid>
+							<p:commandLink title="Buscar docente" action="#{reportesBacking.buscarDocente()}" update="@form, idEscuelas">
+								<h:graphicImage name="search.png" library="img" />
+							</p:commandLink>
+						</h:panelGrid>
+					</p:panel>
+				</h:panelGrid>
+				<h:panelGrid columns="1" id="idEscuelas" rendered="#{reportesBacking.docenteEncontrado}">
+					<p:panel>
+						<h:panelGrid columns="2">
+							<h:panelGrid columns="2">
+								<p:outputLabel value="#{message['lbl.escuela']}:" styleClass="negrita" />
+								<p:selectOneMenu id="selecEscuela" value="#{reportesBean.escuela}" effect="drop">
+									<f:selectItem itemLabel="Seleccione" noSelectionOption="true" />
+									<f:selectItems value="#{reportesBacking.escuelas}" />
+								</p:selectOneMenu>
+							</h:panelGrid>
+							<p:commandLink title="Buscar syllaus" action="#{reportesBacking.consultarDatosSyllabus()}" update="@form, formPrincipal:idDatosSyllabus">
+								<h:graphicImage name="search.png" library="img" />
+							</p:commandLink>
+						</h:panelGrid>
+					</p:panel>
+				</h:panelGrid>
+				<p:spacer height="30px;" />
+				<h:panelGrid columns="1">
+					<p:dataTable id="idDatosSyllabus" value="#{reportesBacking.cumplimientoDTOs}" var="cumplimiento" editable="true">
+						<p:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{message['lbl.nombres']}" />
+							</f:facet>
+							<h:outputText value="#{cumplimiento.nombre}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{message['lbl.cedula']}" />
+							</f:facet>
+							<h:outputText value="#{cumplimiento.cedula}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{message['lbl.escuela']}" />
+							</f:facet>
+							<h:outputText value="#{cumplimiento.cedula}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{message['lbl.asignatura']}" />
+							</f:facet>
+							<h:outputText value="#{cumplimiento.materia}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{message['lbl.resultadoObjetivos']}" />
+							</f:facet>
+							<h:outputText value="#{cumplimiento.porcentajeObjetivos}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{message['lbl.resultadoCompetencias']}" />
+							</f:facet>
+							<h:outputText value="#{cumplimiento.porcentajeCompetencias}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{message['lbl.resultadoResultados']}" />
+							</f:facet>
+							<h:outputText value="#{cumplimiento.porcentajeResultados}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{message['lbl.efectividad']}" />
+							</f:facet>
+							<h:outputText value="#{cumplimiento.efectividad}" />
+						</p:column>
+					</p:dataTable>
+				</h:panelGrid>
+				<p:spacer height="30px;" />
+				<h:panelGrid columns="2">
+					<h:outputText value="#{message['lbl.infoReporteDocente']}" />
+					<h:commandLink title="Descargar reporte de docentes" actionListener="#{reportesBacking.imprimirReporteSyllabusPDF}">
+						<h:graphicImage name="pdf.png" library="img" />
+					</h:commandLink>
+				</h:panelGrid>
+			</h:form>
+		</p:panel>
+
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/templates/menuPrincipalTemplate.xhtml">
 	<ui:define name="content">
 		<p:panel>
@@ -171,19 +171,38 @@
 							</p:column>
 						</p:dataTable>
 					</h:panelGrid>
-
 				</div>
 				<p:spacer height="20px;" />
-				<p:commandLink title="Presentar grafico">
-					<h:graphicImage name="calculate.jpg" library="img" onclick="grafico.show();" />
+				<p:commandLink title="Presentar grafico" action="#{resultadosBacking.calcularPorcentajes()}" update="@form, formPrincipal:idResultados">
+					<h:graphicImage name="calculate.jpg" library="img" />
 				</p:commandLink>
-				<h:panelGrid id="grafico" columns="1" rendered="#{resultadosBacking.activarGrafico}">
-					<p:barChart value="#{evaluacionBean.evaluacion}" legendPosition="e" title="Elementos de Evaluacion" style="height:300px" xaxisLabel="Indicadores"
-						yaxisLabel="Porcentaje de Cumplimiento" />
-				</h:panelGrid>
+				<p:spacer height="20px;" />
+				<p:panel id="idResultados">
+					<f:facet name="header">
+						<h:outputText value="#{message['lbl.buscarDocente']}" />
+					</f:facet>
+					<h:panelGrid columns="2">
+						<h:outputText value="#{message['lbl.resultadoObjetivos']}:" />
+						<h:outputText value="#{resultadoBean.totalObjetivos}%" />
+
+						<h:outputText value="#{message['lbl.resultadoCompetencias']}:" />
+						<h:outputText value="#{resultadoBean.totalCompetencias}%" />
+
+						<h:outputText value="#{message['lbl.resultadoResultados']}:" />
+						<h:outputText value="#{resultadoBean.totalResultados}%" />
+					</h:panelGrid>
+					<h:panelGrid columns="3">
+						<h:outputText value="#{message['lbl.efectividad']}:" />
+						<h:outputText value="#{resultadoBean.efectividad}%" />
+						<h:graphicImage name="circle_red.png" library="img" rendered="#{resultadoBean.efectividad==0.0}" />
+						<h:graphicImage name="circle_yellow.png" library="img" rendered="#{resultadoBean.efectividad==50.0}" />
+						<h:graphicImage name="circle_green.png" library="img" rendered="#{resultadoBean.efectividad>50.0}" />
+					</h:panelGrid>
+				</p:panel>
+				<p:spacer height="20px;" />
 				<div align="center">
-					<p:commandButton id="guardarBtnId" actionListener="#{resultadosBacking.guardarEvaluacion()}" icon="icon-save" value="#{message['boton.guardar']}"
-						update="formPrincipal,grafico" title="Guardar" />
+					<p:commandButton id="guardarBtnId" actionListener="#{resultadosBacking.guardarEvaluacion()}" icon="icon-save" value="#{message['boton.guardar']}" update="formPrincipal"
+						title="Guardar" />
 					<p:commandButton id="cancelarBtnId" icon="icon-cancel" value="#{message['boton.cancelar']}" title="Cancelar" />
 				</div>
 			</h:form>

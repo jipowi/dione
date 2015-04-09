@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportSyllabus" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7c01efe8-dfe5-4407-8bbf-3aa43b652f77">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="cedula" class="java.lang.String"/>
+	<field name="escuela" class="java.lang.String"/>
+	<field name="materia" class="java.lang.String"/>
+	<field name="porcentajeObjetivos" class="java.math.BigDecimal"/>
+	<field name="porcentajeCompetencias" class="java.math.BigDecimal"/>
+	<field name="porcentajeResultados" class="java.math.BigDecimal"/>
+	<field name="efectividad" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="4ce6ea76-eff8-4515-88a6-833dd94a5e7d" x="141" y="35" width="271" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE CUMPLIMIENTO DE SYLLABUS]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="8c115a51-5dda-4b58-a072-86c66a3ede1e" x="452" y="4" width="100" height="55"/>
+				<imageExpression><![CDATA["C:\\Jipowi Dione\\Documentos\\logoUCE.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="b8e024b6-12a1-47b4-96ac-d96d49ee6fb8" x="3" y="11" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f59702d5-639f-4091-a887-20916119c023" x="103" y="11" width="50" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[CEDULA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="083d48ef-d9c8-4016-a638-6058d2e8db3f" x="153" y="11" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ESCUELA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fee970ff-3fa8-47a4-9055-41d3cfe720a6" x="213" y="11" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[MATERIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2821912e-3f59-498e-bcf7-799209c42463" x="275" y="11" width="70" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[OBJETIVOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="69f0b18a-e3e6-440c-8159-1618427bef61" x="345" y="11" width="70" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[COMPETENCIAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a3badb50-d453-4fb8-aa2a-3ae6fff1334c" x="419" y="11" width="70" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[RESULTADOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6fab05fe-01b4-49ba-85b2-5f5a8dfa3f4a" x="489" y="11" width="70" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[EFECTIVIDAD]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="122" splitType="Stretch">
+			<textField>
+				<reportElement uuid="93879c45-fe37-4632-9bd4-4210be99e31c" x="3" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e08f17e3-61da-4cc4-bbe6-c706bb3e2550" x="103" y="0" width="50" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cedula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d833b016-eec8-45d5-a86d-8346f5933914" x="153" y="0" width="60" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{escuela}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="63b12fba-19ce-4523-978a-ee3102640bee" x="213" y="0" width="60" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{materia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e9b56163-c64a-4cd9-8574-26e01e497a41" x="275" y="0" width="50" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{porcentajeObjetivos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="66eddd18-13d3-470e-8a58-ebee741abcf4" x="346" y="0" width="50" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{porcentajeCompetencias}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="158fbf46-e904-4714-a795-0962a005e3f7" x="419" y="0" width="40" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{porcentajeResultados}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="75cb6944-a596-4aa5-b858-a571873e2c2b" x="489" y="0" width="40" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{efectividad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -38,7 +38,7 @@
 							<p:selectOneMenu id="selecMateria" value="#{syllabusBean.materia}" effect="drop">
 								<f:selectItem itemLabel="Seleccione" noSelectionOption="true" />
 								<f:selectItems value="#{syllabusBacking.materias}" />
-								<p:ajax event="change" listener="#{syllabusBacking.obtenerPrerequisitos()}" update="@form, requisitos" />
+								<p:ajax event="change" listener="#{syllabusBacking.obtenerPrerequisitos()}" update="@form, formPrincipal:requisitos" />
 							</p:selectOneMenu>
 
 							<p:outputLabel value="#{message['lbl.numHorasPresenciales']}:" styleClass="negrita" />

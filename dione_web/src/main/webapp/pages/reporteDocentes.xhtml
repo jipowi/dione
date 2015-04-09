@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/menuPrincipalTemplate.xhtml">
+	<ui:define name="content">
+		<p:panel>
+			<p:messages id="messagesReportes" showDetail="true" autoUpdate="true" closable="true" />
+			<h:form id="formPrincipal">
+				<div align="center">
+					<h:panelGrid columns="2">
+						<p:outputLabel value="#{message['titulo.reporteDocente']}" styleClass="negrita" />
+						<h:graphicImage name="estadistica.png" library="img" />
+					</h:panelGrid>
+				</div>
+				<p:spacer height="15px;" />
+				<!-- BUSCADOR DOCENTE -->
+				<h:panelGrid columns="1">
+					<p:panel>
+						<f:facet name="header">
+							<h:outputText value="#{message['lbl.filtroReporte']}" />
+						</f:facet>
+						<h:panelGrid columns="2">
+							<h:panelGrid columns="2">
+								<h:outputLabel value="#{message['lbl.escuela']}:" styleClass="negrita" />
+								<p:selectOneMenu id="selecMateria" value="#{reportesBean.escuela}" effect="drop">
+									<f:selectItem itemLabel="Seleccione" noSelectionOption="true" />
+									<f:selectItems value="#{reportesBacking.escuelas}" />
+								</p:selectOneMenu>
+							</h:panelGrid>
+							<p:commandLink title="Generar Reporte" action="#{reportesBacking.consultarDocentes()}" update="@form, formPrincipal:idDocentes">
+								<h:graphicImage name="search.png" library="img" />
+							</p:commandLink>
+						</h:panelGrid>
+					</p:panel>
+				</h:panelGrid>
+				<p:spacer height="30px;" />
+				<h:panelGrid columns="1">
+					<p:dataTable id="idDocentes" value="#{reportesBacking.docentes}" var="docente" editable="true">
+						<p:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{message['lbl.nombres']}" />
+							</f:facet>
+							<h:outputText value="#{docente.nombresDocente}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{message['lbl.cedula']}" />
+							</f:facet>
+							<h:outputText value="#{docente.cedulaDocente}" />
+						</p:column>
+					</p:dataTable>
+				</h:panelGrid>
+				<p:spacer height="30px;" />
+				<h:panelGrid columns="2">
+					<h:outputText value="#{message['lbl.infoReporteDocente']}" />
+					<h:commandLink title="Descargar reporte de docentes" actionListener="#{reportesBacking.imprimirReporteDocentePDF}">
+						<h:graphicImage name="pdf.png" library="img" />
+					</h:commandLink>
+				</h:panelGrid>
+			</h:form>
+		</p:panel>
+
+	</ui:define>
+</ui:composition>
+</html>
