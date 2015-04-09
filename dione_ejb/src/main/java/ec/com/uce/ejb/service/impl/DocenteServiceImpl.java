@@ -53,6 +53,7 @@ public class DocenteServiceImpl implements DocenteService {
 	private FormacionCDao formacionCDao;
 	@EJB
 	private ExperienciaDao experienciaDao;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -130,7 +131,7 @@ public class DocenteServiceImpl implements DocenteService {
 			formacionAcademinca.setDocente(docente);
 			formacionADao.persist(formacionAcademinca);
 		}
-		for (Experiencia experiencia: experiencias){
+		for (Experiencia experiencia : experiencias) {
 			experiencia.setDocente(docente);
 			experienciaDao.persist(experiencia);
 		}
@@ -166,12 +167,32 @@ public class DocenteServiceImpl implements DocenteService {
 		return formacionCDao.consultarFormacionByDocente(idDocente);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ec.com.uce.ejb.service.DocenteService#consultarExperienciasByDocente(java.lang.Integer)
 	 */
 	@Override
 	public List<Experiencia> consultarExperienciasByDocente(Integer idDocente) throws DioneException {
 		return experienciaDao.consultarExperienciasByDocente(idDocente);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.uce.ejb.service.DocenteService#consultarDocenteById(java.lang.Integer)
+	 */
+	@Override
+	public Docente consultarDocenteById(Integer idDocente) throws DioneException {
+		return docenteDao.findById(idDocente);
+	}
+
+	/* (non-Javadoc)
+	 * @see ec.com.uce.ejb.service.DocenteService#consultarEscuelas(java.lang.String)
+	 */
+	@Override
+	public List<EscuelaUce> consultarEscuelas(String escuela) throws DioneException {
+		return escuelaUceDao.consultarEscuelas(escuela);
 	}
 
 }

@@ -29,6 +29,31 @@ public interface DocenteService {
 
 	/**
 	 * 
+	 * <b> Permite concsultar las escuelas por medio de la descripcion. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 19/03/2015]
+	 * </p>
+	 * 
+	 * @param escuela
+	 * @return
+	 * @throws DioneException
+	 */
+	public List<EscuelaUce> consultarEscuelas(String escuela) throws DioneException;
+
+	/**
+	 * 
+	 * <b> Permite consultar docente por medio del codigo de docente. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 19/03/2015]
+	 * </p>
+	 * 
+	 * @param idDocente
+	 * @throws DioneException
+	 */
+	public Docente consultarDocenteById(Integer idDocente) throws DioneException;
+
+	/**
+	 * 
 	 * <b> Permite consultar las escuelas que se encuentran registradas en la base de datos. </b>
 	 * <p>
 	 * [Author: Paul Jimenez, Date: 29/12/2014]

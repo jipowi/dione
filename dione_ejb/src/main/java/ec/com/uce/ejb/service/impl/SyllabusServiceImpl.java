@@ -15,6 +15,7 @@ import ec.com.uce.dione.dao.CompetenciaDao;
 import ec.com.uce.dione.dao.CompetenciaEspecificaDao;
 import ec.com.uce.dione.dao.CompetenciaGenericaDao;
 import ec.com.uce.dione.dao.CorequisitoDao;
+import ec.com.uce.dione.dao.CumplimientoDao;
 import ec.com.uce.dione.dao.ElementoCompetenciaDao;
 import ec.com.uce.dione.dao.EscuelaUceDao;
 import ec.com.uce.dione.dao.MateriaSyllabusDao;
@@ -29,6 +30,7 @@ import ec.com.uce.dione.entities.CompetenciaGenerale;
 import ec.com.uce.dione.entities.CompetenciasEspecifica;
 import ec.com.uce.dione.entities.CompetenciasGenerica;
 import ec.com.uce.dione.entities.Corequisito;
+import ec.com.uce.dione.entities.Cumplimiento;
 import ec.com.uce.dione.entities.ElementoCompetencia;
 import ec.com.uce.dione.entities.EscuelaUce;
 import ec.com.uce.dione.entities.MateriaSyllabus;
@@ -80,6 +82,8 @@ public class SyllabusServiceImpl implements SyllabusService {
 	private CompetenciaGenericaDao competenciaGenericaDao;
 	@EJB
 	private CompetenciaEspecificaDao competenciaEspecificaDao;
+	@EJB
+	private CumplimientoDao cumpliminetoDao;
 
 	/*
 	 * (non-Javadoc)
@@ -333,7 +337,9 @@ public class SyllabusServiceImpl implements SyllabusService {
 		return unidadesCompetenciaDTO;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ec.com.uce.ejb.service.SyllabusService#consultarSyllabus(java.lang.Integer, java.lang.Integer)
 	 */
 	@Override
@@ -341,11 +347,62 @@ public class SyllabusServiceImpl implements SyllabusService {
 		return materiaSyllabusDao.consultarSyllabus(idDocente, idMateria);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ec.com.uce.ejb.service.SyllabusService#consultarSyllabusById(java.lang.Integer)
 	 */
 	@Override
 	public Syllabus consultarSyllabusById(Integer idSyllabus) throws DioneException {
 		return syllabusDao.findById(idSyllabus);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.uce.ejb.service.SyllabusService#actualizarCompetenciasGenerales(java.util.List)
+	 */
+	@Override
+	public void actualizarCompetenciasGenerales(List<CompetenciaGenerale> competencias) throws DioneException {
+		for (CompetenciaGenerale competencia : competencias) {
+			competenciaDao.update(competencia);
+		}
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.uce.ejb.service.SyllabusService#guardarCumplimiento(java.util.List, java.util.List, java.util.List,
+	 * ec.com.uce.dione.entities.MateriaSyllabus)
+	 */
+	@Override
+	public void guardarCumplimiento(List<Objetivo> objetivos, List<CompetenciaGenerale> competenciasGenerales, List<ResultadosAprendizaje> resultados, Cumplimiento cumplimiento)
+			throws DioneException {
+
+		actualizarObjetivos(objetivos);
+		actualizarCompetenciasGenerales(competenciasGenerales);
+		actualizarResultados(resultados);
+		cumpliminetoDao.persist(cumplimiento);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.uce.ejb.service.SyllabusService#consultarMateriaSyllabusById(java.lang.Integer)
+	 */
+	@Override
+	public MateriaSyllabus consultarMateriaSyllabusById(Integer idMateriaSyllabus) throws DioneException {
+		return materiaSyllabusDao.findById(idMateriaSyllabus);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ec.com.uce.ejb.service.SyllabusService#consultarCumplimientoByMatSyllabus(java.lang.Integer)
+	 */
+	@Override
+	public Cumplimiento consultarCumplimientoByMatSyllabus(Integer idMateriaSyllabus) throws DioneException {
+		return cumpliminetoDao.consultarCumplimientoByMatSyllabus(idMateriaSyllabus);
 	}
 }

@@ -10,6 +10,7 @@ import ec.com.uce.dione.entities.CompetenciaGenerale;
 import ec.com.uce.dione.entities.CompetenciasEspecifica;
 import ec.com.uce.dione.entities.CompetenciasGenerica;
 import ec.com.uce.dione.entities.Corequisito;
+import ec.com.uce.dione.entities.Cumplimiento;
 import ec.com.uce.dione.entities.EscuelaUce;
 import ec.com.uce.dione.entities.MateriaSyllabus;
 import ec.com.uce.dione.entities.MateriaUce;
@@ -99,6 +100,22 @@ public interface SyllabusService {
 
 	/**
 	 * 
+	 * <b> Permite guardar el cumplimiento y actualizar los valor de los objetivos, condiciones y resultados. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 03/04/2015]
+	 * </p>
+	 * 
+	 * @param objetivos
+	 * @param competenciasGenerales
+	 * @param resultados
+	 * @param cumplimiento
+	 * @throws DioneException
+	 */
+	public void guardarCumplimiento(List<Objetivo> objetivos, List<CompetenciaGenerale> competenciasGenerales, List<ResultadosAprendizaje> resultados, Cumplimiento cumplimiento)
+			throws DioneException;
+
+	/**
+	 * 
 	 * <b> Permite consultar los objetivos correspondientes a un syllabus </b>
 	 * <p>
 	 * [Author: Paul Jimenez, Date: 23/01/2015]
@@ -147,6 +164,18 @@ public interface SyllabusService {
 	 * @throws DioneException
 	 */
 	public void actualizarObjetivos(List<Objetivo> objetivos) throws DioneException;
+
+	/**
+	 * 
+	 * <b> Permite actualizar las competencias. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 25/01/2015]
+	 * </p>
+	 * 
+	 * @param objetivos
+	 * @throws DioneException
+	 */
+	public void actualizarCompetenciasGenerales(List<CompetenciaGenerale> competencias) throws DioneException;
 
 	/**
 	 * 
@@ -211,6 +240,19 @@ public interface SyllabusService {
 	 * @throws DioneException
 	 */
 	public MateriaSyllabus consultarMateriaSyllabusBySyllabus(Integer idSyllabus) throws DioneException;
+
+	/**
+	 * 
+	 * <b> Permite consultar Materia syllabus por id. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 08/04/2015]
+	 * </p>
+	 * 
+	 * @param idMateriaSyllabus
+	 * @return
+	 * @throws DioneException
+	 */
+	public MateriaSyllabus consultarMateriaSyllabusById(Integer idMateriaSyllabus) throws DioneException;
 
 	/**
 	 * 
@@ -290,4 +332,17 @@ public interface SyllabusService {
 	 * @throws DioneException
 	 */
 	public Syllabus consultarSyllabusById(Integer idSyllabus) throws DioneException;
+
+	/**
+	 * 
+	 * <b> Permite consultar el complimiento por materiaSyllabus. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 08/04/2015]
+	 * </p>
+	 * 
+	 * @param idMateriaSyllabus
+	 * @return
+	 * @throws DioneException
+	 */
+	public Cumplimiento consultarCumplimientoByMatSyllabus(Integer idMateriaSyllabus) throws DioneException;
 }
