@@ -67,6 +67,7 @@ INSERT INTO MENU VALUES (1, NULL, 'Docente', NULL,'A');
 INSERT INTO MENU VALUES (2, NULL, 'Syllabus', NULL,'A');
 INSERT INTO MENU VALUES (3, NULL, 'Administracion', NULL,'A');
 INSERT INTO MENU VALUES (4, NULL, 'Gerencial', NULL,'A');
+INSERT INTO MENU VALUES (5, NULL, 'Documentos', NULL,'A');
 
 INSERT INTO MENU VALUES (6, 1, 'Ingresar Docente', '/pages/docente.jsf','A');
 INSERT INTO MENU VALUES (7, 1, 'Ingresar Hoja de Vida', '/pages/hojaVida.jsf','A');
@@ -76,6 +77,7 @@ INSERT INTO MENU VALUES (10, 2, 'Verificar cumplimiento syllabus', '/pages/cumpl
 INSERT INTO MENU VALUES (11, 3, 'Ingresar Usuarios', '/pages/usuarios.jsf','A');
 INSERT INTO MENU VALUES (12, 4, 'Reporte Docentes', '/pages/reporteDocentes.jsf','A');
 INSERT INTO MENU VALUES (13, 4, 'Reporte Syllabus', '/pages/reporteSyllabus.jsf','A');
+INSERT INTO MENU VALUES (14, 5, 'Gestor Documental', '/pages/documentos.jsf','A');
 
 INSERT INTO ROL_MENU VALUES (1,1,1);
 INSERT INTO ROL_MENU VALUES (2,2,1);
@@ -89,3 +91,5 @@ INSERT INTO ROL_MENU VALUES (9,11,1);
 INSERT INTO ROL_MENU VALUES (10,12,1);
 INSERT INTO ROL_MENU VALUES (11,13,1);
 INSERT INTO ROL_MENU VALUES (12,4,1);
+INSERT INTO ROL_MENU VALUES (13,5,1);
+INSERT INTO ROL_MENU VALUES (14,14,1);
