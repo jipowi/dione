@@ -57,6 +57,10 @@ public class Docente extends Auditoria implements Serializable {
 	@OneToMany(mappedBy = "docente")
 	private List<MateriaSyllabus> materiaSyllabuses;
 
+	// bi-directional many-to-one association to ArchivoBase
+	@OneToMany(mappedBy = "docente")
+	private List<ArchivoBase> archivoBases;
+
 	public Docente() {
 	}
 
@@ -208,6 +212,21 @@ public class Docente extends Auditoria implements Serializable {
 		materiaSyllabus.setDocente(null);
 
 		return materiaSyllabus;
+	}
+
+	/**
+	 * @return the archivoBases
+	 */
+	public List<ArchivoBase> getArchivoBases() {
+		return archivoBases;
+	}
+
+	/**
+	 * @param archivoBases
+	 *            the archivoBases to set
+	 */
+	public void setArchivoBases(List<ArchivoBase> archivoBases) {
+		this.archivoBases = archivoBases;
 	}
 
 }
