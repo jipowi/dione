@@ -84,5 +84,9 @@ public class ConstantesUtil {
 	public static final String CONTENT_TYPE_IDENTIFICADOR = "CONTENT_TYPE_IDENTIFICADOR";
 	public static final String CONTENIDO_BYTES_IDENTIFICADOR = "CONTENIDO_BYTES_IDENTIFICADOR";
 	public static final String NOMBRE_ARCHIVO_IDENTIFICADOR = "NOMBRE_ARCHIVO_IDENTIFICADOR";
+	public static final Integer INICIO = 25;
+	public static final Integer PROCESO = 50;
+	public static final Integer AVANCE = 75;
+	public static final Integer DOMINIO = 100;
 
 }

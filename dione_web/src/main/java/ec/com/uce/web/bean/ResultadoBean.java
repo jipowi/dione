@@ -32,6 +32,10 @@ public class ResultadoBean implements Serializable {
 	private List<EvaluacionObjetivosDTO> resultObjetivosDTO = new ArrayList<EvaluacionObjetivosDTO>();
 	private List<EvaluacionCompetenciasDTO> resultCompetenciasDTO = new ArrayList<EvaluacionCompetenciasDTO>();
 	private List<EvaluacionResAprendizajeDTO> resultadosDTO = new ArrayList<EvaluacionResAprendizajeDTO>();
+	private Double totalObjetivos;
+	private Double totalCompetencias;
+	private Double totalResultados;
+	private Double efectividad;
 
 	/**
 	 * @return the cedula
@@ -106,6 +110,66 @@ public class ResultadoBean implements Serializable {
 	 */
 	public void setResultadosDTO(List<EvaluacionResAprendizajeDTO> resultadosDTO) {
 		this.resultadosDTO = resultadosDTO;
+	}
+
+	/**
+	 * @return the totalObjetivos
+	 */
+	public Double getTotalObjetivos() {
+		return totalObjetivos;
+	}
+
+	/**
+	 * @param totalObjetivos
+	 *            the totalObjetivos to set
+	 */
+	public void setTotalObjetivos(Double totalObjetivos) {
+		this.totalObjetivos = totalObjetivos;
+	}
+
+	/**
+	 * @return the totalCompetencias
+	 */
+	public Double getTotalCompetencias() {
+		return totalCompetencias;
+	}
+
+	/**
+	 * @param totalCompetencias
+	 *            the totalCompetencias to set
+	 */
+	public void setTotalCompetencias(Double totalCompetencias) {
+		this.totalCompetencias = totalCompetencias;
+	}
+
+	/**
+	 * @return the totalResultados
+	 */
+	public Double getTotalResultados() {
+		return totalResultados;
+	}
+
+	/**
+	 * @param totalResultados
+	 *            the totalResultados to set
+	 */
+	public void setTotalResultados(Double totalResultados) {
+		this.totalResultados = totalResultados;
+	}
+
+	/**
+	 * @return the efectividad
+	 */
+	public Double getEfectividad() {
+		return efectividad;
+	}
+
+	/**
+	 * @param efectividad
+	 *            the efectividad to set
+	 */
+	public void setEfectividad(Double efectividad) {
+		this.efectividad = efectividad;
 	}
 
 }

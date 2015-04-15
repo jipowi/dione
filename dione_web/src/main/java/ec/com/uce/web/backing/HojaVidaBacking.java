@@ -164,6 +164,7 @@ public class HojaVidaBacking implements Serializable {
 			hojaVidaBean.setInstitucionFc(null);
 			hojaVidaBean.setFormacionAcademicaList(null);
 			hojaVidaBean.setFormacionContinuaList(null);
+			HojaVidaBean.setExperienciaList(null);
 
 		} catch (DioneException e) {
 			log.error("Error al momento guardar la hoja de vida", e);

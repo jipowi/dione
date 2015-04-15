@@ -101,6 +101,7 @@ public class SyllabusBacking implements Serializable {
 		try {
 			docente = docenteService.consultarDocenteByCedula(syllabusBean.getCedula());
 			if (docente != null) {
+				materiaUces = new ArrayList<MateriaUce>();
 				docenteEncontrado = true;
 				List<EscuelaUce> escuelas = syllabusService.consultarEscuelaByDocente(docente.getIdDocente().toString());
 
@@ -391,6 +392,7 @@ public class SyllabusBacking implements Serializable {
 		}
 	}
 
+	
 	/**
 	 * @param materias
 	 *            the materias to set

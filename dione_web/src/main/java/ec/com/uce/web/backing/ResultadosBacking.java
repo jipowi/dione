@@ -4,6 +4,7 @@
 package ec.com.uce.web.backing;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import org.apache.log4j.Logger;
 
 import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.CompetenciaGenerale;
+import ec.com.uce.dione.entities.Cumplimiento;
 import ec.com.uce.dione.entities.Docente;
 import ec.com.uce.dione.entities.EscuelaUce;
 import ec.com.uce.dione.entities.MateriaSyllabus;
@@ -30,6 +32,7 @@ import ec.com.uce.ejb.dto.EvaluacionResAprendizajeDTO;
 import ec.com.uce.ejb.service.DocenteService;
 import ec.com.uce.ejb.service.SyllabusService;
 import ec.com.uce.web.bean.ResultadoBean;
+import ec.com.uce.web.util.ConstantesUtil;
 import ec.com.uce.web.util.HiperionMensajes;
 import ec.com.uce.web.util.MessagesController;
 
@@ -63,6 +66,7 @@ public class ResultadosBacking implements Serializable {
 	private List<EvaluacionCompetenciasDTO> resultCompetenciasDTO = new ArrayList<EvaluacionCompetenciasDTO>();
 	private List<EvaluacionResAprendizajeDTO> resultadosDTO = new ArrayList<EvaluacionResAprendizajeDTO>();
 	private Boolean activarGrafico = false;
+	MateriaSyllabus materiaSyllabus;
 
 	Logger log = Logger.getLogger(SyllabusBacking.class);
 
@@ -113,20 +117,41 @@ public class ResultadosBacking implements Serializable {
 	public void guardarEvaluacion() throws DioneException {
 		try {
 
+			// Actualizar objetivos
 			List<Objetivo> objetivos = new ArrayList<Objetivo>();
 			for (EvaluacionObjetivosDTO objetivoDTO : resultObjetivosDTO) {
 				Objetivo objetivo = new Objetivo();
 
 				objetivo.setIdObjetivo(objetivoDTO.getIdObjetivo());
 				objetivo.setObjetivo(objetivoDTO.getObjetivo());
-				//objetivo.setObjetivoCumplido(objetivoDTO.getCumplido());
+				objetivo.setInicioObj(objetivoDTO.getInicio());
+				objetivo.setProcesoObj(objetivoDTO.getProceso());
+				objetivo.setAvanceObj(objetivoDTO.getAvance());
+				objetivo.setDominioObj(objetivoDTO.getDomina());
+
 				objetivo.setSyllabus(syllabus);
 
 				objetivos.add(objetivo);
 			}
 
-			syllabusService.actualizarObjetivos(objetivos);
+			// Actualizar competencias generales
+			List<CompetenciaGenerale> competenciasGenerales = new ArrayList<CompetenciaGenerale>();
+			for (EvaluacionCompetenciasDTO competenciaGeneralDTO : resultCompetenciasDTO) {
+				CompetenciaGenerale competencia = new CompetenciaGenerale();
 
+				competencia.setIdCompetenciaGeneral(competenciaGeneralDTO.getIdCompetencia());
+				competencia.setCompetenciaGeneral(competenciaGeneralDTO.getCompetencia());
+				competencia.setInicioComp(competenciaGeneralDTO.getInicio());
+				competencia.setDominioComp(competenciaGeneralDTO.getDomina());
+				competencia.setAvanceComp(competenciaGeneralDTO.getAvance());
+				competencia.setProcesoComp(competenciaGeneralDTO.getProceso());
+
+				competencia.setSyllabus(syllabus);
+
+				competenciasGenerales.add(competencia);
+			}
+
+			// Actualizar resultados
 			List<ResultadosAprendizaje> resultados = new ArrayList<ResultadosAprendizaje>();
 			for (EvaluacionResAprendizajeDTO resultadoDTO : resultadosDTO) {
 				ResultadosAprendizaje resultado = new ResultadosAprendizaje();
@@ -134,22 +159,106 @@ public class ResultadosBacking implements Serializable {
 				resultado.setIdResultado(resultadoDTO.getIdResultado());
 				resultado.setResultadoAprendizaje(resultadoDTO.getResultado());
 				resultado.setInicioResul(resultadoDTO.getInicio());
-				resultado.setSyllabus(syllabus);
 				resultado.setDominioResul(resultadoDTO.getDomina());
 				resultado.setAvanceResul(resultadoDTO.getAvance());
 				resultado.setProcesoResul(resultadoDTO.getProceso());
 
+				resultado.setSyllabus(syllabus);
+
 				resultados.add(resultado);
 			}
 
-			syllabusService.actualizarResultados(resultados);
-			
-			activarGrafico = true;
+			Cumplimiento cumplimiento = new Cumplimiento();
+			cumplimiento.setPorcentajeObjetivos(BigDecimal.valueOf(resultadoBean.getTotalObjetivos()));
+			cumplimiento.setPorcentajeCompetencias(BigDecimal.valueOf(resultadoBean.getTotalCompetencias()));
+			cumplimiento.setPorcentajeResultados(BigDecimal.valueOf(resultadoBean.getTotalResultados()));
+			cumplimiento.setEfectividad(BigDecimal.valueOf(resultadoBean.getEfectividad()));
+			cumplimiento.setMateriaSyllabus(materiaSyllabus);
+
+			syllabusService.guardarCumplimiento(objetivos, competenciasGenerales, resultados, cumplimiento);
 
 		} catch (DioneException e) {
 			log.error("Error al momento guardar la evaluacion", e);
 			throw new DioneException(e);
 		}
+	}
+
+	/**
+	 * 
+	 * <b> Permite calcular el porcentaje de cada uno de los cumplimientos. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 30/03/2015]
+	 * </p>
+	 * 
+	 */
+	public void calcularPorcentajes() {
+		int inicio = 0;
+		int proceso = 0;
+		int avance = 0;
+		int domina = 0;
+
+		for (EvaluacionObjetivosDTO objetivo : resultObjetivosDTO) {
+			if (objetivo.getInicio()) {
+				inicio += ConstantesUtil.INICIO;
+			}
+			if (objetivo.getProceso()) {
+				proceso += ConstantesUtil.PROCESO;
+			}
+			if (objetivo.getAvance()) {
+				avance += ConstantesUtil.AVANCE;
+			}
+			if (objetivo.getDomina()) {
+				domina += ConstantesUtil.DOMINIO;
+			}
+		}
+		Double resultadoObjetivos = (double) ((inicio + proceso + avance + domina) / resultObjetivosDTO.size());
+		resultadoBean.setTotalObjetivos(resultadoObjetivos);
+
+		inicio = 0;
+		proceso = 0;
+		avance = 0;
+		domina = 0;
+		for (EvaluacionCompetenciasDTO competencia : resultCompetenciasDTO) {
+			if (competencia.getInicio()) {
+				inicio += ConstantesUtil.INICIO;
+			}
+			if (competencia.getProceso()) {
+				proceso += ConstantesUtil.PROCESO;
+			}
+			if (competencia.getAvance()) {
+				avance += ConstantesUtil.AVANCE;
+			}
+			if (competencia.getDomina()) {
+				domina += ConstantesUtil.DOMINIO;
+			}
+		}
+		Double resultadoCompetencias = (double) ((inicio + proceso + avance + domina) / resultCompetenciasDTO.size());
+		resultadoBean.setTotalCompetencias(resultadoCompetencias);
+
+		inicio = 0;
+		proceso = 0;
+		avance = 0;
+		domina = 0;
+		for (EvaluacionResAprendizajeDTO resultado : resultadosDTO) {
+			if (resultado.getInicio()) {
+				inicio += ConstantesUtil.INICIO;
+			}
+			if (resultado.getProceso()) {
+				proceso += ConstantesUtil.PROCESO;
+			}
+			if (resultado.getAvance()) {
+				avance += ConstantesUtil.AVANCE;
+			}
+			if (resultado.getDomina()) {
+				domina += ConstantesUtil.DOMINIO;
+			}
+		}
+		Double resultado = (double) ((inicio + proceso + avance + domina) / resultadosDTO.size());
+		resultadoBean.setTotalResultados(resultado);
+
+		Double efectividad = (resultadoObjetivos / 2) + resultadoCompetencias + resultado;
+
+		resultadoBean.setEfectividad(efectividad);
 	}
 
 	/**
@@ -168,10 +277,18 @@ public class ResultadosBacking implements Serializable {
 		resultadosDTO = new ArrayList<EvaluacionResAprendizajeDTO>();
 
 		Integer idDocente = docente.getIdDocente();
-		Integer idMateria = Integer.parseInt(resultadoBean.getMateria());
+		Integer idMateria = Integer.parseInt(resultadoBean.getMateria().toString());
+
+		materiaSyllabus = syllabusService.consultarSyllabus(idDocente, idMateria);
+		
+		MateriaSyllabus materiaSyllabusTemp = syllabusService.consultarMateriaSyllabusById(materiaSyllabus.getIdMateriaSyllabus());
+		
+		Integer idSyllabus = materiaSyllabusTemp.getSyllabus().getIdSyllabus();
+
+		syllabus = syllabusService.consultarSyllabusById(idSyllabus);
 
 		try {
-			
+
 			List<Objetivo> objetivos = syllabusService.consultarObjetivos(syllabus.getIdSyllabus());
 			List<CompetenciaGenerale> competencias = syllabusService.consultarCompetenciasBySyllabus(syllabus.getIdSyllabus());
 			List<ResultadosAprendizaje> resultados = syllabusService.consultarResultadosAprendizaje(syllabus.getIdSyllabus());
@@ -198,7 +315,7 @@ public class ResultadosBacking implements Serializable {
 			resultadoBean.setResultObjetivosDTO(resultObjetivosDTO);
 			resultadoBean.setResultCompetenciasDTO(resultCompetenciasDTO);
 			resultadoBean.setResultadosDTO(resultadosDTO);
-			
+
 		} catch (DioneException e) {
 			log.error("Error al momento consultar el syllabus", e);
 			throw new DioneException(e);
@@ -338,7 +455,8 @@ public class ResultadosBacking implements Serializable {
 	}
 
 	/**
-	 * @param activarGrafico the activarGrafico to set
+	 * @param activarGrafico
+	 *            the activarGrafico to set
 	 */
 	public void setActivarGrafico(Boolean activarGrafico) {
 		this.activarGrafico = activarGrafico;

@@ -112,7 +112,6 @@ public class GenerarPdfUtil implements Serializable {
 
 		HtmltoPDF htmltoPDF = new HtmltoPDF(FacesContext.getCurrentInstance().getExternalContext().getRealPath(ConstantesUtil.DIRECTORIO_PLANTILLA_XHTML2FO));
 		HashMap<String, String> parametros = new HashMap<String, String>();
-		parametros.put(ConstantesUtil.ANCHO_CODIGO_BARRAS, ConstantesUtil.VALOR_ANCHO_CODIGO_BARRAS_73);
 		byte contenido[] = htmltoPDF.convertir(pHtml, "", "", parametros, null);
 		return contenido;
 	}
