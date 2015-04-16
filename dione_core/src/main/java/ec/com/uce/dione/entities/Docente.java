@@ -37,6 +37,10 @@ public class Docente extends Auditoria implements Serializable {
 	@Column(name = "nombres_docente")
 	private String nombresDocente;
 
+	// bi-directional many-to-one association to DocumentoDocente
+	@OneToMany(mappedBy = "docente")
+	private List<DocumentoDocente> documentoDocentes;
+
 	// bi-directional many-to-one association to EscuelaUce
 	@OneToMany(mappedBy = "docente")
 	private List<EscuelaUce> escuelaUces;
@@ -56,10 +60,6 @@ public class Docente extends Auditoria implements Serializable {
 	// bi-directional many-to-one association to MateriaSyllabus
 	@OneToMany(mappedBy = "docente")
 	private List<MateriaSyllabus> materiaSyllabuses;
-
-	// bi-directional many-to-one association to ArchivoBase
-	@OneToMany(mappedBy = "docente")
-	private List<ArchivoBase> archivoBases;
 
 	public Docente() {
 	}
@@ -102,6 +102,28 @@ public class Docente extends Auditoria implements Serializable {
 
 	public void setNombresDocente(String nombresDocente) {
 		this.nombresDocente = nombresDocente;
+	}
+
+	public List<DocumentoDocente> getDocumentoDocentes() {
+		return this.documentoDocentes;
+	}
+
+	public void setDocumentoDocentes(List<DocumentoDocente> documentoDocentes) {
+		this.documentoDocentes = documentoDocentes;
+	}
+
+	public DocumentoDocente addDocumentoDocente(DocumentoDocente documentoDocente) {
+		getDocumentoDocentes().add(documentoDocente);
+		documentoDocente.setDocente(this);
+
+		return documentoDocente;
+	}
+
+	public DocumentoDocente removeDocumentoDocente(DocumentoDocente documentoDocente) {
+		getDocumentoDocentes().remove(documentoDocente);
+		documentoDocente.setDocente(null);
+
+		return documentoDocente;
 	}
 
 	public List<EscuelaUce> getEscuelaUces() {
@@ -212,21 +234,6 @@ public class Docente extends Auditoria implements Serializable {
 		materiaSyllabus.setDocente(null);
 
 		return materiaSyllabus;
-	}
-
-	/**
-	 * @return the archivoBases
-	 */
-	public List<ArchivoBase> getArchivoBases() {
-		return archivoBases;
-	}
-
-	/**
-	 * @param archivoBases
-	 *            the archivoBases to set
-	 */
-	public void setArchivoBases(List<ArchivoBase> archivoBases) {
-		this.archivoBases = archivoBases;
 	}
 
 }

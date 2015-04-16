@@ -56,6 +56,8 @@ import javax.persistence.NamedQuery;
 		@NamedQuery(name = "Experiencia.findByDocente", query = "SELECT e FROM Experiencia e WHERE e.docente.idDocente =:idDocente"),
 		// ELEMENTO COMPETENCIA
 		@NamedQuery(name = "ElementoCompetencia.findBySyllabus", query = "SELECT r FROM ElementoCompetencia r WHERE r.unidadCompetencia.idUnidadCompetencia =:idUnidadCompetencia"),
+		// DOCUMENTOS
+		@NamedQuery(name = "DocumentoDocente.findByDocente", query = "SELECT r FROM DocumentoDocente r WHERE r.docente.idDocente =:idDocente"),
 		// MENU
 		@NamedQuery(name = "Menu.findByRol", query = "SELECT m FROM RolMenu m WHERE m.rol.idRol =:idRol") })
 public class Consultas implements Serializable {

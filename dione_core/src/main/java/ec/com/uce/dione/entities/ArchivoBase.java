@@ -1,52 +1,51 @@
 package ec.com.uce.dione.entities;
 
 import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
 /**
  * The persistent class for the archivo_base database table.
  * 
  */
 @Entity
-@Table(name = "archivo_base")
-@NamedQuery(name = "ArchivoBase.findAll", query = "SELECT a FROM ArchivoBase a")
+@Table(name="archivo_base")
+@NamedQuery(name="ArchivoBase.findAll", query="SELECT a FROM ArchivoBase a")
 public class ArchivoBase implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_archivo")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_archivo")
 	private Integer idArchivo;
 
-	@Column(name = "documento_byte")
+	@Column(name="descripcion_documento")
+	private String descripcionDocumento;
+
+	@Column(name="documento_byte")
 	private byte[] documentoByte;
 
-	@Column(name = "mime_type")
+	@Temporal(TemporalType.DATE)
+	@Column(name="fecha_carga")
+	private Date fechaCarga;
+
+	@Column(name="mime_type")
 	private String mimeType;
 
-	@Column(name = "nombre_archivo")
+	@Column(name="nombre_archivo")
 	private String nombreArchivo;
 
-	@Column(name = "tipo_archivo")
+	@Column(name="tipo_archivo")
 	private String tipoArchivo;
 
-	@Column(name = "tipo_documento")
+	@Column(name="tipo_documento")
 	private String tipoDocumento;
 
-	// bi-directional many-to-one association to docente
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_docente")
-	private Docente docente;
+	//bi-directional many-to-one association to DocumentoDocente
+	@OneToMany(mappedBy="archivoBase")
+	private List<DocumentoDocente> documentoDocentes;
 
 	public ArchivoBase() {
 	}
@@ -59,12 +58,28 @@ public class ArchivoBase implements Serializable {
 		this.idArchivo = idArchivo;
 	}
 
+	public String getDescripcionDocumento() {
+		return this.descripcionDocumento;
+	}
+
+	public void setDescripcionDocumento(String descripcionDocumento) {
+		this.descripcionDocumento = descripcionDocumento;
+	}
+
 	public byte[] getDocumentoByte() {
 		return this.documentoByte;
 	}
 
 	public void setDocumentoByte(byte[] documentoByte) {
 		this.documentoByte = documentoByte;
+	}
+
+	public Date getFechaCarga() {
+		return this.fechaCarga;
+	}
+
+	public void setFechaCarga(Date fechaCarga) {
+		this.fechaCarga = fechaCarga;
 	}
 
 	public String getMimeType() {
@@ -99,19 +114,26 @@ public class ArchivoBase implements Serializable {
 		this.tipoDocumento = tipoDocumento;
 	}
 
-	/**
-	 * @return the docente
-	 */
-	public Docente getDocente() {
-		return docente;
+	public List<DocumentoDocente> getDocumentoDocentes() {
+		return this.documentoDocentes;
 	}
 
-	/**
-	 * @param docente
-	 *            the docente to set
-	 */
-	public void setDocente(Docente docente) {
-		this.docente = docente;
+	public void setDocumentoDocentes(List<DocumentoDocente> documentoDocentes) {
+		this.documentoDocentes = documentoDocentes;
+	}
+
+	public DocumentoDocente addDocumentoDocente(DocumentoDocente documentoDocente) {
+		getDocumentoDocentes().add(documentoDocente);
+		documentoDocente.setArchivoBase(this);
+
+		return documentoDocente;
+	}
+
+	public DocumentoDocente removeDocumentoDocente(DocumentoDocente documentoDocente) {
+		getDocumentoDocentes().remove(documentoDocente);
+		documentoDocente.setArchivoBase(null);
+
+		return documentoDocente;
 	}
 
 }
