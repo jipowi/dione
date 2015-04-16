@@ -9,6 +9,7 @@ import javax.ejb.Local;
 
 import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.Docente;
+import ec.com.uce.dione.entities.DocumentoDocente;
 import ec.com.uce.dione.entities.Escuela;
 import ec.com.uce.dione.entities.EscuelaUce;
 import ec.com.uce.dione.entities.Experiencia;
@@ -181,5 +182,18 @@ public interface DocenteService {
 	 * @return
 	 */
 	public List<Experiencia> consultarExperienciasByDocente(Integer idDocente) throws DioneException;
+	
+	/**
+	 * 
+	 * <b> Permite consultar los documentos que el docente tiene subidos en el servidor. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 15/04/2015]
+	 * </p>
+	 * 
+	 * @param idDocente
+	 * @return
+	 * @throws DioneException
+	 */
+	public List<DocumentoDocente> consultarDocumentos(Integer idDocente) throws DioneException;
 
 }

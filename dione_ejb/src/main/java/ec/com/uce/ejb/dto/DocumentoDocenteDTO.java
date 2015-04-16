@@ -4,6 +4,9 @@
 package ec.com.uce.ejb.dto;
 
 import java.io.Serializable;
+import java.util.Date;
+
+import ec.com.uce.dione.entities.ArchivoBase;
 
 /**
  * <b> Permite manejar la informacion de la tabla de documentos de docente </b>
@@ -16,7 +19,9 @@ public class DocumentoDocenteDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Integer idDocente;
-	private String idDocumento;
+	private ArchivoBase documento;
+	private String descripcion;
+	private Date fechaSubida;
 
 	/**
 	 * @return the idDocente
@@ -34,18 +39,48 @@ public class DocumentoDocenteDTO implements Serializable {
 	}
 
 	/**
-	 * @return the idDocumento
+	 * @return the documento
 	 */
-	public String getIdDocumento() {
-		return idDocumento;
+	public ArchivoBase getDocumento() {
+		return documento;
 	}
 
 	/**
-	 * @param idDocumento
-	 *            the idDocumento to set
+	 * @param documento
+	 *            the documento to set
 	 */
-	public void setIdDocumento(String idDocumento) {
-		this.idDocumento = idDocumento;
+	public void setDocumento(ArchivoBase documento) {
+		this.documento = documento;
+	}
+
+	/**
+	 * @return the descripcion
+	 */
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	/**
+	 * @param descripcion
+	 *            the descripcion to set
+	 */
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	/**
+	 * @return the fechaSubida
+	 */
+	public Date getFechaSubida() {
+		return fechaSubida;
+	}
+
+	/**
+	 * @param fechaSubida
+	 *            the fechaSubida to set
+	 */
+	public void setFechaSubida(Date fechaSubida) {
+		this.fechaSubida = fechaSubida;
 	}
 
 }

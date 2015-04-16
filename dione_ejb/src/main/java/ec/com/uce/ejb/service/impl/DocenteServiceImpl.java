@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 
 import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.dao.DocenteDao;
+import ec.com.uce.dione.dao.DocenteDocumentoDao;
 import ec.com.uce.dione.dao.EscuelaDao;
 import ec.com.uce.dione.dao.EscuelaUceDao;
 import ec.com.uce.dione.dao.ExperienciaDao;
@@ -18,6 +19,7 @@ import ec.com.uce.dione.dao.FormacionCDao;
 import ec.com.uce.dione.dao.MateriaDao;
 import ec.com.uce.dione.dao.MateriaUceDao;
 import ec.com.uce.dione.entities.Docente;
+import ec.com.uce.dione.entities.DocumentoDocente;
 import ec.com.uce.dione.entities.Escuela;
 import ec.com.uce.dione.entities.EscuelaUce;
 import ec.com.uce.dione.entities.Experiencia;
@@ -53,6 +55,8 @@ public class DocenteServiceImpl implements DocenteService {
 	private FormacionCDao formacionCDao;
 	@EJB
 	private ExperienciaDao experienciaDao;
+	@EJB
+	private DocenteDocumentoDao docenteDocumentoDao;
 
 	/*
 	 * (non-Javadoc)
@@ -193,6 +197,14 @@ public class DocenteServiceImpl implements DocenteService {
 	@Override
 	public List<EscuelaUce> consultarEscuelas(String escuela) throws DioneException {
 		return escuelaUceDao.consultarEscuelas(escuela);
+	}
+
+	/* (non-Javadoc)
+	 * @see ec.com.uce.ejb.service.DocenteService#consultarDocumentos(java.lang.Integer)
+	 */
+	@Override
+	public List<DocumentoDocente> consultarDocumentos(Integer idDocente) throws DioneException {
+		return docenteDocumentoDao.consultarDocumentos(idDocente);
 	}
 
 }
