@@ -4,34 +4,24 @@
 package ec.com.uce.web.backing;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.model.SelectItem;
+import javax.faces.context.FacesContext;
 
 import org.apache.log4j.Logger;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 import ec.com.uce.dione.comun.DioneException;
+import ec.com.uce.dione.entities.ArchivoBase;
 import ec.com.uce.dione.entities.Docente;
-import ec.com.uce.dione.entities.Escuela;
-import ec.com.uce.dione.entities.EscuelaUce;
-import ec.com.uce.dione.entities.Materia;
-import ec.com.uce.dione.entities.MateriaUce;
-import ec.com.uce.dione.enumeration.EstadoEnum;
-import ec.com.uce.ejb.dto.AsignaturaDTO;
-import ec.com.uce.ejb.dto.MateriaDTO;
-import ec.com.uce.ejb.service.CatalogoService;
 import ec.com.uce.ejb.service.DocenteService;
-import ec.com.uce.web.bean.DocenteBean;
 import ec.com.uce.web.bean.DocumentosBean;
-import ec.com.uce.web.util.HiperionMensajes;
-import ec.com.uce.web.util.MessagesController;
-import ec.com.uce.web.validator.ValidatorCedula;
+import ec.com.uce.web.util.ArchivoUtil;
 
 /**
  * <b> Permite almacenar la informacion y manejar las acciones de la pagina. </b>
@@ -56,6 +46,15 @@ public class DocumentosBacking implements Serializable {
 
 	Logger log = Logger.getLogger(DocumentosBacking.class);
 
+	/**
+	 * 
+	 * <b>
+	 * Permite buscar el docente por medio de la CI.
+	 * </b>
+	 * <p>[Author: Paul Jimenez, Date: 15/04/2015]</p>
+	 *
+	 * @throws DioneException
+	 */
 	public void buscarDocente() throws DioneException {
 		try {
 			docente = docenteService.consultarDocenteByCedula(documentosBean.getCedulaDocente());
@@ -67,6 +66,37 @@ public class DocumentosBacking implements Serializable {
 
 	}
 
+	/**
+	 * 
+	 * <b> Permite cargar el archivo en memoria antes de ser guardado </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: Sep 28, 2014]
+	 * </p>
+	 * 
+	 * @param event
+	 */
+	public void cargarArchivoDocente(FileUploadEvent event) {
+
+		if (event.getFile() != null) {
+
+			try {
+
+				UploadedFile file = event.getFile();
+
+				ArchivoBase archivoBase = new ArchivoBase();
+
+				documentosBean.setDocumento(archivoBase);
+				ArchivoUtil.getInstancia().agregarArchivo(archivoBase, file);
+
+				FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+
+			} catch (Exception e) {
+				log.error("Error {}", e);
+			}
+		}
+	}
+	
 	/**
 	 * @return the documentosBean
 	 */
@@ -97,4 +127,5 @@ public class DocumentosBacking implements Serializable {
 		this.docente = docente;
 	}
 
+	
 }
