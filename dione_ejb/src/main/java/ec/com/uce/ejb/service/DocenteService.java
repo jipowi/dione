@@ -8,6 +8,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import ec.com.uce.dione.comun.DioneException;
+import ec.com.uce.dione.entities.ArchivoBase;
 import ec.com.uce.dione.entities.Docente;
 import ec.com.uce.dione.entities.DocumentoDocente;
 import ec.com.uce.dione.entities.Escuela;
@@ -182,7 +183,7 @@ public interface DocenteService {
 	 * @return
 	 */
 	public List<Experiencia> consultarExperienciasByDocente(Integer idDocente) throws DioneException;
-	
+
 	/**
 	 * 
 	 * <b> Permite consultar los documentos que el docente tiene subidos en el servidor. </b>
@@ -195,5 +196,29 @@ public interface DocenteService {
 	 * @throws DioneException
 	 */
 	public List<DocumentoDocente> consultarDocumentos(Integer idDocente) throws DioneException;
+
+	/**
+	 * 
+	 * <b> Permite realizar el guardado de los documentos subidos por el docente. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 16/04/2015]
+	 * </p>
+	 * 
+	 * @param documentos
+	 * @throws DioneException
+	 */
+	public void guardarDocumentos(List<DocumentoDocente> documentos) throws DioneException;
+
+	/**
+	 * 
+	 * <b> Permite consultar el archivo por medio de la llave primaria. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 20/04/2015]
+	 * </p>
+	 * 
+	 * @param idArchivo
+	 * @throws DioneException
+	 */
+	public ArchivoBase consultarArchivoById(Integer idArchivo) throws DioneException;
 
 }

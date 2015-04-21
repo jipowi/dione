@@ -9,6 +9,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import ec.com.uce.dione.comun.DioneException;
+import ec.com.uce.dione.dao.ArchivoBaseDao;
 import ec.com.uce.dione.dao.DocenteDao;
 import ec.com.uce.dione.dao.DocenteDocumentoDao;
 import ec.com.uce.dione.dao.EscuelaDao;
@@ -18,6 +19,7 @@ import ec.com.uce.dione.dao.FormacionADao;
 import ec.com.uce.dione.dao.FormacionCDao;
 import ec.com.uce.dione.dao.MateriaDao;
 import ec.com.uce.dione.dao.MateriaUceDao;
+import ec.com.uce.dione.entities.ArchivoBase;
 import ec.com.uce.dione.entities.Docente;
 import ec.com.uce.dione.entities.DocumentoDocente;
 import ec.com.uce.dione.entities.Escuela;
@@ -57,7 +59,8 @@ public class DocenteServiceImpl implements DocenteService {
 	private ExperienciaDao experienciaDao;
 	@EJB
 	private DocenteDocumentoDao docenteDocumentoDao;
-
+	@EJB
+	private ArchivoBaseDao archivoBaseDao;
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -205,6 +208,30 @@ public class DocenteServiceImpl implements DocenteService {
 	@Override
 	public List<DocumentoDocente> consultarDocumentos(Integer idDocente) throws DioneException {
 		return docenteDocumentoDao.consultarDocumentos(idDocente);
+	}
+
+	/* (non-Javadoc)
+	 * @see ec.com.uce.ejb.service.DocenteService#guardarDocumentos(java.util.List)
+	 */
+	@Override
+	public void guardarDocumentos(List<DocumentoDocente> documentos) throws DioneException {
+		for (DocumentoDocente documentoDocente : documentos) {
+			
+			ArchivoBase archivoBase = documentoDocente.getArchivoBase();
+			archivoBaseDao.persist(archivoBase);
+			
+			documentoDocente.setArchivoBase(archivoBase);
+			
+			docenteDocumentoDao.persist(documentoDocente);
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see ec.com.uce.ejb.service.DocenteService#consultarArchivoById(java.lang.Integer)
+	 */
+	@Override
+	public ArchivoBase consultarArchivoById(Integer idArchivo) throws DioneException {
+		return archivoBaseDao.findById(idArchivo);
 	}
 
 }
