@@ -47,7 +47,14 @@ public class ArchivoBase implements Serializable {
 	@OneToMany(mappedBy="archivoBase")
 	private List<DocumentoDocente> documentoDocentes;
 
+	
+
+	/**
+	 * 
+	 */
 	public ArchivoBase() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getIdArchivo() {

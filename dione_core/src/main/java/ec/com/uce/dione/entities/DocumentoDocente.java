@@ -20,7 +20,7 @@ public class DocumentoDocente implements Serializable {
 	private Integer idDocDocente;
 
 	//bi-directional many-to-one association to ArchivoBase
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_archivo")
 	private ArchivoBase archivoBase;
 
