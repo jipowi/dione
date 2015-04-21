@@ -22,6 +22,14 @@ public class FormacionAcademicaDTO implements Serializable {
 	private String titulo;
 
 	/**
+	 * 
+	 */
+	public FormacionAcademicaDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
 	 * @param institucion
 	 * @param titulo
 	 */

@@ -24,6 +24,14 @@ public class FormacionContinuaDTO implements Serializable {
 	private String tipoDuracion;
 
 	/**
+	 * 
+	 */
+	public FormacionContinuaDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
 	 * @param institucion
 	 * @param curso
 	 * @param duracion

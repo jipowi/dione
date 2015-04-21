@@ -24,6 +24,15 @@ public class ExperienciaDTO implements Serializable {
 	private Date fechaFin;
 	private String funciones;
 
+	
+	/**
+	 * 
+	 */
+	public ExperienciaDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * @param institucion
 	 * @param fechaInicio

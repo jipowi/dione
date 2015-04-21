@@ -18,24 +18,20 @@ import ec.com.uce.dione.entities.ArchivoBase;
 public class DocumentoDocenteDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private Integer idDocente;
 	private ArchivoBase documento;
 	private String descripcion;
 	private Date fechaSubida;
 
 	/**
-	 * @return the idDocente
+	 * @param documento
+	 * @param descripcion
+	 * @param fechaSubida
 	 */
-	public Integer getIdDocente() {
-		return idDocente;
-	}
-
-	/**
-	 * @param idDocente
-	 *            the idDocente to set
-	 */
-	public void setIdDocente(Integer idDocente) {
-		this.idDocente = idDocente;
+	public DocumentoDocenteDTO(ArchivoBase documento, String descripcion, Date fechaSubida) {
+		super();
+		this.documento = documento;
+		this.descripcion = descripcion;
+		this.fechaSubida = fechaSubida;
 	}
 
 	/**
