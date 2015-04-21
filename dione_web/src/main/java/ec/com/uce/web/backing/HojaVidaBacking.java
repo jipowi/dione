@@ -70,6 +70,7 @@ public class HojaVidaBacking implements Serializable {
 	 * 
 	 * @throws DioneException
 	 */
+	@SuppressWarnings("static-access")
 	public void buscarDocente() throws DioneException {
 		try {
 			docente = docenteService.consultarDocenteByCedula(hojaVidaBean.getCedula());
@@ -79,6 +80,42 @@ public class HojaVidaBacking implements Serializable {
 				hojaVidaBean.setApellidosDocente(docente.getApellidosDocente());
 				hojaVidaBean.setNombresDocente(docente.getNombresDocente());
 				hojaVidaBean.setDireccionDocente(docente.getDireccionDocente());
+				
+				ArrayList<FormacionAcademicaDTO> formacionesDTO = new ArrayList<FormacionAcademicaDTO>();
+				List<FormacionAcademica> formacionesA = docenteService.consultarFormacionAByDocente(docente.getIdDocente());
+				for (FormacionAcademica formacionAcademica : formacionesA) {
+					FormacionAcademicaDTO formacionAcademicaDTO = new FormacionAcademicaDTO();
+					formacionAcademicaDTO.setInstitucion(formacionAcademica.getInstitucionAca());
+					formacionAcademicaDTO.setTitulo(formacionAcademica.getTitulo());
+
+					formacionesDTO.add(formacionAcademicaDTO);
+				}
+				hojaVidaBean.setFormacionAcademicaList(formacionesDTO);
+
+				ArrayList<FormacionContinuaDTO> formacionesCDTO = new ArrayList<FormacionContinuaDTO>();
+				List<FormacionContinua> formacionesC = docenteService.consultarFormacionCByDocente(docente.getIdDocente());
+				for (FormacionContinua formacionContinua : formacionesC) {
+					FormacionContinuaDTO formacionContinuaDTO = new FormacionContinuaDTO();
+					formacionContinuaDTO.setInstitucion(formacionContinua.getInstitucionContinua());
+					formacionContinuaDTO.setDuracion(Integer.parseInt(formacionContinua.getDuracion()));
+					formacionContinuaDTO.setCurso(formacionContinua.getCurso());
+
+					formacionesCDTO.add(formacionContinuaDTO);
+				}
+				hojaVidaBean.setFormacionContinuaList(formacionesCDTO);
+
+				ArrayList<ExperienciaDTO> experienciasDTO = new ArrayList<ExperienciaDTO>();
+				List<Experiencia> experiencias = docenteService.consultarExperienciasByDocente(docente.getIdDocente());
+				for (Experiencia experiencia : experiencias) {
+					ExperienciaDTO experienciaDTO = new ExperienciaDTO();
+					experienciaDTO.setInstitucion(experiencia.getInstitucionExp());
+					experienciaDTO.setFechaInicio(experiencia.getFechaFinExp());
+					experienciaDTO.setFunciones(experiencia.getFuncionExp());
+
+					experienciasDTO.add(experienciaDTO);
+				}
+				hojaVidaBean.setExperienciaList(experienciasDTO);
+
 			} else {
 				MessagesController.addError(null, HiperionMensajes.getInstancia().getString("dione.mensaje.error.buscar"));
 			}
@@ -141,7 +178,7 @@ public class HojaVidaBacking implements Serializable {
 				formacionContinuas.add(formacionContinua);
 			}
 
-			for(ExperienciaDTO experienciaDTO: hojaVidaBean.getExperienciaList()){
+			for (ExperienciaDTO experienciaDTO : hojaVidaBean.getExperienciaList()) {
 				Experiencia experiencia = new Experiencia();
 				experiencia.setInstitucionExp(experienciaDTO.getInstitucion());
 				experiencia.setFechaInicioExp(experienciaDTO.getFechaInicio());
@@ -149,7 +186,7 @@ public class HojaVidaBacking implements Serializable {
 				experiencia.setFuncionExp(experienciaDTO.getFunciones());
 				experiencias.add(experiencia);
 			}
-			
+
 			docenteService.guardarHojaVida(docente, formacionAcademicas, formacionContinuas, experiencias);
 			MessagesController.addInfo(null, HiperionMensajes.getInstancia().getString("dione.mensaje.exito.save"));
 

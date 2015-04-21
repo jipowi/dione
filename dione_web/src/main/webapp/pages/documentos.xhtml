@@ -24,33 +24,117 @@
 								<p:outputLabel value="#{message['lbl.cedula']}" styleClass="negrita" />
 								<p:inputText value="#{documentosBean.cedulaDocente}" />
 							</h:panelGrid>
+
 							<p:commandLink title="Buscar docente" action="#{documentosBacking.buscarDocente()}" update="@form">
 								<h:graphicImage name="search.png" library="img" />
 							</p:commandLink>
 						</h:panelGrid>
 					</p:panel>
 				</h:panelGrid>
-				<h:panelGrid columns="1">
-					<p:panel>
-						<f:facet name="header">
-							<h:outputText value="Subir Documentos" />
-						</f:facet>
-						<h:panelGrid columns="2" cellpadding="3">
-							<p:outputLabel value="#{message['lbl.fechaCarga']}" styleClass="negrita" />
-							<p:calendar navigator="true" effect="fold" value="#{documentosBean.fechaSubida}" pattern="dd/MM/yyyy" />
+				<p:spacer height="30px;" />
+				<div align="center">
+					<h:panelGrid columns="1">
+						<p:dataTable id="tablaDocumentos" value="#{documentosBacking.archivos}" var="obj" widgetVar="50">
+							<p:column>
+								<f:facet name="header">
+									<h:outputLabel value="#{message['lbl.fechaCarga']}" />
+								</f:facet>
+								<h:outputText value="#{obj.fechaCarga}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputLabel value="#{message['lbl.documento']}" />
+								</f:facet>
+								<h:graphicImage name="pdf.png" library="img" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputLabel value="#{message['lbl.desDocumento']}" />
+								</f:facet>
+								<h:outputText value="#{obj.descripcionDocumento}" />
+							</p:column>
+						</p:dataTable>
+					</h:panelGrid>
+					<p:spacer height="30px;" />
+					<p:commandLink title="Agregar documentos al repositorio" action="#{documentosBacking.agregarDocumentos()}" update="@form, newDocument">
+						<h:graphicImage name="addDocument.png" library="img" />
+					</p:commandLink>
+					<p:spacer height="30px;" />
+					<h:panelGrid id="newDocument" columns="1" rendered="#{documentosBacking.existeDocente}">
+						<p:panel>
+							<f:facet name="header">
+								<h:outputText value="Subir Documentos" />
+							</f:facet>
+							<h:panelGrid columns="2" cellpadding="3">
+								<p:outputLabel value="#{message['lbl.fechaCarga']}:" styleClass="negrita" />
+								<p:calendar navigator="true" effect="fold" value="#{documentosBean.fechaSubida}" pattern="dd/MM/yyyy" />
 
-							<p:outputLabel value="#{message['lbl.desDocumento']}" styleClass="negrita" />
-							<p:inputText value="#{documentosBean.descripcion}" />
+								<p:outputLabel value="#{message['lbl.desDocumento']}:" styleClass="negrita" />
+								<p:inputText value="#{documentosBean.descripcion}" />
 
-							<p:outputLabel value="#{message['lbl.documento']}" styleClass="negrita" />
-							<p:fileUpload fileUploadListener="#{documentosBacking.cargarArchivoDocente}" mode="advanced" dragDropSupport="false" update="messages" sizeLimit="2000000" fileLimit="3"
-								allowTypes="/(\.|\/)(pdf)$/" required="true" />
-							<p:growl id="messages" showDetail="true" />
-
-						</h:panelGrid>
-					</p:panel>
-				</h:panelGrid>
-
+								<p:outputLabel value="#{message['lbl.documento']}:" styleClass="negrita" />
+								<p:fileUpload fileUploadListener="#{documentosBacking.cargarArchivoDocente}" mode="advanced" dragDropSupport="false" update="messages" sizeLimit="2000000" fileLimit="3"
+									allowTypes="/(\.|\/)(pdf)$/" required="true" />
+								<p:growl id="messages" showDetail="true" />
+							</h:panelGrid>
+							<div align="center">
+								<p:commandButton id="agregarDocumentos" update="tabla" icon="icon-add" value="#{message['boton.agregar']}" actionListener="#{documentosBean.addDocumentos}" title="Agregar" />
+							</div>
+							<p:spacer height="30px;" />
+							<p:dataTable id="tabla" value="#{documentosBean.documentosList}" var="obj" widgetVar="50" editable="true">
+								<p:ajax event="rowEdit" listener="#{documentosBean.onEditDocumento}" update="tabla" />
+								<p:ajax event="rowEditCancel" listener="#{documentosBean.onCancelDocumento}" update="tabla" />
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{message['lbl.desDocumento']}" />
+									</f:facet>
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{obj.descripcion}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{obj.descripcion}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{message['lbl.documento']}" />
+									</f:facet>
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:graphicImage name="pdf.png" library="img" />
+										</f:facet>
+										<f:facet name="input">
+											<p:fileUpload fileUploadListener="#{documentosBacking.cargarArchivoDocente}" mode="advanced" dragDropSupport="false" update="messages" sizeLimit="2000000" fileLimit="3"
+												allowTypes="/(\.|\/)(pdf)$/" required="true" />
+											<p:growl id="messages" showDetail="true" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{message['lbl.fechaCarga']}" />
+									</f:facet>
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{obj.fechaSubida}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:calendar navigator="true" effect="fold" value="#{documentosBean.fechaSubida}" pattern="dd/MM/yyyy" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+								<p:column headerText="Options" style="width:50px">
+									<p:rowEditor />
+								</p:column>
+							</p:dataTable>
+						</p:panel>
+					</h:panelGrid>
+					<p:spacer height="30px;" />
+					<p:commandButton id="guardarBtnId" actionListener="#{documentosBacking.guardarDocumentos()}" icon="icon-save" value="#{message['boton.guardar']}" update="formPrincipal"
+						title="Guardar" />
+				</div>
 			</h:form>
 		</p:panel>
 	</ui:define>

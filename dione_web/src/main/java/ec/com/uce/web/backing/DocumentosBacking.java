@@ -4,6 +4,8 @@
 package ec.com.uce.web.backing;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -19,9 +21,13 @@ import org.primefaces.model.UploadedFile;
 import ec.com.uce.dione.comun.DioneException;
 import ec.com.uce.dione.entities.ArchivoBase;
 import ec.com.uce.dione.entities.Docente;
+import ec.com.uce.dione.entities.DocumentoDocente;
+import ec.com.uce.ejb.dto.DocumentoDocenteDTO;
 import ec.com.uce.ejb.service.DocenteService;
 import ec.com.uce.web.bean.DocumentosBean;
 import ec.com.uce.web.util.ArchivoUtil;
+import ec.com.uce.web.util.HiperionMensajes;
+import ec.com.uce.web.util.MessagesController;
 
 /**
  * <b> Permite almacenar la informacion y manejar las acciones de la pagina. </b>
@@ -43,27 +49,93 @@ public class DocumentosBacking implements Serializable {
 	private DocumentosBean documentosBean;
 
 	private Docente docente;
+	private Boolean existeDocente = false;
+
+	private List<ArchivoBase> archivos = new ArrayList<ArchivoBase>();
 
 	Logger log = Logger.getLogger(DocumentosBacking.class);
 
 	/**
 	 * 
-	 * <b>
-	 * Permite buscar el docente por medio de la CI.
-	 * </b>
-	 * <p>[Author: Paul Jimenez, Date: 15/04/2015]</p>
-	 *
+	 * <b> Permite buscar el docente por medio de la CI. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 15/04/2015]
+	 * </p>
+	 * 
 	 * @throws DioneException
 	 */
 	public void buscarDocente() throws DioneException {
 		try {
+			List<DocumentoDocente> documentosDocente = new ArrayList<DocumentoDocente>();
+
 			docente = docenteService.consultarDocenteByCedula(documentosBean.getCedulaDocente());
-			
+
+			documentosDocente = docenteService.consultarDocumentos(docente.getIdDocente());
+
+			for (DocumentoDocente documentoDocente : documentosDocente) {
+				ArchivoBase archivo = new ArchivoBase();
+
+				archivo = docenteService.consultarArchivoById(documentoDocente.getArchivoBase().getIdArchivo());
+
+				archivos.add(archivo);
+			}
+
 		} catch (DioneException e) {
 			log.error("Error al momento consultar el docente", e);
 			throw new DioneException(e);
 		}
 
+	}
+
+	/**
+	 * 
+	 * <b> Permite agregar nuevos documentos. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 20/04/2015]
+	 * </p>
+	 * 
+	 */
+	public void agregarDocumentos() {
+		existeDocente = true;
+	}
+
+	/**
+	 * 
+	 * <b> Permite guardar los archivos del docente en la base de datos. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 20/04/2015]
+	 * </p>
+	 * 
+	 * @throws DioneException
+	 */
+	public void guardarDocumentos() throws DioneException {
+
+		List<DocumentoDocente> documentos = new ArrayList<DocumentoDocente>();
+
+		for (DocumentoDocenteDTO documentoDTO : documentosBean.getDocumentosList()) {
+
+			DocumentoDocente documento = new DocumentoDocente();
+
+			ArchivoBase archivo = new ArchivoBase();
+
+			archivo = documentoDTO.getDocumento();
+			archivo.setDescripcionDocumento(documentoDTO.getDescripcion());
+			archivo.setFechaCarga(documentoDTO.getFechaSubida());
+
+			documento.setArchivoBase(archivo);
+			documento.setDocente(docente);
+
+			documentos.add(documento);
+		}
+		try {
+			docenteService.guardarDocumentos(documentos);
+			MessagesController.addInfo(null, HiperionMensajes.getInstancia().getString("dione.mensaje.exito.save"));
+
+		} catch (DioneException e) {
+			log.error("Error al momento guardar los documentos del docente", e);
+			MessagesController.addError(null, HiperionMensajes.getInstancia().getString("dione.mensaje.error.save"));
+			throw new DioneException(e);
+		}
 	}
 
 	/**
@@ -85,8 +157,8 @@ public class DocumentosBacking implements Serializable {
 
 				ArchivoBase archivoBase = new ArchivoBase();
 
-				documentosBean.setDocumento(archivoBase);
 				ArchivoUtil.getInstancia().agregarArchivo(archivoBase, file);
+				documentosBean.setDocumento(archivoBase);
 
 				FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
 				FacesContext.getCurrentInstance().addMessage(null, message);
@@ -96,7 +168,7 @@ public class DocumentosBacking implements Serializable {
 			}
 		}
 	}
-	
+
 	/**
 	 * @return the documentosBean
 	 */
@@ -127,5 +199,34 @@ public class DocumentosBacking implements Serializable {
 		this.docente = docente;
 	}
 
-	
+	/**
+	 * @return the existeDocente
+	 */
+	public Boolean getExisteDocente() {
+		return existeDocente;
+	}
+
+	/**
+	 * @param existeDocente
+	 *            the existeDocente to set
+	 */
+	public void setExisteDocente(Boolean existeDocente) {
+		this.existeDocente = existeDocente;
+	}
+
+	/**
+	 * @return the archivos
+	 */
+	public List<ArchivoBase> getArchivos() {
+		return archivos;
+	}
+
+	/**
+	 * @param archivos
+	 *            the archivos to set
+	 */
+	public void setArchivos(List<ArchivoBase> archivos) {
+		this.archivos = archivos;
+	}
+
 }

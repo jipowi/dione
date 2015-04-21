@@ -4,11 +4,15 @@
 package ec.com.uce.web.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.event.RowEditEvent;
 
 import ec.com.uce.dione.entities.ArchivoBase;
 import ec.com.uce.ejb.dto.DocumentoDocenteDTO;
@@ -30,11 +34,10 @@ public class DocumentosBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String cedulaDocente;
-	private List<DocumentoDocenteDTO> documentos;
 	private ArchivoBase documento;
 	private String descripcion;
 	private Date fechaSubida;
-	
+	private static ArrayList<DocumentoDocenteDTO> documentosList = new ArrayList<DocumentoDocenteDTO>();
 
 	/**
 	 * @return the cedulaDocente
@@ -52,21 +55,6 @@ public class DocumentosBean implements Serializable {
 	}
 
 	/**
-	 * @return the documentos
-	 */
-	public List<DocumentoDocenteDTO> getDocumentos() {
-		return documentos;
-	}
-
-	/**
-	 * @param documentos
-	 *            the documentos to set
-	 */
-	public void setDocumentos(List<DocumentoDocenteDTO> documentos) {
-		this.documentos = documentos;
-	}
-
-	/**
 	 * @return the documento
 	 */
 	public ArchivoBase getDocumento() {
@@ -74,7 +62,8 @@ public class DocumentosBean implements Serializable {
 	}
 
 	/**
-	 * @param documento the documento to set
+	 * @param documento
+	 *            the documento to set
 	 */
 	public void setDocumento(ArchivoBase documento) {
 		this.documento = documento;
@@ -88,7 +77,8 @@ public class DocumentosBean implements Serializable {
 	}
 
 	/**
-	 * @param descripcion the descripcion to set
+	 * @param descripcion
+	 *            the descripcion to set
 	 */
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
@@ -102,11 +92,75 @@ public class DocumentosBean implements Serializable {
 	}
 
 	/**
-	 * @param fechaSubida the fechaSubida to set
+	 * @param fechaSubida
+	 *            the fechaSubida to set
 	 */
 	public void setFechaSubida(Date fechaSubida) {
 		this.fechaSubida = fechaSubida;
 	}
 
-	
+	/**
+	 * @return the documentosList
+	 */
+	public ArrayList<DocumentoDocenteDTO> getDocumentosList() {
+		return documentosList;
+	}
+
+	/**
+	 * @param documentosList
+	 *            the documentosList to set
+	 */
+	public static void setDocumentosList(ArrayList<DocumentoDocenteDTO> documentosList) {
+		DocumentosBean.documentosList = documentosList;
+	}
+
+	/**
+	 * 
+	 * <b> Permite agregar un registro de documento </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: Dec 1, 2014]
+	 * </p>
+	 * 
+	 * @return
+	 */
+	public String addDocumentos() {
+		DocumentoDocenteDTO item = new DocumentoDocenteDTO(this.documento, this.descripcion, this.fechaSubida);
+		documentosList.add(item);
+
+		documento = null;
+		descripcion = "";
+		fechaSubida = null;
+
+		return null;
+	}
+
+	/**
+	 * 
+	 * <b> Permite editar un registro de la tabla </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: Dec 1, 2014]
+	 * </p>
+	 * 
+	 * @param event
+	 */
+	public void onEditDocumento(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Item Edited", ((DocumentoDocenteDTO) event.getObject()).getDescripcion());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+
+	/**
+	 * 
+	 * <b> Permite eliminar un registro de la tabla </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: Dec 1, 2014]
+	 * </p>
+	 * 
+	 * @param event
+	 */
+	public void onCancelDocumento(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Item Cancelled");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		documentosList.remove((DocumentoDocenteDTO) event.getObject());
+	}
+
 }
