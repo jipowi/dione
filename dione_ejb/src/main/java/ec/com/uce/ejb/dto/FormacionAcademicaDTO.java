@@ -20,6 +20,7 @@ public class FormacionAcademicaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String institucion;
 	private String titulo;
+	private Integer id;
 
 	/**
 	 * 
@@ -66,6 +67,21 @@ public class FormacionAcademicaDTO implements Serializable {
 	 */
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

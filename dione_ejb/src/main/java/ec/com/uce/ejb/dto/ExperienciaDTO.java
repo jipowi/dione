@@ -23,8 +23,8 @@ public class ExperienciaDTO implements Serializable {
 	private Date fechaInicio;
 	private Date fechaFin;
 	private String funciones;
+	private Integer id;
 
-	
 	/**
 	 * 
 	 */
@@ -105,6 +105,21 @@ public class ExperienciaDTO implements Serializable {
 	 */
 	public void setFunciones(String funciones) {
 		this.funciones = funciones;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

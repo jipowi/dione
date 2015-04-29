@@ -22,6 +22,7 @@ public class FormacionContinuaDTO implements Serializable {
 	private String curso;
 	private Integer duracion;
 	private String tipoDuracion;
+	private Integer id;
 
 	/**
 	 * 
@@ -102,6 +103,21 @@ public class FormacionContinuaDTO implements Serializable {
 	 */
 	public void setTipoDuracion(String tipoDuracion) {
 		this.tipoDuracion = tipoDuracion;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }
