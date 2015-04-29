@@ -61,6 +61,7 @@ public class DocenteServiceImpl implements DocenteService {
 	private DocenteDocumentoDao docenteDocumentoDao;
 	@EJB
 	private ArchivoBaseDao archivoBaseDao;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -130,17 +131,32 @@ public class DocenteServiceImpl implements DocenteService {
 	@Override
 	public void guardarHojaVida(Docente docente, List<FormacionAcademica> formacionAcademicas, List<FormacionContinua> formacionContinuas, List<Experiencia> experiencias)
 			throws DioneException {
+
 		for (FormacionContinua formacionContinua : formacionContinuas) {
 			formacionContinua.setDocente(docente);
-			formacionCDao.persist(formacionContinua);
+			if (formacionContinua.getIdFContinua() != null) {
+				formacionCDao.update(formacionContinua);
+			} else {
+				formacionCDao.persist(formacionContinua);
+			}
 		}
 		for (FormacionAcademica formacionAcademinca : formacionAcademicas) {
 			formacionAcademinca.setDocente(docente);
 			formacionADao.persist(formacionAcademinca);
+			if (formacionAcademinca.getIdFAcademica() != null) {
+				formacionADao.update(formacionAcademinca);
+			} else {
+				formacionADao.persist(formacionAcademinca);
+			}
 		}
 		for (Experiencia experiencia : experiencias) {
 			experiencia.setDocente(docente);
-			experienciaDao.persist(experiencia);
+
+			if (experiencia.getIdExperiencia() != null) {
+				experienciaDao.update(experiencia);
+			} else {
+				experienciaDao.persist(experiencia);
+			}
 		}
 	}
 
@@ -194,7 +210,9 @@ public class DocenteServiceImpl implements DocenteService {
 		return docenteDao.findById(idDocente);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ec.com.uce.ejb.service.DocenteService#consultarEscuelas(java.lang.String)
 	 */
 	@Override
@@ -202,7 +220,9 @@ public class DocenteServiceImpl implements DocenteService {
 		return escuelaUceDao.consultarEscuelas(escuela);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ec.com.uce.ejb.service.DocenteService#consultarDocumentos(java.lang.Integer)
 	 */
 	@Override
@@ -210,23 +230,27 @@ public class DocenteServiceImpl implements DocenteService {
 		return docenteDocumentoDao.consultarDocumentos(idDocente);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ec.com.uce.ejb.service.DocenteService#guardarDocumentos(java.util.List)
 	 */
 	@Override
 	public void guardarDocumentos(List<DocumentoDocente> documentos) throws DioneException {
 		for (DocumentoDocente documentoDocente : documentos) {
-			
+
 			ArchivoBase archivoBase = documentoDocente.getArchivoBase();
 			archivoBaseDao.persist(archivoBase);
-			
+
 			documentoDocente.setArchivoBase(archivoBase);
-			
+
 			docenteDocumentoDao.persist(documentoDocente);
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ec.com.uce.ejb.service.DocenteService#consultarArchivoById(java.lang.Integer)
 	 */
 	@Override
