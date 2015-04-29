@@ -84,7 +84,7 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 	@Override
 	public void delete(T entity) throws DioneException {
 		try {
-			getEntityManager().remove(getEntityManager().merge(entity));
+			getEntityManager().remove(entity);
 		} catch (Throwable ex) {
 			throw new DioneException(ex);
 		}
