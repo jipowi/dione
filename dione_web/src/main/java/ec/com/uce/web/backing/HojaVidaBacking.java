@@ -80,13 +80,14 @@ public class HojaVidaBacking implements Serializable {
 				hojaVidaBean.setApellidosDocente(docente.getApellidosDocente());
 				hojaVidaBean.setNombresDocente(docente.getNombresDocente());
 				hojaVidaBean.setDireccionDocente(docente.getDireccionDocente());
-				
+
 				ArrayList<FormacionAcademicaDTO> formacionesDTO = new ArrayList<FormacionAcademicaDTO>();
 				List<FormacionAcademica> formacionesA = docenteService.consultarFormacionAByDocente(docente.getIdDocente());
 				for (FormacionAcademica formacionAcademica : formacionesA) {
 					FormacionAcademicaDTO formacionAcademicaDTO = new FormacionAcademicaDTO();
 					formacionAcademicaDTO.setInstitucion(formacionAcademica.getInstitucionAca());
 					formacionAcademicaDTO.setTitulo(formacionAcademica.getTitulo());
+					formacionAcademicaDTO.setId(formacionAcademica.getIdFAcademica());
 
 					formacionesDTO.add(formacionAcademicaDTO);
 				}
@@ -99,6 +100,7 @@ public class HojaVidaBacking implements Serializable {
 					formacionContinuaDTO.setInstitucion(formacionContinua.getInstitucionContinua());
 					formacionContinuaDTO.setDuracion(Integer.parseInt(formacionContinua.getDuracion()));
 					formacionContinuaDTO.setCurso(formacionContinua.getCurso());
+					formacionContinuaDTO.setId(formacionContinua.getIdFContinua());
 
 					formacionesCDTO.add(formacionContinuaDTO);
 				}
@@ -111,6 +113,7 @@ public class HojaVidaBacking implements Serializable {
 					experienciaDTO.setInstitucion(experiencia.getInstitucionExp());
 					experienciaDTO.setFechaInicio(experiencia.getFechaFinExp());
 					experienciaDTO.setFunciones(experiencia.getFuncionExp());
+					experienciaDTO.setId(experiencia.getIdExperiencia());
 
 					experienciasDTO.add(experienciaDTO);
 				}
@@ -166,6 +169,10 @@ public class HojaVidaBacking implements Serializable {
 				formacionAcademica.setDocente(docente);
 				formacionAcademica.setInstitucionAca(formacionAcademicaDTO.getInstitucion());
 				formacionAcademica.setTitulo(formacionAcademicaDTO.getTitulo());
+				if (formacionAcademicaDTO.getId() != null) {
+					formacionAcademica.setIdFAcademica(formacionAcademicaDTO.getId());
+				}
+
 				formacionAcademicas.add(formacionAcademica);
 			}
 
@@ -175,6 +182,9 @@ public class HojaVidaBacking implements Serializable {
 				formacionContinua.setDuracion(formacionContinuaDTO.getDuracion().toString());
 				formacionContinua.setTipoDuracion(formacionContinuaDTO.getTipoDuracion());
 				formacionContinua.setInstitucionContinua(formacionContinuaDTO.getInstitucion());
+				if (formacionContinuaDTO.getId() != null) {
+					formacionContinua.setIdFContinua(formacionContinuaDTO.getId());
+				}
 				formacionContinuas.add(formacionContinua);
 			}
 
@@ -184,6 +194,9 @@ public class HojaVidaBacking implements Serializable {
 				experiencia.setFechaInicioExp(experienciaDTO.getFechaInicio());
 				experiencia.setFechaFinExp(experienciaDTO.getFechaFin());
 				experiencia.setFuncionExp(experienciaDTO.getFunciones());
+				if (experienciaDTO.getId() != null) {
+					experiencia.setIdExperiencia(experienciaDTO.getId());
+				}
 				experiencias.add(experiencia);
 			}
 

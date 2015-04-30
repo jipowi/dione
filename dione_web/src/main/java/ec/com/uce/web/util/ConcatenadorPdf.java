@@ -39,6 +39,21 @@ public class ConcatenadorPdf {
 		pageOffset = 0;
 	}
 
+	/**
+	 * 
+	 * <b> Permite agregar pie de pagina y marca de agua a los PDFs. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 29/04/2015]
+	 * </p>
+	 * 
+	 * @param pdf
+	 * @param numerarPaginas
+	 * @param marcaDeAgua
+	 * @param imagenMarcaAgua
+	 * @return
+	 * @throws IOException
+	 * @throws DocumentException
+	 */
 	public static byte[] numerarMarcar(byte pdf[], boolean numerarPaginas, boolean marcaDeAgua, String imagenMarcaAgua) throws IOException, DocumentException {
 		PdfReader reader = new PdfReader(pdf);
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -57,13 +72,13 @@ public class ConcatenadorPdf {
 			img = Image.getInstance(new URL("http://127.0.0.1:8080/dione_web/" + imagenMarcaAgua));
 			img.setAbsolutePosition(rec.getWidth() / 2 - img.getWidth() / 2, rec.getHeight() / 2 - img.getHeight() / 2);
 		}
-		
+
 		while (i++ < numPaginas) {
 			if (marcaDeAgua) {
 				under = stamp.getUnderContent(i);
 				under.addImage(img);
 			}
-			
+
 			if (numerarPaginas) {
 				over = stamp.getOverContent(i);
 				over.beginText();
@@ -74,23 +89,23 @@ public class ConcatenadorPdf {
 				over.beginText();
 				over.setFontAndSize(bf, 7);
 				over.setTextMatrix(50, 50);
-				over.showText("Banco Guayaquil");
+				over.showText("Universidad Central del Ecuador");
 				over.endText();
 				over.beginText();
 				over.setFontAndSize(bf, 7);
 				over.setTextMatrix(50, 40);
-				over.showText("Pichincha 105 - 107 y Francisco de Paula Ycaza");
+				over.showText("Ciudadela Universitaria Av. América");
 				over.endText();
 				over.beginText();
 				over.setFontAndSize(bf, 7);
 				over.setTextMatrix(50, 30);
-				over.showText("Teléfono 3730100");
+				over.showText("(593)252-1500 /290-4799 Quito-Ecuador");
 				over.endText();
 			}
 		}
-		
+
 		stamp.close();
-		
+
 		return byteArrayOutputStream.toByteArray();
 	}
 }

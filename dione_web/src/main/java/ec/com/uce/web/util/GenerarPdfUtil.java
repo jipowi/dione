@@ -51,7 +51,7 @@ public class GenerarPdfUtil implements Serializable {
 
 		byte[] contenido = obtenerCadenaBytes(pHtml);
 
-		// Agregar marca de agua al Pdf
+		// Agregar marca de agua  y piede de pagina al Pdf
 		return ConcatenadorPdf.numerarMarcar(contenido, Boolean.TRUE, Boolean.TRUE, ConstantesUtil.PATH_MARCA_AGUA_PDF);
 	}
 

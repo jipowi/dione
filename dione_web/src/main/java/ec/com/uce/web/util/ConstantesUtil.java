@@ -48,7 +48,7 @@ public class ConstantesUtil {
 	public final static String ENCABEZADO_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 	public final static String ENCABEZADO_XML_STANDALONE = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
 	public final static String ENCABEZADO_ISO_XML = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>";
-	public final static String PATH_MARCA_AGUA_PDF = "/resources/img/fondo_imprimir.png";
+	public final static String PATH_MARCA_AGUA_PDF = "/resources/img/uceWater.png";
 	public final static String PATH_MARCA_AGUA_VACIO_PDF = "/resources/img/vacio.png";
 	public final static String ANCHO_CODIGO_BARRAS = "widthCodigoBarras";
 	public final static String NOMBRE_DEFAULT_LOGO_EMPRESA = "organizacion_no_disponible";

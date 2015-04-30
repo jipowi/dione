@@ -99,7 +99,7 @@ public class BuscarDocenteBacking implements Serializable {
 		}
 
 	}
-	
+
 	/**
 	 * 
 	 * <b> Permite buscar un docente por medio del ingreso de la identificacion. </b>
@@ -113,7 +113,7 @@ public class BuscarDocenteBacking implements Serializable {
 		try {
 			// Hoja de vida
 			if (docente != null) {
-				
+
 				buscarDocenteBean.setApellidosDocente(docente.getApellidosDocente());
 				buscarDocenteBean.setNombresDocente(docente.getNombresDocente());
 				buscarDocenteBean.setDireccionDocente(docente.getDireccionDocente());
@@ -145,61 +145,66 @@ public class BuscarDocenteBacking implements Serializable {
 				buscarDocenteBean.setExperiencias(docenteService.consultarExperienciasByDocente(docente.getIdDocente()));
 
 				// Syllabus
-				
+
 				Integer idDocente = docente.getIdDocente();
 				Integer idMateria = Integer.parseInt(buscarDocenteBean.getMateria().toString());
-				
+
 				MateriaSyllabus materiaSyllabus = syllabusService.consultarSyllabus(idDocente, idMateria);
-				
-				Integer idSyllabus = materiaSyllabus.getSyllabus().getIdSyllabus();
-				
-				syllabus = syllabusService.consultarSyllabusById(idSyllabus);
-				
-				buscarDocenteBean.setMateria(materiaSyllabus.getMateriaUce().getMateriaUce());
-				buscarDocenteBean.setNumHorasPresenciales(syllabus.getNumHorasPresenciales());
-				buscarDocenteBean.setNumHorasTutorias(syllabus.getHorasTutorias());
-				buscarDocenteBean.setDesAsignatura(syllabus.getDescripcionAsignatura());
 
-				// Prerequisitos
-				buscarDocenteBean.setPrerequisitos(syllabusService.obtenerPrerequisitos(materiaSyllabus.getIdMateriaSyllabus()));
-				buscarDocenteBean.setCorequisitos(syllabusService.obtenerCorequisitos(materiaSyllabus.getIdMateriaSyllabus()));
+				if (materiaSyllabus != null) {
 
-				// Objetivos
-				buscarDocenteBean.setObjetivos(syllabusService.consultarObjetivos(idSyllabus));
+					Integer idSyllabus = materiaSyllabus.getSyllabus().getIdSyllabus();
 
-				List<CompetenciaGenerale> competenciasGenerales = syllabusService.consultarCompetenciasBySyllabus(idSyllabus);
-				List<CompetenciasGenerica> competenciasGenericas = syllabusService.consultarCompGenricasBySyllabus(idSyllabus);
-				List<CompetenciasEspecifica> competenciasEspecificas = syllabusService.consultarCompEspecificaBySyllabus(idSyllabus);
+					syllabus = syllabusService.consultarSyllabusById(idSyllabus);
 
-				List<CompetenciasGenerica> competenciasInstrumentales = new ArrayList<CompetenciasGenerica>();
-				List<CompetenciasGenerica> competenciasInterpersonales = new ArrayList<CompetenciasGenerica>();
-				List<CompetenciasGenerica> competenciasSistematicas = new ArrayList<CompetenciasGenerica>();
-				buscarDocenteBean.setCompetenciasGenerales(competenciasGenerales);
+					buscarDocenteBean.setMateria(materiaSyllabus.getMateriaUce().getMateriaUce());
+					buscarDocenteBean.setNumHorasPresenciales(syllabus.getNumHorasPresenciales());
+					buscarDocenteBean.setNumHorasTutorias(syllabus.getHorasTutorias());
+					buscarDocenteBean.setDesAsignatura(syllabus.getDescripcionAsignatura());
 
-				for (CompetenciasGenerica competencia : competenciasGenericas) {
-					if (competencia.getTipoCompetencia() == 1) {
-						competenciasInstrumentales.add(competencia);
-					} else if (competencia.getTipoCompetencia() == 2) {
-						competenciasInterpersonales.add(competencia);
-					} else if (competencia.getTipoCompetencia() == 3) {
-						competenciasSistematicas.add(competencia);
+					// Prerequisitos
+					buscarDocenteBean.setPrerequisitos(syllabusService.obtenerPrerequisitos(materiaSyllabus.getIdMateriaSyllabus()));
+					buscarDocenteBean.setCorequisitos(syllabusService.obtenerCorequisitos(materiaSyllabus.getIdMateriaSyllabus()));
+
+					// Objetivos
+					buscarDocenteBean.setObjetivos(syllabusService.consultarObjetivos(idSyllabus));
+
+					List<CompetenciaGenerale> competenciasGenerales = syllabusService.consultarCompetenciasBySyllabus(idSyllabus);
+					List<CompetenciasGenerica> competenciasGenericas = syllabusService.consultarCompGenricasBySyllabus(idSyllabus);
+					List<CompetenciasEspecifica> competenciasEspecificas = syllabusService.consultarCompEspecificaBySyllabus(idSyllabus);
+
+					List<CompetenciasGenerica> competenciasInstrumentales = new ArrayList<CompetenciasGenerica>();
+					List<CompetenciasGenerica> competenciasInterpersonales = new ArrayList<CompetenciasGenerica>();
+					List<CompetenciasGenerica> competenciasSistematicas = new ArrayList<CompetenciasGenerica>();
+					buscarDocenteBean.setCompetenciasGenerales(competenciasGenerales);
+
+					for (CompetenciasGenerica competencia : competenciasGenericas) {
+						if (competencia.getTipoCompetencia() == 1) {
+							competenciasInstrumentales.add(competencia);
+						} else if (competencia.getTipoCompetencia() == 2) {
+							competenciasInterpersonales.add(competencia);
+						} else if (competencia.getTipoCompetencia() == 3) {
+							competenciasSistematicas.add(competencia);
+						}
 					}
+
+					buscarDocenteBean.setCompetenciasInstrumentales(competenciasInstrumentales);
+					buscarDocenteBean.setCompetenciasInterpersonales(competenciasInterpersonales);
+					buscarDocenteBean.setCompetenciasSistematicas(competenciasSistematicas);
+
+					buscarDocenteBean.setCompetenciasEspecificas(competenciasEspecificas);
+
+					// Bibliografias
+					buscarDocenteBean.setBibliografias(syllabusService.consultarBibliografiasBySyllabus(idSyllabus));
+
+					// Resultados
+					buscarDocenteBean.setResultados(syllabusService.consultarResultadosAprendizaje(idSyllabus));
+
+					// Unidades de competencias
+					buscarDocenteBean.setUnidadesDTO(syllabusService.consultarUnidadesDTO(idSyllabus));
+				} else {
+					MessagesController.addError(null, HiperionMensajes.getInstancia().getString("hiperion.mensage.error.noExisteSyllabus"));
 				}
-
-				buscarDocenteBean.setCompetenciasInstrumentales(competenciasInstrumentales);
-				buscarDocenteBean.setCompetenciasInterpersonales(competenciasInterpersonales);
-				buscarDocenteBean.setCompetenciasSistematicas(competenciasSistematicas);
-
-				buscarDocenteBean.setCompetenciasEspecificas(competenciasEspecificas);
-
-				// Bibliografias
-				buscarDocenteBean.setBibliografias(syllabusService.consultarBibliografiasBySyllabus(idSyllabus));
-
-				// Resultados
-				buscarDocenteBean.setResultados(syllabusService.consultarResultadosAprendizaje(idSyllabus));
-
-				// Unidades de competencias
-				buscarDocenteBean.setUnidadesDTO(syllabusService.consultarUnidadesDTO(idSyllabus));
 
 			} else {
 				MessagesController.addError(null, HiperionMensajes.getInstancia().getString("dione.mensaje.error.buscar"));
