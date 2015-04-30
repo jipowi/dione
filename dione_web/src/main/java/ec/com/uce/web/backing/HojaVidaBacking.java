@@ -182,6 +182,7 @@ public class HojaVidaBacking implements Serializable {
 				formacionContinua.setDuracion(formacionContinuaDTO.getDuracion().toString());
 				formacionContinua.setTipoDuracion(formacionContinuaDTO.getTipoDuracion());
 				formacionContinua.setInstitucionContinua(formacionContinuaDTO.getInstitucion());
+				formacionContinua.setCurso(formacionContinuaDTO.getCurso());
 				if (formacionContinuaDTO.getId() != null) {
 					formacionContinua.setIdFContinua(formacionContinuaDTO.getId());
 				}
