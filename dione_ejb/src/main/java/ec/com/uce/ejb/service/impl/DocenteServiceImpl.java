@@ -142,7 +142,6 @@ public class DocenteServiceImpl implements DocenteService {
 		}
 		for (FormacionAcademica formacionAcademinca : formacionAcademicas) {
 			formacionAcademinca.setDocente(docente);
-			formacionADao.persist(formacionAcademinca);
 			if (formacionAcademinca.getIdFAcademica() != null) {
 				formacionADao.update(formacionAcademinca);
 			} else {
