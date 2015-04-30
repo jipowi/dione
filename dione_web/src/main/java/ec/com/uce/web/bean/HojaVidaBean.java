@@ -20,6 +20,8 @@ import ec.com.uce.dione.entities.Experiencia;
 import ec.com.uce.ejb.dto.ExperienciaDTO;
 import ec.com.uce.ejb.dto.FormacionAcademicaDTO;
 import ec.com.uce.ejb.dto.FormacionContinuaDTO;
+import ec.com.uce.web.util.HiperionMensajes;
+import ec.com.uce.web.util.MessagesController;
 
 /**
  * <b> Permite manejar la informacion en la pagina y el backing </b>
@@ -359,13 +361,20 @@ public class HojaVidaBean implements Serializable {
 	 */
 	public String addExperiencia() {
 		ExperienciaDTO item = new ExperienciaDTO(this.institucion, this.fechaInicio, this.fechaFin, this.funciones);
-		experienciaList.add(item);
+		if (this.fechaFin.after(this.fechaInicio)) {
+			experienciaList.add(item);
 
-		institucion = "";
-		fechaInicio = null;
-		fechaFin = null;
-		funciones = "";
-		return null;
+			institucion = "";
+			fechaInicio = null;
+			fechaFin = null;
+			funciones = "";
+			return null;
+
+		} else {
+			MessagesController.addError(null, HiperionMensajes.getInstancia().getString("La fecha de fin debe ser mayor que la fecha de inicio"));
+			return null;
+		}
+
 	}
 
 	/**
