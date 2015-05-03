@@ -256,7 +256,7 @@ public class ResultadosBacking implements Serializable {
 		Double resultado = (double) ((inicio + proceso + avance + domina) / resultadosDTO.size());
 		resultadoBean.setTotalResultados(resultado);
 
-		Double efectividad = (resultadoObjetivos / 2) + resultadoCompetencias + resultado;
+		Double efectividad = ((resultadoObjetivos*50) + (resultadoCompetencias*25) + (resultado*25))/100;
 
 		resultadoBean.setEfectividad(efectividad);
 	}

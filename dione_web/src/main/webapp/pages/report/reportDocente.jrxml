@@ -2,10 +2,13 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportDocente.jrxml" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="76db8bc3-d5fe-4223-b811-5bbae86dd989">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
-	<field name="cedulaDocente" class="java.lang.String"/>
-	<field name="apellidosDocente" class="java.lang.String"/>
-	<field name="nombresDocente" class="java.lang.String"/>
+	<property name="ireport.y" value="29"/>
+	<field name="cedula" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="formacionesAcademicas" class="java.lang.String">
+		<property name="titulo" value=""/>
+	</field>
+	<field name="formacionesContinuas" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -30,38 +33,56 @@
 	<columnHeader>
 		<band height="28" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="a2ca3ad1-b43e-428d-955f-f2dc3272c89d" x="141" y="8" width="100" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement uuid="3275f58d-df4e-45a9-9ad4-b5cbb4ac7a8d" x="36" y="8" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[CEDULA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="2adc30a7-5a4b-49fc-a894-459587e96804" x="341" y="8" width="100" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[NOMBRES]]></text>
+				<reportElement uuid="07220b19-0950-4a3d-98e6-18a78a696809" x="136" y="8" width="135" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="483974eb-5f9f-4585-9742-7c6313c64f4b" x="241" y="8" width="100" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[APELLIDOS]]></text>
+				<reportElement uuid="e9d06466-8080-43fc-b32e-f15fa21f877f" x="271" y="8" width="136" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FORMACION ACADEMICA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8d00f6c7-edac-4945-bf96-6670659c6aa6" x="411" y="8" width="122" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FORMACION CONTINUA]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="125" splitType="Stretch">
 			<textField>
-				<reportElement uuid="4901d26b-5553-4b57-b4fe-5ad885eb8235" x="141" y="0" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{cedulaDocente}]]></textFieldExpression>
+				<reportElement uuid="62a6e16c-db79-48c4-8620-a414e15e3e2e" x="136" y="0" width="135" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="230c4caf-ddb9-4d6d-8dba-49bf04b1f0ae" x="341" y="0" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{nombresDocente}]]></textFieldExpression>
+				<reportElement uuid="adee4094-1371-4956-88b7-3c22eaae499b" x="36" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{cedula}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="11250eb8-238a-44d8-8ef5-adb127d26c7a" x="241" y="0" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{apellidosDocente}]]></textFieldExpression>
+				<reportElement uuid="c3930881-0347-4678-920b-e76d790e0ebf" x="276" y="0" width="100" height="38"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{formacionesAcademicas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ce7f2972-1aeb-441d-b4bd-ddbd517bcf41" x="412" y="0" width="100" height="38"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{formacionesContinuas}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

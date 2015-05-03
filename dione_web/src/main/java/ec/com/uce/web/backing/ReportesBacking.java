@@ -30,9 +30,12 @@ import ec.com.uce.dione.entities.Cumplimiento;
 import ec.com.uce.dione.entities.Docente;
 import ec.com.uce.dione.entities.Escuela;
 import ec.com.uce.dione.entities.EscuelaUce;
+import ec.com.uce.dione.entities.FormacionAcademica;
+import ec.com.uce.dione.entities.FormacionContinua;
 import ec.com.uce.dione.entities.Materia;
 import ec.com.uce.dione.entities.MateriaSyllabus;
 import ec.com.uce.ejb.dto.ReporteCumplimientoDTO;
+import ec.com.uce.ejb.dto.ReporteDocentesDTO;
 import ec.com.uce.ejb.service.CatalogoService;
 import ec.com.uce.ejb.service.DocenteService;
 import ec.com.uce.ejb.service.SyllabusService;
@@ -72,6 +75,7 @@ public class ReportesBacking implements Serializable {
 
 	private List<SelectItem> escuelas = new ArrayList<SelectItem>();
 	private List<ReporteCumplimientoDTO> cumplimientoDTOs = new ArrayList<ReporteCumplimientoDTO>();
+	private List<ReporteDocentesDTO> docentesDTOs = new ArrayList<ReporteDocentesDTO>();
 
 	/**
 	 * @return the escuelas
@@ -152,6 +156,33 @@ public class ReportesBacking implements Serializable {
 				docentes.add(docente);
 			}
 
+			for (Docente docente : docentes) {
+				ReporteDocentesDTO reporteDocenteDTO = new ReporteDocentesDTO();
+				reporteDocenteDTO.setCedula(docente.getCedulaDocente());
+				reporteDocenteDTO.setNombre(docente.getNombresDocente() + " " + docente.getApellidosDocente());
+
+				List<FormacionAcademica> listFormacionesA = docenteService.consultarFormacionAByDocente(docente.getIdDocente());
+
+				List<FormacionContinua> listFormacionesC = docenteService.consultarFormacionCByDocente(docente.getIdDocente());
+
+				String titulos = "";
+				for (FormacionAcademica obj : listFormacionesA) {
+					titulos += obj.getTitulo() + "\n";
+				}
+
+				String cursos = "";
+				for (FormacionContinua obj : listFormacionesC) {
+					cursos += obj.getCurso() + "\n";
+				}
+				
+				reporteDocenteDTO.setFormacionesAcademicas(titulos);
+				reporteDocenteDTO.setFormacionesContinuas(cursos);
+				reporteDocenteDTO.setFormacionesA(listFormacionesA);
+				reporteDocenteDTO.setFormacionesC(listFormacionesC);
+
+				docentesDTOs.add(reporteDocenteDTO);
+			}
+
 		} catch (Exception e) {
 			log.error("Error al momento consultar los docentes", e);
 			throw new Exception(e);
@@ -188,12 +219,12 @@ public class ReportesBacking implements Serializable {
 			if (materiaSyllabus != null) {
 
 				Cumplimiento cumplimiento = syllabusService.consultarCumplimientoByMatSyllabus(materiaSyllabus.getIdMateriaSyllabus());
-				
+
 				reporteCumplimientoDTO.setPorcentajeObjetivos(cumplimiento.getPorcentajeObjetivos());
 				reporteCumplimientoDTO.setPorcentajeCompetencias(cumplimiento.getPorcentajeCompetencias());
 				reporteCumplimientoDTO.setPorcentajeResultados(cumplimiento.getPorcentajeResultados());
 				reporteCumplimientoDTO.setEfectividad(cumplimiento.getEfectividad());
-				
+
 				cumplimientoDTOs.add(reporteCumplimientoDTO);
 			}
 		}
@@ -211,7 +242,7 @@ public class ReportesBacking implements Serializable {
 	 */
 	public void imprimirReporteDocentePDF(ActionEvent actionEvent) {
 		try {
-			JRBeanCollectionDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(docentes);
+			JRBeanCollectionDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(docentesDTOs);
 
 			String reportPath = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/pages/report/reportDocente.jasper");
 
@@ -259,6 +290,7 @@ public class ReportesBacking implements Serializable {
 			log.error("Error al momento de generar el reporte de syllabus", e);
 		}
 	}
+
 	/**
 	 * @param escuelas
 	 *            the escuelas to set
@@ -348,6 +380,21 @@ public class ReportesBacking implements Serializable {
 	 */
 	public void setCumplimientoDTOs(List<ReporteCumplimientoDTO> cumplimientoDTOs) {
 		this.cumplimientoDTOs = cumplimientoDTOs;
+	}
+
+	/**
+	 * @return the docentesDTOs
+	 */
+	public List<ReporteDocentesDTO> getDocentesDTOs() {
+		return docentesDTOs;
+	}
+
+	/**
+	 * @param docentesDTOs
+	 *            the docentesDTOs to set
+	 */
+	public void setDocentesDTOs(List<ReporteDocentesDTO> docentesDTOs) {
+		this.docentesDTOs = docentesDTOs;
 	}
 
 }

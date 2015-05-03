@@ -35,19 +35,36 @@
 				</h:panelGrid>
 				<p:spacer height="30px;" />
 				<h:panelGrid columns="1">
-					<p:dataTable id="idDocentes" value="#{reportesBacking.docentes}" var="docente" editable="true">
+					<p:dataTable id="idDocentes" value="#{reportesBacking.docentesDTOs}" var="docente" editable="true">
 						<p:column>
 							<f:facet name="header">
 								<h:outputLabel value="#{message['lbl.nombres']}" />
 							</f:facet>
-							<h:outputText value="#{docente.nombresDocente}" />
+							<h:outputText value="#{docente.nombre}" />
 						</p:column>
 						<p:column>
 							<f:facet name="header">
 								<h:outputLabel value="#{message['lbl.cedula']}" />
 							</f:facet>
-							<h:outputText value="#{docente.cedulaDocente}" />
+							<h:outputText value="#{docente.cedula}" />
 						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{message['lbl.formacionAcademica']}" />
+							</f:facet>
+							<p:dataList value="#{docente.formacionesA}" var="obj" type="ordered">
+								<h:outputText value="#{obj.titulo}" />
+							</p:dataList>
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{message['lbl.formacionContinua']}" />
+							</f:facet>
+							<p:dataList value="#{docente.formacionesC}" var="obj" type="ordered">
+								<h:outputText value="#{obj.curso}" />
+							</p:dataList>
+						</p:column>
+
 					</p:dataTable>
 				</h:panelGrid>
 				<p:spacer height="30px;" />
