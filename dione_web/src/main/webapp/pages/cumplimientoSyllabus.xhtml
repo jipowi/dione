@@ -194,7 +194,7 @@
 					<h:panelGrid columns="3">
 						<h:outputText value="#{message['lbl.efectividad']}:" />
 						<h:outputText value="#{resultadoBean.efectividad}%" />
-						<h:graphicImage name="circle_red.png" library="img" rendered="#{resultadoBean.efectividad==0.0}" />
+						<h:graphicImage name="circle_red.png" library="img" rendered="#{resultadoBean.efectividad lt 50.0}" />
 						<h:graphicImage name="circle_yellow.png" library="img" rendered="#{resultadoBean.efectividad==50.0}" />
 						<h:graphicImage name="circle_green.png" library="img" rendered="#{resultadoBean.efectividad>50.0}" />
 					</h:panelGrid>

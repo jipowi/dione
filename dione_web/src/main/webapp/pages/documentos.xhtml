@@ -33,8 +33,14 @@
 				</h:panelGrid>
 				<p:spacer height="30px;" />
 				<div align="center">
+					<!-- TABLA DE DOCUMENTOS ENCONTRADOS -->
 					<h:panelGrid columns="1">
-						<p:dataTable id="tablaDocumentos" value="#{documentosBacking.archivos}" var="obj" widgetVar="50">
+						<p:dataTable id="tablaDocumentos" value="#{documentosBacking.archivos}" selectionMode="single" selection="#{documentosBacking.selectedArchivo}" var="obj" widgetVar="50"
+							editable="true" rowKey="#{obj.idArchivo}">
+							<f:facet name="header">
+								<h:outputText value="Documentos Encontrados" />
+							</f:facet>
+							<p:ajax event="rowSelect" listener="#{documentosBacking.descargarDocumentosPDF}" update="tablaDocumentos" />
 							<p:column>
 								<f:facet name="header">
 									<h:outputLabel value="#{message['lbl.fechaCarga']}" />
@@ -45,7 +51,9 @@
 								<f:facet name="header">
 									<h:outputLabel value="#{message['lbl.documento']}" />
 								</f:facet>
-								<h:graphicImage name="pdf.png" library="img" />
+								<p:commandLink title="Descargar">
+									<h:graphicImage name="pdf.png" library="img" />
+								</p:commandLink>
 							</p:column>
 							<p:column>
 								<f:facet name="header">
@@ -56,10 +64,13 @@
 						</p:dataTable>
 					</h:panelGrid>
 					<p:spacer height="30px;" />
-					<p:commandLink title="Agregar documentos al repositorio" action="#{documentosBacking.agregarDocumentos()}" update="@form, newDocument">
-						<h:graphicImage name="addDocument.png" library="img" />
-					</p:commandLink>
+					<h:panelGrid columns="1">
+						<p:commandLink title="Agregar documentos al repositorio" action="#{documentosBacking.agregarDocumentos()}" update="@form, newDocument">
+							<h:graphicImage name="addDocument.png" library="img" />
+						</p:commandLink>
+					</h:panelGrid>
 					<p:spacer height="30px;" />
+					<!-- AGREGAR DOCUMENTOS -->
 					<h:panelGrid id="newDocument" columns="1" rendered="#{documentosBacking.existeDocente}">
 						<p:panel>
 							<f:facet name="header">
@@ -107,7 +118,7 @@
 										</f:facet>
 										<f:facet name="input">
 											<p:fileUpload fileUploadListener="#{documentosBacking.cargarArchivoDocente}" mode="advanced" dragDropSupport="false" update="messages" sizeLimit="2000000" fileLimit="3"
-												 required="true" />
+												required="true" />
 											<p:growl id="messages" showDetail="true" />
 										</f:facet>
 									</p:cellEditor>
