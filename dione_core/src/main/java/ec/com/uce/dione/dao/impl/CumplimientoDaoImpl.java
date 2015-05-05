@@ -3,6 +3,8 @@
  */
 package ec.com.uce.dione.dao.impl;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,8 +30,10 @@ public class CumplimientoDaoImpl extends GenericDAOImpl<Cumplimiento, Integer> i
 
 	@PersistenceContext(unitName = "dione_core")
 	private EntityManager em;
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ec.com.uce.dione.dao.CumplimientoDao#consultarCumplimientoByMatSyllabus(java.lang.Integer)
 	 */
 	@Override
@@ -37,9 +41,14 @@ public class CumplimientoDaoImpl extends GenericDAOImpl<Cumplimiento, Integer> i
 		Query query = em.createNamedQuery("Cumplimiento.findByIdMateriaSyllabus");
 		query.setParameter("idMateriaSyllabus", idMateriaSyllabus);
 
-		Cumplimiento cumplimiento = (Cumplimiento) query.getSingleResult();
+		@SuppressWarnings("unchecked")
+		List<Cumplimiento> cumplimientos = query.getResultList();
 
-		return cumplimiento;
+		if (cumplimientos.isEmpty()) {
+			return null;
+		} else {
+			return cumplimientos.get(0);
+		}
+
 	}
-
 }
