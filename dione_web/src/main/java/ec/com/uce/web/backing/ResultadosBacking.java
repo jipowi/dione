@@ -176,6 +176,16 @@ public class ResultadosBacking implements Serializable {
 			cumplimiento.setMateriaSyllabus(materiaSyllabus);
 
 			syllabusService.guardarCumplimiento(objetivos, competenciasGenerales, resultados, cumplimiento);
+			resultCompetenciasDTO = new ArrayList<EvaluacionCompetenciasDTO>();
+			resultObjetivosDTO = new ArrayList<EvaluacionObjetivosDTO>();
+			resultadosDTO = new ArrayList<EvaluacionResAprendizajeDTO>();
+
+			resultadoBean.setTotalObjetivos(null);
+			resultadoBean.setTotalCompetencias(null);
+			resultadoBean.setTotalResultados(null);
+			resultadoBean.setEfectividad(null);
+
+			MessagesController.addInfo(null, HiperionMensajes.getInstancia().getString("dione.mensaje.exito.save"));
 
 		} catch (DioneException e) {
 			log.error("Error al momento guardar la evaluacion", e);
@@ -256,7 +266,7 @@ public class ResultadosBacking implements Serializable {
 		Double resultado = (double) ((inicio + proceso + avance + domina) / resultadosDTO.size());
 		resultadoBean.setTotalResultados(resultado);
 
-		Double efectividad = ((resultadoObjetivos*50) + (resultadoCompetencias*25) + (resultado*25))/100;
+		Double efectividad = ((resultadoObjetivos * 50) + (resultadoCompetencias * 25) + (resultado * 25)) / 100;
 
 		resultadoBean.setEfectividad(efectividad);
 	}
@@ -280,9 +290,9 @@ public class ResultadosBacking implements Serializable {
 		Integer idMateria = Integer.parseInt(resultadoBean.getMateria().toString());
 
 		materiaSyllabus = syllabusService.consultarSyllabus(idDocente, idMateria);
-		
+
 		MateriaSyllabus materiaSyllabusTemp = syllabusService.consultarMateriaSyllabusById(materiaSyllabus.getIdMateriaSyllabus());
-		
+
 		Integer idSyllabus = materiaSyllabusTemp.getSyllabus().getIdSyllabus();
 
 		syllabus = syllabusService.consultarSyllabusById(idSyllabus);

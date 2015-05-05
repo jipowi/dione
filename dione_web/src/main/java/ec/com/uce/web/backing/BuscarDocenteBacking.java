@@ -293,6 +293,7 @@ public class BuscarDocenteBacking implements Serializable {
 
 	}
 
+
 	/**
 	 * 
 	 * <b> Permite generar y descargar el syllabus en formato PDF. </b>

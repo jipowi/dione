@@ -5,7 +5,9 @@ package ec.com.uce.web.backing;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -16,6 +18,7 @@ import javax.faces.context.FacesContext;
 
 import org.apache.log4j.Logger;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.UploadedFile;
 
 import ec.com.uce.dione.comun.DioneException;
@@ -26,7 +29,10 @@ import ec.com.uce.ejb.dto.DocumentoDocenteDTO;
 import ec.com.uce.ejb.service.DocenteService;
 import ec.com.uce.web.bean.DocumentosBean;
 import ec.com.uce.web.util.ArchivoUtil;
+import ec.com.uce.web.util.ConstantesUtil;
+import ec.com.uce.web.util.GenerarPdfUtil;
 import ec.com.uce.web.util.HiperionMensajes;
+import ec.com.uce.web.util.JsfUtil;
 import ec.com.uce.web.util.MessagesController;
 
 /**
@@ -52,6 +58,7 @@ public class DocumentosBacking implements Serializable {
 	private Boolean existeDocente = false;
 
 	private List<ArchivoBase> archivos = new ArrayList<ArchivoBase>();
+	private ArchivoBase selectedArchivo;
 
 	Logger log = Logger.getLogger(DocumentosBacking.class);
 
@@ -169,6 +176,27 @@ public class DocumentosBacking implements Serializable {
 		}
 	}
 
+	public void descargarDocumentosPDF(SelectEvent event) throws DioneException {
+		try {
+
+			ArchivoBase archivo = (ArchivoBase) event.getObject();
+			archivo.getDescripcionDocumento();
+
+			Map<String, Object> parametrosReporte = new HashMap<String, Object>();
+
+			parametrosReporte.put(ConstantesUtil.CONTENT_TYPE_IDENTIFICADOR, ConstantesUtil.CONTENT_TYPE_PDF);
+			parametrosReporte.put(ConstantesUtil.NOMBRE_ARCHIVO_IDENTIFICADOR, archivo.getDescripcionDocumento());
+
+			parametrosReporte.put(ConstantesUtil.CONTENIDO_BYTES_IDENTIFICADOR, GenerarPdfUtil.generarPDFs(archivo.getDocumentoByte()));
+
+			JsfUtil.setSessionAttribute(ConstantesUtil.PARAMETROS_DESCARGADOR_IDENTIFICADOR, parametrosReporte);
+			JsfUtil.downloadFile();
+		} catch (Exception e) {
+			log.error("Error al momento de descargar el PDF", e);
+			throw new DioneException(e);
+		}
+	}
+
 	/**
 	 * @return the documentosBean
 	 */
@@ -227,6 +255,21 @@ public class DocumentosBacking implements Serializable {
 	 */
 	public void setArchivos(List<ArchivoBase> archivos) {
 		this.archivos = archivos;
+	}
+
+	/**
+	 * @return the selectedArchivo
+	 */
+	public ArchivoBase getSelectedArchivo() {
+		return selectedArchivo;
+	}
+
+	/**
+	 * @param selectedArchivo
+	 *            the selectedArchivo to set
+	 */
+	public void setSelectedArchivo(ArchivoBase selectedArchivo) {
+		this.selectedArchivo = selectedArchivo;
 	}
 
 }

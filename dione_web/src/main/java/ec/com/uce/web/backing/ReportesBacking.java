@@ -174,7 +174,7 @@ public class ReportesBacking implements Serializable {
 				for (FormacionContinua obj : listFormacionesC) {
 					cursos += obj.getCurso() + "\n";
 				}
-				
+
 				reporteDocenteDTO.setFormacionesAcademicas(titulos);
 				reporteDocenteDTO.setFormacionesContinuas(cursos);
 				reporteDocenteDTO.setFormacionesA(listFormacionesA);
@@ -219,13 +219,17 @@ public class ReportesBacking implements Serializable {
 			if (materiaSyllabus != null) {
 
 				Cumplimiento cumplimiento = syllabusService.consultarCumplimientoByMatSyllabus(materiaSyllabus.getIdMateriaSyllabus());
+				if (cumplimiento != null) {
 
-				reporteCumplimientoDTO.setPorcentajeObjetivos(cumplimiento.getPorcentajeObjetivos());
-				reporteCumplimientoDTO.setPorcentajeCompetencias(cumplimiento.getPorcentajeCompetencias());
-				reporteCumplimientoDTO.setPorcentajeResultados(cumplimiento.getPorcentajeResultados());
-				reporteCumplimientoDTO.setEfectividad(cumplimiento.getEfectividad());
+					reporteCumplimientoDTO.setPorcentajeObjetivos(cumplimiento.getPorcentajeObjetivos());
+					reporteCumplimientoDTO.setPorcentajeCompetencias(cumplimiento.getPorcentajeCompetencias());
+					reporteCumplimientoDTO.setPorcentajeResultados(cumplimiento.getPorcentajeResultados());
+					reporteCumplimientoDTO.setEfectividad(cumplimiento.getEfectividad());
 
-				cumplimientoDTOs.add(reporteCumplimientoDTO);
+					cumplimientoDTOs.add(reporteCumplimientoDTO);
+				} else {
+					MessagesController.addError(null, HiperionMensajes.getInstancia().getString("Usted no tiene cumplimientos ingresados para poder generar el reporte."));
+				}
 			}
 		}
 

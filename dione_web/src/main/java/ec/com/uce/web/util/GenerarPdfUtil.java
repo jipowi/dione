@@ -11,6 +11,8 @@ import javax.xml.transform.TransformerException;
 
 import org.jdom.JDOMException;
 
+import com.lowagie.text.DocumentException;
+
 import ec.com.kruger.framework.common.util.pdf.HtmltoPDF;
 import ec.com.uce.dione.entities.Bibliografia;
 import ec.com.uce.dione.entities.CompetenciaGenerale;
@@ -51,7 +53,23 @@ public class GenerarPdfUtil implements Serializable {
 
 		byte[] contenido = obtenerCadenaBytes(pHtml);
 
-		// Agregar marca de agua  y piede de pagina al Pdf
+		// Agregar marca de agua y piede de pagina al Pdf
+		return ConcatenadorPdf.numerarMarcar(contenido, Boolean.TRUE, Boolean.TRUE, ConstantesUtil.PATH_MARCA_AGUA_PDF);
+	}
+
+	/**
+	 * 
+	 * <b> Permite generar PDF para descargar. </b>
+	 * <p>
+	 * [Author: Paul Jimenez, Date: 04/05/2015]
+	 * </p>
+	 * 
+	 * @param contenido
+	 * @return
+	 * @throws IOException
+	 * @throws DocumentException
+	 */
+	public static byte[] generarPDFs(byte[] contenido) throws IOException, DocumentException {
 		return ConcatenadorPdf.numerarMarcar(contenido, Boolean.TRUE, Boolean.TRUE, ConstantesUtil.PATH_MARCA_AGUA_PDF);
 	}
 
