@@ -88,13 +88,6 @@ public class SyllabusBacking implements Serializable {
 
 	Logger log = Logger.getLogger(SyllabusBacking.class);
 
-	@SuppressWarnings("static-access")
-	public void inicialiazarDatos(){
-		
-		syllabusBean.setObjetivosDTOs(null);
-		syllabusBean.setCompetenciasGeneralesDTOs(null);
-		syllabusBean.setCompetenciasEspecificasDTOs(null);
-	}
 	/**
 	 * 
 	 * <b> Permite buscar un docente por medio del ingreso de la identificacion. </b>
@@ -105,9 +98,7 @@ public class SyllabusBacking implements Serializable {
 	 * @throws DioneException
 	 */
 	public void buscarDocente() throws DioneException {
-		
-		inicialiazarDatos();
-		
+
 		try {
 			docente = docenteService.consultarDocenteByCedula(syllabusBean.getCedula());
 			if (docente != null) {
@@ -402,7 +393,6 @@ public class SyllabusBacking implements Serializable {
 		}
 	}
 
-	
 	/**
 	 * @param materias
 	 *            the materias to set
