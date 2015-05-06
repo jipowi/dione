@@ -106,7 +106,7 @@ public class SyllabusBacking implements Serializable {
 	 */
 	public void buscarDocente() throws DioneException {
 		
-		
+		inicialiazarDatos();
 		
 		try {
 			docente = docenteService.consultarDocenteByCedula(syllabusBean.getCedula());
