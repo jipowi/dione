@@ -24,7 +24,7 @@ import ec.com.uce.ejb.dto.UnidadCompetenciaDTO;
 /**
  * <b> Interfaz local para el servicio que permite manejar el syllabus. </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,07/01/2015
  * @since JDK1.6
  */
@@ -35,7 +35,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite consultar una escuela por </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 14/01/2015]
+	 * [Author: Anita Carrera, Date: 14/01/2015]
 	 * </p>
 	 * 
 	 * @param idEscuela
@@ -47,7 +47,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite consultar las escuelas en las que se encuetra el docente </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 14/01/2015]
+	 * [Author: Anita Carrera, Date: 14/01/2015]
 	 * </p>
 	 * 
 	 * @return
@@ -59,7 +59,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite consultar la materia por medio del id </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 14/01/2015]
+	 * [Author: Anita Carrera, Date: 14/01/2015]
 	 * </p>
 	 * 
 	 * @param idMateria
@@ -72,7 +72,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite consultar las materias correspondientes a una determinada escuela. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 14/01/2015]
+	 * [Author: Anita Carrera, Date: 14/01/2015]
 	 * </p>
 	 * 
 	 * @param idEscuela
@@ -85,7 +85,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite guardar el syllabus </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 14/01/2015]
+	 * [Author: Anita Carrera, Date: 14/01/2015]
 	 * </p>
 	 * 
 	 * @param syllabus
@@ -102,7 +102,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite guardar el cumplimiento y actualizar los valor de los objetivos, condiciones y resultados. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 03/04/2015]
+	 * [Author: Anita Carrera, Date: 03/04/2015]
 	 * </p>
 	 * 
 	 * @param objetivos
@@ -118,7 +118,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite consultar los objetivos correspondientes a un syllabus </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 23/01/2015]
+	 * [Author: Anita Carrera, Date: 23/01/2015]
 	 * </p>
 	 * 
 	 * @param idSyllabus
@@ -131,7 +131,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite consultar los resultados de aprendizaje correspondientes a un syllabus. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 23/01/2015]
+	 * [Author: Anita Carrera, Date: 23/01/2015]
 	 * </p>
 	 * 
 	 * @param idSyllabus
@@ -144,7 +144,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite consultar las competencias correspondientes a un syllabus. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 23/01/2015]
+	 * [Author: Anita Carrera, Date: 23/01/2015]
 	 * </p>
 	 * 
 	 * @param idSyllabus
@@ -157,7 +157,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite actualizar los objetivos. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 25/01/2015]
+	 * [Author: Anita Carrera, Date: 25/01/2015]
 	 * </p>
 	 * 
 	 * @param objetivos
@@ -169,7 +169,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite actualizar las competencias. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 25/01/2015]
+	 * [Author: Anita Carrera, Date: 25/01/2015]
 	 * </p>
 	 * 
 	 * @param objetivos
@@ -181,7 +181,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite actualizar el registro de los resultados en la tabla. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 25/01/2015]
+	 * [Author: Anita Carrera, Date: 25/01/2015]
 	 * </p>
 	 * 
 	 * @param resultados
@@ -193,7 +193,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite obtener los corequisitos por materia seleccionada </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 11/02/2015]
+	 * [Author: Anita Carrera, Date: 11/02/2015]
 	 * </p>
 	 * 
 	 * @param idMateria
@@ -206,7 +206,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite obtener los prerequisitos por materia seleccionada </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 11/02/2015]
+	 * [Author: Anita Carrera, Date: 11/02/2015]
 	 * </p>
 	 * 
 	 * @param idMateria
@@ -219,7 +219,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite consultar el syllabus por un medio de un docente. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 02/03/2015]
+	 * [Author: Anita Carrera, Date: 02/03/2015]
 	 * </p>
 	 * 
 	 * @param idDocente
@@ -232,7 +232,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite consultar la materia y el syllabus de la tabla MateriaSyllabus. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 02/03/2015]
+	 * [Author: Anita Carrera, Date: 02/03/2015]
 	 * </p>
 	 * 
 	 * @param idSyllabus
@@ -245,7 +245,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite consultar Materia syllabus por id. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 08/04/2015]
+	 * [Author: Anita Carrera, Date: 08/04/2015]
 	 * </p>
 	 * 
 	 * @param idMateriaSyllabus
@@ -258,7 +258,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite consultar las competencias por syllabus. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 02/03/2015]
+	 * [Author: Anita Carrera, Date: 02/03/2015]
 	 * </p>
 	 * 
 	 * @param idSyllabus
@@ -271,7 +271,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permiete consultar las competencias especificas por syllabus. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 02/03/2015]
+	 * [Author: Anita Carrera, Date: 02/03/2015]
 	 * </p>
 	 * 
 	 * @param idSyllabus
@@ -284,7 +284,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite consultar las bibliografias por syllabus. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 03/03/2015]
+	 * [Author: Anita Carrera, Date: 03/03/2015]
 	 * </p>
 	 * 
 	 * @param idSyllabus
@@ -297,7 +297,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite consultar las unidades de competencia y sus elementos por medio del syllabus </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 03/03/2015]
+	 * [Author: Anita Carrera, Date: 03/03/2015]
 	 * </p>
 	 * 
 	 * @param idSyllabus
@@ -310,7 +310,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite consultar el syllabus de un docente por medio de la materia y el codigo de docente. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 10/03/2015]
+	 * [Author: Anita Carrera, Date: 10/03/2015]
 	 * </p>
 	 * 
 	 * @param idDocente
@@ -324,7 +324,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite consultar el syllabus por el id. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 10/03/2015]
+	 * [Author: Anita Carrera, Date: 10/03/2015]
 	 * </p>
 	 * 
 	 * @param idSyllabus
@@ -337,7 +337,7 @@ public interface SyllabusService {
 	 * 
 	 * <b> Permite consultar el complimiento por materiaSyllabus. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 08/04/2015]
+	 * [Author: Anita Carrera, Date: 08/04/2015]
 	 * </p>
 	 * 
 	 * @param idMateriaSyllabus

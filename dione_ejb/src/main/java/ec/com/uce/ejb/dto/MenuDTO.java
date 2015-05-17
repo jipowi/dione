@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * <b>Permite manejar la informacion de la tabla menu</b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,11/01/2015
  * @since JDK1.6
  */

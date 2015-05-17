@@ -39,7 +39,7 @@ public interface DetalleCatalogoService {
 	 * 
 	 * <b> Permite consultar un detalle de catalogo por medio del idCatalogo y idDetalle </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Aug 27, 2014]
+	 * [Author: Anita Carrera, Date: Aug 27, 2014]
 	 * </p>
 	 * 
 	 * @param codCatalogo

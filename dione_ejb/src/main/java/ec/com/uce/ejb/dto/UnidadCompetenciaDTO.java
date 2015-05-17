@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * <b> Clase que peermite manejar la informacion de la tabla de Competencias. </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,09/01/2015
  * @since JDK1.6
  */

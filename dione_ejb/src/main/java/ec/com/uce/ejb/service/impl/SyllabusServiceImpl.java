@@ -47,7 +47,7 @@ import ec.com.uce.ejb.service.SyllabusService;
 /**
  * <b> Inplementacion del servicio para manejar las operaciones del syllabus. </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,07/01/2015
  * @since JDK1.6
  */

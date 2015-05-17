@@ -18,7 +18,7 @@ import ec.com.uce.dione.entities.Usuario;
  * 
  * <b> Servicio de interfaz local para realizar las operaciones sobre la tabla Usuario </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,22/12/2013
  * @since JDK1.6
  */
@@ -29,7 +29,7 @@ public interface UsuarioService {
 	 * 
 	 * <b> Permite consultar ina lista de roles guardados en la base de datos. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 11/01/2015]
+	 * [Author: Anita Carrera, Date: 11/01/2015]
 	 * </p>
 	 * 
 	 * @return
@@ -41,7 +41,7 @@ public interface UsuarioService {
 	 * 
 	 * <b> Permite guardar un usuario en la base de datos, con el rol y los menus relacionados. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 12/01/2015]
+	 * [Author: Anita Carrera, Date: 12/01/2015]
 	 * </p>
 	 * 
 	 * @param usuario
@@ -55,7 +55,7 @@ public interface UsuarioService {
 	 * 
 	 * <b> permite obtener lista de usuarios que se encuentran en la base de datos </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 22/12/2013]
+	 * [Author: Anita Carrera, Date: 22/12/2013]
 	 * </p>
 	 * 
 	 * @return
@@ -67,7 +67,7 @@ public interface UsuarioService {
 	 * 
 	 * <b> Permite consultar el usuario por medio del alias </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 22/12/2013]
+	 * [Author: Anita Carrera, Date: 22/12/2013]
 	 * </p>
 	 * 
 	 * @param nombreUsuario
@@ -93,7 +93,7 @@ public interface UsuarioService {
 	 * 
 	 * <b> Permite consultar los roles que tiene un usuario </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Dec 10, 2014]
+	 * [Author: Anita Carrera, Date: Dec 10, 2014]
 	 * </p>
 	 * 
 	 * @param usuario
@@ -106,7 +106,7 @@ public interface UsuarioService {
 	 * 
 	 * <b> Permite consultar los menus a los cuales el usuario tiene acceso </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Dec 10, 2014]
+	 * [Author: Anita Carrera, Date: Dec 10, 2014]
 	 * </p>
 	 * 
 	 * @param rol
@@ -119,7 +119,7 @@ public interface UsuarioService {
 	 * 
 	 * <b> Permite consultar un menu por medio de id. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 11/01/2015]
+	 * [Author: Anita Carrera, Date: 11/01/2015]
 	 * </p>
 	 * 
 	 * @param idMenu
@@ -132,7 +132,7 @@ public interface UsuarioService {
 	 * 
 	 * <b> Permite consultar todos los menus registrados en la base. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 11/01/2015]
+	 * [Author: Anita Carrera, Date: 11/01/2015]
 	 * </p>
 	 * 
 	 * @return
@@ -144,7 +144,7 @@ public interface UsuarioService {
 	 * 
 	 * <b> Consultar el rol por id </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 12/01/2015]
+	 * [Author: Anita Carrera, Date: 12/01/2015]
 	 * </p>
 	 * 
 	 * @return

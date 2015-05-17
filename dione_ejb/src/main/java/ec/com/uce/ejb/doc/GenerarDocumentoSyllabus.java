@@ -32,7 +32,7 @@ public interface GenerarDocumentoSyllabus {
 	 * 
 	 * <b> Permite generar el XMl del documento syllabus. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 10/03/2015]
+	 * [Author: Anita Carrera, Date: 10/03/2015]
 	 * </p>
 	 * 
 	 * @param docente

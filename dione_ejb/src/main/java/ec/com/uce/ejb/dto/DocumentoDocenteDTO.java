@@ -11,7 +11,7 @@ import ec.com.uce.dione.entities.ArchivoBase;
 /**
  * <b> Permite manejar la informacion de la tabla de documentos de docente </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,29/12/2014
  * @since JDK1.6
  */

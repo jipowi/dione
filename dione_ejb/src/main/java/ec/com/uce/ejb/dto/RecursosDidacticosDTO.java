@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * <b> Permite administrar la informacion de los recursos didacticos. </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,10/01/2015
  * @since JDK1.6
  */

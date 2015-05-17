@@ -22,7 +22,7 @@ import ec.com.uce.dione.entities.MateriaUce;
 /**
  * <b> Servicio de interface local para realizar las operaciones necesarias. </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,29/12/2014
  * @since JDK1.6
  */
@@ -33,7 +33,7 @@ public interface DocenteService {
 	 * 
 	 * <b> Permite concsultar las escuelas por medio de la descripcion. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 19/03/2015]
+	 * [Author: Anita Carrera, Date: 19/03/2015]
 	 * </p>
 	 * 
 	 * @param escuela
@@ -46,7 +46,7 @@ public interface DocenteService {
 	 * 
 	 * <b> Permite consultar docente por medio del codigo de docente. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 19/03/2015]
+	 * [Author: Anita Carrera, Date: 19/03/2015]
 	 * </p>
 	 * 
 	 * @param idDocente
@@ -58,7 +58,7 @@ public interface DocenteService {
 	 * 
 	 * <b> Permite consultar las escuelas que se encuentran registradas en la base de datos. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 29/12/2014]
+	 * [Author: Anita Carrera, Date: 29/12/2014]
 	 * </p>
 	 * 
 	 * @return
@@ -70,7 +70,7 @@ public interface DocenteService {
 	 * 
 	 * <b> Permite consultar las materias asignadas a una escuela </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 29/12/2014]
+	 * [Author: Anita Carrera, Date: 29/12/2014]
 	 * </p>
 	 * 
 	 * @param idEscuela
@@ -83,7 +83,7 @@ public interface DocenteService {
 	 * 
 	 * <b> Permite consultar una escuela por medio del codigo </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 01/01/2015]
+	 * [Author: Anita Carrera, Date: 01/01/2015]
 	 * </p>
 	 * 
 	 * @param escuela
@@ -96,7 +96,7 @@ public interface DocenteService {
 	 * 
 	 * <b> Permite consultar la escuela por el Id. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 09/02/2015]
+	 * [Author: Anita Carrera, Date: 09/02/2015]
 	 * </p>
 	 * 
 	 * @param escuela
@@ -109,7 +109,7 @@ public interface DocenteService {
 	 * 
 	 * <b> Permite guardar la informacion del docente en la base de datos </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 05/01/2015]
+	 * [Author: Anita Carrera, Date: 05/01/2015]
 	 * </p>
 	 * 
 	 * @param docente
@@ -121,7 +121,7 @@ public interface DocenteService {
 	 * 
 	 * <b> Permite consultar un docente por medio de la cedula </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 05/01/2015]
+	 * [Author: Anita Carrera, Date: 05/01/2015]
 	 * </p>
 	 * 
 	 * @param cedula
@@ -134,7 +134,7 @@ public interface DocenteService {
 	 * 
 	 * <b> Permite guardar la hoja de vida del docente </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 04/03/2015]
+	 * [Author: Anita Carrera, Date: 04/03/2015]
 	 * </p>
 	 * 
 	 * @param docente
@@ -150,7 +150,7 @@ public interface DocenteService {
 	 * 
 	 * <b> Permite consultar la lista de formaciones academicas que tiene un docente </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 09/02/2015]
+	 * [Author: Anita Carrera, Date: 09/02/2015]
 	 * </p>
 	 * 
 	 * @param idDocente
@@ -163,7 +163,7 @@ public interface DocenteService {
 	 * 
 	 * <b> Permite consultar la lista de formaciones continuas que tiene un docente </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 09/02/2015]
+	 * [Author: Anita Carrera, Date: 09/02/2015]
 	 * </p>
 	 * 
 	 * @param idDocente
@@ -176,7 +176,7 @@ public interface DocenteService {
 	 * 
 	 * <b> Permite consultar las experiencias del docente. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 09/03/2015]
+	 * [Author: Anita Carrera, Date: 09/03/2015]
 	 * </p>
 	 * 
 	 * @param idDocente
@@ -188,7 +188,7 @@ public interface DocenteService {
 	 * 
 	 * <b> Permite consultar los documentos que el docente tiene subidos en el servidor. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 15/04/2015]
+	 * [Author: Anita Carrera, Date: 15/04/2015]
 	 * </p>
 	 * 
 	 * @param idDocente
@@ -201,7 +201,7 @@ public interface DocenteService {
 	 * 
 	 * <b> Permite realizar el guardado de los documentos subidos por el docente. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 16/04/2015]
+	 * [Author: Anita Carrera, Date: 16/04/2015]
 	 * </p>
 	 * 
 	 * @param documentos
@@ -213,7 +213,7 @@ public interface DocenteService {
 	 * 
 	 * <b> Permite consultar el archivo por medio de la llave primaria. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 20/04/2015]
+	 * [Author: Anita Carrera, Date: 20/04/2015]
 	 * </p>
 	 * 
 	 * @param idArchivo

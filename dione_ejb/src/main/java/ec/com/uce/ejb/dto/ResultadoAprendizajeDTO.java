@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * <b> Permite manejar la informacon de la tabla de resultados de aprendizaje. </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,14/01/2015
  * @since JDK1.6
  */

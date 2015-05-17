@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * <b> Permite manejar la informacion de las competencias genericas </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,12/02/2015
  * @since JDK1.6
  */

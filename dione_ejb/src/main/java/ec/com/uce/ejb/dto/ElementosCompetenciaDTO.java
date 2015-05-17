@@ -6,7 +6,7 @@ package ec.com.uce.ejb.dto;
 /**
  * <b> Permite manejar la informacion de los elementos de competencia. </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,07/01/2015
  * @since JDK1.6
  */

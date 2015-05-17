@@ -26,7 +26,7 @@ public interface GenerarDocumentoHojaVida {
 	 * 
 	 * <b> Permite generar el XMl del documento hoja de vida. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 10/03/2015]
+	 * [Author: Anita Carrera, Date: 10/03/2015]
 	 * </p>
 	 * 
 	 * @param docente

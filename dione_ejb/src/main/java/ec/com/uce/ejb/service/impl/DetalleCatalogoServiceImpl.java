@@ -18,7 +18,7 @@ import ec.com.uce.ejb.service.DetalleCatalogoService;
  * 
  * <b> Implemtacion del servicio de Detalle de catalogo </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Dec 1, 2014
  * @since JDK1.6
  */

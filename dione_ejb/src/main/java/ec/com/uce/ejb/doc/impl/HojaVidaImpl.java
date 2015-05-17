@@ -16,7 +16,7 @@ import ec.com.uce.ejb.doc.GenerarDocumentoHojaVida;
  * 
  * <b> Clase que se encarga de generar el documento PDF. </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,10/03/2015
  * @since JDK1.6
  */

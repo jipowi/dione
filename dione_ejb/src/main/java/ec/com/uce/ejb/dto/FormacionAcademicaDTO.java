@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * <b> Incluir aqui la descripcion de la clase. </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Dec 1, 2014
  * @since JDK1.6
  */
