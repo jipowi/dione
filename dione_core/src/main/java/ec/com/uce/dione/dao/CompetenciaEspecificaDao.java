@@ -13,7 +13,7 @@ import ec.com.uce.dione.entities.CompetenciasEspecifica;
 /**
  * <b> Interfaz local para realizar las operaciones necesarias en la tabla CompetenciasEspecifica </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,29/12/2014
  * @since JDK1.6
  */
@@ -24,7 +24,7 @@ public interface CompetenciaEspecificaDao extends GenericDAO<CompetenciasEspecif
 	 * 
 	 * <b> Permiete consultar las competencias especificas por syllabus. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 02/03/2015]
+	 * [Author: Anita Carrera, Date: 02/03/2015]
 	 * </p>
 	 * 
 	 * @param idSyllabus

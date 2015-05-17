@@ -13,7 +13,7 @@ import ec.com.uce.dione.entities.Objetivo;
 /**
  * <b> Interfaz local para realizar las operaciones necesarias en la tabla Objetivo </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,29/12/2014
  * @since JDK1.6
  */

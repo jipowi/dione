@@ -11,7 +11,7 @@ import ec.com.uce.dione.entities.MateriaSyllabus;
 /**
  * <b> Interfaz local de la tabla MateriaSyllabus para realizar las operaciones necesarias sobre la base </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,29/12/2014
  * @since JDK1.6
  */
@@ -22,7 +22,7 @@ public interface MateriaSyllabusDao extends GenericDAO<MateriaSyllabus, Integer>
 	 * 
 	 * <b> Permite consultar la materia y el syllabus de la tabla MateriaSyllabus. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 02/03/2015]
+	 * [Author: Anita Carrera, Date: 02/03/2015]
 	 * </p>
 	 * 
 	 * @param idSyllabus
@@ -35,7 +35,7 @@ public interface MateriaSyllabusDao extends GenericDAO<MateriaSyllabus, Integer>
 	 * 
 	 * <b> Permite consultar el syllabus de un docente por medio de la materia y el codigo de docente. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 10/03/2015]
+	 * [Author: Anita Carrera, Date: 10/03/2015]
 	 * </p>
 	 * 
 	 * @param idDocente

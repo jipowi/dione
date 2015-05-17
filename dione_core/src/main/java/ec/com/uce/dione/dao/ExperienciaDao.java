@@ -13,7 +13,7 @@ import ec.com.uce.dione.entities.Experiencia;
 /**
  * <b> Interfaz local de la tabla Experiencia para realizar las operaciones necesarias sobre la base </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,29/12/2014
  * @since JDK1.6
  */
@@ -24,7 +24,7 @@ public interface ExperienciaDao extends GenericDAO<Experiencia, Long> {
 	 * 
 	 * <b> Permite consultar las experiencias del docente. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 09/03/2015]
+	 * [Author: Anita Carrera, Date: 09/03/2015]
 	 * </p>
 	 * 
 	 * @param idExperiencia

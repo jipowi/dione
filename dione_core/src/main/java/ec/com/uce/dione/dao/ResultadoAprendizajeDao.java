@@ -13,7 +13,7 @@ import ec.com.uce.dione.entities.ResultadosAprendizaje;
 /**
  * <b> Interfaz local para realizar las operaciones necesarias en la tabla ResultadosAprendizaje </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,29/12/2014
  * @since JDK1.6
  */
@@ -24,7 +24,7 @@ public interface ResultadoAprendizajeDao extends GenericDAO<ResultadosAprendizaj
 	 * 
 	 * <b> Permite consultar los resultados de aprendizaje correspondientes a un syllabus. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 23/01/2015]
+	 * [Author: Anita Carrera, Date: 23/01/2015]
 	 * </p>
 	 * 
 	 * @param idSyllabus

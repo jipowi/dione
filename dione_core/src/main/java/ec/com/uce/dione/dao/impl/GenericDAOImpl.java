@@ -16,7 +16,7 @@ import ec.com.uce.dione.dao.GenericDAO;
  * 
  * <b> Implementacion de la interfaz para realizar las operaciones sobre la base de datos </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Dec 1, 2014
  * @since JDK1.6
  */

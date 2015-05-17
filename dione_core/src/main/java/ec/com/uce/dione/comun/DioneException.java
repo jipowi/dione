@@ -7,7 +7,7 @@ package ec.com.uce.dione.comun;
 /**
  * <b> Clase con la exception para el proyecto </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Jan 19, 2014
  * @since JDK1.6
  */

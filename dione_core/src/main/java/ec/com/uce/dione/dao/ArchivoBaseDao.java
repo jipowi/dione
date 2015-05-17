@@ -11,7 +11,7 @@ import ec.com.uce.dione.entities.ArchivoBase;
 /**
  * <b> Interfaz local para operaciones con la tabla ArchivoBase. </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Dec 10, 2014
  * @since JDK1.6
  */

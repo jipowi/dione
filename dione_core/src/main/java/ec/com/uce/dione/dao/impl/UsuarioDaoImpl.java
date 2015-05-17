@@ -14,7 +14,7 @@ import ec.com.uce.dione.entities.Usuario;
  * 
  * <b> Permite implementar las operaciones de la tabla Usuarios </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,21/12/2013
  * @since JDK1.6
  */

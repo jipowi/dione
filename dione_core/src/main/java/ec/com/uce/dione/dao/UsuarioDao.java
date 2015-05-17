@@ -13,7 +13,7 @@ import ec.com.uce.dione.entities.Usuario;
  * 
  * <b> Interface local de la tabla Usuario para realizar las operaciones necesarias </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Dec 18, 2013
  * @since JDK1.6
  */
@@ -26,7 +26,7 @@ public interface UsuarioDao extends GenericDAO<Usuario, Long>{
 	 * 
 	 * <b> Permite obtener la lista de usuarios que se encuentran en la base de datos</b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Dec 18, 2013]
+	 * [Author: Anita Carrera, Date: Dec 18, 2013]
 	 * </p>
 	 * 
 	 * @param nombreUsuario

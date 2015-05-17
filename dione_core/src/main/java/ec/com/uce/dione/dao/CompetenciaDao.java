@@ -13,7 +13,7 @@ import ec.com.uce.dione.entities.CompetenciaGenerale;
 /**
  * <b> Interfaz local para realizar las operaciones necesarias en la tabla Competencia </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,29/12/2014
  * @since JDK1.6
  */
@@ -24,7 +24,7 @@ public interface CompetenciaDao extends GenericDAO<CompetenciaGenerale, Long> {
 	 * 
 	 * <b> Permite consultar las competencias correspondientes a un syllabus. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 23/01/2015]
+	 * [Author: Anita Carrera, Date: 23/01/2015]
 	 * </p>
 	 * 
 	 * @param idSyllabus

@@ -17,7 +17,7 @@ import ec.com.uce.dione.entities.CompetenciasEspecifica;
 /**
  * <b> Implementacion de la interfaz para realizar operaciones sobre la tabla CompetenciasEspecifica. </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,05/01/2015
  * @since JDK1.6
  */

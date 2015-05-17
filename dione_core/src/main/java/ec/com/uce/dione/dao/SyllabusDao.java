@@ -11,7 +11,7 @@ import ec.com.uce.dione.entities.Syllabus;
 /**
  * <b> Interfaz local para realizar las operaciones necesarias en la tabla Syllabus </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,29/12/2014
  * @since JDK1.6
  */
@@ -23,7 +23,7 @@ public interface SyllabusDao extends GenericDAO<Syllabus, Integer> {
 	 * 
 	 * <b> Permite consultar el syllabus de un determinado docente. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 01/03/2015]
+	 * [Author: Anita Carrera, Date: 01/03/2015]
 	 * </p>
 	 * 
 	 * @param idDocente

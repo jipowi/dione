@@ -13,7 +13,7 @@ import ec.com.uce.dione.entities.UnidadCompetencia;
 /**
  * <b> Interfaz local para realizar las operaciones necesarias en la tabla UnidadCompetencia </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,29/12/2014
  * @since JDK1.6
  */
@@ -24,7 +24,7 @@ public interface UnidadCompetenciaDao extends GenericDAO<UnidadCompetencia, Inte
 	 * 
 	 * <b> Permite consutar las unidades de competencia de un determinado sylalbus. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 03/03/2015]
+	 * [Author: Anita Carrera, Date: 03/03/2015]
 	 * </p>
 	 * 
 	 * @param idSyllabus

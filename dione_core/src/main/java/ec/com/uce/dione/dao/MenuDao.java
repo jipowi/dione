@@ -16,7 +16,7 @@ import ec.com.uce.dione.entities.RolMenu;
 /**
  * <b> Interfaz local para operaciones con la tabla Menu. </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Dec 10, 2014
  * @since JDK1.6
  */
@@ -27,7 +27,7 @@ public interface MenuDao extends GenericDAO<Menu, Long> {
 	 * 
 	 * <b> Permite consultar los menus a los cuales un rol tiene acceso </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Dec 10, 2014]
+	 * [Author: Anita Carrera, Date: Dec 10, 2014]
 	 * </p>
 	 * 
 	 * @param rol

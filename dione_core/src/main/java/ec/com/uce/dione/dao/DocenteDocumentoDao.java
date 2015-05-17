@@ -13,7 +13,7 @@ import ec.com.uce.dione.entities.DocumentoDocente;
 /**
  * <b> Interfaz local para realizar las operaciones necesarias en la tabla Cumplimiento </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,29/12/2014
  * @since JDK1.6
  */
@@ -24,7 +24,7 @@ public interface DocenteDocumentoDao extends GenericDAO<DocumentoDocente, Intege
 	 * 
 	 * <b> Permite consultar los documentos que el docente tiene subidos en el servidor. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 15/04/2015]
+	 * [Author: Anita Carrera, Date: 15/04/2015]
 	 * </p>
 	 * 
 	 * @param idDocente

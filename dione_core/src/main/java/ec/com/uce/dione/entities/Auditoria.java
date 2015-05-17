@@ -19,7 +19,7 @@ import ec.com.uce.dione.enumeration.EstadoEnum;
 /**
  * <b> Clase base con atributos comunes de todas las entidades para el control de auditoria del sistema hiperion </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Nov 18, 2014
  * @since JDK1.6
  */

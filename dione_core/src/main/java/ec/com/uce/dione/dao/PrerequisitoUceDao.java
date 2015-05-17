@@ -10,7 +10,7 @@ import ec.com.uce.dione.entities.PrerequisitoUce;
 /**
  * <b> Interfaz local de la tabla Materia para relaizar las operaciones necesarias sobre la base </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,29/12/2014
  * @since JDK1.6
  */

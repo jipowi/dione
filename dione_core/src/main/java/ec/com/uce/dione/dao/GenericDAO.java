@@ -10,7 +10,7 @@ import ec.com.uce.dione.comun.DioneException;
  * 
  * <b> Permite utilizar un solo DAO para la capa de datos en la aplicación contiene metodos CRUD genericos </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Oct 12, 2014
  * @since JDK1.6
  */

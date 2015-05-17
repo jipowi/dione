@@ -19,7 +19,7 @@ import ec.com.uce.dione.entities.Cumplimiento;
 /**
  * <b> Implementacion de la interfaz para realizar operaciones sobre la tabla Cumplimiento. </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,29/12/2014
  * @since JDK1.6
  */

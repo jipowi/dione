@@ -8,7 +8,7 @@ package ec.com.uce.dione.enumeration;
  * 
  * <b> Enumeracion que contiene la lista de estados </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Nov 24, 2014
  * @since JDK1.6
  */

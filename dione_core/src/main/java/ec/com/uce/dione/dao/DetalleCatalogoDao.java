@@ -15,7 +15,7 @@ import ec.com.uce.dione.entities.DetalleCatalogo;
  * 
  * <b> Interfaz local de la tabla DetalleCatalogo para realizar las operaciones necesarias</b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Dec 18, 2013
  * @since JDK1.6
  */
@@ -39,7 +39,7 @@ public interface DetalleCatalogoDao extends GenericDAO<DetalleCatalogo, Long> {
 	 * 
 	 * <b> Permite consultar un detalle de catalogo por medio del idCatalogo y idDetalle </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Aug 27, 2014]
+	 * [Author: Anita Carrera, Date: Aug 27, 2014]
 	 * </p>
 	 * 
 	 * @param codCatalogo

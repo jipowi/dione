@@ -12,7 +12,7 @@ package ec.com.uce.dione.enumeration;
  * 
  * <b> Permite crear un catalogo para los tipos de duracion </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Dec 2, 2014
  * @since JDK1.6
  */

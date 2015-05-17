@@ -13,7 +13,7 @@ import ec.com.uce.dione.entities.ElementoCompetencia;
 /**
  * <b> Interfaz local para realizar las operaciones necesarias en la tabla ElementoCompetencia </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,29/12/2014
  * @since JDK1.6
  */
@@ -24,7 +24,7 @@ public interface ElementoCompetenciaDao extends GenericDAO<ElementoCompetencia, 
 	 * 
 	 * <b> Permite consultar los elementos de competencia por unidad. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 03/03/2015]
+	 * [Author: Anita Carrera, Date: 03/03/2015]
 	 * </p>
 	 * 
 	 * @param idUnidad

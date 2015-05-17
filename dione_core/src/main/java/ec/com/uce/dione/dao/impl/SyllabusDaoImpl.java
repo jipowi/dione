@@ -12,7 +12,7 @@ import ec.com.uce.dione.entities.Syllabus;
 /**
  * <b> Implementacion de la interfaz para realizar operaciones sobre la tabla Escuela. </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,05/01/2015
  * @since JDK1.6
  */
