@@ -26,7 +26,7 @@ import ec.com.uce.web.util.MessagesController;
 /**
  * <b> Permite manejar la informacion en la pagina y el backing </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Nov 19, 2014
  * @since JDK1.6
  */
@@ -153,7 +153,7 @@ public class HojaVidaBean implements Serializable {
 	 * 
 	 * <b> Permite agregar un registro de formacion academica </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Dec 1, 2014]
+	 * [Author: Anita Carrera, Date: Dec 1, 2014]
 	 * </p>
 	 * 
 	 * @return
@@ -171,7 +171,7 @@ public class HojaVidaBean implements Serializable {
 	 * 
 	 * <b> Permite agregar un registro de formacion continua </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Dec 2, 2014]
+	 * [Author: Anita Carrera, Date: Dec 2, 2014]
 	 * </p>
 	 * 
 	 * @return
@@ -191,7 +191,7 @@ public class HojaVidaBean implements Serializable {
 	 * 
 	 * <b> Permite editar un registro de la tabla </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Dec 1, 2014]
+	 * [Author: Anita Carrera, Date: Dec 1, 2014]
 	 * </p>
 	 * 
 	 * @param event
@@ -205,7 +205,7 @@ public class HojaVidaBean implements Serializable {
 	 * 
 	 * <b> Permite editar un registro de formacion continua </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Dec 2, 2014]
+	 * [Author: Anita Carrera, Date: Dec 2, 2014]
 	 * </p>
 	 * 
 	 * @param event
@@ -219,7 +219,7 @@ public class HojaVidaBean implements Serializable {
 	 * 
 	 * <b> Permite eliminar un registro de la tabla </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Dec 1, 2014]
+	 * [Author: Anita Carrera, Date: Dec 1, 2014]
 	 * </p>
 	 * 
 	 * @param event
@@ -234,7 +234,7 @@ public class HojaVidaBean implements Serializable {
 	 * 
 	 * <b> Permite eliminar un registro de formacion continua </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Dec 2, 2014]
+	 * [Author: Anita Carrera, Date: Dec 2, 2014]
 	 * </p>
 	 * 
 	 * @param event
@@ -354,7 +354,7 @@ public class HojaVidaBean implements Serializable {
 	 * 
 	 * <b> Permite agregar un registro de experiencia </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Dec 1, 2014]
+	 * [Author: Anita Carrera, Date: Dec 1, 2014]
 	 * </p>
 	 * 
 	 * @return
@@ -381,7 +381,7 @@ public class HojaVidaBean implements Serializable {
 	 * 
 	 * <b> Permite editar un registro de la tabla </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Dec 1, 2014]
+	 * [Author: Anita Carrera, Date: Dec 1, 2014]
 	 * </p>
 	 * 
 	 * @param event
@@ -395,7 +395,7 @@ public class HojaVidaBean implements Serializable {
 	 * 
 	 * <b> Permite eliminar un registro de la tabla </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Dec 1, 2014]
+	 * [Author: Anita Carrera, Date: Dec 1, 2014]
 	 * </p>
 	 * 
 	 * @param event

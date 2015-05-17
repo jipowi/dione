@@ -25,7 +25,7 @@ import ec.com.uce.ejb.dto.UnidadCompetenciaDTO;
 /**
  * <b> Permite manejar la informacion de la interfaz del cliente. </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,05/01/2015
  * @since JDK1.6
  */
@@ -393,7 +393,7 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * <b> Permite agregar un registro de objetivos. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 */
@@ -408,7 +408,7 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * <b> Permite editar un registro </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 * @param event
@@ -422,7 +422,7 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * <b> Permite eliminar un objetivo </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 * @param event
@@ -438,7 +438,7 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * <b> Permite agregar un registro de competencias. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 */
@@ -453,7 +453,7 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * <b> Permite editar un registro </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 * @param event
@@ -467,7 +467,7 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * <b> Permite eliminar un registro </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 * @param event
@@ -483,7 +483,7 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * <b> Permite agregar un registro de competencias. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 */
@@ -498,7 +498,7 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * <b> Permite editar un registro </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 * @param event
@@ -512,7 +512,7 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * <b> Permite eliminar un registro </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 * @param event
@@ -528,7 +528,7 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * <b> Permite agregar un registro de uniades de competencias. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 */
@@ -546,7 +546,7 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * <b> Permite editar un registro </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 * @param event
@@ -560,7 +560,7 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * <b> Permite eliminar un registro </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 * @param event
@@ -576,7 +576,7 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * <b> Permite agregar un registro de elementos de competencias. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 */
@@ -592,7 +592,7 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * <b> Permite editar un registro </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 * @param event
@@ -606,7 +606,7 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * <b> Permite eliminar un registro </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 * @param event
@@ -622,7 +622,7 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * <b> Permite agregar un registro. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 */
@@ -638,7 +638,7 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * <b> Permite editar un registro </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 * @param event
@@ -652,7 +652,7 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * <b> Permite eliminar un registro </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 * @param event
@@ -668,7 +668,7 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * <b> Permite agregar un registro. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 */
@@ -684,7 +684,7 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * <b> Permite editar un registro </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 * @param event
@@ -698,7 +698,7 @@ public class SyllabusBean implements Serializable {
 	 * 
 	 * <b> Permite eliminar un registro </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 * @param event

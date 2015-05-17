@@ -14,7 +14,7 @@ import ec.com.uce.dione.entities.ArchivoBase;
 /**
  * <b> contiene metodos para el manejo de archivos </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Jul 18, 2014
  * @since JDK1.6
  */
@@ -36,7 +36,7 @@ public class ArchivoUtil implements Serializable {
 	 * 
 	 * <b> Permite cargar el archivo en memoria antes de ser guardado en la base de datos </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Jul 19, 2014]
+	 * [Author: Anita Carrera, Date: Jul 19, 2014]
 	 * </p>
 	 * 
 	 * @param archivoBase

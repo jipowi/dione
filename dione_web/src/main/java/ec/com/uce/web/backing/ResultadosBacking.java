@@ -39,7 +39,7 @@ import ec.com.uce.web.util.MessagesController;
 /**
  * <b> Permite administrar las acciones de la pagina web </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,15/01/2015
  * @since JDK1.6
  */
@@ -74,7 +74,7 @@ public class ResultadosBacking implements Serializable {
 	 * 
 	 * <b> Permite buscar un docente por medio del ingreso de la identificacion. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 * @throws DioneException
@@ -109,7 +109,7 @@ public class ResultadosBacking implements Serializable {
 	 * 
 	 * <b> Permite actualizar la tabla de obetivos, elementos de competencia y resultados de aprendizaje. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 25/01/2015]
+	 * [Author: Anita Carrera, Date: 25/01/2015]
 	 * </p>
 	 * 
 	 * @throws DioneException
@@ -197,7 +197,7 @@ public class ResultadosBacking implements Serializable {
 	 * 
 	 * <b> Permite calcular el porcentaje de cada uno de los cumplimientos. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 30/03/2015]
+	 * [Author: Anita Carrera, Date: 30/03/2015]
 	 * </p>
 	 * 
 	 */
@@ -275,7 +275,7 @@ public class ResultadosBacking implements Serializable {
 	 * 
 	 * <b> Permite buscar el syllabus y con este objeto agregar ls objetivos, competencias y resultados de aprendizaje </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 21/01/2015]
+	 * [Author: Anita Carrera, Date: 21/01/2015]
 	 * </p>
 	 * 
 	 * @throws DioneException

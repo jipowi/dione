@@ -37,7 +37,7 @@ import ec.com.uce.web.util.MessagesController;
 /**
  * <b> Permite buscar los datos del docente </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,06/02/2015
  * @since JDK1.6
  */
@@ -68,7 +68,7 @@ public class BuscarDocenteBacking implements Serializable {
 	 * 
 	 * <b> Permite buscar un docente por medio del ingreso de la identificacion. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 * @throws DioneException
@@ -104,7 +104,7 @@ public class BuscarDocenteBacking implements Serializable {
 	 * 
 	 * <b> Permite buscar un docente por medio del ingreso de la identificacion. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 * @throws DioneException
@@ -266,7 +266,7 @@ public class BuscarDocenteBacking implements Serializable {
 	 * 
 	 * <b> Permite generar y descargar la hoja de vida en formato PDF. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 01/03/2015]
+	 * [Author: Anita Carrera, Date: 01/03/2015]
 	 * </p>
 	 * 
 	 * @throws DioneException
@@ -298,7 +298,7 @@ public class BuscarDocenteBacking implements Serializable {
 	 * 
 	 * <b> Permite generar y descargar el syllabus en formato PDF. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 01/03/2015]
+	 * [Author: Anita Carrera, Date: 01/03/2015]
 	 * </p>
 	 * 
 	 * @throws DioneException

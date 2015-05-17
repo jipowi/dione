@@ -83,7 +83,7 @@ public class UsuarioBacking implements Serializable {
 	 * 
 	 * <b> Permite autenticar el usuario con la aplicacion </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Dec 6, 2014]
+	 * [Author: Anita Carrera, Date: Dec 6, 2014]
 	 * </p>
 	 * 
 	 * @param actionEvent
@@ -164,7 +164,7 @@ public class UsuarioBacking implements Serializable {
 	 * 
 	 * <b> Permite cargar la lista de menus para seleccionar. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 11/01/2015]
+	 * [Author: Anita Carrera, Date: 11/01/2015]
 	 * </p>
 	 * 
 	 * @throws DioneException
@@ -199,7 +199,7 @@ public class UsuarioBacking implements Serializable {
 	 * 
 	 * <b> Permite agregar los menu a usuario que se esta registrando. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 11/01/2015]
+	 * [Author: Anita Carrera, Date: 11/01/2015]
 	 * </p>
 	 * 
 	 */
@@ -224,7 +224,7 @@ public class UsuarioBacking implements Serializable {
 	 * 
 	 * <b> Permite guardar usuarios en la base de datos </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 10/01/2015]
+	 * [Author: Anita Carrera, Date: 10/01/2015]
 	 * </p>
 	 * 
 	 * @throws DioneException

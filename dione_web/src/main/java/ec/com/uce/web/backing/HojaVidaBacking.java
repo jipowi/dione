@@ -65,7 +65,7 @@ public class HojaVidaBacking implements Serializable {
 	 * 
 	 * <b> Permite buscar un docente por medio del ingreso de la identificacion. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 * @throws DioneException
@@ -151,7 +151,7 @@ public class HojaVidaBacking implements Serializable {
 	 * 
 	 * <b> Permite guardar la hoja de vida de un docente </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 06/02/2015]
+	 * [Author: Anita Carrera, Date: 06/02/2015]
 	 * </p>
 	 * 
 	 * @throws DioneException

@@ -38,7 +38,7 @@ import ec.com.uce.web.util.MessagesController;
 /**
  * <b> Permite almacenar la informacion y manejar las acciones de la pagina. </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Dec 8, 2014
  * @since JDK1.6
  */
@@ -66,7 +66,7 @@ public class DocumentosBacking implements Serializable {
 	 * 
 	 * <b> Permite buscar el docente por medio de la CI. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 15/04/2015]
+	 * [Author: Anita Carrera, Date: 15/04/2015]
 	 * </p>
 	 * 
 	 * @throws DioneException
@@ -98,7 +98,7 @@ public class DocumentosBacking implements Serializable {
 	 * 
 	 * <b> Permite agregar nuevos documentos. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 20/04/2015]
+	 * [Author: Anita Carrera, Date: 20/04/2015]
 	 * </p>
 	 * 
 	 */
@@ -110,7 +110,7 @@ public class DocumentosBacking implements Serializable {
 	 * 
 	 * <b> Permite guardar los archivos del docente en la base de datos. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 20/04/2015]
+	 * [Author: Anita Carrera, Date: 20/04/2015]
 	 * </p>
 	 * 
 	 * @throws DioneException
@@ -149,7 +149,7 @@ public class DocumentosBacking implements Serializable {
 	 * 
 	 * <b> Permite cargar el archivo en memoria antes de ser guardado </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Sep 28, 2014]
+	 * [Author: Anita Carrera, Date: Sep 28, 2014]
 	 * </p>
 	 * 
 	 * @param event

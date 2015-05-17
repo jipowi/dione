@@ -25,7 +25,7 @@ import ec.com.uce.ejb.dto.UnidadCompetenciaDTO;
 /**
  * <b> Permite manejar la informacion en la pagina y el backing </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Nov 19, 2014
  * @since JDK1.6
  */

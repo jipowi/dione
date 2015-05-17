@@ -59,7 +59,7 @@ public class XSLUtil {
 	 * 
 	 * <b> Permite generar un contenido XML. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 01/03/2015]
+	 * [Author: Anita Carrera, Date: 01/03/2015]
 	 * </p>
 	 * 
 	 * @param docente
@@ -91,7 +91,7 @@ public class XSLUtil {
 	 * 
 	 * <b> Permite generar el XML del syllabus. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 10/03/2015]
+	 * [Author: Anita Carrera, Date: 10/03/2015]
 	 * </p>
 	 * 
 	 * @param syllabus
@@ -140,7 +140,7 @@ public class XSLUtil {
 	 * 
 	 * <b> Permite generar el HTML de la hoja de vida. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 09/03/2015]
+	 * [Author: Anita Carrera, Date: 09/03/2015]
 	 * </p>
 	 * 
 	 * @param docente
@@ -185,7 +185,7 @@ public class XSLUtil {
 	 * 
 	 * <b> Permite obtener el HTML del syllabus. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 10/03/2015]
+	 * [Author: Anita Carrera, Date: 10/03/2015]
 	 * </p>
 	 * 
 	 * @param syllabus

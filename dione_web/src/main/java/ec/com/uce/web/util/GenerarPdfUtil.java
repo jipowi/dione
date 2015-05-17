@@ -37,7 +37,7 @@ public class GenerarPdfUtil implements Serializable {
 	 * 
 	 * <b> Permite generar la hoja de vida en formato PDF. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 10/03/2015]
+	 * [Author: Anita Carrera, Date: 10/03/2015]
 	 * </p>
 	 * 
 	 * @param docente
@@ -61,7 +61,7 @@ public class GenerarPdfUtil implements Serializable {
 	 * 
 	 * <b> Permite generar PDF para descargar. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 04/05/2015]
+	 * [Author: Anita Carrera, Date: 04/05/2015]
 	 * </p>
 	 * 
 	 * @param contenido
@@ -77,7 +77,7 @@ public class GenerarPdfUtil implements Serializable {
 	 * 
 	 * <b> Permite obtener el archivo PDF del Syllabus. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 10/03/2015]
+	 * [Author: Anita Carrera, Date: 10/03/2015]
 	 * </p>
 	 * 
 	 * @param syllabus
@@ -112,7 +112,7 @@ public class GenerarPdfUtil implements Serializable {
 	/**
 	 * <b> Permite obtener la cadena de bytes del archivo HTML. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 10/03/2015]
+	 * [Author: Anita Carrera, Date: 10/03/2015]
 	 * </p>
 	 * 
 	 * @param pHtml

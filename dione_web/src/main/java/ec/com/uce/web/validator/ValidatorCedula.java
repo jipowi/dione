@@ -17,7 +17,7 @@ import ec.com.uce.web.util.HiperionMensajes;
  * 
  * <b> Permite validar el numero de cedula </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,13/01/2015
  * @since JDK1.6
  */

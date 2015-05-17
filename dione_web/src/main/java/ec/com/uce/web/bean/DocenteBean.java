@@ -21,7 +21,7 @@ import ec.com.uce.ejb.dto.MateriaDTO;
 /**
  * <b> Permite manejar la informacion en la pagina y el backing </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Nov 19, 2014
  * @since JDK1.6
  */
@@ -132,7 +132,7 @@ public class DocenteBean implements Serializable {
 	 * 
 	 * <b> Permite agregar una asignatura a la tabla </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 29/12/2014]
+	 * [Author: Anita Carrera, Date: 29/12/2014]
 	 * </p>
 	 * 
 	 * @return
@@ -151,7 +151,7 @@ public class DocenteBean implements Serializable {
 	 * 
 	 * <b> Permite editar un registro </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 29/12/2014]
+	 * [Author: Anita Carrera, Date: 29/12/2014]
 	 * </p>
 	 * 
 	 * @param event
@@ -165,7 +165,7 @@ public class DocenteBean implements Serializable {
 	 * 
 	 * <b> Permite eliminar un registro de la tabla de asignaturas </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 29/12/2014]
+	 * [Author: Anita Carrera, Date: 29/12/2014]
 	 * </p>
 	 * 
 	 * @param event

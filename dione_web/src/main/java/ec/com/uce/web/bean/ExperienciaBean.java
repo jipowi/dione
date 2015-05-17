@@ -19,7 +19,7 @@ import ec.com.uce.ejb.dto.ExperienciaDTO;
 /**
  * <b> Permite manejar la informacion en la pagina y el backing </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Nov 19, 2014
  * @since JDK1.6
  */
@@ -117,7 +117,7 @@ public class ExperienciaBean implements Serializable {
 	 * 
 	 * <b> Permite agregar un registro de experiencia </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Dec 1, 2014]
+	 * [Author: Anita Carrera, Date: Dec 1, 2014]
 	 * </p>
 	 * 
 	 * @return
@@ -137,7 +137,7 @@ public class ExperienciaBean implements Serializable {
 	 * 
 	 * <b> Permite editar un registro de la tabla </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Dec 1, 2014]
+	 * [Author: Anita Carrera, Date: Dec 1, 2014]
 	 * </p>
 	 * 
 	 * @param event
@@ -151,7 +151,7 @@ public class ExperienciaBean implements Serializable {
 	 * 
 	 * <b> Permite eliminar un registro de la tabla </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Dec 1, 2014]
+	 * [Author: Anita Carrera, Date: Dec 1, 2014]
 	 * </p>
 	 * 
 	 * @param event

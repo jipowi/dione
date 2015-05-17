@@ -11,7 +11,7 @@ import javax.persistence.Transient;
  * 
  * <b> Mensajes para propiedades de W2F </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Jul 8, 2014
  * @since JDK1.6
  */
@@ -32,7 +32,7 @@ public class HiperionMensajes {
 	 * 
 	 * <b> Obtener la instancia singleton del controlador de mensajes de internacionalizacion </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Jul 8, 2014]
+	 * [Author: Anita Carrera, Date: Jul 8, 2014]
 	 * </p>
 	 * 
 	 * @return
@@ -45,7 +45,7 @@ public class HiperionMensajes {
 	 * 
 	 * <b> Recupera una valor del archivo de propiedades dado la clave </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Jul 8, 2014]
+	 * [Author: Anita Carrera, Date: Jul 8, 2014]
 	 * </p>
 	 * 
 	 * @param key
@@ -65,7 +65,7 @@ public class HiperionMensajes {
 	 * 
 	 * <b> Recupera una valor del archivo de propiedades dado la clave como entero Largo </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Jul 8, 2014]
+	 * [Author: Anita Carrera, Date: Jul 8, 2014]
 	 * </p>
 	 * 
 	 * @param key
@@ -83,7 +83,7 @@ public class HiperionMensajes {
 	 * 
 	 * <b> Recupera una valor del archivo de propiedades dado la clave como entero </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Jul 8, 2014]
+	 * [Author: Anita Carrera, Date: Jul 8, 2014]
 	 * </p>
 	 * 
 	 * @param key
@@ -100,7 +100,7 @@ public class HiperionMensajes {
 	/**
 	 * <b>Obtiene un mensaje del archivo de internacionalizaci&oacute;n con ciertos parametros de relleno</b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Jul 8, 2014]
+	 * [Author: Anita Carrera, Date: Jul 8, 2014]
 	 * </p>
 	 * 
 	 * @param key

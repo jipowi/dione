@@ -51,7 +51,7 @@ import ec.com.uce.web.util.MessagesController;
 /**
  * <b> Permite almacenar la informacion de la pagina web y administrar las acciones de la misma </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,05/01/2015
  * @since JDK1.6
  */
@@ -104,7 +104,7 @@ public class SyllabusBacking implements Serializable {
 	 * 
 	 * <b> Permite buscar un docente por medio del ingreso de la identificacion. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 * @throws DioneException
@@ -144,7 +144,7 @@ public class SyllabusBacking implements Serializable {
 	 * 
 	 * <b> Permite obtener los prerequisitos de la materia seleccionada </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 11/02/2015]
+	 * [Author: Anita Carrera, Date: 11/02/2015]
 	 * </p>
 	 * 
 	 * @throws DioneException
@@ -160,7 +160,7 @@ public class SyllabusBacking implements Serializable {
 	 * 
 	 * <b> Permite visualizar las competencias seleccionadas en el popup </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 12/02/2015]
+	 * [Author: Anita Carrera, Date: 12/02/2015]
 	 * </p>
 	 * 
 	 */
@@ -196,7 +196,7 @@ public class SyllabusBacking implements Serializable {
 	 * 
 	 * <b> Permite guardar el syllabus en la base de datos </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 14/01/2015]
+	 * [Author: Anita Carrera, Date: 14/01/2015]
 	 * </p>
 	 * 
 	 * @throws Exception
@@ -358,7 +358,7 @@ public class SyllabusBacking implements Serializable {
 	 * 
 	 * <b> Permite obtener las competencias interpersonales, instrumentales y sistematicas. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 12/02/2015]
+	 * [Author: Anita Carrera, Date: 12/02/2015]
 	 * </p>
 	 * 
 	 * @throws DioneException

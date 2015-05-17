@@ -43,7 +43,7 @@ public class ConcatenadorPdf {
 	 * 
 	 * <b> Permite agregar pie de pagina y marca de agua a los PDFs. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 29/04/2015]
+	 * [Author: Anita Carrera, Date: 29/04/2015]
 	 * </p>
 	 * 
 	 * @param pdf

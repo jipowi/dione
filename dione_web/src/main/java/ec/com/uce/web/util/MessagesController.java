@@ -11,7 +11,7 @@ import javax.faces.context.FacesContext;
 /**
  * <b> Agrega varios tipos de mensajes al contexto de JSF </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Jul 28, 2014
  * @since JDK1.6
  */
@@ -20,7 +20,7 @@ public class MessagesController {
 	/**
 	 * <b> Agrega un mensaje informativo </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Jul 28, 2014]
+	 * [Author: Anita Carrera, Date: Jul 28, 2014]
 	 * </p>
 	 * 
 	 * @param keyMessage
@@ -35,7 +35,7 @@ public class MessagesController {
 	/**
 	 * <b> Agrega un mensaje de advertencia</b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Jul 28, 2014]
+	 * [Author: Anita Carrera, Date: Jul 28, 2014]
 	 * </p>
 	 * 
 	 * @param keyMessage
@@ -50,7 +50,7 @@ public class MessagesController {
 	/**
 	 * <b> Agrega un mensaje de error</b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Jul 28, 2014]
+	 * [Author: Anita Carrera, Date: Jul 28, 2014]
 	 * </p>
 	 * 
 	 * @param keyMessage
@@ -65,7 +65,7 @@ public class MessagesController {
 	/**
 	 * <b> Agrega un mensaje de error grave</b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Jul 28, 2014]
+	 * [Author: Anita Carrera, Date: Jul 28, 2014]
 	 * </p>
 	 * 
 	 * @param keyMessage
@@ -80,7 +80,7 @@ public class MessagesController {
 	/**
 	 * <b> Agrega un mensaje informativo de session</b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Jul 28, 2014]
+	 * [Author: Anita Carrera, Date: Jul 28, 2014]
 	 * </p>
 	 * 
 	 * @param keyMessage
@@ -95,7 +95,7 @@ public class MessagesController {
 	/**
 	 * <b> Agrega un mensaje de advertencia a la sesión</b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Jul 28, 2014]
+	 * [Author: Anita Carrera, Date: Jul 28, 2014]
 	 * </p>
 	 * 
 	 * @param keyMessage
@@ -110,7 +110,7 @@ public class MessagesController {
 	/**
 	 * <b> Agrega un mensaje de error a la sesión</b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Jul 28, 2014]
+	 * [Author: Anita Carrera, Date: Jul 28, 2014]
 	 * </p>
 	 * 
 	 * @param keyMessage
@@ -125,7 +125,7 @@ public class MessagesController {
 	/**
 	 * <b> Agrega un mensaje de error grave a la sesión</b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Jul 28, 2014]
+	 * [Author: Anita Carrera, Date: Jul 28, 2014]
 	 * </p>
 	 * 
 	 * @param keyMessage

@@ -16,7 +16,7 @@ import ec.com.uce.web.util.StringField;
  * 
  * <b> Validador para el formato de un numero de cedula para una persona natural </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Apr 9, 2014
  * @since JDK1.6
  */
@@ -67,7 +67,7 @@ public class ValidatorCedulaNatural implements javax.faces.validator.Validator {
 	 * 
 	 * <b> Valida el tipo de cedula a devolver. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: Apr 9, 2014]
+	 * [Author: Anita Carrera, Date: Apr 9, 2014]
 	 * </p>
 	 * 
 	 * @param ruc

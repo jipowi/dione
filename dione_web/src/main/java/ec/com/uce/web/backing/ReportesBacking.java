@@ -46,7 +46,7 @@ import ec.com.uce.web.util.MessagesController;
 /**
  * <b> Permite almacenar la informacion y manejar las acciones de la pagina. </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Dec 8, 2014
  * @since JDK1.6
  */
@@ -104,7 +104,7 @@ public class ReportesBacking implements Serializable {
 	 * 
 	 * <b> Permite buscar un docente por medio del ingreso de la identificacion. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 07/01/2015]
+	 * [Author: Anita Carrera, Date: 07/01/2015]
 	 * </p>
 	 * 
 	 * @throws DioneException
@@ -138,7 +138,7 @@ public class ReportesBacking implements Serializable {
 	 * 
 	 * <b> Permite consultar los docentes por escuela. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 20/03/2015]
+	 * [Author: Anita Carrera, Date: 20/03/2015]
 	 * </p>
 	 * 
 	 * @throws Exception
@@ -193,7 +193,7 @@ public class ReportesBacking implements Serializable {
 	 * 
 	 * <b> Permite consultar los datos del Syllabus. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 29/03/2015]
+	 * [Author: Anita Carrera, Date: 29/03/2015]
 	 * </p>
 	 * 
 	 * @throws NumberFormatException
@@ -239,7 +239,7 @@ public class ReportesBacking implements Serializable {
 	 * 
 	 * <b> Permite imprimir el reporte generado en iReport en formato PDF. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 23/03/2015]
+	 * [Author: Anita Carrera, Date: 23/03/2015]
 	 * </p>
 	 * 
 	 * @param actionEvent
@@ -269,7 +269,7 @@ public class ReportesBacking implements Serializable {
 	 * 
 	 * <b> Permite imprimir el reporte generado en iReport en formato PDF. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 23/03/2015]
+	 * [Author: Anita Carrera, Date: 23/03/2015]
 	 * </p>
 	 * 
 	 * @param actionEvent

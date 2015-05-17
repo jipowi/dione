@@ -35,7 +35,7 @@ import ec.com.uce.web.validator.ValidatorCedula;
 /**
  * <b> Permite almacenar la informacion y manejar las acciones de la pagina. </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,Dec 8, 2014
  * @since JDK1.6
  */
@@ -86,7 +86,7 @@ public class DocenteBacking implements Serializable {
 	 * 
 	 * <b> Permite obtener las materias por medio de la escuela seleccionada. </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 04/01/2015]
+	 * [Author: Anita Carrera, Date: 04/01/2015]
 	 * </p>
 	 * 
 	 * @throws DioneException
@@ -118,7 +118,7 @@ public class DocenteBacking implements Serializable {
 	 * 
 	 * <b> Permite agregar guardar las materias seleccionadas </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 04/01/2015]
+	 * [Author: Anita Carrera, Date: 04/01/2015]
 	 * </p>
 	 * 
 	 */
@@ -136,7 +136,7 @@ public class DocenteBacking implements Serializable {
 	 * 
 	 * <b> Permite guardar la informacion del docente </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 05/01/2015]
+	 * [Author: Anita Carrera, Date: 05/01/2015]
 	 * </p>
 	 * 
 	 * @throws DioneException
@@ -197,7 +197,7 @@ public class DocenteBacking implements Serializable {
 	 * 
 	 * <b> Permite validar el numero de identificacion tanto para cedula como ruc </b>
 	 * <p>
-	 * [Author: Paul Jimenez, Date: 02/02/2015]
+	 * [Author: Anita Carrera, Date: 02/02/2015]
 	 * </p>
 	 * 
 	 * @param identificacion

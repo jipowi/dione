@@ -17,7 +17,7 @@ import ec.com.uce.ejb.dto.EvaluacionResAprendizajeDTO;
 /**
  * <b> Permite manejar la informacion de la interfaz del cliente. </b>
  * 
- * @author Paul Jimenez
+ * @author Anita Carrera
  * @version 1.0,05/01/2015
  * @since JDK1.6
  */
